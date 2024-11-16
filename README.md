@@ -29,14 +29,12 @@ from tradesignals import TradesignalsIo
 
 client = TradesignalsIo(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
-    # defaults to "production".
-    environment="sandbox",
 )
 
-chain = client.options.chain.retrieve(
-    symbol="AAPL",
+response = client.etfs.holdings.holdings(
+    "ticker",
 )
-print(chain.option_chain)
+print(response.data)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -55,16 +53,14 @@ from tradesignals import AsyncTradesignalsIo
 
 client = AsyncTradesignalsIo(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
-    # defaults to "production".
-    environment="sandbox",
 )
 
 
 async def main() -> None:
-    chain = await client.options.chain.retrieve(
-        symbol="AAPL",
+    response = await client.etfs.holdings.holdings(
+        "ticker",
     )
-    print(chain.option_chain)
+    print(response.data)
 
 
 asyncio.run(main())
@@ -97,7 +93,9 @@ from tradesignals import TradesignalsIo
 client = TradesignalsIo()
 
 try:
-    client.economic_calendars.list()
+    client.etfs.holdings.holdings(
+        "ticker",
+    )
 except tradesignals.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -140,7 +138,9 @@ client = TradesignalsIo(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).economic_calendars.list()
+client.with_options(max_retries=5).etfs.holdings.holdings(
+    "ticker",
+)
 ```
 
 ### Timeouts
@@ -163,7 +163,9 @@ client = TradesignalsIo(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).economic_calendars.list()
+client.with_options(timeout=5.0).etfs.holdings.holdings(
+    "ticker",
+)
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -216,11 +218,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from tradesignals import TradesignalsIo
 
 client = TradesignalsIo()
-response = client.economic_calendars.with_raw_response.list()
+response = client.etfs.holdings.with_raw_response.holdings(
+    "ticker",
+)
 print(response.headers.get('X-My-Header'))
 
-economic_calendar = response.parse()  # get the object that `economic_calendars.list()` would have returned
-print(economic_calendar.events)
+holding = response.parse()  # get the object that `etfs.holdings.holdings()` would have returned
+print(holding.data)
 ```
 
 These methods return an [`APIResponse`](https://github.com/macanderson/tradesignals-python/tree/main/src/tradesignals/_response.py) object.
@@ -234,7 +238,9 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.economic_calendars.with_streaming_response.list() as response:
+with client.etfs.holdings.with_streaming_response.holdings(
+    "ticker",
+) as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
