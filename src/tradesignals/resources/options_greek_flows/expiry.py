@@ -22,6 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.options_greek_flows import expiry_list_params
+from ...types.options_greek_flows.expiry_list_response import ExpiryListResponse
 
 __all__ = ["ExpiryResource", "AsyncExpiryResource"]
 
@@ -58,7 +59,7 @@ class ExpiryResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> ExpiryListResponse:
         """
         Retrieve options Greek flow data aggregated by expiration date.
 
@@ -93,7 +94,7 @@ class ExpiryResource(SyncAPIResource):
                     expiry_list_params.ExpiryListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=ExpiryListResponse,
         )
 
 
@@ -129,7 +130,7 @@ class AsyncExpiryResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> ExpiryListResponse:
         """
         Retrieve options Greek flow data aggregated by expiration date.
 
@@ -164,7 +165,7 @@ class AsyncExpiryResource(AsyncAPIResource):
                     expiry_list_params.ExpiryListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=ExpiryListResponse,
         )
 
 

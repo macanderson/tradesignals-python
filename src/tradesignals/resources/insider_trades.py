@@ -23,6 +23,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.insider_trade_list_response import InsiderTradeListResponse
 
 __all__ = ["InsiderTradesResource", "AsyncInsiderTradesResource"]
 
@@ -60,7 +61,7 @@ class InsiderTradesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> InsiderTradeListResponse:
         """Retrieve data on insider buys and sells.
 
         Filter by optional symbol, date, and
@@ -100,7 +101,7 @@ class InsiderTradesResource(SyncAPIResource):
                     insider_trade_list_params.InsiderTradeListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=InsiderTradeListResponse,
         )
 
 
@@ -137,7 +138,7 @@ class AsyncInsiderTradesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> InsiderTradeListResponse:
         """Retrieve data on insider buys and sells.
 
         Filter by optional symbol, date, and
@@ -177,7 +178,7 @@ class AsyncInsiderTradesResource(AsyncAPIResource):
                     insider_trade_list_params.InsiderTradeListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=InsiderTradeListResponse,
         )
 
 

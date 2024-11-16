@@ -22,6 +22,7 @@ from ..._response import (
 )
 from ...types.etf import tide_retrieve_params
 from ..._base_client import make_request_options
+from ...types.etf.tide_retrieve_response import TideRetrieveResponse
 
 __all__ = ["TideResource", "AsyncTideResource"]
 
@@ -57,7 +58,7 @@ class TideResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> TideRetrieveResponse:
         """Retrieve data showing ETF inflows and outflows.
 
         Filter by optional date and ETF
@@ -91,7 +92,7 @@ class TideResource(SyncAPIResource):
                     tide_retrieve_params.TideRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=TideRetrieveResponse,
         )
 
 
@@ -126,7 +127,7 @@ class AsyncTideResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> TideRetrieveResponse:
         """Retrieve data showing ETF inflows and outflows.
 
         Filter by optional date and ETF
@@ -160,7 +161,7 @@ class AsyncTideResource(AsyncAPIResource):
                     tide_retrieve_params.TideRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=TideRetrieveResponse,
         )
 
 

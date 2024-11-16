@@ -37,6 +37,7 @@ client = Tradesignals(
 options_flow = client.options_flows.retrieve(
     symbol="AAPL",
 )
+print(options_flow.data)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -62,6 +63,7 @@ async def main() -> None:
     options_flow = await client.options_flows.retrieve(
         symbol="AAPL",
     )
+    print(options_flow.data)
 
 
 asyncio.run(main())
@@ -211,7 +213,7 @@ response = client.options_flows.with_raw_response.retrieve(
 print(response.headers.get('X-My-Header'))
 
 options_flow = response.parse()  # get the object that `options_flows.retrieve()` would have returned
-print(options_flow)
+print(options_flow.data)
 ```
 
 These methods return an [`APIResponse`](https://github.com/stainless-sdks/tradesignals-python/tree/main/src/tradesignals/_response.py) object.

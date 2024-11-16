@@ -22,6 +22,8 @@ from ..._response import (
 )
 from ...types.etf import sector_retrieve_params
 from ..._base_client import make_request_options
+from ...types.etf.sector_list_response import SectorListResponse
+from ...types.etf.sector_retrieve_response import SectorRetrieveResponse
 
 __all__ = ["SectorsResource", "AsyncSectorsResource"]
 
@@ -57,7 +59,7 @@ class SectorsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> SectorRetrieveResponse:
         """Retrieve data for ETFs categorized by sectors.
 
         Filter by optional sector and
@@ -91,7 +93,7 @@ class SectorsResource(SyncAPIResource):
                     sector_retrieve_params.SectorRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=SectorRetrieveResponse,
         )
 
     def list(
@@ -103,14 +105,14 @@ class SectorsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> SectorListResponse:
         """Retrieve a list of available sectors for ETFs."""
         return self._get(
             "/api/etf/sectors/list",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=SectorListResponse,
         )
 
 
@@ -145,7 +147,7 @@ class AsyncSectorsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> SectorRetrieveResponse:
         """Retrieve data for ETFs categorized by sectors.
 
         Filter by optional sector and
@@ -179,7 +181,7 @@ class AsyncSectorsResource(AsyncAPIResource):
                     sector_retrieve_params.SectorRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=SectorRetrieveResponse,
         )
 
     async def list(
@@ -191,14 +193,14 @@ class AsyncSectorsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> SectorListResponse:
         """Retrieve a list of available sectors for ETFs."""
         return await self._get(
             "/api/etf/sectors/list",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=SectorListResponse,
         )
 
 

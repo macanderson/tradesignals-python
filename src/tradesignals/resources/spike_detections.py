@@ -22,6 +22,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.spike_detection_list_response import SpikeDetectionListResponse
 
 __all__ = ["SpikeDetectionsResource", "AsyncSpikeDetectionsResource"]
 
@@ -58,7 +59,7 @@ class SpikeDetectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> SpikeDetectionListResponse:
         """Retrieve data on detected spikes in trading activity.
 
         Filter by optional symbol
@@ -95,7 +96,7 @@ class SpikeDetectionsResource(SyncAPIResource):
                     spike_detection_list_params.SpikeDetectionListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=SpikeDetectionListResponse,
         )
 
 
@@ -131,7 +132,7 @@ class AsyncSpikeDetectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> SpikeDetectionListResponse:
         """Retrieve data on detected spikes in trading activity.
 
         Filter by optional symbol
@@ -168,7 +169,7 @@ class AsyncSpikeDetectionsResource(AsyncAPIResource):
                     spike_detection_list_params.SpikeDetectionListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=SpikeDetectionListResponse,
         )
 
 

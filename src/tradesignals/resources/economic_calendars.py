@@ -22,6 +22,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.economic_calendar_list_response import EconomicCalendarListResponse
 
 __all__ = ["EconomicCalendarsResource", "AsyncEconomicCalendarsResource"]
 
@@ -58,7 +59,7 @@ class EconomicCalendarsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> EconomicCalendarListResponse:
         """Retrieve upcoming economic events and data releases.
 
         Filter by optional start
@@ -95,7 +96,7 @@ class EconomicCalendarsResource(SyncAPIResource):
                     economic_calendar_list_params.EconomicCalendarListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=EconomicCalendarListResponse,
         )
 
 
@@ -131,7 +132,7 @@ class AsyncEconomicCalendarsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> EconomicCalendarListResponse:
         """Retrieve upcoming economic events and data releases.
 
         Filter by optional start
@@ -168,7 +169,7 @@ class AsyncEconomicCalendarsResource(AsyncAPIResource):
                     economic_calendar_list_params.EconomicCalendarListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=EconomicCalendarListResponse,
         )
 
 
