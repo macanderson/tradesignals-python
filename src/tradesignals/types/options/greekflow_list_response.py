@@ -8,7 +8,7 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 
-__all__ = ["GreekFlowListResponse", "Data"]
+__all__ = ["GreekflowListResponse", "Data"]
 
 
 class Data(BaseModel):
@@ -35,5 +35,5 @@ class Data(BaseModel):
     vega: Optional[float] = None
 
 
-class GreekFlowListResponse(BaseModel):
+class GreekflowListResponse(BaseModel):
     data: Optional[List[Data]] = None

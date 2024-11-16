@@ -8,10 +8,10 @@ from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["GreekFlowListParams"]
+__all__ = ["GreekflowListParams"]
 
 
-class GreekFlowListParams(TypedDict, total=False):
+class GreekflowListParams(TypedDict, total=False):
     date: Annotated[Union[str, datetime.date], PropertyInfo(format="iso8601")]
     """Date to filter the Greek flow data. ISO 8601 format."""
 
