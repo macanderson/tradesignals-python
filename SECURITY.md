@@ -20,7 +20,7 @@ or products provided by Tradesignals Io please follow the respective company's s
 
 ### Tradesignals Io Terms and Policies
 
-Our Security Policy can be found at [Security Policy URL](https://tradesignals.io/security-policy).
+Our Security Policy can be found at [Security Policy URL](https://tradesignals.io/terms).
 
 Please contact hello@tradesignals.com for any questions or concerns regarding security of our services.
 

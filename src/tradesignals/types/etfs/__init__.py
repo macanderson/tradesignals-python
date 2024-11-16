@@ -2,4 +2,4 @@
 
 from __future__ import annotations
 
-from .holding_holdings_response import HoldingHoldingsResponse as HoldingHoldingsResponse
+from .openapi_uri import OpenAPIUri as OpenAPIUri
