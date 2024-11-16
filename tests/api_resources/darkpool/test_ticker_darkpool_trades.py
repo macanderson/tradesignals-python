@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
+from typing import Any, Optional, cast
 
 import pytest
 
@@ -23,7 +23,7 @@ class TestTickerDarkpoolTrades:
         ticker_darkpool_trade = client.darkpool.ticker_darkpool_trades.retrieve(
             ticker="ticker",
         )
-        assert_matches_type(TickerDarkpoolTradeRetrieveResponse, ticker_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[TickerDarkpoolTradeRetrieveResponse], ticker_darkpool_trade, path=["response"])
 
     @parametrize
     def test_method_retrieve_with_all_params(self, client: TradesignalsIo) -> None:
@@ -34,7 +34,7 @@ class TestTickerDarkpoolTrades:
             newer_than="newer_than",
             older_than="older_than",
         )
-        assert_matches_type(TickerDarkpoolTradeRetrieveResponse, ticker_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[TickerDarkpoolTradeRetrieveResponse], ticker_darkpool_trade, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: TradesignalsIo) -> None:
@@ -45,7 +45,7 @@ class TestTickerDarkpoolTrades:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         ticker_darkpool_trade = response.parse()
-        assert_matches_type(TickerDarkpoolTradeRetrieveResponse, ticker_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[TickerDarkpoolTradeRetrieveResponse], ticker_darkpool_trade, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: TradesignalsIo) -> None:
@@ -56,7 +56,7 @@ class TestTickerDarkpoolTrades:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             ticker_darkpool_trade = response.parse()
-            assert_matches_type(TickerDarkpoolTradeRetrieveResponse, ticker_darkpool_trade, path=["response"])
+            assert_matches_type(Optional[TickerDarkpoolTradeRetrieveResponse], ticker_darkpool_trade, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -76,7 +76,7 @@ class TestAsyncTickerDarkpoolTrades:
         ticker_darkpool_trade = await async_client.darkpool.ticker_darkpool_trades.retrieve(
             ticker="ticker",
         )
-        assert_matches_type(TickerDarkpoolTradeRetrieveResponse, ticker_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[TickerDarkpoolTradeRetrieveResponse], ticker_darkpool_trade, path=["response"])
 
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignalsIo) -> None:
@@ -87,7 +87,7 @@ class TestAsyncTickerDarkpoolTrades:
             newer_than="newer_than",
             older_than="older_than",
         )
-        assert_matches_type(TickerDarkpoolTradeRetrieveResponse, ticker_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[TickerDarkpoolTradeRetrieveResponse], ticker_darkpool_trade, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
@@ -98,7 +98,7 @@ class TestAsyncTickerDarkpoolTrades:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         ticker_darkpool_trade = await response.parse()
-        assert_matches_type(TickerDarkpoolTradeRetrieveResponse, ticker_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[TickerDarkpoolTradeRetrieveResponse], ticker_darkpool_trade, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
@@ -109,7 +109,7 @@ class TestAsyncTickerDarkpoolTrades:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             ticker_darkpool_trade = await response.parse()
-            assert_matches_type(TickerDarkpoolTradeRetrieveResponse, ticker_darkpool_trade, path=["response"])
+            assert_matches_type(Optional[TickerDarkpoolTradeRetrieveResponse], ticker_darkpool_trade, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

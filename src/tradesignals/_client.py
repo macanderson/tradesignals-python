@@ -46,7 +46,7 @@ __all__ = [
 
 
 class TradesignalsIo(SyncAPIClient):
-    etfs: resources.EtfsResource
+    etf: resources.EtfResource
     darkpool: resources.DarkpoolResource
     with_raw_response: TradesignalsIoWithRawResponse
     with_streaming_response: TradesignalsIoWithStreamedResponse
@@ -105,7 +105,7 @@ class TradesignalsIo(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.etfs = resources.EtfsResource(self)
+        self.etf = resources.EtfResource(self)
         self.darkpool = resources.DarkpoolResource(self)
         self.with_raw_response = TradesignalsIoWithRawResponse(self)
         self.with_streaming_response = TradesignalsIoWithStreamedResponse(self)
@@ -119,7 +119,7 @@ class TradesignalsIo(SyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
-        return {"Authorization": api_key}
+        return {"Authorization": f"Bearer {api_key}"}
 
     @property
     @override
@@ -217,7 +217,7 @@ class TradesignalsIo(SyncAPIClient):
 
 
 class AsyncTradesignalsIo(AsyncAPIClient):
-    etfs: resources.AsyncEtfsResource
+    etf: resources.AsyncEtfResource
     darkpool: resources.AsyncDarkpoolResource
     with_raw_response: AsyncTradesignalsIoWithRawResponse
     with_streaming_response: AsyncTradesignalsIoWithStreamedResponse
@@ -276,7 +276,7 @@ class AsyncTradesignalsIo(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.etfs = resources.AsyncEtfsResource(self)
+        self.etf = resources.AsyncEtfResource(self)
         self.darkpool = resources.AsyncDarkpoolResource(self)
         self.with_raw_response = AsyncTradesignalsIoWithRawResponse(self)
         self.with_streaming_response = AsyncTradesignalsIoWithStreamedResponse(self)
@@ -290,7 +290,7 @@ class AsyncTradesignalsIo(AsyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
-        return {"Authorization": api_key}
+        return {"Authorization": f"Bearer {api_key}"}
 
     @property
     @override
@@ -389,25 +389,25 @@ class AsyncTradesignalsIo(AsyncAPIClient):
 
 class TradesignalsIoWithRawResponse:
     def __init__(self, client: TradesignalsIo) -> None:
-        self.etfs = resources.EtfsResourceWithRawResponse(client.etfs)
+        self.etf = resources.EtfResourceWithRawResponse(client.etf)
         self.darkpool = resources.DarkpoolResourceWithRawResponse(client.darkpool)
 
 
 class AsyncTradesignalsIoWithRawResponse:
     def __init__(self, client: AsyncTradesignalsIo) -> None:
-        self.etfs = resources.AsyncEtfsResourceWithRawResponse(client.etfs)
+        self.etf = resources.AsyncEtfResourceWithRawResponse(client.etf)
         self.darkpool = resources.AsyncDarkpoolResourceWithRawResponse(client.darkpool)
 
 
 class TradesignalsIoWithStreamedResponse:
     def __init__(self, client: TradesignalsIo) -> None:
-        self.etfs = resources.EtfsResourceWithStreamingResponse(client.etfs)
+        self.etf = resources.EtfResourceWithStreamingResponse(client.etf)
         self.darkpool = resources.DarkpoolResourceWithStreamingResponse(client.darkpool)
 
 
 class AsyncTradesignalsIoWithStreamedResponse:
     def __init__(self, client: AsyncTradesignalsIo) -> None:
-        self.etfs = resources.AsyncEtfsResourceWithStreamingResponse(client.etfs)
+        self.etf = resources.AsyncEtfResourceWithStreamingResponse(client.etf)
         self.darkpool = resources.AsyncDarkpoolResourceWithStreamingResponse(client.darkpool)
 
 

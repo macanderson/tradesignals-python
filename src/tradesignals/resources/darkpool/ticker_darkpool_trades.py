@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Type, Union, Optional, cast
 from datetime import date
 
 import httpx
@@ -20,6 +20,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
 from ...types.darkpool import ticker_darkpool_trade_retrieve_params
 from ...types.darkpool.ticker_darkpool_trade_retrieve_response import TickerDarkpoolTradeRetrieveResponse
@@ -61,7 +62,7 @@ class TickerDarkpoolTradesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TickerDarkpoolTradeRetrieveResponse:
+    ) -> Optional[TickerDarkpoolTradeRetrieveResponse]:
         """-> Returns the darkpool trades for the given ticker on a given day.
 
         Date must be
@@ -107,8 +108,11 @@ class TickerDarkpoolTradesResource(SyncAPIResource):
                     },
                     ticker_darkpool_trade_retrieve_params.TickerDarkpoolTradeRetrieveParams,
                 ),
+                post_parser=DataWrapper[Optional[TickerDarkpoolTradeRetrieveResponse]]._unwrapper,
             ),
-            cast_to=TickerDarkpoolTradeRetrieveResponse,
+            cast_to=cast(
+                Type[Optional[TickerDarkpoolTradeRetrieveResponse]], DataWrapper[TickerDarkpoolTradeRetrieveResponse]
+            ),
         )
 
 
@@ -146,7 +150,7 @@ class AsyncTickerDarkpoolTradesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TickerDarkpoolTradeRetrieveResponse:
+    ) -> Optional[TickerDarkpoolTradeRetrieveResponse]:
         """-> Returns the darkpool trades for the given ticker on a given day.
 
         Date must be
@@ -192,8 +196,11 @@ class AsyncTickerDarkpoolTradesResource(AsyncAPIResource):
                     },
                     ticker_darkpool_trade_retrieve_params.TickerDarkpoolTradeRetrieveParams,
                 ),
+                post_parser=DataWrapper[Optional[TickerDarkpoolTradeRetrieveResponse]]._unwrapper,
             ),
-            cast_to=TickerDarkpoolTradeRetrieveResponse,
+            cast_to=cast(
+                Type[Optional[TickerDarkpoolTradeRetrieveResponse]], DataWrapper[TickerDarkpoolTradeRetrieveResponse]
+            ),
         )
 
 

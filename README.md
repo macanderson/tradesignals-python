@@ -6,8 +6,6 @@ The Tradesignals library provides convenient access to the Tradesignals Io REST 
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
-
 ## Documentation
 
 The REST API documentation can be found on [docs.tradesignals.com](https://docs.tradesignals.com). The full API of this library can be found in [api.md](api.md).
@@ -31,10 +29,9 @@ client = TradesignalsIo(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
 )
 
-ticker_darkpool_trade = client.darkpool.ticker_darkpool_trades.retrieve(
+darkpool_trades = client.darkpool.ticker_darkpool_trades.retrieve(
     ticker="AAPL",
 )
-print(ticker_darkpool_trade.data)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -57,10 +54,9 @@ client = AsyncTradesignalsIo(
 
 
 async def main() -> None:
-    ticker_darkpool_trade = await client.darkpool.ticker_darkpool_trades.retrieve(
+    darkpool_trades = await client.darkpool.ticker_darkpool_trades.retrieve(
         ticker="AAPL",
     )
-    print(ticker_darkpool_trade.data)
 
 
 asyncio.run(main())
@@ -216,7 +212,7 @@ response = client.darkpool.recent_darkpool_trades.with_raw_response.retrieve()
 print(response.headers.get('X-My-Header'))
 
 recent_darkpool_trade = response.parse()  # get the object that `darkpool.recent_darkpool_trades.retrieve()` would have returned
-print(recent_darkpool_trade.data)
+print(recent_darkpool_trade)
 ```
 
 These methods return an [`APIResponse`](https://github.com/macanderson/tradesignals-python/tree/main/src/tradesignals/_response.py) object.

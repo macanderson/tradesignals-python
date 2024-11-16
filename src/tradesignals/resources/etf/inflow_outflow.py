@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Type, Optional, cast
+
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
@@ -13,33 +15,34 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.etfs.openapi_uri import OpenAPIUri
+from ...types.etf.inflow_outflow_retrieve_response import InflowOutflowRetrieveResponse
 
-__all__ = ["HoldingsResource", "AsyncHoldingsResource"]
+__all__ = ["InflowOutflowResource", "AsyncInflowOutflowResource"]
 
 
-class HoldingsResource(SyncAPIResource):
+class InflowOutflowResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> HoldingsResourceWithRawResponse:
+    def with_raw_response(self) -> InflowOutflowResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return HoldingsResourceWithRawResponse(self)
+        return InflowOutflowResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> HoldingsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> InflowOutflowResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return HoldingsResourceWithStreamingResponse(self)
+        return InflowOutflowResourceWithStreamingResponse(self)
 
-    def holdings(
+    def retrieve(
         self,
         ticker: str | NotGiven = NOT_GIVEN,
         *,
@@ -49,10 +52,9 @@ class HoldingsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OpenAPIUri:
-        """Retrieve holdings data for ETFs.
-
-        Filter by optional ETF symbol and date.
+    ) -> Optional[InflowOutflowRetrieveResponse]:
+        """
+        Returns an ETF's inflow and outflow
 
         Args:
           extra_headers: Send extra headers
@@ -66,35 +68,39 @@ class HoldingsResource(SyncAPIResource):
         if not ticker:
             raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return self._get(
-            f"/api/etfs/{ticker}/holdings",
+            f"/api/etfs/{ticker}/in-outflow",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Optional[InflowOutflowRetrieveResponse]]._unwrapper,
             ),
-            cast_to=OpenAPIUri,
+            cast_to=cast(Type[Optional[InflowOutflowRetrieveResponse]], DataWrapper[InflowOutflowRetrieveResponse]),
         )
 
 
-class AsyncHoldingsResource(AsyncAPIResource):
+class AsyncInflowOutflowResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncHoldingsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncInflowOutflowResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncHoldingsResourceWithRawResponse(self)
+        return AsyncInflowOutflowResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncHoldingsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncInflowOutflowResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncHoldingsResourceWithStreamingResponse(self)
+        return AsyncInflowOutflowResourceWithStreamingResponse(self)
 
-    async def holdings(
+    async def retrieve(
         self,
         ticker: str | NotGiven = NOT_GIVEN,
         *,
@@ -104,10 +110,9 @@ class AsyncHoldingsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OpenAPIUri:
-        """Retrieve holdings data for ETFs.
-
-        Filter by optional ETF symbol and date.
+    ) -> Optional[InflowOutflowRetrieveResponse]:
+        """
+        Returns an ETF's inflow and outflow
 
         Args:
           extra_headers: Send extra headers
@@ -121,45 +126,49 @@ class AsyncHoldingsResource(AsyncAPIResource):
         if not ticker:
             raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return await self._get(
-            f"/api/etfs/{ticker}/holdings",
+            f"/api/etfs/{ticker}/in-outflow",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                post_parser=DataWrapper[Optional[InflowOutflowRetrieveResponse]]._unwrapper,
             ),
-            cast_to=OpenAPIUri,
+            cast_to=cast(Type[Optional[InflowOutflowRetrieveResponse]], DataWrapper[InflowOutflowRetrieveResponse]),
         )
 
 
-class HoldingsResourceWithRawResponse:
-    def __init__(self, holdings: HoldingsResource) -> None:
-        self._holdings = holdings
+class InflowOutflowResourceWithRawResponse:
+    def __init__(self, inflow_outflow: InflowOutflowResource) -> None:
+        self._inflow_outflow = inflow_outflow
 
-        self.holdings = to_raw_response_wrapper(
-            holdings.holdings,
+        self.retrieve = to_raw_response_wrapper(
+            inflow_outflow.retrieve,
         )
 
 
-class AsyncHoldingsResourceWithRawResponse:
-    def __init__(self, holdings: AsyncHoldingsResource) -> None:
-        self._holdings = holdings
+class AsyncInflowOutflowResourceWithRawResponse:
+    def __init__(self, inflow_outflow: AsyncInflowOutflowResource) -> None:
+        self._inflow_outflow = inflow_outflow
 
-        self.holdings = async_to_raw_response_wrapper(
-            holdings.holdings,
+        self.retrieve = async_to_raw_response_wrapper(
+            inflow_outflow.retrieve,
         )
 
 
-class HoldingsResourceWithStreamingResponse:
-    def __init__(self, holdings: HoldingsResource) -> None:
-        self._holdings = holdings
+class InflowOutflowResourceWithStreamingResponse:
+    def __init__(self, inflow_outflow: InflowOutflowResource) -> None:
+        self._inflow_outflow = inflow_outflow
 
-        self.holdings = to_streamed_response_wrapper(
-            holdings.holdings,
+        self.retrieve = to_streamed_response_wrapper(
+            inflow_outflow.retrieve,
         )
 
 
-class AsyncHoldingsResourceWithStreamingResponse:
-    def __init__(self, holdings: AsyncHoldingsResource) -> None:
-        self._holdings = holdings
+class AsyncInflowOutflowResourceWithStreamingResponse:
+    def __init__(self, inflow_outflow: AsyncInflowOutflowResource) -> None:
+        self._inflow_outflow = inflow_outflow
 
-        self.holdings = async_to_streamed_response_wrapper(
-            holdings.holdings,
+        self.retrieve = async_to_streamed_response_wrapper(
+            inflow_outflow.retrieve,
         )
