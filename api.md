@@ -416,18 +416,16 @@ Methods:
 
 # Darkpool
 
-## Transactions
-
 Types:
 
 ```python
-from tradesignals.types.darkpool import TransactionRetrieveResponse, TransactionListResponse
+from tradesignals.types import DarkpoolRetrieveResponse, DarkpoolListResponse
 ```
 
 Methods:
 
-- <code title="get /api/darkpool/transactions/{symbol}">client.darkpool.transactions.<a href="./src/tradesignals/resources/darkpool/transactions.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/darkpool/transaction_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool/transaction_retrieve_response.py">TransactionRetrieveResponse</a></code>
-- <code title="get /api/darkpool/transactions">client.darkpool.transactions.<a href="./src/tradesignals/resources/darkpool/transactions.py">list</a>(\*\*<a href="src/tradesignals/types/darkpool/transaction_list_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool/transaction_list_response.py">TransactionListResponse</a></code>
+- <code title="get /api/darkpool/{symbol}">client.darkpool.<a href="./src/tradesignals/resources/darkpool.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/darkpool_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool_retrieve_response.py">DarkpoolRetrieveResponse</a></code>
+- <code title="get /api/darkpool/recent">client.darkpool.<a href="./src/tradesignals/resources/darkpool.py">list</a>(\*\*<a href="src/tradesignals/types/darkpool_list_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool_list_response.py">DarkpoolListResponse</a></code>
 
 # Seasonality
 

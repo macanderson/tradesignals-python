@@ -1,8 +1,8 @@
-# Tradesignals API Client API library
+# Tradesignals API library
 
 [![PyPI version](https://img.shields.io/pypi/v/tradesignals.svg)](https://pypi.org/project/tradesignals/)
 
-The Tradesignals API Client library provides convenient access to the Tradesignals Io REST API from any Python 3.8+
+The Tradesignals library provides convenient access to the Tradesignals Io REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -28,7 +28,9 @@ import os
 from tradesignals import TradesignalsIo
 
 client = TradesignalsIo(
-    api_key=os.environ.get("TRADESIGNALS_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
+    # defaults to "production".
+    environment="sandbox",
 )
 
 chain = client.options.chain.retrieve(
@@ -39,7 +41,7 @@ print(chain.option_chain)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `TRADESIGNALS_API_KEY="My API Key"` to your `.env` file
+to add `TRADESIGNALS_TOKEN="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -52,7 +54,9 @@ import asyncio
 from tradesignals import AsyncTradesignalsIo
 
 client = AsyncTradesignalsIo(
-    api_key=os.environ.get("TRADESIGNALS_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
+    # defaults to "production".
+    environment="sandbox",
 )
 
 
@@ -165,6 +169,20 @@ client.with_options(timeout=5.0).economic_calendars.list()
 On timeout, an `APITimeoutError` is thrown.
 
 Note that requests that time out are [retried twice by default](#retries).
+
+## Default Headers
+
+We automatically send the `Accepts` header set to `text/json, text`.
+
+If you need to, you can override it by setting default headers per-request or on the client object.
+
+```python
+from tradesignals import TradesignalsIo
+
+client = TradesignalsIo(
+    default_headers={"Accepts": "My-Custom-Value"},
+)
+```
 
 ## Advanced
 
