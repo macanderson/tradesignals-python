@@ -32,14 +32,6 @@ from .contract import (
     ContractResourceWithStreamingResponse,
     AsyncContractResourceWithStreamingResponse,
 )
-from .contracts import (
-    ContractsResource,
-    AsyncContractsResource,
-    ContractsResourceWithRawResponse,
-    AsyncContractsResourceWithRawResponse,
-    ContractsResourceWithStreamingResponse,
-    AsyncContractsResourceWithStreamingResponse,
-)
 from .historical import (
     HistoricalResource,
     AsyncHistoricalResource,
@@ -55,6 +47,14 @@ from .expirations import (
     AsyncExpirationsResourceWithRawResponse,
     ExpirationsResourceWithStreamingResponse,
     AsyncExpirationsResourceWithStreamingResponse,
+)
+from .list_contracts import (
+    ListContractsResource,
+    AsyncListContractsResource,
+    ListContractsResourceWithRawResponse,
+    AsyncListContractsResourceWithRawResponse,
+    ListContractsResourceWithStreamingResponse,
+    AsyncListContractsResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -88,12 +88,12 @@ __all__ = [
     "AsyncContractResourceWithRawResponse",
     "ContractResourceWithStreamingResponse",
     "AsyncContractResourceWithStreamingResponse",
-    "ContractsResource",
-    "AsyncContractsResource",
-    "ContractsResourceWithRawResponse",
-    "AsyncContractsResourceWithRawResponse",
-    "ContractsResourceWithStreamingResponse",
-    "AsyncContractsResourceWithStreamingResponse",
+    "ListContractsResource",
+    "AsyncListContractsResource",
+    "ListContractsResourceWithRawResponse",
+    "AsyncListContractsResourceWithRawResponse",
+    "ListContractsResourceWithStreamingResponse",
+    "AsyncListContractsResourceWithStreamingResponse",
     "OptionsResource",
     "AsyncOptionsResource",
     "OptionsResourceWithRawResponse",

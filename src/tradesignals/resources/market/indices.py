@@ -14,6 +14,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.market.index_list_response import IndexListResponse
 
 __all__ = ["IndicesResource", "AsyncIndicesResource"]
 
@@ -47,14 +48,14 @@ class IndicesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> IndexListResponse:
         """Retrieve data on major market indices."""
         return self._get(
             "/api/market/indices",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=IndexListResponse,
         )
 
 
@@ -87,14 +88,14 @@ class AsyncIndicesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> IndexListResponse:
         """Retrieve data on major market indices."""
         return await self._get(
             "/api/market/indices",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=IndexListResponse,
         )
 
 

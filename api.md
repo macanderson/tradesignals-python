@@ -141,7 +141,7 @@ from tradesignals.types import EtfListResponse
 
 Methods:
 
-- <code title="get /api/etf/list">client.etf.<a href="./src/tradesignals/resources/etf/etf.py">list</a>() -> <a href="./src/tradesignals/types/etf_list_response.py">object</a></code>
+- <code title="get /api/etf/list">client.etf.<a href="./src/tradesignals/resources/etf/etf.py">list</a>() -> <a href="./src/tradesignals/types/etf_list_response.py">EtfListResponse</a></code>
 
 ## Tide
 
@@ -178,7 +178,7 @@ from tradesignals.types.etf import HoldingListResponse
 
 Methods:
 
-- <code title="get /api/etf/holdings">client.etf.holdings.<a href="./src/tradesignals/resources/etf/holdings.py">list</a>(\*\*<a href="src/tradesignals/types/etf/holding_list_params.py">params</a>) -> <a href="./src/tradesignals/types/etf/holding_list_response.py">object</a></code>
+- <code title="get /api/etf/holdings">client.etf.holdings.<a href="./src/tradesignals/resources/etf/holdings.py">list</a>(\*\*<a href="src/tradesignals/types/etf/holding_list_params.py">params</a>) -> <a href="./src/tradesignals/types/etf/holding_list_response.py">HoldingListResponse</a></code>
 
 # Options
 
@@ -192,7 +192,7 @@ from tradesignals.types.options import ChainRetrieveResponse
 
 Methods:
 
-- <code title="get /api/options/chain/{symbol}">client.options.chain.<a href="./src/tradesignals/resources/options/chain.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/options/chain_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/options/chain_retrieve_response.py">object</a></code>
+- <code title="get /api/options/chain/{symbol}">client.options.chain.<a href="./src/tradesignals/resources/options/chain.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/options/chain_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/options/chain_retrieve_response.py">ChainRetrieveResponse</a></code>
 
 ## Expirations
 
@@ -204,7 +204,7 @@ from tradesignals.types.options import ExpirationRetrieveResponse
 
 Methods:
 
-- <code title="get /api/options/expirations/{symbol}">client.options.expirations.<a href="./src/tradesignals/resources/options/expirations.py">retrieve</a>(symbol) -> <a href="./src/tradesignals/types/options/expiration_retrieve_response.py">object</a></code>
+- <code title="get /api/options/expirations/{symbol}">client.options.expirations.<a href="./src/tradesignals/resources/options/expirations.py">retrieve</a>(symbol) -> <a href="./src/tradesignals/types/options/expiration_retrieve_response.py">ExpirationRetrieveResponse</a></code>
 
 ## Greeks
 
@@ -216,7 +216,7 @@ from tradesignals.types.options import GreekRetrieveResponse
 
 Methods:
 
-- <code title="get /api/options/greeks/{symbol}">client.options.greeks.<a href="./src/tradesignals/resources/options/greeks.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/options/greek_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/options/greek_retrieve_response.py">object</a></code>
+- <code title="get /api/options/greeks/{symbol}">client.options.greeks.<a href="./src/tradesignals/resources/options/greeks.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/options/greek_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/options/greek_retrieve_response.py">GreekRetrieveResponse</a></code>
 
 ## Historical
 
@@ -228,7 +228,7 @@ from tradesignals.types.options import HistoricalRetrieveResponse
 
 Methods:
 
-- <code title="get /api/options/historical/{symbol}">client.options.historical.<a href="./src/tradesignals/resources/options/historical.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/options/historical_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/options/historical_retrieve_response.py">object</a></code>
+- <code title="get /api/options/historical/{symbol}">client.options.historical.<a href="./src/tradesignals/resources/options/historical.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/options/historical_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/options/historical_retrieve_response.py">HistoricalRetrieveResponse</a></code>
 
 ## Contract
 
@@ -240,21 +240,31 @@ from tradesignals.types.options import ContractRetrieveResponse
 
 Methods:
 
-- <code title="get /api/options/contract/{optionSymbol}">client.options.contract.<a href="./src/tradesignals/resources/options/contract.py">retrieve</a>(option_symbol) -> <a href="./src/tradesignals/types/options/contract_retrieve_response.py">object</a></code>
+- <code title="get /api/options/contract/{optionSymbol}">client.options.contract.<a href="./src/tradesignals/resources/options/contract.py">retrieve</a>(option_symbol) -> <a href="./src/tradesignals/types/options/contract_retrieve_response.py">ContractRetrieveResponse</a></code>
 
-## Contracts
+## ListContracts
 
 Types:
 
 ```python
-from tradesignals.types.options import ContractListResponse
+from tradesignals.types.options import ListContractListResponse
 ```
 
 Methods:
 
-- <code title="get /api/options/contracts">client.options.contracts.<a href="./src/tradesignals/resources/options/contracts.py">list</a>(\*\*<a href="src/tradesignals/types/options/contract_list_params.py">params</a>) -> <a href="./src/tradesignals/types/options/contract_list_response.py">object</a></code>
+- <code title="get /api/options/contracts">client.options.list_contracts.<a href="./src/tradesignals/resources/options/list_contracts.py">list</a>(\*\*<a href="src/tradesignals/types/options/list_contract_list_params.py">params</a>) -> <a href="./src/tradesignals/types/options/list_contract_list_response.py">ListContractListResponse</a></code>
 
 # Stocks
+
+Types:
+
+```python
+from tradesignals.types import StockPostResponse
+```
+
+Methods:
+
+- <code title="post /api/stocks/screener">client.stocks.<a href="./src/tradesignals/resources/stocks/stocks.py">post</a>(\*\*<a href="src/tradesignals/types/stock_post_params.py">params</a>) -> <a href="./src/tradesignals/types/stock_post_response.py">StockPostResponse</a></code>
 
 ## Price
 
@@ -266,7 +276,7 @@ from tradesignals.types.stocks import PriceRetrieveResponse
 
 Methods:
 
-- <code title="get /api/stocks/price/{symbol}">client.stocks.price.<a href="./src/tradesignals/resources/stocks/price.py">retrieve</a>(symbol) -> <a href="./src/tradesignals/types/stocks/price_retrieve_response.py">object</a></code>
+- <code title="get /api/stocks/price/{symbol}">client.stocks.price.<a href="./src/tradesignals/resources/stocks/price.py">retrieve</a>(symbol) -> <a href="./src/tradesignals/types/stocks/price_retrieve_response.py">PriceRetrieveResponse</a></code>
 
 ## Quote
 
@@ -278,7 +288,7 @@ from tradesignals.types.stocks import QuoteRetrieveResponse
 
 Methods:
 
-- <code title="get /api/stocks/quote/{symbol}">client.stocks.quote.<a href="./src/tradesignals/resources/stocks/quote.py">retrieve</a>(symbol) -> <a href="./src/tradesignals/types/stocks/quote_retrieve_response.py">object</a></code>
+- <code title="get /api/stocks/quote/{symbol}">client.stocks.quote.<a href="./src/tradesignals/resources/stocks/quote.py">retrieve</a>(symbol) -> <a href="./src/tradesignals/types/stocks/quote_retrieve_response.py">QuoteRetrieveResponse</a></code>
 
 ## Historical
 
@@ -290,7 +300,7 @@ from tradesignals.types.stocks import HistoricalRetrieveResponse
 
 Methods:
 
-- <code title="get /api/stocks/historical/{symbol}">client.stocks.historical.<a href="./src/tradesignals/resources/stocks/historical.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/stocks/historical_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/stocks/historical_retrieve_response.py">object</a></code>
+- <code title="get /api/stocks/historical/{symbol}">client.stocks.historical.<a href="./src/tradesignals/resources/stocks/historical.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/stocks/historical_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/stocks/historical_retrieve_response.py">HistoricalRetrieveResponse</a></code>
 
 ## Company
 
@@ -302,7 +312,7 @@ from tradesignals.types.stocks import CompanyRetrieveResponse
 
 Methods:
 
-- <code title="get /api/stocks/company/{symbol}">client.stocks.company.<a href="./src/tradesignals/resources/stocks/company.py">retrieve</a>(symbol) -> <a href="./src/tradesignals/types/stocks/company_retrieve_response.py">object</a></code>
+- <code title="get /api/stocks/company/{symbol}">client.stocks.company.<a href="./src/tradesignals/resources/stocks/company.py">retrieve</a>(symbol) -> <a href="./src/tradesignals/types/stocks/company_retrieve_response.py">CompanyRetrieveResponse</a></code>
 
 ## Financials
 
@@ -314,7 +324,7 @@ from tradesignals.types.stocks import FinancialRetrieveResponse
 
 Methods:
 
-- <code title="get /api/stocks/financials/{symbol}">client.stocks.financials.<a href="./src/tradesignals/resources/stocks/financials.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/stocks/financial_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/stocks/financial_retrieve_response.py">object</a></code>
+- <code title="get /api/stocks/financials/{symbol}">client.stocks.financials.<a href="./src/tradesignals/resources/stocks/financials.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/stocks/financial_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/stocks/financial_retrieve_response.py">FinancialRetrieveResponse</a></code>
 
 ## Earnings
 
@@ -326,7 +336,7 @@ from tradesignals.types.stocks import EarningRetrieveResponse
 
 Methods:
 
-- <code title="get /api/stocks/earnings/{symbol}">client.stocks.earnings.<a href="./src/tradesignals/resources/stocks/earnings.py">retrieve</a>(symbol) -> <a href="./src/tradesignals/types/stocks/earning_retrieve_response.py">object</a></code>
+- <code title="get /api/stocks/earnings/{symbol}">client.stocks.earnings.<a href="./src/tradesignals/resources/stocks/earnings.py">retrieve</a>(symbol) -> <a href="./src/tradesignals/types/stocks/earning_retrieve_response.py">EarningRetrieveResponse</a></code>
 
 ## Dividends
 
@@ -338,7 +348,7 @@ from tradesignals.types.stocks import DividendRetrieveResponse
 
 Methods:
 
-- <code title="get /api/stocks/dividends/{symbol}">client.stocks.dividends.<a href="./src/tradesignals/resources/stocks/dividends.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/stocks/dividend_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/stocks/dividend_retrieve_response.py">object</a></code>
+- <code title="get /api/stocks/dividends/{symbol}">client.stocks.dividends.<a href="./src/tradesignals/resources/stocks/dividends.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/stocks/dividend_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/stocks/dividend_retrieve_response.py">DividendRetrieveResponse</a></code>
 
 ## Screener
 
@@ -350,7 +360,7 @@ from tradesignals.types.stocks import ScreenerRetrieveResponse
 
 Methods:
 
-- <code title="get /api/stocks/screener">client.stocks.screener.<a href="./src/tradesignals/resources/stocks/screener.py">retrieve</a>(\*\*<a href="src/tradesignals/types/stocks/screener_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/stocks/screener_retrieve_response.py">object</a></code>
+- <code title="get /api/stocks/screener">client.stocks.screener.<a href="./src/tradesignals/resources/stocks/screener.py">retrieve</a>(\*\*<a href="src/tradesignals/types/stocks/screener_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/stocks/screener_retrieve_response.py">ScreenerRetrieveResponse</a></code>
 
 # News
 
@@ -362,7 +372,7 @@ from tradesignals.types import NewsListResponse
 
 Methods:
 
-- <code title="get /api/news">client.news.<a href="./src/tradesignals/resources/news.py">list</a>(\*\*<a href="src/tradesignals/types/news_list_params.py">params</a>) -> <a href="./src/tradesignals/types/news_list_response.py">object</a></code>
+- <code title="get /api/news">client.news.<a href="./src/tradesignals/resources/news.py">list</a>(\*\*<a href="src/tradesignals/types/news_list_params.py">params</a>) -> <a href="./src/tradesignals/types/news_list_response.py">NewsListResponse</a></code>
 
 # Congress
 
@@ -376,7 +386,7 @@ from tradesignals.types.congress import TradeListResponse
 
 Methods:
 
-- <code title="get /api/congress/trades">client.congress.trades.<a href="./src/tradesignals/resources/congress/trades.py">list</a>(\*\*<a href="src/tradesignals/types/congress/trade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/trade_list_response.py">object</a></code>
+- <code title="get /api/congress/trades">client.congress.trades.<a href="./src/tradesignals/resources/congress/trades.py">list</a>(\*\*<a href="src/tradesignals/types/congress/trade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/trade_list_response.py">TradeListResponse</a></code>
 
 ## Members
 
@@ -388,7 +398,7 @@ from tradesignals.types.congress import MemberListResponse
 
 Methods:
 
-- <code title="get /api/congress/members">client.congress.members.<a href="./src/tradesignals/resources/congress/members.py">list</a>() -> <a href="./src/tradesignals/types/congress/member_list_response.py">object</a></code>
+- <code title="get /api/congress/members">client.congress.members.<a href="./src/tradesignals/resources/congress/members.py">list</a>() -> <a href="./src/tradesignals/types/congress/member_list_response.py">MemberListResponse</a></code>
 
 # Institutions
 
@@ -400,7 +410,7 @@ from tradesignals.types import InstitutionListResponse
 
 Methods:
 
-- <code title="get /api/institutions/list">client.institutions.<a href="./src/tradesignals/resources/institutions/institutions.py">list</a>() -> <a href="./src/tradesignals/types/institution_list_response.py">object</a></code>
+- <code title="get /api/institutions/list">client.institutions.<a href="./src/tradesignals/resources/institutions/institutions.py">list</a>() -> <a href="./src/tradesignals/types/institution_list_response.py">InstitutionListResponse</a></code>
 
 ## Trades
 
@@ -412,7 +422,7 @@ from tradesignals.types.institutions import TradeListResponse
 
 Methods:
 
-- <code title="get /api/institutions/trades">client.institutions.trades.<a href="./src/tradesignals/resources/institutions/trades.py">list</a>(\*\*<a href="src/tradesignals/types/institutions/trade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/trade_list_response.py">object</a></code>
+- <code title="get /api/institutions/trades">client.institutions.trades.<a href="./src/tradesignals/resources/institutions/trades.py">list</a>(\*\*<a href="src/tradesignals/types/institutions/trade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/trade_list_response.py">TradeListResponse</a></code>
 
 # Darkpool
 
@@ -426,8 +436,8 @@ from tradesignals.types.darkpool import TransactionRetrieveResponse, Transaction
 
 Methods:
 
-- <code title="get /api/darkpool/transactions/{symbol}">client.darkpool.transactions.<a href="./src/tradesignals/resources/darkpool/transactions.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/darkpool/transaction_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool/transaction_retrieve_response.py">object</a></code>
-- <code title="get /api/darkpool/transactions">client.darkpool.transactions.<a href="./src/tradesignals/resources/darkpool/transactions.py">list</a>(\*\*<a href="src/tradesignals/types/darkpool/transaction_list_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool/transaction_list_response.py">object</a></code>
+- <code title="get /api/darkpool/transactions/{symbol}">client.darkpool.transactions.<a href="./src/tradesignals/resources/darkpool/transactions.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/darkpool/transaction_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool/transaction_retrieve_response.py">TransactionRetrieveResponse</a></code>
+- <code title="get /api/darkpool/transactions">client.darkpool.transactions.<a href="./src/tradesignals/resources/darkpool/transactions.py">list</a>(\*\*<a href="src/tradesignals/types/darkpool/transaction_list_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool/transaction_list_response.py">TransactionListResponse</a></code>
 
 # Seasonality
 
@@ -441,7 +451,7 @@ from tradesignals.types.seasonality import StockRetrieveResponse
 
 Methods:
 
-- <code title="get /api/seasonality/stocks/{symbol}">client.seasonality.stocks.<a href="./src/tradesignals/resources/seasonality/stocks.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/seasonality/stock_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/seasonality/stock_retrieve_response.py">object</a></code>
+- <code title="get /api/seasonality/stocks/{symbol}">client.seasonality.stocks.<a href="./src/tradesignals/resources/seasonality/stocks.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/seasonality/stock_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/seasonality/stock_retrieve_response.py">StockRetrieveResponse</a></code>
 
 # Analyst
 
@@ -455,7 +465,7 @@ from tradesignals.types.analyst import RatingRetrieveResponse
 
 Methods:
 
-- <code title="get /api/analyst/ratings/{symbol}">client.analyst.ratings.<a href="./src/tradesignals/resources/analyst/ratings.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/analyst/rating_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/analyst/rating_retrieve_response.py">object</a></code>
+- <code title="get /api/analyst/ratings/{symbol}">client.analyst.ratings.<a href="./src/tradesignals/resources/analyst/ratings.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/analyst/rating_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/analyst/rating_retrieve_response.py">RatingRetrieveResponse</a></code>
 
 ## UpgradesDowngrades
 
@@ -467,7 +477,7 @@ from tradesignals.types.analyst import UpgradesDowngradeListResponse
 
 Methods:
 
-- <code title="get /api/analyst/upgrades_downgrades">client.analyst.upgrades_downgrades.<a href="./src/tradesignals/resources/analyst/upgrades_downgrades.py">list</a>(\*\*<a href="src/tradesignals/types/analyst/upgrades_downgrade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/analyst/upgrades_downgrade_list_response.py">object</a></code>
+- <code title="get /api/analyst/upgrades_downgrades">client.analyst.upgrades_downgrades.<a href="./src/tradesignals/resources/analyst/upgrades_downgrades.py">list</a>(\*\*<a href="src/tradesignals/types/analyst/upgrades_downgrade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/analyst/upgrades_downgrade_list_response.py">UpgradesDowngradeListResponse</a></code>
 
 # Market
 
@@ -481,7 +491,7 @@ from tradesignals.types.market import OverviewRetrieveResponse
 
 Methods:
 
-- <code title="get /api/market/overview">client.market.overview.<a href="./src/tradesignals/resources/market/overview.py">retrieve</a>() -> <a href="./src/tradesignals/types/market/overview_retrieve_response.py">object</a></code>
+- <code title="get /api/market/overview">client.market.overview.<a href="./src/tradesignals/resources/market/overview.py">retrieve</a>() -> <a href="./src/tradesignals/types/market/overview_retrieve_response.py">OverviewRetrieveResponse</a></code>
 
 ## Indices
 
@@ -493,7 +503,7 @@ from tradesignals.types.market import IndexListResponse
 
 Methods:
 
-- <code title="get /api/market/indices">client.market.indices.<a href="./src/tradesignals/resources/market/indices.py">list</a>() -> <a href="./src/tradesignals/types/market/index_list_response.py">object</a></code>
+- <code title="get /api/market/indices">client.market.indices.<a href="./src/tradesignals/resources/market/indices.py">list</a>() -> <a href="./src/tradesignals/types/market/index_list_response.py">IndexListResponse</a></code>
 
 ## Movers
 
@@ -505,7 +515,7 @@ from tradesignals.types.market import MoverListResponse
 
 Methods:
 
-- <code title="get /api/market/movers">client.market.movers.<a href="./src/tradesignals/resources/market/movers.py">list</a>(\*\*<a href="src/tradesignals/types/market/mover_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/mover_list_response.py">object</a></code>
+- <code title="get /api/market/movers">client.market.movers.<a href="./src/tradesignals/resources/market/movers.py">list</a>(\*\*<a href="src/tradesignals/types/market/mover_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/mover_list_response.py">MoverListResponse</a></code>
 
 ## Sectors
 
@@ -517,7 +527,7 @@ from tradesignals.types.market import SectorListResponse
 
 Methods:
 
-- <code title="get /api/market/sectors">client.market.sectors.<a href="./src/tradesignals/resources/market/sectors.py">list</a>(\*\*<a href="src/tradesignals/types/market/sector_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/sector_list_response.py">object</a></code>
+- <code title="get /api/market/sectors">client.market.sectors.<a href="./src/tradesignals/resources/market/sectors.py">list</a>(\*\*<a href="src/tradesignals/types/market/sector_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/sector_list_response.py">SectorListResponse</a></code>
 
 ## News
 
@@ -529,4 +539,4 @@ from tradesignals.types.market import NewsListResponse
 
 Methods:
 
-- <code title="get /api/market/news">client.market.news.<a href="./src/tradesignals/resources/market/news.py">list</a>(\*\*<a href="src/tradesignals/types/market/news_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/news_list_response.py">object</a></code>
+- <code title="get /api/market/news">client.market.news.<a href="./src/tradesignals/resources/market/news.py">list</a>(\*\*<a href="src/tradesignals/types/market/news_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/news_list_response.py">NewsListResponse</a></code>

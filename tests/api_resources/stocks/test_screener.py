@@ -9,6 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals.types.stocks import ScreenerRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +20,7 @@ class TestScreener:
     @parametrize
     def test_method_retrieve(self, client: Tradesignals) -> None:
         screener = client.stocks.screener.retrieve()
-        assert_matches_type(object, screener, path=["response"])
+        assert_matches_type(ScreenerRetrieveResponse, screener, path=["response"])
 
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Tradesignals) -> None:
@@ -33,7 +34,7 @@ class TestScreener:
             volume_max=0,
             volume_min=0,
         )
-        assert_matches_type(object, screener, path=["response"])
+        assert_matches_type(ScreenerRetrieveResponse, screener, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Tradesignals) -> None:
@@ -42,7 +43,7 @@ class TestScreener:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         screener = response.parse()
-        assert_matches_type(object, screener, path=["response"])
+        assert_matches_type(ScreenerRetrieveResponse, screener, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Tradesignals) -> None:
@@ -51,7 +52,7 @@ class TestScreener:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             screener = response.parse()
-            assert_matches_type(object, screener, path=["response"])
+            assert_matches_type(ScreenerRetrieveResponse, screener, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -62,7 +63,7 @@ class TestAsyncScreener:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncTradesignals) -> None:
         screener = await async_client.stocks.screener.retrieve()
-        assert_matches_type(object, screener, path=["response"])
+        assert_matches_type(ScreenerRetrieveResponse, screener, path=["response"])
 
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignals) -> None:
@@ -76,7 +77,7 @@ class TestAsyncScreener:
             volume_max=0,
             volume_min=0,
         )
-        assert_matches_type(object, screener, path=["response"])
+        assert_matches_type(ScreenerRetrieveResponse, screener, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncTradesignals) -> None:
@@ -85,7 +86,7 @@ class TestAsyncScreener:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         screener = await response.parse()
-        assert_matches_type(object, screener, path=["response"])
+        assert_matches_type(ScreenerRetrieveResponse, screener, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncTradesignals) -> None:
@@ -94,6 +95,6 @@ class TestAsyncScreener:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             screener = await response.parse()
-            assert_matches_type(object, screener, path=["response"])
+            assert_matches_type(ScreenerRetrieveResponse, screener, path=["response"])
 
         assert cast(Any, response.is_closed) is True

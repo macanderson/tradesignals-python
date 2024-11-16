@@ -21,6 +21,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.market import sector_list_params
+from ...types.market.sector_list_response import SectorListResponse
 
 __all__ = ["SectorsResource", "AsyncSectorsResource"]
 
@@ -55,7 +56,7 @@ class SectorsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> SectorListResponse:
         """Retrieve performance data for market sectors.
 
         Filter by optional time frame.
@@ -80,7 +81,7 @@ class SectorsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform({"time_frame": time_frame}, sector_list_params.SectorListParams),
             ),
-            cast_to=object,
+            cast_to=SectorListResponse,
         )
 
 
@@ -114,7 +115,7 @@ class AsyncSectorsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> SectorListResponse:
         """Retrieve performance data for market sectors.
 
         Filter by optional time frame.
@@ -139,7 +140,7 @@ class AsyncSectorsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform({"time_frame": time_frame}, sector_list_params.SectorListParams),
             ),
-            cast_to=object,
+            cast_to=SectorListResponse,
         )
 
 

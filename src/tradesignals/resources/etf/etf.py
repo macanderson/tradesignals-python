@@ -38,6 +38,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.etf_list_response import EtfListResponse
 
 __all__ = ["EtfResource", "AsyncEtfResource"]
 
@@ -83,14 +84,14 @@ class EtfResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> EtfListResponse:
         """Retrieve a list of ETFs available."""
         return self._get(
             "/api/etf/list",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=EtfListResponse,
         )
 
 
@@ -135,14 +136,14 @@ class AsyncEtfResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> EtfListResponse:
         """Retrieve a list of ETFs available."""
         return await self._get(
             "/api/etf/list",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=EtfListResponse,
         )
 
 

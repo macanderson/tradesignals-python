@@ -14,6 +14,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.congress.member_list_response import MemberListResponse
 
 __all__ = ["MembersResource", "AsyncMembersResource"]
 
@@ -47,14 +48,14 @@ class MembersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> MemberListResponse:
         """Retrieve a list of Congress members who have reported trades."""
         return self._get(
             "/api/congress/members",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MemberListResponse,
         )
 
 
@@ -87,14 +88,14 @@ class AsyncMembersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> MemberListResponse:
         """Retrieve a list of Congress members who have reported trades."""
         return await self._get(
             "/api/congress/members",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=MemberListResponse,
         )
 
 

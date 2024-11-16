@@ -23,6 +23,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.options import historical_retrieve_params
+from ...types.options.historical_retrieve_response import HistoricalRetrieveResponse
 
 __all__ = ["HistoricalResource", "AsyncHistoricalResource"]
 
@@ -62,7 +63,7 @@ class HistoricalResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> HistoricalRetrieveResponse:
         """Retrieve historical options data for a specific stock symbol.
 
         Filter by optional
@@ -107,7 +108,7 @@ class HistoricalResource(SyncAPIResource):
                     historical_retrieve_params.HistoricalRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=HistoricalRetrieveResponse,
         )
 
 
@@ -146,7 +147,7 @@ class AsyncHistoricalResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> HistoricalRetrieveResponse:
         """Retrieve historical options data for a specific stock symbol.
 
         Filter by optional
@@ -191,7 +192,7 @@ class AsyncHistoricalResource(AsyncAPIResource):
                     historical_retrieve_params.HistoricalRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=HistoricalRetrieveResponse,
         )
 
 

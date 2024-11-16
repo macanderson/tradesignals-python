@@ -9,6 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals.types.stocks import PriceRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -21,7 +22,7 @@ class TestPrice:
         price = client.stocks.price.retrieve(
             "symbol",
         )
-        assert_matches_type(object, price, path=["response"])
+        assert_matches_type(PriceRetrieveResponse, price, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Tradesignals) -> None:
@@ -32,7 +33,7 @@ class TestPrice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         price = response.parse()
-        assert_matches_type(object, price, path=["response"])
+        assert_matches_type(PriceRetrieveResponse, price, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Tradesignals) -> None:
@@ -43,7 +44,7 @@ class TestPrice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             price = response.parse()
-            assert_matches_type(object, price, path=["response"])
+            assert_matches_type(PriceRetrieveResponse, price, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -63,7 +64,7 @@ class TestAsyncPrice:
         price = await async_client.stocks.price.retrieve(
             "symbol",
         )
-        assert_matches_type(object, price, path=["response"])
+        assert_matches_type(PriceRetrieveResponse, price, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncTradesignals) -> None:
@@ -74,7 +75,7 @@ class TestAsyncPrice:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         price = await response.parse()
-        assert_matches_type(object, price, path=["response"])
+        assert_matches_type(PriceRetrieveResponse, price, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncTradesignals) -> None:
@@ -85,7 +86,7 @@ class TestAsyncPrice:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             price = await response.parse()
-            assert_matches_type(object, price, path=["response"])
+            assert_matches_type(PriceRetrieveResponse, price, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

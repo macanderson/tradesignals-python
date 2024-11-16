@@ -27,14 +27,6 @@ from .contract import (
     AsyncContractResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
-from .contracts import (
-    ContractsResource,
-    AsyncContractsResource,
-    ContractsResourceWithRawResponse,
-    AsyncContractsResourceWithRawResponse,
-    ContractsResourceWithStreamingResponse,
-    AsyncContractsResourceWithStreamingResponse,
-)
 from .historical import (
     HistoricalResource,
     AsyncHistoricalResource,
@@ -51,6 +43,14 @@ from .expirations import (
     AsyncExpirationsResourceWithRawResponse,
     ExpirationsResourceWithStreamingResponse,
     AsyncExpirationsResourceWithStreamingResponse,
+)
+from .list_contracts import (
+    ListContractsResource,
+    AsyncListContractsResource,
+    ListContractsResourceWithRawResponse,
+    AsyncListContractsResourceWithRawResponse,
+    ListContractsResourceWithStreamingResponse,
+    AsyncListContractsResourceWithStreamingResponse,
 )
 
 __all__ = ["OptionsResource", "AsyncOptionsResource"]
@@ -78,8 +78,8 @@ class OptionsResource(SyncAPIResource):
         return ContractResource(self._client)
 
     @cached_property
-    def contracts(self) -> ContractsResource:
-        return ContractsResource(self._client)
+    def list_contracts(self) -> ListContractsResource:
+        return ListContractsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> OptionsResourceWithRawResponse:
@@ -123,8 +123,8 @@ class AsyncOptionsResource(AsyncAPIResource):
         return AsyncContractResource(self._client)
 
     @cached_property
-    def contracts(self) -> AsyncContractsResource:
-        return AsyncContractsResource(self._client)
+    def list_contracts(self) -> AsyncListContractsResource:
+        return AsyncListContractsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncOptionsResourceWithRawResponse:
@@ -171,8 +171,8 @@ class OptionsResourceWithRawResponse:
         return ContractResourceWithRawResponse(self._options.contract)
 
     @cached_property
-    def contracts(self) -> ContractsResourceWithRawResponse:
-        return ContractsResourceWithRawResponse(self._options.contracts)
+    def list_contracts(self) -> ListContractsResourceWithRawResponse:
+        return ListContractsResourceWithRawResponse(self._options.list_contracts)
 
 
 class AsyncOptionsResourceWithRawResponse:
@@ -200,8 +200,8 @@ class AsyncOptionsResourceWithRawResponse:
         return AsyncContractResourceWithRawResponse(self._options.contract)
 
     @cached_property
-    def contracts(self) -> AsyncContractsResourceWithRawResponse:
-        return AsyncContractsResourceWithRawResponse(self._options.contracts)
+    def list_contracts(self) -> AsyncListContractsResourceWithRawResponse:
+        return AsyncListContractsResourceWithRawResponse(self._options.list_contracts)
 
 
 class OptionsResourceWithStreamingResponse:
@@ -229,8 +229,8 @@ class OptionsResourceWithStreamingResponse:
         return ContractResourceWithStreamingResponse(self._options.contract)
 
     @cached_property
-    def contracts(self) -> ContractsResourceWithStreamingResponse:
-        return ContractsResourceWithStreamingResponse(self._options.contracts)
+    def list_contracts(self) -> ListContractsResourceWithStreamingResponse:
+        return ListContractsResourceWithStreamingResponse(self._options.list_contracts)
 
 
 class AsyncOptionsResourceWithStreamingResponse:
@@ -258,5 +258,5 @@ class AsyncOptionsResourceWithStreamingResponse:
         return AsyncContractResourceWithStreamingResponse(self._options.contract)
 
     @cached_property
-    def contracts(self) -> AsyncContractsResourceWithStreamingResponse:
-        return AsyncContractsResourceWithStreamingResponse(self._options.contracts)
+    def list_contracts(self) -> AsyncListContractsResourceWithStreamingResponse:
+        return AsyncListContractsResourceWithStreamingResponse(self._options.list_contracts)

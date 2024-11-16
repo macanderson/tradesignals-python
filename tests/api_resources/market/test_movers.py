@@ -9,6 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals.types.market import MoverListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +20,7 @@ class TestMovers:
     @parametrize
     def test_method_list(self, client: Tradesignals) -> None:
         mover = client.market.movers.list()
-        assert_matches_type(object, mover, path=["response"])
+        assert_matches_type(MoverListResponse, mover, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Tradesignals) -> None:
@@ -27,7 +28,7 @@ class TestMovers:
             limit=0,
             type="gainers",
         )
-        assert_matches_type(object, mover, path=["response"])
+        assert_matches_type(MoverListResponse, mover, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Tradesignals) -> None:
@@ -36,7 +37,7 @@ class TestMovers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         mover = response.parse()
-        assert_matches_type(object, mover, path=["response"])
+        assert_matches_type(MoverListResponse, mover, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Tradesignals) -> None:
@@ -45,7 +46,7 @@ class TestMovers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             mover = response.parse()
-            assert_matches_type(object, mover, path=["response"])
+            assert_matches_type(MoverListResponse, mover, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -56,7 +57,7 @@ class TestAsyncMovers:
     @parametrize
     async def test_method_list(self, async_client: AsyncTradesignals) -> None:
         mover = await async_client.market.movers.list()
-        assert_matches_type(object, mover, path=["response"])
+        assert_matches_type(MoverListResponse, mover, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncTradesignals) -> None:
@@ -64,7 +65,7 @@ class TestAsyncMovers:
             limit=0,
             type="gainers",
         )
-        assert_matches_type(object, mover, path=["response"])
+        assert_matches_type(MoverListResponse, mover, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncTradesignals) -> None:
@@ -73,7 +74,7 @@ class TestAsyncMovers:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         mover = await response.parse()
-        assert_matches_type(object, mover, path=["response"])
+        assert_matches_type(MoverListResponse, mover, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncTradesignals) -> None:
@@ -82,6 +83,6 @@ class TestAsyncMovers:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             mover = await response.parse()
-            assert_matches_type(object, mover, path=["response"])
+            assert_matches_type(MoverListResponse, mover, path=["response"])
 
         assert cast(Any, response.is_closed) is True

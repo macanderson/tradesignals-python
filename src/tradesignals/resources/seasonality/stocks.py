@@ -21,6 +21,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.seasonality import stock_retrieve_params
+from ...types.seasonality.stock_retrieve_response import StockRetrieveResponse
 
 __all__ = ["StocksResource", "AsyncStocksResource"]
 
@@ -56,7 +57,7 @@ class StocksResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> StockRetrieveResponse:
         """Retrieve seasonality data for a specific stock symbol.
 
         Filter by optional time
@@ -84,7 +85,7 @@ class StocksResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform({"time_frame": time_frame}, stock_retrieve_params.StockRetrieveParams),
             ),
-            cast_to=object,
+            cast_to=StockRetrieveResponse,
         )
 
 
@@ -119,7 +120,7 @@ class AsyncStocksResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> StockRetrieveResponse:
         """Retrieve seasonality data for a specific stock symbol.
 
         Filter by optional time
@@ -149,7 +150,7 @@ class AsyncStocksResource(AsyncAPIResource):
                     {"time_frame": time_frame}, stock_retrieve_params.StockRetrieveParams
                 ),
             ),
-            cast_to=object,
+            cast_to=StockRetrieveResponse,
         )
 
 

@@ -19,6 +19,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.stocks import screener_retrieve_params
+from ...types.stocks.screener_retrieve_response import ScreenerRetrieveResponse
 
 __all__ = ["ScreenerResource", "AsyncScreenerResource"]
 
@@ -60,7 +61,7 @@ class ScreenerResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> ScreenerRetrieveResponse:
         """Retrieve stocks that meet specified screening criteria.
 
         Filter by optional
@@ -112,7 +113,7 @@ class ScreenerResource(SyncAPIResource):
                     screener_retrieve_params.ScreenerRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=ScreenerRetrieveResponse,
         )
 
 
@@ -153,7 +154,7 @@ class AsyncScreenerResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> ScreenerRetrieveResponse:
         """Retrieve stocks that meet specified screening criteria.
 
         Filter by optional
@@ -205,7 +206,7 @@ class AsyncScreenerResource(AsyncAPIResource):
                     screener_retrieve_params.ScreenerRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=ScreenerRetrieveResponse,
         )
 
 

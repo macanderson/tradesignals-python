@@ -22,6 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.stocks import dividend_retrieve_params
+from ...types.stocks.dividend_retrieve_response import DividendRetrieveResponse
 
 __all__ = ["DividendsResource", "AsyncDividendsResource"]
 
@@ -58,7 +59,7 @@ class DividendsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> DividendRetrieveResponse:
         """Retrieve dividend history for a specific stock symbol.
 
         Filter by optional start
@@ -94,7 +95,7 @@ class DividendsResource(SyncAPIResource):
                     dividend_retrieve_params.DividendRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=DividendRetrieveResponse,
         )
 
 
@@ -130,7 +131,7 @@ class AsyncDividendsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> DividendRetrieveResponse:
         """Retrieve dividend history for a specific stock symbol.
 
         Filter by optional start
@@ -166,7 +167,7 @@ class AsyncDividendsResource(AsyncAPIResource):
                     dividend_retrieve_params.DividendRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=DividendRetrieveResponse,
         )
 
 

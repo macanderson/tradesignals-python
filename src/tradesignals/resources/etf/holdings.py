@@ -22,6 +22,7 @@ from ..._response import (
 )
 from ...types.etf import holding_list_params
 from ..._base_client import make_request_options
+from ...types.etf.holding_list_response import HoldingListResponse
 
 __all__ = ["HoldingsResource", "AsyncHoldingsResource"]
 
@@ -57,7 +58,7 @@ class HoldingsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> HoldingListResponse:
         """Retrieve holdings data for ETFs.
 
         Filter by optional ETF symbol and date.
@@ -90,7 +91,7 @@ class HoldingsResource(SyncAPIResource):
                     holding_list_params.HoldingListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=HoldingListResponse,
         )
 
 
@@ -125,7 +126,7 @@ class AsyncHoldingsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> HoldingListResponse:
         """Retrieve holdings data for ETFs.
 
         Filter by optional ETF symbol and date.
@@ -158,7 +159,7 @@ class AsyncHoldingsResource(AsyncAPIResource):
                     holding_list_params.HoldingListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=HoldingListResponse,
         )
 
 

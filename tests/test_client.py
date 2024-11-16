@@ -718,11 +718,14 @@ class TestTradesignals:
     @mock.patch("tradesignals._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/options/flow/AAPL").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/api/stocks/screener").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.get(
-                "/api/options/flow/AAPL", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+            self.client.post(
+                "/api/stocks/screener",
+                body=cast(object, dict()),
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -730,11 +733,14 @@ class TestTradesignals:
     @mock.patch("tradesignals._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/options/flow/AAPL").mock(return_value=httpx.Response(500))
+        respx_mock.post("/api/stocks/screener").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.get(
-                "/api/options/flow/AAPL", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+            self.client.post(
+                "/api/stocks/screener",
+                body=cast(object, dict()),
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -763,9 +769,9 @@ class TestTradesignals:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/options/flow/AAPL").mock(side_effect=retry_handler)
+        respx_mock.post("/api/stocks/screener").mock(side_effect=retry_handler)
 
-        response = client.options_flows.with_raw_response.retrieve(symbol="AAPL")
+        response = client.stocks.with_raw_response.post()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -787,11 +793,9 @@ class TestTradesignals:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/options/flow/AAPL").mock(side_effect=retry_handler)
+        respx_mock.post("/api/stocks/screener").mock(side_effect=retry_handler)
 
-        response = client.options_flows.with_raw_response.retrieve(
-            symbol="AAPL", extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = client.stocks.with_raw_response.post(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -812,11 +816,9 @@ class TestTradesignals:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/options/flow/AAPL").mock(side_effect=retry_handler)
+        respx_mock.post("/api/stocks/screener").mock(side_effect=retry_handler)
 
-        response = client.options_flows.with_raw_response.retrieve(
-            symbol="AAPL", extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.stocks.with_raw_response.post(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1492,11 +1494,14 @@ class TestAsyncTradesignals:
     @mock.patch("tradesignals._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/options/flow/AAPL").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/api/stocks/screener").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.get(
-                "/api/options/flow/AAPL", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+            await self.client.post(
+                "/api/stocks/screener",
+                body=cast(object, dict()),
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -1504,11 +1509,14 @@ class TestAsyncTradesignals:
     @mock.patch("tradesignals._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/options/flow/AAPL").mock(return_value=httpx.Response(500))
+        respx_mock.post("/api/stocks/screener").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.get(
-                "/api/options/flow/AAPL", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+            await self.client.post(
+                "/api/stocks/screener",
+                body=cast(object, dict()),
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -1538,9 +1546,9 @@ class TestAsyncTradesignals:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/options/flow/AAPL").mock(side_effect=retry_handler)
+        respx_mock.post("/api/stocks/screener").mock(side_effect=retry_handler)
 
-        response = await client.options_flows.with_raw_response.retrieve(symbol="AAPL")
+        response = await client.stocks.with_raw_response.post()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1563,11 +1571,9 @@ class TestAsyncTradesignals:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/options/flow/AAPL").mock(side_effect=retry_handler)
+        respx_mock.post("/api/stocks/screener").mock(side_effect=retry_handler)
 
-        response = await client.options_flows.with_raw_response.retrieve(
-            symbol="AAPL", extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = await client.stocks.with_raw_response.post(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1589,10 +1595,8 @@ class TestAsyncTradesignals:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/options/flow/AAPL").mock(side_effect=retry_handler)
+        respx_mock.post("/api/stocks/screener").mock(side_effect=retry_handler)
 
-        response = await client.options_flows.with_raw_response.retrieve(
-            symbol="AAPL", extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = await client.stocks.with_raw_response.post(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"

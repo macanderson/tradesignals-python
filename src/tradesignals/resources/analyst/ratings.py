@@ -22,6 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.analyst import rating_retrieve_params
+from ...types.analyst.rating_retrieve_response import RatingRetrieveResponse
 
 __all__ = ["RatingsResource", "AsyncRatingsResource"]
 
@@ -58,7 +59,7 @@ class RatingsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> RatingRetrieveResponse:
         """Retrieve analyst ratings and recommendations for a specific stock symbol.
 
         Filter
@@ -94,7 +95,7 @@ class RatingsResource(SyncAPIResource):
                     rating_retrieve_params.RatingRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=RatingRetrieveResponse,
         )
 
 
@@ -130,7 +131,7 @@ class AsyncRatingsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> RatingRetrieveResponse:
         """Retrieve analyst ratings and recommendations for a specific stock symbol.
 
         Filter
@@ -166,7 +167,7 @@ class AsyncRatingsResource(AsyncAPIResource):
                     rating_retrieve_params.RatingRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=RatingRetrieveResponse,
         )
 
 

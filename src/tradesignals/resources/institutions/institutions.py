@@ -22,6 +22,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.institution_list_response import InstitutionListResponse
 
 __all__ = ["InstitutionsResource", "AsyncInstitutionsResource"]
 
@@ -59,14 +60,14 @@ class InstitutionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> InstitutionListResponse:
         """Retrieve a list of institutions that have reported trades."""
         return self._get(
             "/api/institutions/list",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=InstitutionListResponse,
         )
 
 
@@ -103,14 +104,14 @@ class AsyncInstitutionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> InstitutionListResponse:
         """Retrieve a list of institutions that have reported trades."""
         return await self._get(
             "/api/institutions/list",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=InstitutionListResponse,
         )
 
 
