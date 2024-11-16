@@ -16,6 +16,14 @@ from .institutions import (
     InstitutionsResourceWithStreamingResponse,
     AsyncInstitutionsResourceWithStreamingResponse,
 )
+from .institutional_activities import (
+    InstitutionalActivitiesResource,
+    AsyncInstitutionalActivitiesResource,
+    InstitutionalActivitiesResourceWithRawResponse,
+    AsyncInstitutionalActivitiesResourceWithRawResponse,
+    InstitutionalActivitiesResourceWithStreamingResponse,
+    AsyncInstitutionalActivitiesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "TradesResource",
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncTradesResourceWithRawResponse",
     "TradesResourceWithStreamingResponse",
     "AsyncTradesResourceWithStreamingResponse",
+    "InstitutionalActivitiesResource",
+    "AsyncInstitutionalActivitiesResource",
+    "InstitutionalActivitiesResourceWithRawResponse",
+    "AsyncInstitutionalActivitiesResourceWithRawResponse",
+    "InstitutionalActivitiesResourceWithStreamingResponse",
+    "AsyncInstitutionalActivitiesResourceWithStreamingResponse",
     "InstitutionsResource",
     "AsyncInstitutionsResource",
     "InstitutionsResourceWithRawResponse",

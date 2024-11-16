@@ -46,21 +46,13 @@ __all__ = [
 
 
 class Tradesignals(SyncAPIClient):
-    options_flows: resources.OptionsFlowsResource
-    options_greek_flows: resources.OptionsGreekFlowsResource
-    options_open_interest_changes: resources.OptionsOpenInterestChangesResource
-    institutional_activities: resources.InstitutionalActivitiesResource
-    insider_trades: resources.InsiderTradesResource
     spike_detections: resources.SpikeDetectionsResource
-    options_total_volumes: resources.OptionsTotalVolumesResource
     economic_calendars: resources.EconomicCalendarsResource
-    calendar: resources.CalendarResource
-    correlations: resources.CorrelationsResource
     etf: resources.EtfResource
     options: resources.OptionsResource
     stocks: resources.StocksResource
     news: resources.NewsResource
-    congress: resources.CongressResource
+    insider_trades: resources.InsiderTradesResource
     institutions: resources.InstitutionsResource
     darkpool: resources.DarkpoolResource
     seasonality: resources.SeasonalityResource
@@ -123,21 +115,13 @@ class Tradesignals(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.options_flows = resources.OptionsFlowsResource(self)
-        self.options_greek_flows = resources.OptionsGreekFlowsResource(self)
-        self.options_open_interest_changes = resources.OptionsOpenInterestChangesResource(self)
-        self.institutional_activities = resources.InstitutionalActivitiesResource(self)
-        self.insider_trades = resources.InsiderTradesResource(self)
         self.spike_detections = resources.SpikeDetectionsResource(self)
-        self.options_total_volumes = resources.OptionsTotalVolumesResource(self)
         self.economic_calendars = resources.EconomicCalendarsResource(self)
-        self.calendar = resources.CalendarResource(self)
-        self.correlations = resources.CorrelationsResource(self)
         self.etf = resources.EtfResource(self)
         self.options = resources.OptionsResource(self)
         self.stocks = resources.StocksResource(self)
         self.news = resources.NewsResource(self)
-        self.congress = resources.CongressResource(self)
+        self.insider_trades = resources.InsiderTradesResource(self)
         self.institutions = resources.InstitutionsResource(self)
         self.darkpool = resources.DarkpoolResource(self)
         self.seasonality = resources.SeasonalityResource(self)
@@ -252,21 +236,13 @@ class Tradesignals(SyncAPIClient):
 
 
 class AsyncTradesignals(AsyncAPIClient):
-    options_flows: resources.AsyncOptionsFlowsResource
-    options_greek_flows: resources.AsyncOptionsGreekFlowsResource
-    options_open_interest_changes: resources.AsyncOptionsOpenInterestChangesResource
-    institutional_activities: resources.AsyncInstitutionalActivitiesResource
-    insider_trades: resources.AsyncInsiderTradesResource
     spike_detections: resources.AsyncSpikeDetectionsResource
-    options_total_volumes: resources.AsyncOptionsTotalVolumesResource
     economic_calendars: resources.AsyncEconomicCalendarsResource
-    calendar: resources.AsyncCalendarResource
-    correlations: resources.AsyncCorrelationsResource
     etf: resources.AsyncEtfResource
     options: resources.AsyncOptionsResource
     stocks: resources.AsyncStocksResource
     news: resources.AsyncNewsResource
-    congress: resources.AsyncCongressResource
+    insider_trades: resources.AsyncInsiderTradesResource
     institutions: resources.AsyncInstitutionsResource
     darkpool: resources.AsyncDarkpoolResource
     seasonality: resources.AsyncSeasonalityResource
@@ -329,21 +305,13 @@ class AsyncTradesignals(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.options_flows = resources.AsyncOptionsFlowsResource(self)
-        self.options_greek_flows = resources.AsyncOptionsGreekFlowsResource(self)
-        self.options_open_interest_changes = resources.AsyncOptionsOpenInterestChangesResource(self)
-        self.institutional_activities = resources.AsyncInstitutionalActivitiesResource(self)
-        self.insider_trades = resources.AsyncInsiderTradesResource(self)
         self.spike_detections = resources.AsyncSpikeDetectionsResource(self)
-        self.options_total_volumes = resources.AsyncOptionsTotalVolumesResource(self)
         self.economic_calendars = resources.AsyncEconomicCalendarsResource(self)
-        self.calendar = resources.AsyncCalendarResource(self)
-        self.correlations = resources.AsyncCorrelationsResource(self)
         self.etf = resources.AsyncEtfResource(self)
         self.options = resources.AsyncOptionsResource(self)
         self.stocks = resources.AsyncStocksResource(self)
         self.news = resources.AsyncNewsResource(self)
-        self.congress = resources.AsyncCongressResource(self)
+        self.insider_trades = resources.AsyncInsiderTradesResource(self)
         self.institutions = resources.AsyncInstitutionsResource(self)
         self.darkpool = resources.AsyncDarkpoolResource(self)
         self.seasonality = resources.AsyncSeasonalityResource(self)
@@ -459,25 +427,13 @@ class AsyncTradesignals(AsyncAPIClient):
 
 class TradesignalsWithRawResponse:
     def __init__(self, client: Tradesignals) -> None:
-        self.options_flows = resources.OptionsFlowsResourceWithRawResponse(client.options_flows)
-        self.options_greek_flows = resources.OptionsGreekFlowsResourceWithRawResponse(client.options_greek_flows)
-        self.options_open_interest_changes = resources.OptionsOpenInterestChangesResourceWithRawResponse(
-            client.options_open_interest_changes
-        )
-        self.institutional_activities = resources.InstitutionalActivitiesResourceWithRawResponse(
-            client.institutional_activities
-        )
-        self.insider_trades = resources.InsiderTradesResourceWithRawResponse(client.insider_trades)
         self.spike_detections = resources.SpikeDetectionsResourceWithRawResponse(client.spike_detections)
-        self.options_total_volumes = resources.OptionsTotalVolumesResourceWithRawResponse(client.options_total_volumes)
         self.economic_calendars = resources.EconomicCalendarsResourceWithRawResponse(client.economic_calendars)
-        self.calendar = resources.CalendarResourceWithRawResponse(client.calendar)
-        self.correlations = resources.CorrelationsResourceWithRawResponse(client.correlations)
         self.etf = resources.EtfResourceWithRawResponse(client.etf)
         self.options = resources.OptionsResourceWithRawResponse(client.options)
         self.stocks = resources.StocksResourceWithRawResponse(client.stocks)
         self.news = resources.NewsResourceWithRawResponse(client.news)
-        self.congress = resources.CongressResourceWithRawResponse(client.congress)
+        self.insider_trades = resources.InsiderTradesResourceWithRawResponse(client.insider_trades)
         self.institutions = resources.InstitutionsResourceWithRawResponse(client.institutions)
         self.darkpool = resources.DarkpoolResourceWithRawResponse(client.darkpool)
         self.seasonality = resources.SeasonalityResourceWithRawResponse(client.seasonality)
@@ -487,27 +443,13 @@ class TradesignalsWithRawResponse:
 
 class AsyncTradesignalsWithRawResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
-        self.options_flows = resources.AsyncOptionsFlowsResourceWithRawResponse(client.options_flows)
-        self.options_greek_flows = resources.AsyncOptionsGreekFlowsResourceWithRawResponse(client.options_greek_flows)
-        self.options_open_interest_changes = resources.AsyncOptionsOpenInterestChangesResourceWithRawResponse(
-            client.options_open_interest_changes
-        )
-        self.institutional_activities = resources.AsyncInstitutionalActivitiesResourceWithRawResponse(
-            client.institutional_activities
-        )
-        self.insider_trades = resources.AsyncInsiderTradesResourceWithRawResponse(client.insider_trades)
         self.spike_detections = resources.AsyncSpikeDetectionsResourceWithRawResponse(client.spike_detections)
-        self.options_total_volumes = resources.AsyncOptionsTotalVolumesResourceWithRawResponse(
-            client.options_total_volumes
-        )
         self.economic_calendars = resources.AsyncEconomicCalendarsResourceWithRawResponse(client.economic_calendars)
-        self.calendar = resources.AsyncCalendarResourceWithRawResponse(client.calendar)
-        self.correlations = resources.AsyncCorrelationsResourceWithRawResponse(client.correlations)
         self.etf = resources.AsyncEtfResourceWithRawResponse(client.etf)
         self.options = resources.AsyncOptionsResourceWithRawResponse(client.options)
         self.stocks = resources.AsyncStocksResourceWithRawResponse(client.stocks)
         self.news = resources.AsyncNewsResourceWithRawResponse(client.news)
-        self.congress = resources.AsyncCongressResourceWithRawResponse(client.congress)
+        self.insider_trades = resources.AsyncInsiderTradesResourceWithRawResponse(client.insider_trades)
         self.institutions = resources.AsyncInstitutionsResourceWithRawResponse(client.institutions)
         self.darkpool = resources.AsyncDarkpoolResourceWithRawResponse(client.darkpool)
         self.seasonality = resources.AsyncSeasonalityResourceWithRawResponse(client.seasonality)
@@ -517,27 +459,13 @@ class AsyncTradesignalsWithRawResponse:
 
 class TradesignalsWithStreamedResponse:
     def __init__(self, client: Tradesignals) -> None:
-        self.options_flows = resources.OptionsFlowsResourceWithStreamingResponse(client.options_flows)
-        self.options_greek_flows = resources.OptionsGreekFlowsResourceWithStreamingResponse(client.options_greek_flows)
-        self.options_open_interest_changes = resources.OptionsOpenInterestChangesResourceWithStreamingResponse(
-            client.options_open_interest_changes
-        )
-        self.institutional_activities = resources.InstitutionalActivitiesResourceWithStreamingResponse(
-            client.institutional_activities
-        )
-        self.insider_trades = resources.InsiderTradesResourceWithStreamingResponse(client.insider_trades)
         self.spike_detections = resources.SpikeDetectionsResourceWithStreamingResponse(client.spike_detections)
-        self.options_total_volumes = resources.OptionsTotalVolumesResourceWithStreamingResponse(
-            client.options_total_volumes
-        )
         self.economic_calendars = resources.EconomicCalendarsResourceWithStreamingResponse(client.economic_calendars)
-        self.calendar = resources.CalendarResourceWithStreamingResponse(client.calendar)
-        self.correlations = resources.CorrelationsResourceWithStreamingResponse(client.correlations)
         self.etf = resources.EtfResourceWithStreamingResponse(client.etf)
         self.options = resources.OptionsResourceWithStreamingResponse(client.options)
         self.stocks = resources.StocksResourceWithStreamingResponse(client.stocks)
         self.news = resources.NewsResourceWithStreamingResponse(client.news)
-        self.congress = resources.CongressResourceWithStreamingResponse(client.congress)
+        self.insider_trades = resources.InsiderTradesResourceWithStreamingResponse(client.insider_trades)
         self.institutions = resources.InstitutionsResourceWithStreamingResponse(client.institutions)
         self.darkpool = resources.DarkpoolResourceWithStreamingResponse(client.darkpool)
         self.seasonality = resources.SeasonalityResourceWithStreamingResponse(client.seasonality)
@@ -547,31 +475,15 @@ class TradesignalsWithStreamedResponse:
 
 class AsyncTradesignalsWithStreamedResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
-        self.options_flows = resources.AsyncOptionsFlowsResourceWithStreamingResponse(client.options_flows)
-        self.options_greek_flows = resources.AsyncOptionsGreekFlowsResourceWithStreamingResponse(
-            client.options_greek_flows
-        )
-        self.options_open_interest_changes = resources.AsyncOptionsOpenInterestChangesResourceWithStreamingResponse(
-            client.options_open_interest_changes
-        )
-        self.institutional_activities = resources.AsyncInstitutionalActivitiesResourceWithStreamingResponse(
-            client.institutional_activities
-        )
-        self.insider_trades = resources.AsyncInsiderTradesResourceWithStreamingResponse(client.insider_trades)
         self.spike_detections = resources.AsyncSpikeDetectionsResourceWithStreamingResponse(client.spike_detections)
-        self.options_total_volumes = resources.AsyncOptionsTotalVolumesResourceWithStreamingResponse(
-            client.options_total_volumes
-        )
         self.economic_calendars = resources.AsyncEconomicCalendarsResourceWithStreamingResponse(
             client.economic_calendars
         )
-        self.calendar = resources.AsyncCalendarResourceWithStreamingResponse(client.calendar)
-        self.correlations = resources.AsyncCorrelationsResourceWithStreamingResponse(client.correlations)
         self.etf = resources.AsyncEtfResourceWithStreamingResponse(client.etf)
         self.options = resources.AsyncOptionsResourceWithStreamingResponse(client.options)
         self.stocks = resources.AsyncStocksResourceWithStreamingResponse(client.stocks)
         self.news = resources.AsyncNewsResourceWithStreamingResponse(client.news)
-        self.congress = resources.AsyncCongressResourceWithStreamingResponse(client.congress)
+        self.insider_trades = resources.AsyncInsiderTradesResourceWithStreamingResponse(client.insider_trades)
         self.institutions = resources.AsyncInstitutionsResourceWithStreamingResponse(client.institutions)
         self.darkpool = resources.AsyncDarkpoolResourceWithStreamingResponse(client.darkpool)
         self.seasonality = resources.AsyncSeasonalityResourceWithStreamingResponse(client.seasonality)

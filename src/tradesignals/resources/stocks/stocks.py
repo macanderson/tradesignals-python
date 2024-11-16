@@ -82,6 +82,14 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .correlations import (
+    CorrelationsResource,
+    AsyncCorrelationsResource,
+    CorrelationsResourceWithRawResponse,
+    AsyncCorrelationsResourceWithRawResponse,
+    CorrelationsResourceWithStreamingResponse,
+    AsyncCorrelationsResourceWithStreamingResponse,
+)
 from ..._base_client import make_request_options
 from ...types.stock_post_response import StockPostResponse
 
@@ -89,6 +97,10 @@ __all__ = ["StocksResource", "AsyncStocksResource"]
 
 
 class StocksResource(SyncAPIResource):
+    @cached_property
+    def correlations(self) -> CorrelationsResource:
+        return CorrelationsResource(self._client)
+
     @cached_property
     def price(self) -> PriceResource:
         return PriceResource(self._client)
@@ -195,6 +207,10 @@ class StocksResource(SyncAPIResource):
 
 
 class AsyncStocksResource(AsyncAPIResource):
+    @cached_property
+    def correlations(self) -> AsyncCorrelationsResource:
+        return AsyncCorrelationsResource(self._client)
+
     @cached_property
     def price(self) -> AsyncPriceResource:
         return AsyncPriceResource(self._client)
@@ -309,6 +325,10 @@ class StocksResourceWithRawResponse:
         )
 
     @cached_property
+    def correlations(self) -> CorrelationsResourceWithRawResponse:
+        return CorrelationsResourceWithRawResponse(self._stocks.correlations)
+
+    @cached_property
     def price(self) -> PriceResourceWithRawResponse:
         return PriceResourceWithRawResponse(self._stocks.price)
 
@@ -348,6 +368,10 @@ class AsyncStocksResourceWithRawResponse:
         self.post = async_to_raw_response_wrapper(
             stocks.post,
         )
+
+    @cached_property
+    def correlations(self) -> AsyncCorrelationsResourceWithRawResponse:
+        return AsyncCorrelationsResourceWithRawResponse(self._stocks.correlations)
 
     @cached_property
     def price(self) -> AsyncPriceResourceWithRawResponse:
@@ -391,6 +415,10 @@ class StocksResourceWithStreamingResponse:
         )
 
     @cached_property
+    def correlations(self) -> CorrelationsResourceWithStreamingResponse:
+        return CorrelationsResourceWithStreamingResponse(self._stocks.correlations)
+
+    @cached_property
     def price(self) -> PriceResourceWithStreamingResponse:
         return PriceResourceWithStreamingResponse(self._stocks.price)
 
@@ -430,6 +458,10 @@ class AsyncStocksResourceWithStreamingResponse:
         self.post = async_to_streamed_response_wrapper(
             stocks.post,
         )
+
+    @cached_property
+    def correlations(self) -> AsyncCorrelationsResourceWithStreamingResponse:
+        return AsyncCorrelationsResourceWithStreamingResponse(self._stocks.correlations)
 
     @cached_property
     def price(self) -> AsyncPriceResourceWithStreamingResponse:
