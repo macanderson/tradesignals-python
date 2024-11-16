@@ -12,6 +12,14 @@ from .recent_darkpool_trades import (
     RecentDarkpoolTradesResourceWithStreamingResponse,
     AsyncRecentDarkpoolTradesResourceWithStreamingResponse,
 )
+from .ticker_darkpool_trades import (
+    TickerDarkpoolTradesResource,
+    AsyncTickerDarkpoolTradesResource,
+    TickerDarkpoolTradesResourceWithRawResponse,
+    AsyncTickerDarkpoolTradesResourceWithRawResponse,
+    TickerDarkpoolTradesResourceWithStreamingResponse,
+    AsyncTickerDarkpoolTradesResourceWithStreamingResponse,
+)
 
 __all__ = ["DarkpoolResource", "AsyncDarkpoolResource"]
 
@@ -20,6 +28,10 @@ class DarkpoolResource(SyncAPIResource):
     @cached_property
     def recent_darkpool_trades(self) -> RecentDarkpoolTradesResource:
         return RecentDarkpoolTradesResource(self._client)
+
+    @cached_property
+    def ticker_darkpool_trades(self) -> TickerDarkpoolTradesResource:
+        return TickerDarkpoolTradesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> DarkpoolResourceWithRawResponse:
@@ -45,6 +57,10 @@ class AsyncDarkpoolResource(AsyncAPIResource):
     @cached_property
     def recent_darkpool_trades(self) -> AsyncRecentDarkpoolTradesResource:
         return AsyncRecentDarkpoolTradesResource(self._client)
+
+    @cached_property
+    def ticker_darkpool_trades(self) -> AsyncTickerDarkpoolTradesResource:
+        return AsyncTickerDarkpoolTradesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncDarkpoolResourceWithRawResponse:
@@ -74,6 +90,10 @@ class DarkpoolResourceWithRawResponse:
     def recent_darkpool_trades(self) -> RecentDarkpoolTradesResourceWithRawResponse:
         return RecentDarkpoolTradesResourceWithRawResponse(self._darkpool.recent_darkpool_trades)
 
+    @cached_property
+    def ticker_darkpool_trades(self) -> TickerDarkpoolTradesResourceWithRawResponse:
+        return TickerDarkpoolTradesResourceWithRawResponse(self._darkpool.ticker_darkpool_trades)
+
 
 class AsyncDarkpoolResourceWithRawResponse:
     def __init__(self, darkpool: AsyncDarkpoolResource) -> None:
@@ -82,6 +102,10 @@ class AsyncDarkpoolResourceWithRawResponse:
     @cached_property
     def recent_darkpool_trades(self) -> AsyncRecentDarkpoolTradesResourceWithRawResponse:
         return AsyncRecentDarkpoolTradesResourceWithRawResponse(self._darkpool.recent_darkpool_trades)
+
+    @cached_property
+    def ticker_darkpool_trades(self) -> AsyncTickerDarkpoolTradesResourceWithRawResponse:
+        return AsyncTickerDarkpoolTradesResourceWithRawResponse(self._darkpool.ticker_darkpool_trades)
 
 
 class DarkpoolResourceWithStreamingResponse:
@@ -92,6 +116,10 @@ class DarkpoolResourceWithStreamingResponse:
     def recent_darkpool_trades(self) -> RecentDarkpoolTradesResourceWithStreamingResponse:
         return RecentDarkpoolTradesResourceWithStreamingResponse(self._darkpool.recent_darkpool_trades)
 
+    @cached_property
+    def ticker_darkpool_trades(self) -> TickerDarkpoolTradesResourceWithStreamingResponse:
+        return TickerDarkpoolTradesResourceWithStreamingResponse(self._darkpool.ticker_darkpool_trades)
+
 
 class AsyncDarkpoolResourceWithStreamingResponse:
     def __init__(self, darkpool: AsyncDarkpoolResource) -> None:
@@ -100,3 +128,7 @@ class AsyncDarkpoolResourceWithStreamingResponse:
     @cached_property
     def recent_darkpool_trades(self) -> AsyncRecentDarkpoolTradesResourceWithStreamingResponse:
         return AsyncRecentDarkpoolTradesResourceWithStreamingResponse(self._darkpool.recent_darkpool_trades)
+
+    @cached_property
+    def ticker_darkpool_trades(self) -> AsyncTickerDarkpoolTradesResourceWithStreamingResponse:
+        return AsyncTickerDarkpoolTradesResourceWithStreamingResponse(self._darkpool.ticker_darkpool_trades)
