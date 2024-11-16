@@ -8,26 +8,26 @@ from .etfs import (
     EtfsResourceWithStreamingResponse,
     AsyncEtfsResourceWithStreamingResponse,
 )
-from .darkpool import (
-    DarkpoolResource,
-    AsyncDarkpoolResource,
-    DarkpoolResourceWithRawResponse,
-    AsyncDarkpoolResourceWithRawResponse,
-    DarkpoolResourceWithStreamingResponse,
-    AsyncDarkpoolResourceWithStreamingResponse,
+from .holdings import (
+    HoldingsResource,
+    AsyncHoldingsResource,
+    HoldingsResourceWithRawResponse,
+    AsyncHoldingsResourceWithRawResponse,
+    HoldingsResourceWithStreamingResponse,
+    AsyncHoldingsResourceWithStreamingResponse,
 )
 
 __all__ = [
+    "HoldingsResource",
+    "AsyncHoldingsResource",
+    "HoldingsResourceWithRawResponse",
+    "AsyncHoldingsResourceWithRawResponse",
+    "HoldingsResourceWithStreamingResponse",
+    "AsyncHoldingsResourceWithStreamingResponse",
     "EtfsResource",
     "AsyncEtfsResource",
     "EtfsResourceWithRawResponse",
     "AsyncEtfsResourceWithRawResponse",
     "EtfsResourceWithStreamingResponse",
     "AsyncEtfsResourceWithStreamingResponse",
-    "DarkpoolResource",
-    "AsyncDarkpoolResource",
-    "DarkpoolResourceWithRawResponse",
-    "AsyncDarkpoolResourceWithRawResponse",
-    "DarkpoolResourceWithStreamingResponse",
-    "AsyncDarkpoolResourceWithStreamingResponse",
 ]
