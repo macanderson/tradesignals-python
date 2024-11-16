@@ -333,7 +333,7 @@ class TestTradesignalsIo:
     def test_validate_headers(self) -> None:
         client = TradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("Authorization") == api_key
+        assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(TradesignalsIoError):
             with update_env(**{"TRADESIGNALS_TOKEN": Omit()}):
@@ -1103,7 +1103,7 @@ class TestAsyncTradesignalsIo:
     def test_validate_headers(self) -> None:
         client = AsyncTradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("Authorization") == api_key
+        assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         with pytest.raises(TradesignalsIoError):
             with update_env(**{"TRADESIGNALS_TOKEN": Omit()}):
