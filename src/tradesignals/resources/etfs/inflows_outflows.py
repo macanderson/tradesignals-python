@@ -17,32 +17,32 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.etf.holding_retrieve_response import HoldingRetrieveResponse
+from ...types.etfs.inflows_outflow_list_response import InflowsOutflowListResponse
 
-__all__ = ["HoldingsResource", "AsyncHoldingsResource"]
+__all__ = ["InflowsOutflowsResource", "AsyncInflowsOutflowsResource"]
 
 
-class HoldingsResource(SyncAPIResource):
+class InflowsOutflowsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> HoldingsResourceWithRawResponse:
+    def with_raw_response(self) -> InflowsOutflowsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return HoldingsResourceWithRawResponse(self)
+        return InflowsOutflowsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> HoldingsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> InflowsOutflowsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return HoldingsResourceWithStreamingResponse(self)
+        return InflowsOutflowsResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def list(
         self,
         ticker: str | NotGiven = NOT_GIVEN,
         *,
@@ -52,10 +52,9 @@ class HoldingsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[HoldingRetrieveResponse]:
-        """Retrieve holdings data for ETFs.
-
-        Filter by optional ETF symbol and date.
+    ) -> Optional[InflowsOutflowListResponse]:
+        """
+        Returns an ETF's inflow and outflow
 
         Args:
           extra_headers: Send extra headers
@@ -69,39 +68,39 @@ class HoldingsResource(SyncAPIResource):
         if not ticker:
             raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return self._get(
-            f"/api/etfs/{ticker}/holdings",
+            f"/api/etfs/{ticker}/in-outflow",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[Optional[HoldingRetrieveResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[InflowsOutflowListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[HoldingRetrieveResponse]], DataWrapper[HoldingRetrieveResponse]),
+            cast_to=cast(Type[Optional[InflowsOutflowListResponse]], DataWrapper[InflowsOutflowListResponse]),
         )
 
 
-class AsyncHoldingsResource(AsyncAPIResource):
+class AsyncInflowsOutflowsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncHoldingsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncInflowsOutflowsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncHoldingsResourceWithRawResponse(self)
+        return AsyncInflowsOutflowsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncHoldingsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncInflowsOutflowsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncHoldingsResourceWithStreamingResponse(self)
+        return AsyncInflowsOutflowsResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def list(
         self,
         ticker: str | NotGiven = NOT_GIVEN,
         *,
@@ -111,10 +110,9 @@ class AsyncHoldingsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[HoldingRetrieveResponse]:
-        """Retrieve holdings data for ETFs.
-
-        Filter by optional ETF symbol and date.
+    ) -> Optional[InflowsOutflowListResponse]:
+        """
+        Returns an ETF's inflow and outflow
 
         Args:
           extra_headers: Send extra headers
@@ -128,49 +126,49 @@ class AsyncHoldingsResource(AsyncAPIResource):
         if not ticker:
             raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return await self._get(
-            f"/api/etfs/{ticker}/holdings",
+            f"/api/etfs/{ticker}/in-outflow",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[Optional[HoldingRetrieveResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[InflowsOutflowListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[HoldingRetrieveResponse]], DataWrapper[HoldingRetrieveResponse]),
+            cast_to=cast(Type[Optional[InflowsOutflowListResponse]], DataWrapper[InflowsOutflowListResponse]),
         )
 
 
-class HoldingsResourceWithRawResponse:
-    def __init__(self, holdings: HoldingsResource) -> None:
-        self._holdings = holdings
+class InflowsOutflowsResourceWithRawResponse:
+    def __init__(self, inflows_outflows: InflowsOutflowsResource) -> None:
+        self._inflows_outflows = inflows_outflows
 
-        self.retrieve = to_raw_response_wrapper(
-            holdings.retrieve,
+        self.list = to_raw_response_wrapper(
+            inflows_outflows.list,
         )
 
 
-class AsyncHoldingsResourceWithRawResponse:
-    def __init__(self, holdings: AsyncHoldingsResource) -> None:
-        self._holdings = holdings
+class AsyncInflowsOutflowsResourceWithRawResponse:
+    def __init__(self, inflows_outflows: AsyncInflowsOutflowsResource) -> None:
+        self._inflows_outflows = inflows_outflows
 
-        self.retrieve = async_to_raw_response_wrapper(
-            holdings.retrieve,
+        self.list = async_to_raw_response_wrapper(
+            inflows_outflows.list,
         )
 
 
-class HoldingsResourceWithStreamingResponse:
-    def __init__(self, holdings: HoldingsResource) -> None:
-        self._holdings = holdings
+class InflowsOutflowsResourceWithStreamingResponse:
+    def __init__(self, inflows_outflows: InflowsOutflowsResource) -> None:
+        self._inflows_outflows = inflows_outflows
 
-        self.retrieve = to_streamed_response_wrapper(
-            holdings.retrieve,
+        self.list = to_streamed_response_wrapper(
+            inflows_outflows.list,
         )
 
 
-class AsyncHoldingsResourceWithStreamingResponse:
-    def __init__(self, holdings: AsyncHoldingsResource) -> None:
-        self._holdings = holdings
+class AsyncInflowsOutflowsResourceWithStreamingResponse:
+    def __init__(self, inflows_outflows: AsyncInflowsOutflowsResource) -> None:
+        self._inflows_outflows = inflows_outflows
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            holdings.retrieve,
+        self.list = async_to_streamed_response_wrapper(
+            inflows_outflows.list,
         )

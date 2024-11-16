@@ -8,10 +8,10 @@ from typing_extensions import Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["TickerDarkpoolTradeRetrieveParams"]
+__all__ = ["TickerDarkpoolTradeListParams"]
 
 
-class TickerDarkpoolTradeRetrieveParams(TypedDict, total=False):
+class TickerDarkpoolTradeListParams(TypedDict, total=False):
     date: Annotated[Union[str, datetime.date], PropertyInfo(format="iso8601")]
     """Date to filter darkpool transactions."""
 

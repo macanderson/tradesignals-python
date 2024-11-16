@@ -1,88 +1,81 @@
-# Shared Types
-
-```python
-from tradesignals.types import (
-    DarkpoolTrade,
-    DarkpoolTradesResponse,
-    EtfHolding,
-    EtfHoldingsResponse,
-    EtfInOutflow,
-    EtfInOutflowResponse,
-)
-```
-
-# Etf
+# Etfs
 
 ## Holdings
 
 Types:
 
 ```python
-from tradesignals.types.etf import HoldingRetrieveResponse
+from tradesignals.types.etfs import EtfHolding, EtfHoldingsResponse, HoldingListResponse
 ```
 
 Methods:
 
-- <code title="get /api/etfs/{ticker}/holdings">client.etf.holdings.<a href="./src/tradesignals/resources/etf/holdings.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etf/holding_retrieve_response.py">Optional</a></code>
+- <code title="get /api/etfs/{ticker}/holdings">client.etfs.holdings.<a href="./src/tradesignals/resources/etfs/holdings.py">list</a>(ticker) -> <a href="./src/tradesignals/types/etfs/holding_list_response.py">Optional</a></code>
 
-## InflowOutflow
+## InflowsOutflows
 
 Types:
 
 ```python
-from tradesignals.types.etf import InflowOutflowRetrieveResponse
+from tradesignals.types.etfs import EtfInOutflow, EtfInOutflowResponse, InflowsOutflowListResponse
 ```
 
 Methods:
 
-- <code title="get /api/etfs/{ticker}/in-outflow">client.etf.inflow_outflow.<a href="./src/tradesignals/resources/etf/inflow_outflow.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etf/inflow_outflow_retrieve_response.py">Optional</a></code>
+- <code title="get /api/etfs/{ticker}/in-outflow">client.etfs.inflows_outflows.<a href="./src/tradesignals/resources/etfs/inflows_outflows.py">list</a>(ticker) -> <a href="./src/tradesignals/types/etfs/inflows_outflow_list_response.py">Optional</a></code>
 
-## Info
+## Information
 
 Types:
 
 ```python
-from tradesignals.types.etf import InfoRetrieveResponse
+from tradesignals.types.etfs import EtfInfo, EtfInfoResponse
 ```
 
 Methods:
 
-- <code title="get /api/etfs/{ticker}/info">client.etf.info.<a href="./src/tradesignals/resources/etf/info.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etf/info_retrieve_response.py">InfoRetrieveResponse</a></code>
+- <code title="get /api/etfs/{ticker}/info">client.etfs.information.<a href="./src/tradesignals/resources/etfs/information.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etfs/etf_info.py">EtfInfo</a></code>
 
 ## Exposure
 
 Types:
 
 ```python
-from tradesignals.types.etf import ExposureRetrieveResponse
+from tradesignals.types.etfs import EtfExposureData, EtfExposureResponse
 ```
 
 Methods:
 
-- <code title="get /api/etfs/{ticker}/exposure">client.etf.exposure.<a href="./src/tradesignals/resources/etf/exposure.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etf/exposure_retrieve_response.py">ExposureRetrieveResponse</a></code>
+- <code title="get /api/etfs/{ticker}/exposure">client.etfs.exposure.<a href="./src/tradesignals/resources/etfs/exposure.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etfs/etf_exposure_response.py">EtfExposureResponse</a></code>
 
 # Darkpool
+
+Types:
+
+```python
+from tradesignals.types import TickerDarkpoolResponse, TickerDarkpoolTrade
+```
 
 ## RecentDarkpoolTrades
 
 Types:
 
 ```python
-from tradesignals.types.darkpool import RecentDarkpoolTradeRetrieveResponse
+from tradesignals.types.darkpool import RecentDarkpoolTradeListResponse
 ```
 
 Methods:
 
-- <code title="get /api/darkpool/recent">client.darkpool.recent_darkpool_trades.<a href="./src/tradesignals/resources/darkpool/recent_darkpool_trades.py">retrieve</a>(\*\*<a href="src/tradesignals/types/darkpool/recent_darkpool_trade_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool/recent_darkpool_trade_retrieve_response.py">Optional</a></code>
+- <code title="get /api/darkpool/recent">client.darkpool.recent_darkpool_trades.<a href="./src/tradesignals/resources/darkpool/recent_darkpool_trades.py">list</a>(\*\*<a href="src/tradesignals/types/darkpool/recent_darkpool_trade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool/recent_darkpool_trade_list_response.py">Optional</a></code>
 
 ## TickerDarkpoolTrades
 
 Types:
 
 ```python
-from tradesignals.types.darkpool import TickerDarkpoolTradeRetrieveResponse
+from tradesignals.types.darkpool import TickerDarkpoolTradeListResponse
 ```
 
 Methods:
 
-- <code title="get /api/darkpool/{ticker}">client.darkpool.ticker_darkpool_trades.<a href="./src/tradesignals/resources/darkpool/ticker_darkpool_trades.py">retrieve</a>(ticker, \*\*<a href="src/tradesignals/types/darkpool/ticker_darkpool_trade_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool/ticker_darkpool_trade_retrieve_response.py">Optional</a></code>
+- <code title="get /api/darkpool/{ticker}">client.darkpool.ticker_darkpool_trades.<a href="./src/tradesignals/resources/darkpool/ticker_darkpool_trades.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/darkpool/ticker_darkpool_trade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool/ticker_darkpool_trade_list_response.py">Optional</a></code>

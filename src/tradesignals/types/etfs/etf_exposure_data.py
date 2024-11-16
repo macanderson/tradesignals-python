@@ -1,13 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["ExposureRetrieveResponse", "Data"]
+__all__ = ["EtfExposureData"]
 
 
-class Data(BaseModel):
+class EtfExposureData(BaseModel):
     avg30_volume: Optional[str] = None
     """The average stock volume for the stock last 30 days."""
 
@@ -70,7 +70,3 @@ class Data(BaseModel):
 
     week52_low: Optional[str] = None
     """The 52 week low stock price of the ticker."""
-
-
-class ExposureRetrieveResponse(BaseModel):
-    data: Optional[List[Data]] = None

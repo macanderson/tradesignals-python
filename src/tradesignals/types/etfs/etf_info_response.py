@@ -1,13 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["InfoRetrieveResponse", "Data"]
+__all__ = ["EtfInfoResponse"]
 
 
-class Data(BaseModel):
+class EtfInfoResponse(BaseModel):
     aum: Optional[str] = None
     """The total assets under management (AUM) of the ETF."""
 
@@ -52,7 +52,3 @@ class Data(BaseModel):
 
     website: Optional[str] = None
     """A link to the website of the ETF."""
-
-
-class InfoRetrieveResponse(BaseModel):
-    data: Optional[List[Data]] = None

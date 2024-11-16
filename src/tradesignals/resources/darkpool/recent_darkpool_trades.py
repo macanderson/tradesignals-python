@@ -22,8 +22,8 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.darkpool import recent_darkpool_trade_retrieve_params
-from ...types.darkpool.recent_darkpool_trade_retrieve_response import RecentDarkpoolTradeRetrieveResponse
+from ...types.darkpool import recent_darkpool_trade_list_params
+from ...types.darkpool.recent_darkpool_trade_list_response import RecentDarkpoolTradeListResponse
 
 __all__ = ["RecentDarkpoolTradesResource", "AsyncRecentDarkpoolTradesResource"]
 
@@ -48,7 +48,7 @@ class RecentDarkpoolTradesResource(SyncAPIResource):
         """
         return RecentDarkpoolTradesResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def list(
         self,
         *,
         date: Union[str, date] | NotGiven = NOT_GIVEN,
@@ -59,7 +59,7 @@ class RecentDarkpoolTradesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[RecentDarkpoolTradeRetrieveResponse]:
+    ) -> Optional[RecentDarkpoolTradeListResponse]:
         """
         -> Returns recent Darkpool trades for all securities listed on either NASDAQ or
         NYSE.
@@ -89,13 +89,11 @@ class RecentDarkpoolTradesResource(SyncAPIResource):
                         "date": date,
                         "limit": limit,
                     },
-                    recent_darkpool_trade_retrieve_params.RecentDarkpoolTradeRetrieveParams,
+                    recent_darkpool_trade_list_params.RecentDarkpoolTradeListParams,
                 ),
-                post_parser=DataWrapper[Optional[RecentDarkpoolTradeRetrieveResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[RecentDarkpoolTradeListResponse]]._unwrapper,
             ),
-            cast_to=cast(
-                Type[Optional[RecentDarkpoolTradeRetrieveResponse]], DataWrapper[RecentDarkpoolTradeRetrieveResponse]
-            ),
+            cast_to=cast(Type[Optional[RecentDarkpoolTradeListResponse]], DataWrapper[RecentDarkpoolTradeListResponse]),
         )
 
 
@@ -119,7 +117,7 @@ class AsyncRecentDarkpoolTradesResource(AsyncAPIResource):
         """
         return AsyncRecentDarkpoolTradesResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def list(
         self,
         *,
         date: Union[str, date] | NotGiven = NOT_GIVEN,
@@ -130,7 +128,7 @@ class AsyncRecentDarkpoolTradesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[RecentDarkpoolTradeRetrieveResponse]:
+    ) -> Optional[RecentDarkpoolTradeListResponse]:
         """
         -> Returns recent Darkpool trades for all securities listed on either NASDAQ or
         NYSE.
@@ -160,13 +158,11 @@ class AsyncRecentDarkpoolTradesResource(AsyncAPIResource):
                         "date": date,
                         "limit": limit,
                     },
-                    recent_darkpool_trade_retrieve_params.RecentDarkpoolTradeRetrieveParams,
+                    recent_darkpool_trade_list_params.RecentDarkpoolTradeListParams,
                 ),
-                post_parser=DataWrapper[Optional[RecentDarkpoolTradeRetrieveResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[RecentDarkpoolTradeListResponse]]._unwrapper,
             ),
-            cast_to=cast(
-                Type[Optional[RecentDarkpoolTradeRetrieveResponse]], DataWrapper[RecentDarkpoolTradeRetrieveResponse]
-            ),
+            cast_to=cast(Type[Optional[RecentDarkpoolTradeListResponse]], DataWrapper[RecentDarkpoolTradeListResponse]),
         )
 
 
@@ -174,8 +170,8 @@ class RecentDarkpoolTradesResourceWithRawResponse:
     def __init__(self, recent_darkpool_trades: RecentDarkpoolTradesResource) -> None:
         self._recent_darkpool_trades = recent_darkpool_trades
 
-        self.retrieve = to_raw_response_wrapper(
-            recent_darkpool_trades.retrieve,
+        self.list = to_raw_response_wrapper(
+            recent_darkpool_trades.list,
         )
 
 
@@ -183,8 +179,8 @@ class AsyncRecentDarkpoolTradesResourceWithRawResponse:
     def __init__(self, recent_darkpool_trades: AsyncRecentDarkpoolTradesResource) -> None:
         self._recent_darkpool_trades = recent_darkpool_trades
 
-        self.retrieve = async_to_raw_response_wrapper(
-            recent_darkpool_trades.retrieve,
+        self.list = async_to_raw_response_wrapper(
+            recent_darkpool_trades.list,
         )
 
 
@@ -192,8 +188,8 @@ class RecentDarkpoolTradesResourceWithStreamingResponse:
     def __init__(self, recent_darkpool_trades: RecentDarkpoolTradesResource) -> None:
         self._recent_darkpool_trades = recent_darkpool_trades
 
-        self.retrieve = to_streamed_response_wrapper(
-            recent_darkpool_trades.retrieve,
+        self.list = to_streamed_response_wrapper(
+            recent_darkpool_trades.list,
         )
 
 
@@ -201,6 +197,6 @@ class AsyncRecentDarkpoolTradesResourceWithStreamingResponse:
     def __init__(self, recent_darkpool_trades: AsyncRecentDarkpoolTradesResource) -> None:
         self._recent_darkpool_trades = recent_darkpool_trades
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            recent_darkpool_trades.retrieve,
+        self.list = async_to_streamed_response_wrapper(
+            recent_darkpool_trades.list,
         )
