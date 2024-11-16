@@ -8,4 +8,4 @@ __all__ = ["EtfListResponse"]
 
 
 class EtfListResponse(BaseModel):
-    etfs: Optional[List[str]] = None
+    data: Optional[List[str]] = None
