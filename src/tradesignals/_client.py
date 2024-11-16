@@ -46,7 +46,6 @@ __all__ = [
 
 
 class Tradesignals(SyncAPIClient):
-    spike_detections: resources.SpikeDetectionsResource
     economic_calendars: resources.EconomicCalendarsResource
     etf: resources.EtfResource
     options: resources.OptionsResource
@@ -115,7 +114,6 @@ class Tradesignals(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.spike_detections = resources.SpikeDetectionsResource(self)
         self.economic_calendars = resources.EconomicCalendarsResource(self)
         self.etf = resources.EtfResource(self)
         self.options = resources.OptionsResource(self)
@@ -236,7 +234,6 @@ class Tradesignals(SyncAPIClient):
 
 
 class AsyncTradesignals(AsyncAPIClient):
-    spike_detections: resources.AsyncSpikeDetectionsResource
     economic_calendars: resources.AsyncEconomicCalendarsResource
     etf: resources.AsyncEtfResource
     options: resources.AsyncOptionsResource
@@ -305,7 +302,6 @@ class AsyncTradesignals(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.spike_detections = resources.AsyncSpikeDetectionsResource(self)
         self.economic_calendars = resources.AsyncEconomicCalendarsResource(self)
         self.etf = resources.AsyncEtfResource(self)
         self.options = resources.AsyncOptionsResource(self)
@@ -427,7 +423,6 @@ class AsyncTradesignals(AsyncAPIClient):
 
 class TradesignalsWithRawResponse:
     def __init__(self, client: Tradesignals) -> None:
-        self.spike_detections = resources.SpikeDetectionsResourceWithRawResponse(client.spike_detections)
         self.economic_calendars = resources.EconomicCalendarsResourceWithRawResponse(client.economic_calendars)
         self.etf = resources.EtfResourceWithRawResponse(client.etf)
         self.options = resources.OptionsResourceWithRawResponse(client.options)
@@ -443,7 +438,6 @@ class TradesignalsWithRawResponse:
 
 class AsyncTradesignalsWithRawResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
-        self.spike_detections = resources.AsyncSpikeDetectionsResourceWithRawResponse(client.spike_detections)
         self.economic_calendars = resources.AsyncEconomicCalendarsResourceWithRawResponse(client.economic_calendars)
         self.etf = resources.AsyncEtfResourceWithRawResponse(client.etf)
         self.options = resources.AsyncOptionsResourceWithRawResponse(client.options)
@@ -459,7 +453,6 @@ class AsyncTradesignalsWithRawResponse:
 
 class TradesignalsWithStreamedResponse:
     def __init__(self, client: Tradesignals) -> None:
-        self.spike_detections = resources.SpikeDetectionsResourceWithStreamingResponse(client.spike_detections)
         self.economic_calendars = resources.EconomicCalendarsResourceWithStreamingResponse(client.economic_calendars)
         self.etf = resources.EtfResourceWithStreamingResponse(client.etf)
         self.options = resources.OptionsResourceWithStreamingResponse(client.options)
@@ -475,7 +468,6 @@ class TradesignalsWithStreamedResponse:
 
 class AsyncTradesignalsWithStreamedResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
-        self.spike_detections = resources.AsyncSpikeDetectionsResourceWithStreamingResponse(client.spike_detections)
         self.economic_calendars = resources.AsyncEconomicCalendarsResourceWithStreamingResponse(
             client.economic_calendars
         )
