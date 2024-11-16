@@ -9,6 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals.types.stocks import FinancialRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +23,7 @@ class TestFinancials:
             symbol="symbol",
             statement_type="income",
         )
-        assert_matches_type(object, financial, path=["response"])
+        assert_matches_type(FinancialRetrieveResponse, financial, path=["response"])
 
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Tradesignals) -> None:
@@ -31,7 +32,7 @@ class TestFinancials:
             statement_type="income",
             period="annual",
         )
-        assert_matches_type(object, financial, path=["response"])
+        assert_matches_type(FinancialRetrieveResponse, financial, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Tradesignals) -> None:
@@ -43,7 +44,7 @@ class TestFinancials:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         financial = response.parse()
-        assert_matches_type(object, financial, path=["response"])
+        assert_matches_type(FinancialRetrieveResponse, financial, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Tradesignals) -> None:
@@ -55,7 +56,7 @@ class TestFinancials:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             financial = response.parse()
-            assert_matches_type(object, financial, path=["response"])
+            assert_matches_type(FinancialRetrieveResponse, financial, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -77,7 +78,7 @@ class TestAsyncFinancials:
             symbol="symbol",
             statement_type="income",
         )
-        assert_matches_type(object, financial, path=["response"])
+        assert_matches_type(FinancialRetrieveResponse, financial, path=["response"])
 
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignals) -> None:
@@ -86,7 +87,7 @@ class TestAsyncFinancials:
             statement_type="income",
             period="annual",
         )
-        assert_matches_type(object, financial, path=["response"])
+        assert_matches_type(FinancialRetrieveResponse, financial, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncTradesignals) -> None:
@@ -98,7 +99,7 @@ class TestAsyncFinancials:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         financial = await response.parse()
-        assert_matches_type(object, financial, path=["response"])
+        assert_matches_type(FinancialRetrieveResponse, financial, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncTradesignals) -> None:
@@ -110,7 +111,7 @@ class TestAsyncFinancials:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             financial = await response.parse()
-            assert_matches_type(object, financial, path=["response"])
+            assert_matches_type(FinancialRetrieveResponse, financial, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

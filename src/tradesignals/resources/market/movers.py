@@ -21,6 +21,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.market import mover_list_params
+from ...types.market.mover_list_response import MoverListResponse
 
 __all__ = ["MoversResource", "AsyncMoversResource"]
 
@@ -56,7 +57,7 @@ class MoversResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> MoverListResponse:
         """Retrieve top gainers and losers in the market.
 
         Filter by optional type.
@@ -89,7 +90,7 @@ class MoversResource(SyncAPIResource):
                     mover_list_params.MoverListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=MoverListResponse,
         )
 
 
@@ -124,7 +125,7 @@ class AsyncMoversResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> MoverListResponse:
         """Retrieve top gainers and losers in the market.
 
         Filter by optional type.
@@ -157,7 +158,7 @@ class AsyncMoversResource(AsyncAPIResource):
                     mover_list_params.MoverListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=MoverListResponse,
         )
 
 

@@ -22,6 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.market import news_list_params
+from ...types.market.news_list_response import NewsListResponse
 
 __all__ = ["NewsResource", "AsyncNewsResource"]
 
@@ -56,7 +57,7 @@ class NewsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> NewsListResponse:
         """Retrieve the latest news affecting the overall market.
 
         Filter by optional date.
@@ -81,7 +82,7 @@ class NewsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform({"date": date}, news_list_params.NewsListParams),
             ),
-            cast_to=object,
+            cast_to=NewsListResponse,
         )
 
 
@@ -115,7 +116,7 @@ class AsyncNewsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> NewsListResponse:
         """Retrieve the latest news affecting the overall market.
 
         Filter by optional date.
@@ -140,7 +141,7 @@ class AsyncNewsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform({"date": date}, news_list_params.NewsListParams),
             ),
-            cast_to=object,
+            cast_to=NewsListResponse,
         )
 
 

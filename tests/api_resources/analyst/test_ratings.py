@@ -10,6 +10,7 @@ import pytest
 from tests.utils import assert_matches_type
 from tradesignals import Tradesignals, AsyncTradesignals
 from tradesignals._utils import parse_date
+from tradesignals.types.analyst import RatingRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +23,7 @@ class TestRatings:
         rating = client.analyst.ratings.retrieve(
             symbol="symbol",
         )
-        assert_matches_type(object, rating, path=["response"])
+        assert_matches_type(RatingRetrieveResponse, rating, path=["response"])
 
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Tradesignals) -> None:
@@ -31,7 +32,7 @@ class TestRatings:
             end_date=parse_date("2019-12-27"),
             start_date=parse_date("2019-12-27"),
         )
-        assert_matches_type(object, rating, path=["response"])
+        assert_matches_type(RatingRetrieveResponse, rating, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Tradesignals) -> None:
@@ -42,7 +43,7 @@ class TestRatings:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         rating = response.parse()
-        assert_matches_type(object, rating, path=["response"])
+        assert_matches_type(RatingRetrieveResponse, rating, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Tradesignals) -> None:
@@ -53,7 +54,7 @@ class TestRatings:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             rating = response.parse()
-            assert_matches_type(object, rating, path=["response"])
+            assert_matches_type(RatingRetrieveResponse, rating, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -73,7 +74,7 @@ class TestAsyncRatings:
         rating = await async_client.analyst.ratings.retrieve(
             symbol="symbol",
         )
-        assert_matches_type(object, rating, path=["response"])
+        assert_matches_type(RatingRetrieveResponse, rating, path=["response"])
 
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignals) -> None:
@@ -82,7 +83,7 @@ class TestAsyncRatings:
             end_date=parse_date("2019-12-27"),
             start_date=parse_date("2019-12-27"),
         )
-        assert_matches_type(object, rating, path=["response"])
+        assert_matches_type(RatingRetrieveResponse, rating, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncTradesignals) -> None:
@@ -93,7 +94,7 @@ class TestAsyncRatings:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         rating = await response.parse()
-        assert_matches_type(object, rating, path=["response"])
+        assert_matches_type(RatingRetrieveResponse, rating, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncTradesignals) -> None:
@@ -104,7 +105,7 @@ class TestAsyncRatings:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             rating = await response.parse()
-            assert_matches_type(object, rating, path=["response"])
+            assert_matches_type(RatingRetrieveResponse, rating, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

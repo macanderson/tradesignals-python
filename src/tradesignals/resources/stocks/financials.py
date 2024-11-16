@@ -21,6 +21,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.stocks import financial_retrieve_params
+from ...types.stocks.financial_retrieve_response import FinancialRetrieveResponse
 
 __all__ = ["FinancialsResource", "AsyncFinancialsResource"]
 
@@ -57,7 +58,7 @@ class FinancialsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> FinancialRetrieveResponse:
         """Retrieve financial statements for a specific stock symbol.
 
         Filter by statement
@@ -93,7 +94,7 @@ class FinancialsResource(SyncAPIResource):
                     financial_retrieve_params.FinancialRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=FinancialRetrieveResponse,
         )
 
 
@@ -129,7 +130,7 @@ class AsyncFinancialsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> FinancialRetrieveResponse:
         """Retrieve financial statements for a specific stock symbol.
 
         Filter by statement
@@ -165,7 +166,7 @@ class AsyncFinancialsResource(AsyncAPIResource):
                     financial_retrieve_params.FinancialRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=FinancialRetrieveResponse,
         )
 
 

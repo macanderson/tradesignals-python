@@ -9,6 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals.types import EtfListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,7 +20,7 @@ class TestEtf:
     @parametrize
     def test_method_list(self, client: Tradesignals) -> None:
         etf = client.etf.list()
-        assert_matches_type(object, etf, path=["response"])
+        assert_matches_type(EtfListResponse, etf, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Tradesignals) -> None:
@@ -28,7 +29,7 @@ class TestEtf:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         etf = response.parse()
-        assert_matches_type(object, etf, path=["response"])
+        assert_matches_type(EtfListResponse, etf, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Tradesignals) -> None:
@@ -37,7 +38,7 @@ class TestEtf:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             etf = response.parse()
-            assert_matches_type(object, etf, path=["response"])
+            assert_matches_type(EtfListResponse, etf, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -48,7 +49,7 @@ class TestAsyncEtf:
     @parametrize
     async def test_method_list(self, async_client: AsyncTradesignals) -> None:
         etf = await async_client.etf.list()
-        assert_matches_type(object, etf, path=["response"])
+        assert_matches_type(EtfListResponse, etf, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncTradesignals) -> None:
@@ -57,7 +58,7 @@ class TestAsyncEtf:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         etf = await response.parse()
-        assert_matches_type(object, etf, path=["response"])
+        assert_matches_type(EtfListResponse, etf, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncTradesignals) -> None:
@@ -66,6 +67,6 @@ class TestAsyncEtf:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             etf = await response.parse()
-            assert_matches_type(object, etf, path=["response"])
+            assert_matches_type(EtfListResponse, etf, path=["response"])
 
         assert cast(Any, response.is_closed) is True

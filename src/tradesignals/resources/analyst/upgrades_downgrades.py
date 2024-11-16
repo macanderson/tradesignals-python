@@ -22,6 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.analyst import upgrades_downgrade_list_params
+from ...types.analyst.upgrades_downgrade_list_response import UpgradesDowngradeListResponse
 
 __all__ = ["UpgradesDowngradesResource", "AsyncUpgradesDowngradesResource"]
 
@@ -56,7 +57,7 @@ class UpgradesDowngradesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> UpgradesDowngradeListResponse:
         """Retrieve recent analyst upgrades and downgrades across all stocks.
 
         Filter by
@@ -82,7 +83,7 @@ class UpgradesDowngradesResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform({"date": date}, upgrades_downgrade_list_params.UpgradesDowngradeListParams),
             ),
-            cast_to=object,
+            cast_to=UpgradesDowngradeListResponse,
         )
 
 
@@ -116,7 +117,7 @@ class AsyncUpgradesDowngradesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> UpgradesDowngradeListResponse:
         """Retrieve recent analyst upgrades and downgrades across all stocks.
 
         Filter by
@@ -144,7 +145,7 @@ class AsyncUpgradesDowngradesResource(AsyncAPIResource):
                     {"date": date}, upgrades_downgrade_list_params.UpgradesDowngradeListParams
                 ),
             ),
-            cast_to=object,
+            cast_to=UpgradesDowngradeListResponse,
         )
 
 
