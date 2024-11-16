@@ -22,8 +22,8 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.darkpool import ticker_darkpool_trade_retrieve_params
-from ...types.darkpool.ticker_darkpool_trade_retrieve_response import TickerDarkpoolTradeRetrieveResponse
+from ...types.darkpool import ticker_darkpool_trade_list_params
+from ...types.darkpool.ticker_darkpool_trade_list_response import TickerDarkpoolTradeListResponse
 
 __all__ = ["TickerDarkpoolTradesResource", "AsyncTickerDarkpoolTradesResource"]
 
@@ -48,7 +48,7 @@ class TickerDarkpoolTradesResource(SyncAPIResource):
         """
         return TickerDarkpoolTradesResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def list(
         self,
         ticker: str,
         *,
@@ -62,7 +62,7 @@ class TickerDarkpoolTradesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[TickerDarkpoolTradeRetrieveResponse]:
+    ) -> Optional[TickerDarkpoolTradeListResponse]:
         """-> Returns the darkpool trades for the given ticker on a given day.
 
         Date must be
@@ -106,13 +106,11 @@ class TickerDarkpoolTradesResource(SyncAPIResource):
                         "newer_than": newer_than,
                         "older_than": older_than,
                     },
-                    ticker_darkpool_trade_retrieve_params.TickerDarkpoolTradeRetrieveParams,
+                    ticker_darkpool_trade_list_params.TickerDarkpoolTradeListParams,
                 ),
-                post_parser=DataWrapper[Optional[TickerDarkpoolTradeRetrieveResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[TickerDarkpoolTradeListResponse]]._unwrapper,
             ),
-            cast_to=cast(
-                Type[Optional[TickerDarkpoolTradeRetrieveResponse]], DataWrapper[TickerDarkpoolTradeRetrieveResponse]
-            ),
+            cast_to=cast(Type[Optional[TickerDarkpoolTradeListResponse]], DataWrapper[TickerDarkpoolTradeListResponse]),
         )
 
 
@@ -136,7 +134,7 @@ class AsyncTickerDarkpoolTradesResource(AsyncAPIResource):
         """
         return AsyncTickerDarkpoolTradesResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def list(
         self,
         ticker: str,
         *,
@@ -150,7 +148,7 @@ class AsyncTickerDarkpoolTradesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[TickerDarkpoolTradeRetrieveResponse]:
+    ) -> Optional[TickerDarkpoolTradeListResponse]:
         """-> Returns the darkpool trades for the given ticker on a given day.
 
         Date must be
@@ -194,13 +192,11 @@ class AsyncTickerDarkpoolTradesResource(AsyncAPIResource):
                         "newer_than": newer_than,
                         "older_than": older_than,
                     },
-                    ticker_darkpool_trade_retrieve_params.TickerDarkpoolTradeRetrieveParams,
+                    ticker_darkpool_trade_list_params.TickerDarkpoolTradeListParams,
                 ),
-                post_parser=DataWrapper[Optional[TickerDarkpoolTradeRetrieveResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[TickerDarkpoolTradeListResponse]]._unwrapper,
             ),
-            cast_to=cast(
-                Type[Optional[TickerDarkpoolTradeRetrieveResponse]], DataWrapper[TickerDarkpoolTradeRetrieveResponse]
-            ),
+            cast_to=cast(Type[Optional[TickerDarkpoolTradeListResponse]], DataWrapper[TickerDarkpoolTradeListResponse]),
         )
 
 
@@ -208,8 +204,8 @@ class TickerDarkpoolTradesResourceWithRawResponse:
     def __init__(self, ticker_darkpool_trades: TickerDarkpoolTradesResource) -> None:
         self._ticker_darkpool_trades = ticker_darkpool_trades
 
-        self.retrieve = to_raw_response_wrapper(
-            ticker_darkpool_trades.retrieve,
+        self.list = to_raw_response_wrapper(
+            ticker_darkpool_trades.list,
         )
 
 
@@ -217,8 +213,8 @@ class AsyncTickerDarkpoolTradesResourceWithRawResponse:
     def __init__(self, ticker_darkpool_trades: AsyncTickerDarkpoolTradesResource) -> None:
         self._ticker_darkpool_trades = ticker_darkpool_trades
 
-        self.retrieve = async_to_raw_response_wrapper(
-            ticker_darkpool_trades.retrieve,
+        self.list = async_to_raw_response_wrapper(
+            ticker_darkpool_trades.list,
         )
 
 
@@ -226,8 +222,8 @@ class TickerDarkpoolTradesResourceWithStreamingResponse:
     def __init__(self, ticker_darkpool_trades: TickerDarkpoolTradesResource) -> None:
         self._ticker_darkpool_trades = ticker_darkpool_trades
 
-        self.retrieve = to_streamed_response_wrapper(
-            ticker_darkpool_trades.retrieve,
+        self.list = to_streamed_response_wrapper(
+            ticker_darkpool_trades.list,
         )
 
 
@@ -235,6 +231,6 @@ class AsyncTickerDarkpoolTradesResourceWithStreamingResponse:
     def __init__(self, ticker_darkpool_trades: AsyncTickerDarkpoolTradesResource) -> None:
         self._ticker_darkpool_trades = ticker_darkpool_trades
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            ticker_darkpool_trades.retrieve,
+        self.list = async_to_streamed_response_wrapper(
+            ticker_darkpool_trades.list,
         )

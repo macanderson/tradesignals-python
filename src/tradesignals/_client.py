@@ -46,7 +46,7 @@ __all__ = [
 
 
 class TradesignalsIo(SyncAPIClient):
-    etf: resources.EtfResource
+    etfs: resources.EtfsResource
     darkpool: resources.DarkpoolResource
     with_raw_response: TradesignalsIoWithRawResponse
     with_streaming_response: TradesignalsIoWithStreamedResponse
@@ -105,7 +105,7 @@ class TradesignalsIo(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.etf = resources.EtfResource(self)
+        self.etfs = resources.EtfsResource(self)
         self.darkpool = resources.DarkpoolResource(self)
         self.with_raw_response = TradesignalsIoWithRawResponse(self)
         self.with_streaming_response = TradesignalsIoWithStreamedResponse(self)
@@ -217,7 +217,7 @@ class TradesignalsIo(SyncAPIClient):
 
 
 class AsyncTradesignalsIo(AsyncAPIClient):
-    etf: resources.AsyncEtfResource
+    etfs: resources.AsyncEtfsResource
     darkpool: resources.AsyncDarkpoolResource
     with_raw_response: AsyncTradesignalsIoWithRawResponse
     with_streaming_response: AsyncTradesignalsIoWithStreamedResponse
@@ -276,7 +276,7 @@ class AsyncTradesignalsIo(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.etf = resources.AsyncEtfResource(self)
+        self.etfs = resources.AsyncEtfsResource(self)
         self.darkpool = resources.AsyncDarkpoolResource(self)
         self.with_raw_response = AsyncTradesignalsIoWithRawResponse(self)
         self.with_streaming_response = AsyncTradesignalsIoWithStreamedResponse(self)
@@ -389,25 +389,25 @@ class AsyncTradesignalsIo(AsyncAPIClient):
 
 class TradesignalsIoWithRawResponse:
     def __init__(self, client: TradesignalsIo) -> None:
-        self.etf = resources.EtfResourceWithRawResponse(client.etf)
+        self.etfs = resources.EtfsResourceWithRawResponse(client.etfs)
         self.darkpool = resources.DarkpoolResourceWithRawResponse(client.darkpool)
 
 
 class AsyncTradesignalsIoWithRawResponse:
     def __init__(self, client: AsyncTradesignalsIo) -> None:
-        self.etf = resources.AsyncEtfResourceWithRawResponse(client.etf)
+        self.etfs = resources.AsyncEtfsResourceWithRawResponse(client.etfs)
         self.darkpool = resources.AsyncDarkpoolResourceWithRawResponse(client.darkpool)
 
 
 class TradesignalsIoWithStreamedResponse:
     def __init__(self, client: TradesignalsIo) -> None:
-        self.etf = resources.EtfResourceWithStreamingResponse(client.etf)
+        self.etfs = resources.EtfsResourceWithStreamingResponse(client.etfs)
         self.darkpool = resources.DarkpoolResourceWithStreamingResponse(client.darkpool)
 
 
 class AsyncTradesignalsIoWithStreamedResponse:
     def __init__(self, client: AsyncTradesignalsIo) -> None:
-        self.etf = resources.AsyncEtfResourceWithStreamingResponse(client.etf)
+        self.etfs = resources.AsyncEtfsResourceWithStreamingResponse(client.etfs)
         self.darkpool = resources.AsyncDarkpoolResourceWithStreamingResponse(client.darkpool)
 
 
