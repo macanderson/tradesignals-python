@@ -44,11 +44,23 @@ from .overview import (
 )
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from .spike_detection import (
+    SpikeDetectionResource,
+    AsyncSpikeDetectionResource,
+    SpikeDetectionResourceWithRawResponse,
+    AsyncSpikeDetectionResourceWithRawResponse,
+    SpikeDetectionResourceWithStreamingResponse,
+    AsyncSpikeDetectionResourceWithStreamingResponse,
+)
 
 __all__ = ["MarketResource", "AsyncMarketResource"]
 
 
 class MarketResource(SyncAPIResource):
+    @cached_property
+    def spike_detection(self) -> SpikeDetectionResource:
+        return SpikeDetectionResource(self._client)
+
     @cached_property
     def overview(self) -> OverviewResource:
         return OverviewResource(self._client)
@@ -90,6 +102,10 @@ class MarketResource(SyncAPIResource):
 
 
 class AsyncMarketResource(AsyncAPIResource):
+    @cached_property
+    def spike_detection(self) -> AsyncSpikeDetectionResource:
+        return AsyncSpikeDetectionResource(self._client)
+
     @cached_property
     def overview(self) -> AsyncOverviewResource:
         return AsyncOverviewResource(self._client)
@@ -135,6 +151,10 @@ class MarketResourceWithRawResponse:
         self._market = market
 
     @cached_property
+    def spike_detection(self) -> SpikeDetectionResourceWithRawResponse:
+        return SpikeDetectionResourceWithRawResponse(self._market.spike_detection)
+
+    @cached_property
     def overview(self) -> OverviewResourceWithRawResponse:
         return OverviewResourceWithRawResponse(self._market.overview)
 
@@ -158,6 +178,10 @@ class MarketResourceWithRawResponse:
 class AsyncMarketResourceWithRawResponse:
     def __init__(self, market: AsyncMarketResource) -> None:
         self._market = market
+
+    @cached_property
+    def spike_detection(self) -> AsyncSpikeDetectionResourceWithRawResponse:
+        return AsyncSpikeDetectionResourceWithRawResponse(self._market.spike_detection)
 
     @cached_property
     def overview(self) -> AsyncOverviewResourceWithRawResponse:
@@ -185,6 +209,10 @@ class MarketResourceWithStreamingResponse:
         self._market = market
 
     @cached_property
+    def spike_detection(self) -> SpikeDetectionResourceWithStreamingResponse:
+        return SpikeDetectionResourceWithStreamingResponse(self._market.spike_detection)
+
+    @cached_property
     def overview(self) -> OverviewResourceWithStreamingResponse:
         return OverviewResourceWithStreamingResponse(self._market.overview)
 
@@ -208,6 +236,10 @@ class MarketResourceWithStreamingResponse:
 class AsyncMarketResourceWithStreamingResponse:
     def __init__(self, market: AsyncMarketResource) -> None:
         self._market = market
+
+    @cached_property
+    def spike_detection(self) -> AsyncSpikeDetectionResourceWithStreamingResponse:
+        return AsyncSpikeDetectionResourceWithStreamingResponse(self._market.spike_detection)
 
     @cached_property
     def overview(self) -> AsyncOverviewResourceWithStreamingResponse:

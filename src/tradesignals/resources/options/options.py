@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+from .flow import (
+    FlowResource,
+    AsyncFlowResource,
+    FlowResourceWithRawResponse,
+    AsyncFlowResourceWithRawResponse,
+    FlowResourceWithStreamingResponse,
+    AsyncFlowResourceWithStreamingResponse,
+)
 from .chain import (
     ChainResource,
     AsyncChainResource,
@@ -27,6 +35,22 @@ from .contract import (
     AsyncContractResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
+from .oi_change import (
+    OiChangeResource,
+    AsyncOiChangeResource,
+    OiChangeResourceWithRawResponse,
+    AsyncOiChangeResourceWithRawResponse,
+    OiChangeResourceWithStreamingResponse,
+    AsyncOiChangeResourceWithStreamingResponse,
+)
+from .greek_flow import (
+    GreekFlowResource,
+    AsyncGreekFlowResource,
+    GreekFlowResourceWithRawResponse,
+    AsyncGreekFlowResourceWithRawResponse,
+    GreekFlowResourceWithStreamingResponse,
+    AsyncGreekFlowResourceWithStreamingResponse,
+)
 from .historical import (
     HistoricalResource,
     AsyncHistoricalResource,
@@ -44,47 +68,23 @@ from .expirations import (
     ExpirationsResourceWithStreamingResponse,
     AsyncExpirationsResourceWithStreamingResponse,
 )
-from .options_flows import (
-    OptionsFlowsResource,
-    AsyncOptionsFlowsResource,
-    OptionsFlowsResourceWithRawResponse,
-    AsyncOptionsFlowsResourceWithRawResponse,
-    OptionsFlowsResourceWithStreamingResponse,
-    AsyncOptionsFlowsResourceWithStreamingResponse,
+from .total_volume import (
+    TotalVolumeResource,
+    AsyncTotalVolumeResource,
+    TotalVolumeResourceWithRawResponse,
+    AsyncTotalVolumeResourceWithRawResponse,
+    TotalVolumeResourceWithStreamingResponse,
+    AsyncTotalVolumeResourceWithStreamingResponse,
 )
-from .list_contracts import (
-    ListContractsResource,
-    AsyncListContractsResource,
-    ListContractsResourceWithRawResponse,
-    AsyncListContractsResourceWithRawResponse,
-    ListContractsResourceWithStreamingResponse,
-    AsyncListContractsResourceWithStreamingResponse,
+from .option_contracts import (
+    OptionContractsResource,
+    AsyncOptionContractsResource,
+    OptionContractsResourceWithRawResponse,
+    AsyncOptionContractsResourceWithRawResponse,
+    OptionContractsResourceWithStreamingResponse,
+    AsyncOptionContractsResourceWithStreamingResponse,
 )
-from .options_greek_flows import (
-    OptionsGreekFlowsResource,
-    AsyncOptionsGreekFlowsResource,
-    OptionsGreekFlowsResourceWithRawResponse,
-    AsyncOptionsGreekFlowsResourceWithRawResponse,
-    OptionsGreekFlowsResourceWithStreamingResponse,
-    AsyncOptionsGreekFlowsResourceWithStreamingResponse,
-)
-from .options_total_volumes import (
-    OptionsTotalVolumesResource,
-    AsyncOptionsTotalVolumesResource,
-    OptionsTotalVolumesResourceWithRawResponse,
-    AsyncOptionsTotalVolumesResourceWithRawResponse,
-    OptionsTotalVolumesResourceWithStreamingResponse,
-    AsyncOptionsTotalVolumesResourceWithStreamingResponse,
-)
-from .options_open_interest_changes import (
-    OptionsOpenInterestChangesResource,
-    AsyncOptionsOpenInterestChangesResource,
-    OptionsOpenInterestChangesResourceWithRawResponse,
-    AsyncOptionsOpenInterestChangesResourceWithRawResponse,
-    OptionsOpenInterestChangesResourceWithStreamingResponse,
-    AsyncOptionsOpenInterestChangesResourceWithStreamingResponse,
-)
-from .options_greek_flows.options_greek_flows import OptionsGreekFlowsResource, AsyncOptionsGreekFlowsResource
+from .greek_flow.greek_flow import GreekFlowResource, AsyncGreekFlowResource
 
 __all__ = ["OptionsResource", "AsyncOptionsResource"]
 
@@ -111,24 +111,24 @@ class OptionsResource(SyncAPIResource):
         return ContractResource(self._client)
 
     @cached_property
-    def list_contracts(self) -> ListContractsResource:
-        return ListContractsResource(self._client)
+    def option_contracts(self) -> OptionContractsResource:
+        return OptionContractsResource(self._client)
 
     @cached_property
-    def options_flows(self) -> OptionsFlowsResource:
-        return OptionsFlowsResource(self._client)
+    def flow(self) -> FlowResource:
+        return FlowResource(self._client)
 
     @cached_property
-    def options_total_volumes(self) -> OptionsTotalVolumesResource:
-        return OptionsTotalVolumesResource(self._client)
+    def total_volume(self) -> TotalVolumeResource:
+        return TotalVolumeResource(self._client)
 
     @cached_property
-    def options_greek_flows(self) -> OptionsGreekFlowsResource:
-        return OptionsGreekFlowsResource(self._client)
+    def greek_flow(self) -> GreekFlowResource:
+        return GreekFlowResource(self._client)
 
     @cached_property
-    def options_open_interest_changes(self) -> OptionsOpenInterestChangesResource:
-        return OptionsOpenInterestChangesResource(self._client)
+    def oi_change(self) -> OiChangeResource:
+        return OiChangeResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> OptionsResourceWithRawResponse:
@@ -172,24 +172,24 @@ class AsyncOptionsResource(AsyncAPIResource):
         return AsyncContractResource(self._client)
 
     @cached_property
-    def list_contracts(self) -> AsyncListContractsResource:
-        return AsyncListContractsResource(self._client)
+    def option_contracts(self) -> AsyncOptionContractsResource:
+        return AsyncOptionContractsResource(self._client)
 
     @cached_property
-    def options_flows(self) -> AsyncOptionsFlowsResource:
-        return AsyncOptionsFlowsResource(self._client)
+    def flow(self) -> AsyncFlowResource:
+        return AsyncFlowResource(self._client)
 
     @cached_property
-    def options_total_volumes(self) -> AsyncOptionsTotalVolumesResource:
-        return AsyncOptionsTotalVolumesResource(self._client)
+    def total_volume(self) -> AsyncTotalVolumeResource:
+        return AsyncTotalVolumeResource(self._client)
 
     @cached_property
-    def options_greek_flows(self) -> AsyncOptionsGreekFlowsResource:
-        return AsyncOptionsGreekFlowsResource(self._client)
+    def greek_flow(self) -> AsyncGreekFlowResource:
+        return AsyncGreekFlowResource(self._client)
 
     @cached_property
-    def options_open_interest_changes(self) -> AsyncOptionsOpenInterestChangesResource:
-        return AsyncOptionsOpenInterestChangesResource(self._client)
+    def oi_change(self) -> AsyncOiChangeResource:
+        return AsyncOiChangeResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncOptionsResourceWithRawResponse:
@@ -236,24 +236,24 @@ class OptionsResourceWithRawResponse:
         return ContractResourceWithRawResponse(self._options.contract)
 
     @cached_property
-    def list_contracts(self) -> ListContractsResourceWithRawResponse:
-        return ListContractsResourceWithRawResponse(self._options.list_contracts)
+    def option_contracts(self) -> OptionContractsResourceWithRawResponse:
+        return OptionContractsResourceWithRawResponse(self._options.option_contracts)
 
     @cached_property
-    def options_flows(self) -> OptionsFlowsResourceWithRawResponse:
-        return OptionsFlowsResourceWithRawResponse(self._options.options_flows)
+    def flow(self) -> FlowResourceWithRawResponse:
+        return FlowResourceWithRawResponse(self._options.flow)
 
     @cached_property
-    def options_total_volumes(self) -> OptionsTotalVolumesResourceWithRawResponse:
-        return OptionsTotalVolumesResourceWithRawResponse(self._options.options_total_volumes)
+    def total_volume(self) -> TotalVolumeResourceWithRawResponse:
+        return TotalVolumeResourceWithRawResponse(self._options.total_volume)
 
     @cached_property
-    def options_greek_flows(self) -> OptionsGreekFlowsResourceWithRawResponse:
-        return OptionsGreekFlowsResourceWithRawResponse(self._options.options_greek_flows)
+    def greek_flow(self) -> GreekFlowResourceWithRawResponse:
+        return GreekFlowResourceWithRawResponse(self._options.greek_flow)
 
     @cached_property
-    def options_open_interest_changes(self) -> OptionsOpenInterestChangesResourceWithRawResponse:
-        return OptionsOpenInterestChangesResourceWithRawResponse(self._options.options_open_interest_changes)
+    def oi_change(self) -> OiChangeResourceWithRawResponse:
+        return OiChangeResourceWithRawResponse(self._options.oi_change)
 
 
 class AsyncOptionsResourceWithRawResponse:
@@ -281,24 +281,24 @@ class AsyncOptionsResourceWithRawResponse:
         return AsyncContractResourceWithRawResponse(self._options.contract)
 
     @cached_property
-    def list_contracts(self) -> AsyncListContractsResourceWithRawResponse:
-        return AsyncListContractsResourceWithRawResponse(self._options.list_contracts)
+    def option_contracts(self) -> AsyncOptionContractsResourceWithRawResponse:
+        return AsyncOptionContractsResourceWithRawResponse(self._options.option_contracts)
 
     @cached_property
-    def options_flows(self) -> AsyncOptionsFlowsResourceWithRawResponse:
-        return AsyncOptionsFlowsResourceWithRawResponse(self._options.options_flows)
+    def flow(self) -> AsyncFlowResourceWithRawResponse:
+        return AsyncFlowResourceWithRawResponse(self._options.flow)
 
     @cached_property
-    def options_total_volumes(self) -> AsyncOptionsTotalVolumesResourceWithRawResponse:
-        return AsyncOptionsTotalVolumesResourceWithRawResponse(self._options.options_total_volumes)
+    def total_volume(self) -> AsyncTotalVolumeResourceWithRawResponse:
+        return AsyncTotalVolumeResourceWithRawResponse(self._options.total_volume)
 
     @cached_property
-    def options_greek_flows(self) -> AsyncOptionsGreekFlowsResourceWithRawResponse:
-        return AsyncOptionsGreekFlowsResourceWithRawResponse(self._options.options_greek_flows)
+    def greek_flow(self) -> AsyncGreekFlowResourceWithRawResponse:
+        return AsyncGreekFlowResourceWithRawResponse(self._options.greek_flow)
 
     @cached_property
-    def options_open_interest_changes(self) -> AsyncOptionsOpenInterestChangesResourceWithRawResponse:
-        return AsyncOptionsOpenInterestChangesResourceWithRawResponse(self._options.options_open_interest_changes)
+    def oi_change(self) -> AsyncOiChangeResourceWithRawResponse:
+        return AsyncOiChangeResourceWithRawResponse(self._options.oi_change)
 
 
 class OptionsResourceWithStreamingResponse:
@@ -326,24 +326,24 @@ class OptionsResourceWithStreamingResponse:
         return ContractResourceWithStreamingResponse(self._options.contract)
 
     @cached_property
-    def list_contracts(self) -> ListContractsResourceWithStreamingResponse:
-        return ListContractsResourceWithStreamingResponse(self._options.list_contracts)
+    def option_contracts(self) -> OptionContractsResourceWithStreamingResponse:
+        return OptionContractsResourceWithStreamingResponse(self._options.option_contracts)
 
     @cached_property
-    def options_flows(self) -> OptionsFlowsResourceWithStreamingResponse:
-        return OptionsFlowsResourceWithStreamingResponse(self._options.options_flows)
+    def flow(self) -> FlowResourceWithStreamingResponse:
+        return FlowResourceWithStreamingResponse(self._options.flow)
 
     @cached_property
-    def options_total_volumes(self) -> OptionsTotalVolumesResourceWithStreamingResponse:
-        return OptionsTotalVolumesResourceWithStreamingResponse(self._options.options_total_volumes)
+    def total_volume(self) -> TotalVolumeResourceWithStreamingResponse:
+        return TotalVolumeResourceWithStreamingResponse(self._options.total_volume)
 
     @cached_property
-    def options_greek_flows(self) -> OptionsGreekFlowsResourceWithStreamingResponse:
-        return OptionsGreekFlowsResourceWithStreamingResponse(self._options.options_greek_flows)
+    def greek_flow(self) -> GreekFlowResourceWithStreamingResponse:
+        return GreekFlowResourceWithStreamingResponse(self._options.greek_flow)
 
     @cached_property
-    def options_open_interest_changes(self) -> OptionsOpenInterestChangesResourceWithStreamingResponse:
-        return OptionsOpenInterestChangesResourceWithStreamingResponse(self._options.options_open_interest_changes)
+    def oi_change(self) -> OiChangeResourceWithStreamingResponse:
+        return OiChangeResourceWithStreamingResponse(self._options.oi_change)
 
 
 class AsyncOptionsResourceWithStreamingResponse:
@@ -371,21 +371,21 @@ class AsyncOptionsResourceWithStreamingResponse:
         return AsyncContractResourceWithStreamingResponse(self._options.contract)
 
     @cached_property
-    def list_contracts(self) -> AsyncListContractsResourceWithStreamingResponse:
-        return AsyncListContractsResourceWithStreamingResponse(self._options.list_contracts)
+    def option_contracts(self) -> AsyncOptionContractsResourceWithStreamingResponse:
+        return AsyncOptionContractsResourceWithStreamingResponse(self._options.option_contracts)
 
     @cached_property
-    def options_flows(self) -> AsyncOptionsFlowsResourceWithStreamingResponse:
-        return AsyncOptionsFlowsResourceWithStreamingResponse(self._options.options_flows)
+    def flow(self) -> AsyncFlowResourceWithStreamingResponse:
+        return AsyncFlowResourceWithStreamingResponse(self._options.flow)
 
     @cached_property
-    def options_total_volumes(self) -> AsyncOptionsTotalVolumesResourceWithStreamingResponse:
-        return AsyncOptionsTotalVolumesResourceWithStreamingResponse(self._options.options_total_volumes)
+    def total_volume(self) -> AsyncTotalVolumeResourceWithStreamingResponse:
+        return AsyncTotalVolumeResourceWithStreamingResponse(self._options.total_volume)
 
     @cached_property
-    def options_greek_flows(self) -> AsyncOptionsGreekFlowsResourceWithStreamingResponse:
-        return AsyncOptionsGreekFlowsResourceWithStreamingResponse(self._options.options_greek_flows)
+    def greek_flow(self) -> AsyncGreekFlowResourceWithStreamingResponse:
+        return AsyncGreekFlowResourceWithStreamingResponse(self._options.greek_flow)
 
     @cached_property
-    def options_open_interest_changes(self) -> AsyncOptionsOpenInterestChangesResourceWithStreamingResponse:
-        return AsyncOptionsOpenInterestChangesResourceWithStreamingResponse(self._options.options_open_interest_changes)
+    def oi_change(self) -> AsyncOiChangeResourceWithStreamingResponse:
+        return AsyncOiChangeResourceWithStreamingResponse(self._options.oi_change)

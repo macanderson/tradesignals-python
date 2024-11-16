@@ -8,7 +8,7 @@ from typing import Any, cast
 import pytest
 
 from tests.utils import assert_matches_type
-from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals import TradesignalsIo, AsyncTradesignalsIo
 from tradesignals._utils import parse_date
 from tradesignals.types.etf import TideRetrieveResponse
 
@@ -19,12 +19,12 @@ class TestTide:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_retrieve(self, client: Tradesignals) -> None:
+    def test_method_retrieve(self, client: TradesignalsIo) -> None:
         tide = client.etf.tide.retrieve()
         assert_matches_type(TideRetrieveResponse, tide, path=["response"])
 
     @parametrize
-    def test_method_retrieve_with_all_params(self, client: Tradesignals) -> None:
+    def test_method_retrieve_with_all_params(self, client: TradesignalsIo) -> None:
         tide = client.etf.tide.retrieve(
             date=parse_date("2019-12-27"),
             etf="SPY",
@@ -32,7 +32,7 @@ class TestTide:
         assert_matches_type(TideRetrieveResponse, tide, path=["response"])
 
     @parametrize
-    def test_raw_response_retrieve(self, client: Tradesignals) -> None:
+    def test_raw_response_retrieve(self, client: TradesignalsIo) -> None:
         response = client.etf.tide.with_raw_response.retrieve()
 
         assert response.is_closed is True
@@ -41,7 +41,7 @@ class TestTide:
         assert_matches_type(TideRetrieveResponse, tide, path=["response"])
 
     @parametrize
-    def test_streaming_response_retrieve(self, client: Tradesignals) -> None:
+    def test_streaming_response_retrieve(self, client: TradesignalsIo) -> None:
         with client.etf.tide.with_streaming_response.retrieve() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -56,12 +56,12 @@ class TestAsyncTide:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         tide = await async_client.etf.tide.retrieve()
         assert_matches_type(TideRetrieveResponse, tide, path=["response"])
 
     @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignalsIo) -> None:
         tide = await async_client.etf.tide.retrieve(
             date=parse_date("2019-12-27"),
             etf="SPY",
@@ -69,7 +69,7 @@ class TestAsyncTide:
         assert_matches_type(TideRetrieveResponse, tide, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         response = await async_client.etf.tide.with_raw_response.retrieve()
 
         assert response.is_closed is True
@@ -78,7 +78,7 @@ class TestAsyncTide:
         assert_matches_type(TideRetrieveResponse, tide, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         async with async_client.etf.tide.with_streaming_response.retrieve() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

@@ -48,6 +48,14 @@ from .options import (
     OptionsResourceWithStreamingResponse,
     AsyncOptionsResourceWithStreamingResponse,
 )
+from .congress import (
+    CongressResource,
+    AsyncCongressResource,
+    CongressResourceWithRawResponse,
+    AsyncCongressResourceWithRawResponse,
+    CongressResourceWithStreamingResponse,
+    AsyncCongressResourceWithStreamingResponse,
+)
 from .darkpool import (
     DarkpoolResource,
     AsyncDarkpoolResource,
@@ -63,6 +71,14 @@ from .seasonality import (
     AsyncSeasonalityResourceWithRawResponse,
     SeasonalityResourceWithStreamingResponse,
     AsyncSeasonalityResourceWithStreamingResponse,
+)
+from .correlations import (
+    CorrelationsResource,
+    AsyncCorrelationsResource,
+    CorrelationsResourceWithRawResponse,
+    AsyncCorrelationsResourceWithRawResponse,
+    CorrelationsResourceWithStreamingResponse,
+    AsyncCorrelationsResourceWithStreamingResponse,
 )
 from .institutions import (
     InstitutionsResource,
@@ -108,6 +124,12 @@ __all__ = [
     "AsyncOptionsResourceWithRawResponse",
     "OptionsResourceWithStreamingResponse",
     "AsyncOptionsResourceWithStreamingResponse",
+    "CorrelationsResource",
+    "AsyncCorrelationsResource",
+    "CorrelationsResourceWithRawResponse",
+    "AsyncCorrelationsResourceWithRawResponse",
+    "CorrelationsResourceWithStreamingResponse",
+    "AsyncCorrelationsResourceWithStreamingResponse",
     "StocksResource",
     "AsyncStocksResource",
     "StocksResourceWithRawResponse",
@@ -126,6 +148,12 @@ __all__ = [
     "AsyncInsiderTradesResourceWithRawResponse",
     "InsiderTradesResourceWithStreamingResponse",
     "AsyncInsiderTradesResourceWithStreamingResponse",
+    "CongressResource",
+    "AsyncCongressResource",
+    "CongressResourceWithRawResponse",
+    "AsyncCongressResourceWithRawResponse",
+    "CongressResourceWithStreamingResponse",
+    "AsyncCongressResourceWithStreamingResponse",
     "InstitutionsResource",
     "AsyncInstitutionsResource",
     "InstitutionsResourceWithRawResponse",

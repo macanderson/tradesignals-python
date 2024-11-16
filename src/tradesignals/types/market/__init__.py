@@ -10,3 +10,5 @@ from .index_list_response import IndexListResponse as IndexListResponse
 from .mover_list_response import MoverListResponse as MoverListResponse
 from .sector_list_response import SectorListResponse as SectorListResponse
 from .overview_retrieve_response import OverviewRetrieveResponse as OverviewRetrieveResponse
+from .spike_detection_retrieve_params import SpikeDetectionRetrieveParams as SpikeDetectionRetrieveParams
+from .spike_detection_retrieve_response import SpikeDetectionRetrieveResponse as SpikeDetectionRetrieveResponse
