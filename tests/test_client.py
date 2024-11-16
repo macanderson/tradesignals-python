@@ -556,16 +556,6 @@ class TestTradesignalsIo:
             client = TradesignalsIo(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
-        # explicit environment arg requires explicitness
-        with update_env(TRADESIGNALS_IO_BASE_URL="http://localhost:5000/from/env"):
-            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                TradesignalsIo(api_key=api_key, _strict_response_validation=True, environment="production")
-
-            client = TradesignalsIo(
-                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
-            )
-            assert str(client.base_url).startswith("https://api.unusualwhales.com")
-
     @pytest.mark.parametrize(
         "client",
         [
@@ -728,11 +718,13 @@ class TestTradesignalsIo:
     @mock.patch("tradesignals._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/calendar/economic").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/api/etfs/ticker/holdings").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.get(
-                "/api/calendar/economic", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/api/etfs/ticker/holdings",
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -740,11 +732,13 @@ class TestTradesignalsIo:
     @mock.patch("tradesignals._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/calendar/economic").mock(return_value=httpx.Response(500))
+        respx_mock.get("/api/etfs/ticker/holdings").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.get(
-                "/api/calendar/economic", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/api/etfs/ticker/holdings",
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -773,9 +767,9 @@ class TestTradesignalsIo:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/calendar/economic").mock(side_effect=retry_handler)
+        respx_mock.get("/api/etfs/ticker/holdings").mock(side_effect=retry_handler)
 
-        response = client.economic_calendars.with_raw_response.list()
+        response = client.etfs.holdings.with_raw_response.holdings("ticker")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -797,9 +791,11 @@ class TestTradesignalsIo:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/calendar/economic").mock(side_effect=retry_handler)
+        respx_mock.get("/api/etfs/ticker/holdings").mock(side_effect=retry_handler)
 
-        response = client.economic_calendars.with_raw_response.list(extra_headers={"x-stainless-retry-count": Omit()})
+        response = client.etfs.holdings.with_raw_response.holdings(
+            "ticker", extra_headers={"x-stainless-retry-count": Omit()}
+        )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -820,9 +816,11 @@ class TestTradesignalsIo:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/calendar/economic").mock(side_effect=retry_handler)
+        respx_mock.get("/api/etfs/ticker/holdings").mock(side_effect=retry_handler)
 
-        response = client.economic_calendars.with_raw_response.list(extra_headers={"x-stainless-retry-count": "42"})
+        response = client.etfs.holdings.with_raw_response.holdings(
+            "ticker", extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1332,16 +1330,6 @@ class TestAsyncTradesignalsIo:
             client = AsyncTradesignalsIo(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
-        # explicit environment arg requires explicitness
-        with update_env(TRADESIGNALS_IO_BASE_URL="http://localhost:5000/from/env"):
-            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                AsyncTradesignalsIo(api_key=api_key, _strict_response_validation=True, environment="production")
-
-            client = AsyncTradesignalsIo(
-                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
-            )
-            assert str(client.base_url).startswith("https://api.unusualwhales.com")
-
     @pytest.mark.parametrize(
         "client",
         [
@@ -1508,11 +1496,13 @@ class TestAsyncTradesignalsIo:
     @mock.patch("tradesignals._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/calendar/economic").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/api/etfs/ticker/holdings").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.get(
-                "/api/calendar/economic", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/api/etfs/ticker/holdings",
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -1520,11 +1510,13 @@ class TestAsyncTradesignalsIo:
     @mock.patch("tradesignals._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.get("/api/calendar/economic").mock(return_value=httpx.Response(500))
+        respx_mock.get("/api/etfs/ticker/holdings").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.get(
-                "/api/calendar/economic", cast_to=httpx.Response, options={"headers": {RAW_RESPONSE_HEADER: "stream"}}
+                "/api/etfs/ticker/holdings",
+                cast_to=httpx.Response,
+                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
 
         assert _get_open_connections(self.client) == 0
@@ -1554,9 +1546,9 @@ class TestAsyncTradesignalsIo:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/calendar/economic").mock(side_effect=retry_handler)
+        respx_mock.get("/api/etfs/ticker/holdings").mock(side_effect=retry_handler)
 
-        response = await client.economic_calendars.with_raw_response.list()
+        response = await client.etfs.holdings.with_raw_response.holdings("ticker")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1579,10 +1571,10 @@ class TestAsyncTradesignalsIo:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/calendar/economic").mock(side_effect=retry_handler)
+        respx_mock.get("/api/etfs/ticker/holdings").mock(side_effect=retry_handler)
 
-        response = await client.economic_calendars.with_raw_response.list(
-            extra_headers={"x-stainless-retry-count": Omit()}
+        response = await client.etfs.holdings.with_raw_response.holdings(
+            "ticker", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1605,10 +1597,10 @@ class TestAsyncTradesignalsIo:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/api/calendar/economic").mock(side_effect=retry_handler)
+        respx_mock.get("/api/etfs/ticker/holdings").mock(side_effect=retry_handler)
 
-        response = await client.economic_calendars.with_raw_response.list(
-            extra_headers={"x-stainless-retry-count": "42"}
+        response = await client.etfs.holdings.with_raw_response.holdings(
+            "ticker", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
