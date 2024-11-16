@@ -22,6 +22,14 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from .institutional_activities import (
+    InstitutionalActivitiesResource,
+    AsyncInstitutionalActivitiesResource,
+    InstitutionalActivitiesResourceWithRawResponse,
+    AsyncInstitutionalActivitiesResourceWithRawResponse,
+    InstitutionalActivitiesResourceWithStreamingResponse,
+    AsyncInstitutionalActivitiesResourceWithStreamingResponse,
+)
 from ...types.institution_list_response import InstitutionListResponse
 
 __all__ = ["InstitutionsResource", "AsyncInstitutionsResource"]
@@ -33,12 +41,16 @@ class InstitutionsResource(SyncAPIResource):
         return TradesResource(self._client)
 
     @cached_property
+    def institutional_activities(self) -> InstitutionalActivitiesResource:
+        return InstitutionalActivitiesResource(self._client)
+
+    @cached_property
     def with_raw_response(self) -> InstitutionsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/tradesignals-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
         return InstitutionsResourceWithRawResponse(self)
 
@@ -47,7 +59,7 @@ class InstitutionsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/tradesignals-python#with_streaming_response
+        For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
         return InstitutionsResourceWithStreamingResponse(self)
 
@@ -77,12 +89,16 @@ class AsyncInstitutionsResource(AsyncAPIResource):
         return AsyncTradesResource(self._client)
 
     @cached_property
+    def institutional_activities(self) -> AsyncInstitutionalActivitiesResource:
+        return AsyncInstitutionalActivitiesResource(self._client)
+
+    @cached_property
     def with_raw_response(self) -> AsyncInstitutionsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/tradesignals-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
         return AsyncInstitutionsResourceWithRawResponse(self)
 
@@ -91,7 +107,7 @@ class AsyncInstitutionsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/tradesignals-python#with_streaming_response
+        For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
         return AsyncInstitutionsResourceWithStreamingResponse(self)
 
@@ -127,6 +143,10 @@ class InstitutionsResourceWithRawResponse:
     def trades(self) -> TradesResourceWithRawResponse:
         return TradesResourceWithRawResponse(self._institutions.trades)
 
+    @cached_property
+    def institutional_activities(self) -> InstitutionalActivitiesResourceWithRawResponse:
+        return InstitutionalActivitiesResourceWithRawResponse(self._institutions.institutional_activities)
+
 
 class AsyncInstitutionsResourceWithRawResponse:
     def __init__(self, institutions: AsyncInstitutionsResource) -> None:
@@ -139,6 +159,10 @@ class AsyncInstitutionsResourceWithRawResponse:
     @cached_property
     def trades(self) -> AsyncTradesResourceWithRawResponse:
         return AsyncTradesResourceWithRawResponse(self._institutions.trades)
+
+    @cached_property
+    def institutional_activities(self) -> AsyncInstitutionalActivitiesResourceWithRawResponse:
+        return AsyncInstitutionalActivitiesResourceWithRawResponse(self._institutions.institutional_activities)
 
 
 class InstitutionsResourceWithStreamingResponse:
@@ -153,6 +177,10 @@ class InstitutionsResourceWithStreamingResponse:
     def trades(self) -> TradesResourceWithStreamingResponse:
         return TradesResourceWithStreamingResponse(self._institutions.trades)
 
+    @cached_property
+    def institutional_activities(self) -> InstitutionalActivitiesResourceWithStreamingResponse:
+        return InstitutionalActivitiesResourceWithStreamingResponse(self._institutions.institutional_activities)
+
 
 class AsyncInstitutionsResourceWithStreamingResponse:
     def __init__(self, institutions: AsyncInstitutionsResource) -> None:
@@ -165,3 +193,7 @@ class AsyncInstitutionsResourceWithStreamingResponse:
     @cached_property
     def trades(self) -> AsyncTradesResourceWithStreamingResponse:
         return AsyncTradesResourceWithStreamingResponse(self._institutions.trades)
+
+    @cached_property
+    def institutional_activities(self) -> AsyncInstitutionalActivitiesResourceWithStreamingResponse:
+        return AsyncInstitutionalActivitiesResourceWithStreamingResponse(self._institutions.institutional_activities)
