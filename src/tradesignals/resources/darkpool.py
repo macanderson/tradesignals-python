@@ -7,65 +7,80 @@ from datetime import date
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
+from ..types import darkpool_list_params, darkpool_retrieve_params
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
+from .._compat import cached_property
+from .._resource import SyncAPIResource, AsyncAPIResource
+from .._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..._base_client import make_request_options
-from ...types.darkpool import transaction_list_params, transaction_retrieve_params
-from ...types.darkpool.transaction_list_response import TransactionListResponse
-from ...types.darkpool.transaction_retrieve_response import TransactionRetrieveResponse
+from .._base_client import make_request_options
+from ..types.darkpool_list_response import DarkpoolListResponse
+from ..types.darkpool_retrieve_response import DarkpoolRetrieveResponse
 
-__all__ = ["TransactionsResource", "AsyncTransactionsResource"]
+__all__ = ["DarkpoolResource", "AsyncDarkpoolResource"]
 
 
-class TransactionsResource(SyncAPIResource):
+class DarkpoolResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> TransactionsResourceWithRawResponse:
+    def with_raw_response(self) -> DarkpoolResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return TransactionsResourceWithRawResponse(self)
+        return DarkpoolResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> TransactionsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> DarkpoolResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return TransactionsResourceWithStreamingResponse(self)
+        return DarkpoolResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
         symbol: str,
         *,
         date: Union[str, date] | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        newer_than: str | NotGiven = NOT_GIVEN,
+        older_than: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TransactionRetrieveResponse:
-        """Retrieve dark pool transactions for a specific symbol.
+    ) -> DarkpoolRetrieveResponse:
+        """-> Returns the darkpool trades for the given ticker on a given day.
 
-        Filter by date.
+        Date must be
+        the current or a past date. If no date is given, returns data for the
+        current/last market day.
 
         Args:
-          date: Date to filter dark pool transactions.
+          date: Date to filter darkpool transactions.
+
+          limit: How many items to return. Default is 100. Max is 200. Minimum is 1.
+
+          newer_than: -> The unix time in milliseconds or seconds at which no older results will be
+              returned. Can be used with newer_than to paginate by time. Also accepts an ISO
+              date example "2024-01-25".
+
+          older_than: -> The unix time in milliseconds or seconds at which no newer results will be
+              returned. Can be used with newer_than to paginate by time. Also accepts an ISO
+              date example "2024-01-25".
 
           extra_headers: Send extra headers
 
@@ -78,48 +93,7 @@ class TransactionsResource(SyncAPIResource):
         if not symbol:
             raise ValueError(f"Expected a non-empty value for `symbol` but received {symbol!r}")
         return self._get(
-            f"/api/darkpool/transactions/{symbol}",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform({"date": date}, transaction_retrieve_params.TransactionRetrieveParams),
-            ),
-            cast_to=TransactionRetrieveResponse,
-        )
-
-    def list(
-        self,
-        *,
-        date: Union[str, date] | NotGiven = NOT_GIVEN,
-        symbol: str | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TransactionListResponse:
-        """Retrieve dark pool transactions data.
-
-        Filter by optional symbol and date.
-
-        Args:
-          date: Date to filter dark pool transactions.
-
-          symbol: Stock symbol to filter dark pool transactions.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/api/darkpool/transactions",
+            f"/api/darkpool/{symbol}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -128,53 +102,117 @@ class TransactionsResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "date": date,
-                        "symbol": symbol,
+                        "limit": limit,
+                        "newer_than": newer_than,
+                        "older_than": older_than,
                     },
-                    transaction_list_params.TransactionListParams,
+                    darkpool_retrieve_params.DarkpoolRetrieveParams,
                 ),
             ),
-            cast_to=TransactionListResponse,
+            cast_to=DarkpoolRetrieveResponse,
         )
 
-
-class AsyncTransactionsResource(AsyncAPIResource):
-    @cached_property
-    def with_raw_response(self) -> AsyncTransactionsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return the
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
-        """
-        return AsyncTransactionsResourceWithRawResponse(self)
-
-    @cached_property
-    def with_streaming_response(self) -> AsyncTransactionsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
-        """
-        return AsyncTransactionsResourceWithStreamingResponse(self)
-
-    async def retrieve(
+    def list(
         self,
-        symbol: str,
         *,
         date: Union[str, date] | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TransactionRetrieveResponse:
-        """Retrieve dark pool transactions for a specific symbol.
-
-        Filter by date.
+    ) -> DarkpoolListResponse:
+        """
+        Returns recent Darkpool trades for all securities listed on either NASDAQ or
+        NYSE.
 
         Args:
-          date: Date to filter dark pool transactions.
+          date: Date to filter darkpool transactions.
+
+          limit: How many items to return. Default is 100. Max is 200. Minimum is 1.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/api/darkpool/recent",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "date": date,
+                        "limit": limit,
+                    },
+                    darkpool_list_params.DarkpoolListParams,
+                ),
+            ),
+            cast_to=DarkpoolListResponse,
+        )
+
+
+class AsyncDarkpoolResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncDarkpoolResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return the
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncDarkpoolResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncDarkpoolResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
+        """
+        return AsyncDarkpoolResourceWithStreamingResponse(self)
+
+    async def retrieve(
+        self,
+        symbol: str,
+        *,
+        date: Union[str, date] | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        newer_than: str | NotGiven = NOT_GIVEN,
+        older_than: str | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DarkpoolRetrieveResponse:
+        """-> Returns the darkpool trades for the given ticker on a given day.
+
+        Date must be
+        the current or a past date. If no date is given, returns data for the
+        current/last market day.
+
+        Args:
+          date: Date to filter darkpool transactions.
+
+          limit: How many items to return. Default is 100. Max is 200. Minimum is 1.
+
+          newer_than: -> The unix time in milliseconds or seconds at which no older results will be
+              returned. Can be used with newer_than to paginate by time. Also accepts an ISO
+              date example "2024-01-25".
+
+          older_than: -> The unix time in milliseconds or seconds at which no newer results will be
+              returned. Can be used with newer_than to paginate by time. Also accepts an ISO
+              date example "2024-01-25".
 
           extra_headers: Send extra headers
 
@@ -187,39 +225,45 @@ class AsyncTransactionsResource(AsyncAPIResource):
         if not symbol:
             raise ValueError(f"Expected a non-empty value for `symbol` but received {symbol!r}")
         return await self._get(
-            f"/api/darkpool/transactions/{symbol}",
+            f"/api/darkpool/{symbol}",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"date": date}, transaction_retrieve_params.TransactionRetrieveParams
+                    {
+                        "date": date,
+                        "limit": limit,
+                        "newer_than": newer_than,
+                        "older_than": older_than,
+                    },
+                    darkpool_retrieve_params.DarkpoolRetrieveParams,
                 ),
             ),
-            cast_to=TransactionRetrieveResponse,
+            cast_to=DarkpoolRetrieveResponse,
         )
 
     async def list(
         self,
         *,
         date: Union[str, date] | NotGiven = NOT_GIVEN,
-        symbol: str | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> TransactionListResponse:
-        """Retrieve dark pool transactions data.
-
-        Filter by optional symbol and date.
+    ) -> DarkpoolListResponse:
+        """
+        Returns recent Darkpool trades for all securities listed on either NASDAQ or
+        NYSE.
 
         Args:
-          date: Date to filter dark pool transactions.
+          date: Date to filter darkpool transactions.
 
-          symbol: Stock symbol to filter dark pool transactions.
+          limit: How many items to return. Default is 100. Max is 200. Minimum is 1.
 
           extra_headers: Send extra headers
 
@@ -230,7 +274,7 @@ class AsyncTransactionsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/api/darkpool/transactions",
+            "/api/darkpool/recent",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -239,58 +283,58 @@ class AsyncTransactionsResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "date": date,
-                        "symbol": symbol,
+                        "limit": limit,
                     },
-                    transaction_list_params.TransactionListParams,
+                    darkpool_list_params.DarkpoolListParams,
                 ),
             ),
-            cast_to=TransactionListResponse,
+            cast_to=DarkpoolListResponse,
         )
 
 
-class TransactionsResourceWithRawResponse:
-    def __init__(self, transactions: TransactionsResource) -> None:
-        self._transactions = transactions
+class DarkpoolResourceWithRawResponse:
+    def __init__(self, darkpool: DarkpoolResource) -> None:
+        self._darkpool = darkpool
 
         self.retrieve = to_raw_response_wrapper(
-            transactions.retrieve,
+            darkpool.retrieve,
         )
         self.list = to_raw_response_wrapper(
-            transactions.list,
+            darkpool.list,
         )
 
 
-class AsyncTransactionsResourceWithRawResponse:
-    def __init__(self, transactions: AsyncTransactionsResource) -> None:
-        self._transactions = transactions
+class AsyncDarkpoolResourceWithRawResponse:
+    def __init__(self, darkpool: AsyncDarkpoolResource) -> None:
+        self._darkpool = darkpool
 
         self.retrieve = async_to_raw_response_wrapper(
-            transactions.retrieve,
+            darkpool.retrieve,
         )
         self.list = async_to_raw_response_wrapper(
-            transactions.list,
+            darkpool.list,
         )
 
 
-class TransactionsResourceWithStreamingResponse:
-    def __init__(self, transactions: TransactionsResource) -> None:
-        self._transactions = transactions
+class DarkpoolResourceWithStreamingResponse:
+    def __init__(self, darkpool: DarkpoolResource) -> None:
+        self._darkpool = darkpool
 
         self.retrieve = to_streamed_response_wrapper(
-            transactions.retrieve,
+            darkpool.retrieve,
         )
         self.list = to_streamed_response_wrapper(
-            transactions.list,
+            darkpool.list,
         )
 
 
-class AsyncTransactionsResourceWithStreamingResponse:
-    def __init__(self, transactions: AsyncTransactionsResource) -> None:
-        self._transactions = transactions
+class AsyncDarkpoolResourceWithStreamingResponse:
+    def __init__(self, darkpool: AsyncDarkpoolResource) -> None:
+        self._darkpool = darkpool
 
         self.retrieve = async_to_streamed_response_wrapper(
-            transactions.retrieve,
+            darkpool.retrieve,
         )
         self.list = async_to_streamed_response_wrapper(
-            transactions.list,
+            darkpool.list,
         )
