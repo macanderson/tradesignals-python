@@ -8,7 +8,7 @@ from typing import Any, cast
 import pytest
 
 from tests.utils import assert_matches_type
-from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals import TradesignalsIo, AsyncTradesignalsIo
 from tradesignals._utils import parse_date
 from tradesignals.types.options import ChainRetrieveResponse
 
@@ -19,14 +19,14 @@ class TestChain:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_retrieve(self, client: Tradesignals) -> None:
+    def test_method_retrieve(self, client: TradesignalsIo) -> None:
         chain = client.options.chain.retrieve(
             symbol="AAPL",
         )
         assert_matches_type(ChainRetrieveResponse, chain, path=["response"])
 
     @parametrize
-    def test_method_retrieve_with_all_params(self, client: Tradesignals) -> None:
+    def test_method_retrieve_with_all_params(self, client: TradesignalsIo) -> None:
         chain = client.options.chain.retrieve(
             symbol="AAPL",
             expiration=parse_date("2019-12-27"),
@@ -34,7 +34,7 @@ class TestChain:
         assert_matches_type(ChainRetrieveResponse, chain, path=["response"])
 
     @parametrize
-    def test_raw_response_retrieve(self, client: Tradesignals) -> None:
+    def test_raw_response_retrieve(self, client: TradesignalsIo) -> None:
         response = client.options.chain.with_raw_response.retrieve(
             symbol="AAPL",
         )
@@ -45,7 +45,7 @@ class TestChain:
         assert_matches_type(ChainRetrieveResponse, chain, path=["response"])
 
     @parametrize
-    def test_streaming_response_retrieve(self, client: Tradesignals) -> None:
+    def test_streaming_response_retrieve(self, client: TradesignalsIo) -> None:
         with client.options.chain.with_streaming_response.retrieve(
             symbol="AAPL",
         ) as response:
@@ -58,7 +58,7 @@ class TestChain:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: Tradesignals) -> None:
+    def test_path_params_retrieve(self, client: TradesignalsIo) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `symbol` but received ''"):
             client.options.chain.with_raw_response.retrieve(
                 symbol="",
@@ -69,14 +69,14 @@ class TestAsyncChain:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         chain = await async_client.options.chain.retrieve(
             symbol="AAPL",
         )
         assert_matches_type(ChainRetrieveResponse, chain, path=["response"])
 
     @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignalsIo) -> None:
         chain = await async_client.options.chain.retrieve(
             symbol="AAPL",
             expiration=parse_date("2019-12-27"),
@@ -84,7 +84,7 @@ class TestAsyncChain:
         assert_matches_type(ChainRetrieveResponse, chain, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         response = await async_client.options.chain.with_raw_response.retrieve(
             symbol="AAPL",
         )
@@ -95,7 +95,7 @@ class TestAsyncChain:
         assert_matches_type(ChainRetrieveResponse, chain, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         async with async_client.options.chain.with_streaming_response.retrieve(
             symbol="AAPL",
         ) as response:
@@ -108,7 +108,7 @@ class TestAsyncChain:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `symbol` but received ''"):
             await async_client.options.chain.with_raw_response.retrieve(
                 symbol="",

@@ -4,15 +4,16 @@ from . import types
 from ._types import NOT_GIVEN, NoneType, NotGiven, Transport, ProxiesTypes
 from ._utils import file_from_path
 from ._client import (
+    ENVIRONMENTS,
     Client,
     Stream,
     Timeout,
     Transport,
     AsyncClient,
     AsyncStream,
-    Tradesignals,
     RequestOptions,
-    AsyncTradesignals,
+    TradesignalsIo,
+    AsyncTradesignalsIo,
 )
 from ._models import BaseModel
 from ._version import __title__, __version__
@@ -26,10 +27,10 @@ from ._exceptions import (
     RateLimitError,
     APITimeoutError,
     BadRequestError,
-    TradesignalsError,
     APIConnectionError,
     AuthenticationError,
     InternalServerError,
+    TradesignalsIoError,
     PermissionDeniedError,
     UnprocessableEntityError,
     APIResponseValidationError,
@@ -46,7 +47,7 @@ __all__ = [
     "ProxiesTypes",
     "NotGiven",
     "NOT_GIVEN",
-    "TradesignalsError",
+    "TradesignalsIoError",
     "APIError",
     "APIStatusError",
     "APITimeoutError",
@@ -66,8 +67,9 @@ __all__ = [
     "AsyncClient",
     "Stream",
     "AsyncStream",
-    "Tradesignals",
-    "AsyncTradesignals",
+    "TradesignalsIo",
+    "AsyncTradesignalsIo",
+    "ENVIRONMENTS",
     "file_from_path",
     "BaseModel",
     "DEFAULT_TIMEOUT",

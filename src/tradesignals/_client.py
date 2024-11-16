@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Union, Mapping
-from typing_extensions import Self, override
+from typing import Any, Dict, Union, Mapping, cast
+from typing_extensions import Self, Literal, override
 
 import httpx
 
@@ -25,7 +25,7 @@ from ._utils import (
 )
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError, TradesignalsError
+from ._exceptions import APIStatusError, TradesignalsIoError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -33,42 +33,52 @@ from ._base_client import (
 )
 
 __all__ = [
+    "ENVIRONMENTS",
     "Timeout",
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
     "resources",
-    "Tradesignals",
-    "AsyncTradesignals",
+    "TradesignalsIo",
+    "AsyncTradesignalsIo",
     "Client",
     "AsyncClient",
 ]
 
+ENVIRONMENTS: Dict[str, str] = {
+    "production": "https://api.unusualwhales.com",
+    "sandbox": "https://sandbox.tradesignals.io",
+}
 
-class Tradesignals(SyncAPIClient):
-    spike_detections: resources.SpikeDetectionsResource
+
+class TradesignalsIo(SyncAPIClient):
     economic_calendars: resources.EconomicCalendarsResource
     etf: resources.EtfResource
     options: resources.OptionsResource
+    correlations: resources.CorrelationsResource
     stocks: resources.StocksResource
     news: resources.NewsResource
     insider_trades: resources.InsiderTradesResource
+    congress: resources.CongressResource
     institutions: resources.InstitutionsResource
     darkpool: resources.DarkpoolResource
     seasonality: resources.SeasonalityResource
     analyst: resources.AnalystResource
     market: resources.MarketResource
-    with_raw_response: TradesignalsWithRawResponse
-    with_streaming_response: TradesignalsWithStreamedResponse
+    with_raw_response: TradesignalsIoWithRawResponse
+    with_streaming_response: TradesignalsIoWithStreamedResponse
 
     # client options
     api_key: str
+
+    _environment: Literal["production", "sandbox"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        base_url: str | httpx.URL | None = None,
+        environment: Literal["production", "sandbox"] | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -87,22 +97,43 @@ class Tradesignals(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous tradesignals client instance.
+        """Construct a new synchronous Tradesignals.io client instance.
 
-        This automatically infers the `api_key` argument from the `UNUSUALWHALES_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `TRADESIGNALS_TOKEN` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("UNUSUALWHALES_API_KEY")
+            api_key = os.environ.get("TRADESIGNALS_TOKEN")
         if api_key is None:
-            raise TradesignalsError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the UNUSUALWHALES_API_KEY environment variable"
+            raise TradesignalsIoError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the TRADESIGNALS_TOKEN environment variable"
             )
         self.api_key = api_key
 
-        if base_url is None:
-            base_url = os.environ.get("TRADESIGNALS_BASE_URL")
-        if base_url is None:
-            base_url = f"https://api.unusualwhales.com"
+        self._environment = environment
+
+        base_url_env = os.environ.get("TRADESIGNALS_IO_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # cast required because mypy doesn't understand the type narrowing
+            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; The `TRADESIGNALS_IO_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                )
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
 
         super().__init__(
             version=__version__,
@@ -115,20 +146,21 @@ class Tradesignals(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.spike_detections = resources.SpikeDetectionsResource(self)
         self.economic_calendars = resources.EconomicCalendarsResource(self)
         self.etf = resources.EtfResource(self)
         self.options = resources.OptionsResource(self)
+        self.correlations = resources.CorrelationsResource(self)
         self.stocks = resources.StocksResource(self)
         self.news = resources.NewsResource(self)
         self.insider_trades = resources.InsiderTradesResource(self)
+        self.congress = resources.CongressResource(self)
         self.institutions = resources.InstitutionsResource(self)
         self.darkpool = resources.DarkpoolResource(self)
         self.seasonality = resources.SeasonalityResource(self)
         self.analyst = resources.AnalystResource(self)
         self.market = resources.MarketResource(self)
-        self.with_raw_response = TradesignalsWithRawResponse(self)
-        self.with_streaming_response = TradesignalsWithStreamedResponse(self)
+        self.with_raw_response = TradesignalsIoWithRawResponse(self)
+        self.with_streaming_response = TradesignalsIoWithStreamedResponse(self)
 
     @property
     @override
@@ -147,6 +179,7 @@ class Tradesignals(SyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": "false",
+            "Accepts": "text/json, text",
             **self._custom_headers,
         }
 
@@ -154,6 +187,7 @@ class Tradesignals(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        environment: Literal["production", "sandbox"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -189,6 +223,7 @@ class Tradesignals(SyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
+            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -235,30 +270,34 @@ class Tradesignals(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncTradesignals(AsyncAPIClient):
-    spike_detections: resources.AsyncSpikeDetectionsResource
+class AsyncTradesignalsIo(AsyncAPIClient):
     economic_calendars: resources.AsyncEconomicCalendarsResource
     etf: resources.AsyncEtfResource
     options: resources.AsyncOptionsResource
+    correlations: resources.AsyncCorrelationsResource
     stocks: resources.AsyncStocksResource
     news: resources.AsyncNewsResource
     insider_trades: resources.AsyncInsiderTradesResource
+    congress: resources.AsyncCongressResource
     institutions: resources.AsyncInstitutionsResource
     darkpool: resources.AsyncDarkpoolResource
     seasonality: resources.AsyncSeasonalityResource
     analyst: resources.AsyncAnalystResource
     market: resources.AsyncMarketResource
-    with_raw_response: AsyncTradesignalsWithRawResponse
-    with_streaming_response: AsyncTradesignalsWithStreamedResponse
+    with_raw_response: AsyncTradesignalsIoWithRawResponse
+    with_streaming_response: AsyncTradesignalsIoWithStreamedResponse
 
     # client options
     api_key: str
+
+    _environment: Literal["production", "sandbox"] | NotGiven
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        base_url: str | httpx.URL | None = None,
+        environment: Literal["production", "sandbox"] | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -277,22 +316,43 @@ class AsyncTradesignals(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async tradesignals client instance.
+        """Construct a new async Tradesignals.io client instance.
 
-        This automatically infers the `api_key` argument from the `UNUSUALWHALES_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `TRADESIGNALS_TOKEN` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("UNUSUALWHALES_API_KEY")
+            api_key = os.environ.get("TRADESIGNALS_TOKEN")
         if api_key is None:
-            raise TradesignalsError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the UNUSUALWHALES_API_KEY environment variable"
+            raise TradesignalsIoError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the TRADESIGNALS_TOKEN environment variable"
             )
         self.api_key = api_key
 
-        if base_url is None:
-            base_url = os.environ.get("TRADESIGNALS_BASE_URL")
-        if base_url is None:
-            base_url = f"https://api.unusualwhales.com"
+        self._environment = environment
+
+        base_url_env = os.environ.get("TRADESIGNALS_IO_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # cast required because mypy doesn't understand the type narrowing
+            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; The `TRADESIGNALS_IO_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                )
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
 
         super().__init__(
             version=__version__,
@@ -305,20 +365,21 @@ class AsyncTradesignals(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.spike_detections = resources.AsyncSpikeDetectionsResource(self)
         self.economic_calendars = resources.AsyncEconomicCalendarsResource(self)
         self.etf = resources.AsyncEtfResource(self)
         self.options = resources.AsyncOptionsResource(self)
+        self.correlations = resources.AsyncCorrelationsResource(self)
         self.stocks = resources.AsyncStocksResource(self)
         self.news = resources.AsyncNewsResource(self)
         self.insider_trades = resources.AsyncInsiderTradesResource(self)
+        self.congress = resources.AsyncCongressResource(self)
         self.institutions = resources.AsyncInstitutionsResource(self)
         self.darkpool = resources.AsyncDarkpoolResource(self)
         self.seasonality = resources.AsyncSeasonalityResource(self)
         self.analyst = resources.AsyncAnalystResource(self)
         self.market = resources.AsyncMarketResource(self)
-        self.with_raw_response = AsyncTradesignalsWithRawResponse(self)
-        self.with_streaming_response = AsyncTradesignalsWithStreamedResponse(self)
+        self.with_raw_response = AsyncTradesignalsIoWithRawResponse(self)
+        self.with_streaming_response = AsyncTradesignalsIoWithStreamedResponse(self)
 
     @property
     @override
@@ -337,6 +398,7 @@ class AsyncTradesignals(AsyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": f"async:{get_async_library()}",
+            "Accepts": "text/json, text",
             **self._custom_headers,
         }
 
@@ -344,6 +406,7 @@ class AsyncTradesignals(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        environment: Literal["production", "sandbox"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -379,6 +442,7 @@ class AsyncTradesignals(AsyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
+            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -425,15 +489,16 @@ class AsyncTradesignals(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class TradesignalsWithRawResponse:
-    def __init__(self, client: Tradesignals) -> None:
-        self.spike_detections = resources.SpikeDetectionsResourceWithRawResponse(client.spike_detections)
+class TradesignalsIoWithRawResponse:
+    def __init__(self, client: TradesignalsIo) -> None:
         self.economic_calendars = resources.EconomicCalendarsResourceWithRawResponse(client.economic_calendars)
         self.etf = resources.EtfResourceWithRawResponse(client.etf)
         self.options = resources.OptionsResourceWithRawResponse(client.options)
+        self.correlations = resources.CorrelationsResourceWithRawResponse(client.correlations)
         self.stocks = resources.StocksResourceWithRawResponse(client.stocks)
         self.news = resources.NewsResourceWithRawResponse(client.news)
         self.insider_trades = resources.InsiderTradesResourceWithRawResponse(client.insider_trades)
+        self.congress = resources.CongressResourceWithRawResponse(client.congress)
         self.institutions = resources.InstitutionsResourceWithRawResponse(client.institutions)
         self.darkpool = resources.DarkpoolResourceWithRawResponse(client.darkpool)
         self.seasonality = resources.SeasonalityResourceWithRawResponse(client.seasonality)
@@ -441,15 +506,16 @@ class TradesignalsWithRawResponse:
         self.market = resources.MarketResourceWithRawResponse(client.market)
 
 
-class AsyncTradesignalsWithRawResponse:
-    def __init__(self, client: AsyncTradesignals) -> None:
-        self.spike_detections = resources.AsyncSpikeDetectionsResourceWithRawResponse(client.spike_detections)
+class AsyncTradesignalsIoWithRawResponse:
+    def __init__(self, client: AsyncTradesignalsIo) -> None:
         self.economic_calendars = resources.AsyncEconomicCalendarsResourceWithRawResponse(client.economic_calendars)
         self.etf = resources.AsyncEtfResourceWithRawResponse(client.etf)
         self.options = resources.AsyncOptionsResourceWithRawResponse(client.options)
+        self.correlations = resources.AsyncCorrelationsResourceWithRawResponse(client.correlations)
         self.stocks = resources.AsyncStocksResourceWithRawResponse(client.stocks)
         self.news = resources.AsyncNewsResourceWithRawResponse(client.news)
         self.insider_trades = resources.AsyncInsiderTradesResourceWithRawResponse(client.insider_trades)
+        self.congress = resources.AsyncCongressResourceWithRawResponse(client.congress)
         self.institutions = resources.AsyncInstitutionsResourceWithRawResponse(client.institutions)
         self.darkpool = resources.AsyncDarkpoolResourceWithRawResponse(client.darkpool)
         self.seasonality = resources.AsyncSeasonalityResourceWithRawResponse(client.seasonality)
@@ -457,15 +523,16 @@ class AsyncTradesignalsWithRawResponse:
         self.market = resources.AsyncMarketResourceWithRawResponse(client.market)
 
 
-class TradesignalsWithStreamedResponse:
-    def __init__(self, client: Tradesignals) -> None:
-        self.spike_detections = resources.SpikeDetectionsResourceWithStreamingResponse(client.spike_detections)
+class TradesignalsIoWithStreamedResponse:
+    def __init__(self, client: TradesignalsIo) -> None:
         self.economic_calendars = resources.EconomicCalendarsResourceWithStreamingResponse(client.economic_calendars)
         self.etf = resources.EtfResourceWithStreamingResponse(client.etf)
         self.options = resources.OptionsResourceWithStreamingResponse(client.options)
+        self.correlations = resources.CorrelationsResourceWithStreamingResponse(client.correlations)
         self.stocks = resources.StocksResourceWithStreamingResponse(client.stocks)
         self.news = resources.NewsResourceWithStreamingResponse(client.news)
         self.insider_trades = resources.InsiderTradesResourceWithStreamingResponse(client.insider_trades)
+        self.congress = resources.CongressResourceWithStreamingResponse(client.congress)
         self.institutions = resources.InstitutionsResourceWithStreamingResponse(client.institutions)
         self.darkpool = resources.DarkpoolResourceWithStreamingResponse(client.darkpool)
         self.seasonality = resources.SeasonalityResourceWithStreamingResponse(client.seasonality)
@@ -473,17 +540,18 @@ class TradesignalsWithStreamedResponse:
         self.market = resources.MarketResourceWithStreamingResponse(client.market)
 
 
-class AsyncTradesignalsWithStreamedResponse:
-    def __init__(self, client: AsyncTradesignals) -> None:
-        self.spike_detections = resources.AsyncSpikeDetectionsResourceWithStreamingResponse(client.spike_detections)
+class AsyncTradesignalsIoWithStreamedResponse:
+    def __init__(self, client: AsyncTradesignalsIo) -> None:
         self.economic_calendars = resources.AsyncEconomicCalendarsResourceWithStreamingResponse(
             client.economic_calendars
         )
         self.etf = resources.AsyncEtfResourceWithStreamingResponse(client.etf)
         self.options = resources.AsyncOptionsResourceWithStreamingResponse(client.options)
+        self.correlations = resources.AsyncCorrelationsResourceWithStreamingResponse(client.correlations)
         self.stocks = resources.AsyncStocksResourceWithStreamingResponse(client.stocks)
         self.news = resources.AsyncNewsResourceWithStreamingResponse(client.news)
         self.insider_trades = resources.AsyncInsiderTradesResourceWithStreamingResponse(client.insider_trades)
+        self.congress = resources.AsyncCongressResourceWithStreamingResponse(client.congress)
         self.institutions = resources.AsyncInstitutionsResourceWithStreamingResponse(client.institutions)
         self.darkpool = resources.AsyncDarkpoolResourceWithStreamingResponse(client.darkpool)
         self.seasonality = resources.AsyncSeasonalityResourceWithStreamingResponse(client.seasonality)
@@ -491,6 +559,6 @@ class AsyncTradesignalsWithStreamedResponse:
         self.market = resources.AsyncMarketResourceWithStreamingResponse(client.market)
 
 
-Client = Tradesignals
+Client = TradesignalsIo
 
-AsyncClient = AsyncTradesignals
+AsyncClient = AsyncTradesignalsIo

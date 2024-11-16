@@ -48,6 +48,14 @@ from .options import (
     OptionsResourceWithStreamingResponse,
     AsyncOptionsResourceWithStreamingResponse,
 )
+from .congress import (
+    CongressResource,
+    AsyncCongressResource,
+    CongressResourceWithRawResponse,
+    AsyncCongressResourceWithRawResponse,
+    CongressResourceWithStreamingResponse,
+    AsyncCongressResourceWithStreamingResponse,
+)
 from .darkpool import (
     DarkpoolResource,
     AsyncDarkpoolResource,
@@ -63,6 +71,14 @@ from .seasonality import (
     AsyncSeasonalityResourceWithRawResponse,
     SeasonalityResourceWithStreamingResponse,
     AsyncSeasonalityResourceWithStreamingResponse,
+)
+from .correlations import (
+    CorrelationsResource,
+    AsyncCorrelationsResource,
+    CorrelationsResourceWithRawResponse,
+    AsyncCorrelationsResourceWithRawResponse,
+    CorrelationsResourceWithStreamingResponse,
+    AsyncCorrelationsResourceWithStreamingResponse,
 )
 from .institutions import (
     InstitutionsResource,
@@ -80,14 +96,6 @@ from .insider_trades import (
     InsiderTradesResourceWithStreamingResponse,
     AsyncInsiderTradesResourceWithStreamingResponse,
 )
-from .spike_detections import (
-    SpikeDetectionsResource,
-    AsyncSpikeDetectionsResource,
-    SpikeDetectionsResourceWithRawResponse,
-    AsyncSpikeDetectionsResourceWithRawResponse,
-    SpikeDetectionsResourceWithStreamingResponse,
-    AsyncSpikeDetectionsResourceWithStreamingResponse,
-)
 from .economic_calendars import (
     EconomicCalendarsResource,
     AsyncEconomicCalendarsResource,
@@ -98,12 +106,6 @@ from .economic_calendars import (
 )
 
 __all__ = [
-    "SpikeDetectionsResource",
-    "AsyncSpikeDetectionsResource",
-    "SpikeDetectionsResourceWithRawResponse",
-    "AsyncSpikeDetectionsResourceWithRawResponse",
-    "SpikeDetectionsResourceWithStreamingResponse",
-    "AsyncSpikeDetectionsResourceWithStreamingResponse",
     "EconomicCalendarsResource",
     "AsyncEconomicCalendarsResource",
     "EconomicCalendarsResourceWithRawResponse",
@@ -122,6 +124,12 @@ __all__ = [
     "AsyncOptionsResourceWithRawResponse",
     "OptionsResourceWithStreamingResponse",
     "AsyncOptionsResourceWithStreamingResponse",
+    "CorrelationsResource",
+    "AsyncCorrelationsResource",
+    "CorrelationsResourceWithRawResponse",
+    "AsyncCorrelationsResourceWithRawResponse",
+    "CorrelationsResourceWithStreamingResponse",
+    "AsyncCorrelationsResourceWithStreamingResponse",
     "StocksResource",
     "AsyncStocksResource",
     "StocksResourceWithRawResponse",
@@ -140,6 +148,12 @@ __all__ = [
     "AsyncInsiderTradesResourceWithRawResponse",
     "InsiderTradesResourceWithStreamingResponse",
     "AsyncInsiderTradesResourceWithStreamingResponse",
+    "CongressResource",
+    "AsyncCongressResource",
+    "CongressResourceWithRawResponse",
+    "AsyncCongressResourceWithRawResponse",
+    "CongressResourceWithStreamingResponse",
+    "AsyncCongressResourceWithStreamingResponse",
     "InstitutionsResource",
     "AsyncInstitutionsResource",
     "InstitutionsResourceWithRawResponse",

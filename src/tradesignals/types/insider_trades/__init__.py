@@ -2,6 +2,5 @@
 
 from __future__ import annotations
 
-from .congress_trade_list_params import CongressTradeListParams as CongressTradeListParams
-from .congress_trade_list_response import CongressTradeListResponse as CongressTradeListResponse
-from .congress_member_list_response import CongressMemberListResponse as CongressMemberListResponse
+from .trade_list_params import TradeListParams as TradeListParams
+from .trade_list_response import TradeListResponse as TradeListResponse

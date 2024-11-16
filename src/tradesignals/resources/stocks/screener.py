@@ -62,28 +62,12 @@ class ScreenerResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScreenerRetrieveResponse:
-        """Retrieve stocks that meet specified screening criteria.
-
-        Filter by optional
-        market capitalization, price, trading volume, sector, and industry.
+        """
+        Retrieve stocks that meet specified screening criteria sent in the request body.
+        Filter by optional market capitalization, price, trading volume, sector, and
+        industry.
 
         Args:
-          industry: Industry to filter stocks.
-
-          market_cap_max: Maximum market capitalization.
-
-          market_cap_min: Minimum market capitalization.
-
-          price_max: Maximum stock price.
-
-          price_min: Minimum stock price.
-
-          sector: Sector to filter stocks.
-
-          volume_max: Maximum trading volume.
-
-          volume_min: Minimum trading volume.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -92,26 +76,23 @@ class ScreenerResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get(
+        return self._post(
             "/api/stocks/screener",
+            body=maybe_transform(
+                {
+                    "industry": industry,
+                    "market_cap_max": market_cap_max,
+                    "market_cap_min": market_cap_min,
+                    "price_max": price_max,
+                    "price_min": price_min,
+                    "sector": sector,
+                    "volume_max": volume_max,
+                    "volume_min": volume_min,
+                },
+                screener_retrieve_params.ScreenerRetrieveParams,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "industry": industry,
-                        "market_cap_max": market_cap_max,
-                        "market_cap_min": market_cap_min,
-                        "price_max": price_max,
-                        "price_min": price_min,
-                        "sector": sector,
-                        "volume_max": volume_max,
-                        "volume_min": volume_min,
-                    },
-                    screener_retrieve_params.ScreenerRetrieveParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ScreenerRetrieveResponse,
         )
@@ -155,28 +136,12 @@ class AsyncScreenerResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> ScreenerRetrieveResponse:
-        """Retrieve stocks that meet specified screening criteria.
-
-        Filter by optional
-        market capitalization, price, trading volume, sector, and industry.
+        """
+        Retrieve stocks that meet specified screening criteria sent in the request body.
+        Filter by optional market capitalization, price, trading volume, sector, and
+        industry.
 
         Args:
-          industry: Industry to filter stocks.
-
-          market_cap_max: Maximum market capitalization.
-
-          market_cap_min: Minimum market capitalization.
-
-          price_max: Maximum stock price.
-
-          price_min: Minimum stock price.
-
-          sector: Sector to filter stocks.
-
-          volume_max: Maximum trading volume.
-
-          volume_min: Minimum trading volume.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -185,26 +150,23 @@ class AsyncScreenerResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return await self._get(
+        return await self._post(
             "/api/stocks/screener",
+            body=await async_maybe_transform(
+                {
+                    "industry": industry,
+                    "market_cap_max": market_cap_max,
+                    "market_cap_min": market_cap_min,
+                    "price_max": price_max,
+                    "price_min": price_min,
+                    "sector": sector,
+                    "volume_max": volume_max,
+                    "volume_min": volume_min,
+                },
+                screener_retrieve_params.ScreenerRetrieveParams,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "industry": industry,
-                        "market_cap_max": market_cap_max,
-                        "market_cap_min": market_cap_min,
-                        "price_max": price_max,
-                        "price_min": price_min,
-                        "sector": sector,
-                        "volume_max": volume_max,
-                        "volume_min": volume_min,
-                    },
-                    screener_retrieve_params.ScreenerRetrieveParams,
-                ),
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=ScreenerRetrieveResponse,
         )
