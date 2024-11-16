@@ -8,10 +8,10 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["ListContractListParams"]
+__all__ = ["OptionContractListParams"]
 
 
-class ListContractListParams(TypedDict, total=False):
+class OptionContractListParams(TypedDict, total=False):
     symbol: Required[str]
     """Stock symbol to filter option contracts."""
 

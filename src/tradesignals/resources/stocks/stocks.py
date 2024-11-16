@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import httpx
+
 from .price import (
     PriceResource,
     AsyncPriceResource,
@@ -18,6 +20,7 @@ from .quote import (
     QuoteResourceWithStreamingResponse,
     AsyncQuoteResourceWithStreamingResponse,
 )
+from ...types import stock_screener_method_params
 from .company import (
     CompanyResource,
     AsyncCompanyResource,
@@ -25,6 +28,11 @@ from .company import (
     AsyncCompanyResourceWithRawResponse,
     CompanyResourceWithStreamingResponse,
     AsyncCompanyResourceWithStreamingResponse,
+)
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
 )
 from .earnings import (
     EarningsResource,
@@ -68,6 +76,14 @@ from .historical import (
     AsyncHistoricalResourceWithStreamingResponse,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from ..._base_client import make_request_options
+from ...types.stock_screener_method_response import StockScreenerMethodResponse
 
 __all__ = ["StocksResource", "AsyncStocksResource"]
 
@@ -124,6 +140,78 @@ class StocksResource(SyncAPIResource):
         """
         return StocksResourceWithStreamingResponse(self)
 
+    def screener_method(
+        self,
+        *,
+        industry: str | NotGiven = NOT_GIVEN,
+        market_cap_max: float | NotGiven = NOT_GIVEN,
+        market_cap_min: float | NotGiven = NOT_GIVEN,
+        price_max: float | NotGiven = NOT_GIVEN,
+        price_min: float | NotGiven = NOT_GIVEN,
+        sector: str | NotGiven = NOT_GIVEN,
+        volume_max: float | NotGiven = NOT_GIVEN,
+        volume_min: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> StockScreenerMethodResponse:
+        """Retrieve stocks that meet specified screening criteria.
+
+        Filter by optional
+        market capitalization, price, trading volume, sector, and industry.
+
+        Args:
+          industry: Industry to filter stocks.
+
+          market_cap_max: Maximum market capitalization.
+
+          market_cap_min: Minimum market capitalization.
+
+          price_max: Maximum stock price.
+
+          price_min: Minimum stock price.
+
+          sector: Sector to filter stocks.
+
+          volume_max: Maximum trading volume.
+
+          volume_min: Minimum trading volume.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/api/stocks/screener",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "industry": industry,
+                        "market_cap_max": market_cap_max,
+                        "market_cap_min": market_cap_min,
+                        "price_max": price_max,
+                        "price_min": price_min,
+                        "sector": sector,
+                        "volume_max": volume_max,
+                        "volume_min": volume_min,
+                    },
+                    stock_screener_method_params.StockScreenerMethodParams,
+                ),
+            ),
+            cast_to=StockScreenerMethodResponse,
+        )
+
 
 class AsyncStocksResource(AsyncAPIResource):
     @cached_property
@@ -177,10 +265,86 @@ class AsyncStocksResource(AsyncAPIResource):
         """
         return AsyncStocksResourceWithStreamingResponse(self)
 
+    async def screener_method(
+        self,
+        *,
+        industry: str | NotGiven = NOT_GIVEN,
+        market_cap_max: float | NotGiven = NOT_GIVEN,
+        market_cap_min: float | NotGiven = NOT_GIVEN,
+        price_max: float | NotGiven = NOT_GIVEN,
+        price_min: float | NotGiven = NOT_GIVEN,
+        sector: str | NotGiven = NOT_GIVEN,
+        volume_max: float | NotGiven = NOT_GIVEN,
+        volume_min: float | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> StockScreenerMethodResponse:
+        """Retrieve stocks that meet specified screening criteria.
+
+        Filter by optional
+        market capitalization, price, trading volume, sector, and industry.
+
+        Args:
+          industry: Industry to filter stocks.
+
+          market_cap_max: Maximum market capitalization.
+
+          market_cap_min: Minimum market capitalization.
+
+          price_max: Maximum stock price.
+
+          price_min: Minimum stock price.
+
+          sector: Sector to filter stocks.
+
+          volume_max: Maximum trading volume.
+
+          volume_min: Minimum trading volume.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/api/stocks/screener",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "industry": industry,
+                        "market_cap_max": market_cap_max,
+                        "market_cap_min": market_cap_min,
+                        "price_max": price_max,
+                        "price_min": price_min,
+                        "sector": sector,
+                        "volume_max": volume_max,
+                        "volume_min": volume_min,
+                    },
+                    stock_screener_method_params.StockScreenerMethodParams,
+                ),
+            ),
+            cast_to=StockScreenerMethodResponse,
+        )
+
 
 class StocksResourceWithRawResponse:
     def __init__(self, stocks: StocksResource) -> None:
         self._stocks = stocks
+
+        self.screener_method = to_raw_response_wrapper(
+            stocks.screener_method,
+        )
 
     @cached_property
     def price(self) -> PriceResourceWithRawResponse:
@@ -219,6 +383,10 @@ class AsyncStocksResourceWithRawResponse:
     def __init__(self, stocks: AsyncStocksResource) -> None:
         self._stocks = stocks
 
+        self.screener_method = async_to_raw_response_wrapper(
+            stocks.screener_method,
+        )
+
     @cached_property
     def price(self) -> AsyncPriceResourceWithRawResponse:
         return AsyncPriceResourceWithRawResponse(self._stocks.price)
@@ -256,6 +424,10 @@ class StocksResourceWithStreamingResponse:
     def __init__(self, stocks: StocksResource) -> None:
         self._stocks = stocks
 
+        self.screener_method = to_streamed_response_wrapper(
+            stocks.screener_method,
+        )
+
     @cached_property
     def price(self) -> PriceResourceWithStreamingResponse:
         return PriceResourceWithStreamingResponse(self._stocks.price)
@@ -292,6 +464,10 @@ class StocksResourceWithStreamingResponse:
 class AsyncStocksResourceWithStreamingResponse:
     def __init__(self, stocks: AsyncStocksResource) -> None:
         self._stocks = stocks
+
+        self.screener_method = async_to_streamed_response_wrapper(
+            stocks.screener_method,
+        )
 
     @cached_property
     def price(self) -> AsyncPriceResourceWithStreamingResponse:
