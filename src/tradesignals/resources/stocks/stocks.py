@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import httpx
-
 from .price import (
     PriceResource,
     AsyncPriceResource,
@@ -20,7 +18,6 @@ from .quote import (
     QuoteResourceWithStreamingResponse,
     AsyncQuoteResourceWithStreamingResponse,
 )
-from ...types import stock_post_params
 from .company import (
     CompanyResource,
     AsyncCompanyResource,
@@ -28,11 +25,6 @@ from .company import (
     AsyncCompanyResourceWithRawResponse,
     CompanyResourceWithStreamingResponse,
     AsyncCompanyResourceWithStreamingResponse,
-)
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
 )
 from .earnings import (
     EarningsResource,
@@ -76,31 +68,11 @@ from .historical import (
     AsyncHistoricalResourceWithStreamingResponse,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
-from .correlations import (
-    CorrelationsResource,
-    AsyncCorrelationsResource,
-    CorrelationsResourceWithRawResponse,
-    AsyncCorrelationsResourceWithRawResponse,
-    CorrelationsResourceWithStreamingResponse,
-    AsyncCorrelationsResourceWithStreamingResponse,
-)
-from ..._base_client import make_request_options
-from ...types.stock_post_response import StockPostResponse
 
 __all__ = ["StocksResource", "AsyncStocksResource"]
 
 
 class StocksResource(SyncAPIResource):
-    @cached_property
-    def correlations(self) -> CorrelationsResource:
-        return CorrelationsResource(self._client)
-
     @cached_property
     def price(self) -> PriceResource:
         return PriceResource(self._client)
@@ -152,65 +124,8 @@ class StocksResource(SyncAPIResource):
         """
         return StocksResourceWithStreamingResponse(self)
 
-    def post(
-        self,
-        *,
-        industry: str | NotGiven = NOT_GIVEN,
-        market_cap_max: float | NotGiven = NOT_GIVEN,
-        market_cap_min: float | NotGiven = NOT_GIVEN,
-        price_max: float | NotGiven = NOT_GIVEN,
-        price_min: float | NotGiven = NOT_GIVEN,
-        sector: str | NotGiven = NOT_GIVEN,
-        volume_max: float | NotGiven = NOT_GIVEN,
-        volume_min: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> StockPostResponse:
-        """
-        Retrieve stocks that meet specified screening criteria sent in the request body.
-        Filter by optional market capitalization, price, trading volume, sector, and
-        industry.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/api/stocks/screener",
-            body=maybe_transform(
-                {
-                    "industry": industry,
-                    "market_cap_max": market_cap_max,
-                    "market_cap_min": market_cap_min,
-                    "price_max": price_max,
-                    "price_min": price_min,
-                    "sector": sector,
-                    "volume_max": volume_max,
-                    "volume_min": volume_min,
-                },
-                stock_post_params.StockPostParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=StockPostResponse,
-        )
-
 
 class AsyncStocksResource(AsyncAPIResource):
-    @cached_property
-    def correlations(self) -> AsyncCorrelationsResource:
-        return AsyncCorrelationsResource(self._client)
-
     @cached_property
     def price(self) -> AsyncPriceResource:
         return AsyncPriceResource(self._client)
@@ -262,71 +177,10 @@ class AsyncStocksResource(AsyncAPIResource):
         """
         return AsyncStocksResourceWithStreamingResponse(self)
 
-    async def post(
-        self,
-        *,
-        industry: str | NotGiven = NOT_GIVEN,
-        market_cap_max: float | NotGiven = NOT_GIVEN,
-        market_cap_min: float | NotGiven = NOT_GIVEN,
-        price_max: float | NotGiven = NOT_GIVEN,
-        price_min: float | NotGiven = NOT_GIVEN,
-        sector: str | NotGiven = NOT_GIVEN,
-        volume_max: float | NotGiven = NOT_GIVEN,
-        volume_min: float | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> StockPostResponse:
-        """
-        Retrieve stocks that meet specified screening criteria sent in the request body.
-        Filter by optional market capitalization, price, trading volume, sector, and
-        industry.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/api/stocks/screener",
-            body=await async_maybe_transform(
-                {
-                    "industry": industry,
-                    "market_cap_max": market_cap_max,
-                    "market_cap_min": market_cap_min,
-                    "price_max": price_max,
-                    "price_min": price_min,
-                    "sector": sector,
-                    "volume_max": volume_max,
-                    "volume_min": volume_min,
-                },
-                stock_post_params.StockPostParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=StockPostResponse,
-        )
-
 
 class StocksResourceWithRawResponse:
     def __init__(self, stocks: StocksResource) -> None:
         self._stocks = stocks
-
-        self.post = to_raw_response_wrapper(
-            stocks.post,
-        )
-
-    @cached_property
-    def correlations(self) -> CorrelationsResourceWithRawResponse:
-        return CorrelationsResourceWithRawResponse(self._stocks.correlations)
 
     @cached_property
     def price(self) -> PriceResourceWithRawResponse:
@@ -365,14 +219,6 @@ class AsyncStocksResourceWithRawResponse:
     def __init__(self, stocks: AsyncStocksResource) -> None:
         self._stocks = stocks
 
-        self.post = async_to_raw_response_wrapper(
-            stocks.post,
-        )
-
-    @cached_property
-    def correlations(self) -> AsyncCorrelationsResourceWithRawResponse:
-        return AsyncCorrelationsResourceWithRawResponse(self._stocks.correlations)
-
     @cached_property
     def price(self) -> AsyncPriceResourceWithRawResponse:
         return AsyncPriceResourceWithRawResponse(self._stocks.price)
@@ -410,14 +256,6 @@ class StocksResourceWithStreamingResponse:
     def __init__(self, stocks: StocksResource) -> None:
         self._stocks = stocks
 
-        self.post = to_streamed_response_wrapper(
-            stocks.post,
-        )
-
-    @cached_property
-    def correlations(self) -> CorrelationsResourceWithStreamingResponse:
-        return CorrelationsResourceWithStreamingResponse(self._stocks.correlations)
-
     @cached_property
     def price(self) -> PriceResourceWithStreamingResponse:
         return PriceResourceWithStreamingResponse(self._stocks.price)
@@ -454,14 +292,6 @@ class StocksResourceWithStreamingResponse:
 class AsyncStocksResourceWithStreamingResponse:
     def __init__(self, stocks: AsyncStocksResource) -> None:
         self._stocks = stocks
-
-        self.post = async_to_streamed_response_wrapper(
-            stocks.post,
-        )
-
-    @cached_property
-    def correlations(self) -> AsyncCorrelationsResourceWithStreamingResponse:
-        return AsyncCorrelationsResourceWithStreamingResponse(self._stocks.correlations)
 
     @cached_property
     def price(self) -> AsyncPriceResourceWithStreamingResponse:

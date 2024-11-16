@@ -48,8 +48,22 @@ from .overview import (
     OverviewResourceWithStreamingResponse,
     AsyncOverviewResourceWithStreamingResponse,
 )
+from .spike_detection import (
+    SpikeDetectionResource,
+    AsyncSpikeDetectionResource,
+    SpikeDetectionResourceWithRawResponse,
+    AsyncSpikeDetectionResourceWithRawResponse,
+    SpikeDetectionResourceWithStreamingResponse,
+    AsyncSpikeDetectionResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "SpikeDetectionResource",
+    "AsyncSpikeDetectionResource",
+    "SpikeDetectionResourceWithRawResponse",
+    "AsyncSpikeDetectionResourceWithRawResponse",
+    "SpikeDetectionResourceWithStreamingResponse",
+    "AsyncSpikeDetectionResourceWithStreamingResponse",
     "OverviewResource",
     "AsyncOverviewResource",
     "OverviewResourceWithRawResponse",
