@@ -5,7 +5,7 @@
 Types:
 
 ```python
-from tradesignals.types.etfs import EtfHolding, EtfHoldingsResponse, HoldingListResponse
+from tradesignals.types.etfs import EtfHolding, HoldingListResponse
 ```
 
 Methods:
@@ -17,7 +17,7 @@ Methods:
 Types:
 
 ```python
-from tradesignals.types.etfs import EtfInOutflow, EtfInOutflowResponse, InflowsOutflowListResponse
+from tradesignals.types.etfs import EtfInOutflow, InflowsOutflowListResponse
 ```
 
 Methods:
@@ -29,31 +29,31 @@ Methods:
 Types:
 
 ```python
-from tradesignals.types.etfs import EtfInfo, EtfInfoResponse
+from tradesignals.types.etfs import EtfInfo, InformationRetrieveResponse
 ```
 
 Methods:
 
-- <code title="get /api/etfs/{ticker}/info">client.etfs.information.<a href="./src/tradesignals/resources/etfs/information.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etfs/etf_info.py">EtfInfo</a></code>
+- <code title="get /api/etfs/{ticker}/info">client.etfs.information.<a href="./src/tradesignals/resources/etfs/information.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etfs/information_retrieve_response.py">Optional</a></code>
 
 ## Exposure
 
 Types:
 
 ```python
-from tradesignals.types.etfs import EtfExposureData, EtfExposureResponse
+from tradesignals.types.etfs import EtfExposureData, ExposureRetrieveResponse
 ```
 
 Methods:
 
-- <code title="get /api/etfs/{ticker}/exposure">client.etfs.exposure.<a href="./src/tradesignals/resources/etfs/exposure.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etfs/etf_exposure_response.py">EtfExposureResponse</a></code>
+- <code title="get /api/etfs/{ticker}/exposure">client.etfs.exposure.<a href="./src/tradesignals/resources/etfs/exposure.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etfs/exposure_retrieve_response.py">Optional</a></code>
 
 # Darkpool
 
 Types:
 
 ```python
-from tradesignals.types import TickerDarkpoolResponse, TickerDarkpoolTrade
+from tradesignals.types import Trade
 ```
 
 ## RecentDarkpoolTrades

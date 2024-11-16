@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from ..ticker_darkpool_trade import TickerDarkpoolTrade
+from ..trade import Trade
 
 __all__ = ["RecentDarkpoolTradeListResponse"]
 
-RecentDarkpoolTradeListResponse: TypeAlias = List[TickerDarkpoolTrade]
+RecentDarkpoolTradeListResponse: TypeAlias = List[Trade]

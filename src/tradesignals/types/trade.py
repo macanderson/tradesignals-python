@@ -6,10 +6,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["TickerDarkpoolTrade"]
+__all__ = ["Trade"]
 
 
-class TickerDarkpoolTrade(BaseModel):
+class Trade(BaseModel):
     canceled: Optional[bool] = None
     """Whether the trade has been cancelled."""
 
