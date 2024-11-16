@@ -8,7 +8,7 @@ from typing import Any, cast
 import pytest
 
 from tests.utils import assert_matches_type
-from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals import TradesignalsIo, AsyncTradesignalsIo
 from tradesignals.types import InstitutionListResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -18,12 +18,12 @@ class TestInstitutions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_list(self, client: Tradesignals) -> None:
+    def test_method_list(self, client: TradesignalsIo) -> None:
         institution = client.institutions.list()
         assert_matches_type(InstitutionListResponse, institution, path=["response"])
 
     @parametrize
-    def test_raw_response_list(self, client: Tradesignals) -> None:
+    def test_raw_response_list(self, client: TradesignalsIo) -> None:
         response = client.institutions.with_raw_response.list()
 
         assert response.is_closed is True
@@ -32,7 +32,7 @@ class TestInstitutions:
         assert_matches_type(InstitutionListResponse, institution, path=["response"])
 
     @parametrize
-    def test_streaming_response_list(self, client: Tradesignals) -> None:
+    def test_streaming_response_list(self, client: TradesignalsIo) -> None:
         with client.institutions.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -47,12 +47,12 @@ class TestAsyncInstitutions:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_list(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_list(self, async_client: AsyncTradesignalsIo) -> None:
         institution = await async_client.institutions.list()
         assert_matches_type(InstitutionListResponse, institution, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncTradesignals) -> None:
+    async def test_raw_response_list(self, async_client: AsyncTradesignalsIo) -> None:
         response = await async_client.institutions.with_raw_response.list()
 
         assert response.is_closed is True
@@ -61,7 +61,7 @@ class TestAsyncInstitutions:
         assert_matches_type(InstitutionListResponse, institution, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncTradesignals) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncTradesignalsIo) -> None:
         async with async_client.institutions.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

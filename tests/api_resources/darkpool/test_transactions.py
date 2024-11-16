@@ -8,7 +8,7 @@ from typing import Any, cast
 import pytest
 
 from tests.utils import assert_matches_type
-from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals import TradesignalsIo, AsyncTradesignalsIo
 from tradesignals._utils import parse_date
 from tradesignals.types.darkpool import (
     TransactionListResponse,
@@ -22,14 +22,14 @@ class TestTransactions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_retrieve(self, client: Tradesignals) -> None:
+    def test_method_retrieve(self, client: TradesignalsIo) -> None:
         transaction = client.darkpool.transactions.retrieve(
             symbol="symbol",
         )
         assert_matches_type(TransactionRetrieveResponse, transaction, path=["response"])
 
     @parametrize
-    def test_method_retrieve_with_all_params(self, client: Tradesignals) -> None:
+    def test_method_retrieve_with_all_params(self, client: TradesignalsIo) -> None:
         transaction = client.darkpool.transactions.retrieve(
             symbol="symbol",
             date=parse_date("2019-12-27"),
@@ -37,7 +37,7 @@ class TestTransactions:
         assert_matches_type(TransactionRetrieveResponse, transaction, path=["response"])
 
     @parametrize
-    def test_raw_response_retrieve(self, client: Tradesignals) -> None:
+    def test_raw_response_retrieve(self, client: TradesignalsIo) -> None:
         response = client.darkpool.transactions.with_raw_response.retrieve(
             symbol="symbol",
         )
@@ -48,7 +48,7 @@ class TestTransactions:
         assert_matches_type(TransactionRetrieveResponse, transaction, path=["response"])
 
     @parametrize
-    def test_streaming_response_retrieve(self, client: Tradesignals) -> None:
+    def test_streaming_response_retrieve(self, client: TradesignalsIo) -> None:
         with client.darkpool.transactions.with_streaming_response.retrieve(
             symbol="symbol",
         ) as response:
@@ -61,19 +61,19 @@ class TestTransactions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: Tradesignals) -> None:
+    def test_path_params_retrieve(self, client: TradesignalsIo) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `symbol` but received ''"):
             client.darkpool.transactions.with_raw_response.retrieve(
                 symbol="",
             )
 
     @parametrize
-    def test_method_list(self, client: Tradesignals) -> None:
+    def test_method_list(self, client: TradesignalsIo) -> None:
         transaction = client.darkpool.transactions.list()
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
     @parametrize
-    def test_method_list_with_all_params(self, client: Tradesignals) -> None:
+    def test_method_list_with_all_params(self, client: TradesignalsIo) -> None:
         transaction = client.darkpool.transactions.list(
             date=parse_date("2019-12-27"),
             symbol="symbol",
@@ -81,7 +81,7 @@ class TestTransactions:
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
     @parametrize
-    def test_raw_response_list(self, client: Tradesignals) -> None:
+    def test_raw_response_list(self, client: TradesignalsIo) -> None:
         response = client.darkpool.transactions.with_raw_response.list()
 
         assert response.is_closed is True
@@ -90,7 +90,7 @@ class TestTransactions:
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
     @parametrize
-    def test_streaming_response_list(self, client: Tradesignals) -> None:
+    def test_streaming_response_list(self, client: TradesignalsIo) -> None:
         with client.darkpool.transactions.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -105,14 +105,14 @@ class TestAsyncTransactions:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         transaction = await async_client.darkpool.transactions.retrieve(
             symbol="symbol",
         )
         assert_matches_type(TransactionRetrieveResponse, transaction, path=["response"])
 
     @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignalsIo) -> None:
         transaction = await async_client.darkpool.transactions.retrieve(
             symbol="symbol",
             date=parse_date("2019-12-27"),
@@ -120,7 +120,7 @@ class TestAsyncTransactions:
         assert_matches_type(TransactionRetrieveResponse, transaction, path=["response"])
 
     @parametrize
-    async def test_raw_response_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_raw_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         response = await async_client.darkpool.transactions.with_raw_response.retrieve(
             symbol="symbol",
         )
@@ -131,7 +131,7 @@ class TestAsyncTransactions:
         assert_matches_type(TransactionRetrieveResponse, transaction, path=["response"])
 
     @parametrize
-    async def test_streaming_response_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_streaming_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         async with async_client.darkpool.transactions.with_streaming_response.retrieve(
             symbol="symbol",
         ) as response:
@@ -144,19 +144,19 @@ class TestAsyncTransactions:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncTradesignals) -> None:
+    async def test_path_params_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `symbol` but received ''"):
             await async_client.darkpool.transactions.with_raw_response.retrieve(
                 symbol="",
             )
 
     @parametrize
-    async def test_method_list(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_list(self, async_client: AsyncTradesignalsIo) -> None:
         transaction = await async_client.darkpool.transactions.list()
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncTradesignalsIo) -> None:
         transaction = await async_client.darkpool.transactions.list(
             date=parse_date("2019-12-27"),
             symbol="symbol",
@@ -164,7 +164,7 @@ class TestAsyncTransactions:
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncTradesignals) -> None:
+    async def test_raw_response_list(self, async_client: AsyncTradesignalsIo) -> None:
         response = await async_client.darkpool.transactions.with_raw_response.list()
 
         assert response.is_closed is True
@@ -173,7 +173,7 @@ class TestAsyncTransactions:
         assert_matches_type(TransactionListResponse, transaction, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncTradesignals) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncTradesignalsIo) -> None:
         async with async_client.darkpool.transactions.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

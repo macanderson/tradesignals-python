@@ -1,11 +1,11 @@
 [project]
 name = "tradesignals"
 version = "0.1.0-alpha.1"
-description = "The official Python library for the tradesignals API"
+description = "The official Python library for the Tradesignals.io API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Tradesignals", email = "dev-feedback@tradesignals.com" },
+{ name = "Tradesignals Io", email = "hello@tradesignals.com" },
 ]
 dependencies = [
     "httpx>=0.23.0, <1",

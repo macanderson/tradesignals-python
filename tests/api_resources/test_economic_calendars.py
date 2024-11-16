@@ -8,7 +8,7 @@ from typing import Any, cast
 import pytest
 
 from tests.utils import assert_matches_type
-from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals import TradesignalsIo, AsyncTradesignalsIo
 from tradesignals.types import EconomicCalendarListResponse
 from tradesignals._utils import parse_date
 
@@ -19,12 +19,12 @@ class TestEconomicCalendars:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_list(self, client: Tradesignals) -> None:
+    def test_method_list(self, client: TradesignalsIo) -> None:
         economic_calendar = client.economic_calendars.list()
         assert_matches_type(EconomicCalendarListResponse, economic_calendar, path=["response"])
 
     @parametrize
-    def test_method_list_with_all_params(self, client: Tradesignals) -> None:
+    def test_method_list_with_all_params(self, client: TradesignalsIo) -> None:
         economic_calendar = client.economic_calendars.list(
             country="US",
             end_date=parse_date("2019-12-27"),
@@ -33,7 +33,7 @@ class TestEconomicCalendars:
         assert_matches_type(EconomicCalendarListResponse, economic_calendar, path=["response"])
 
     @parametrize
-    def test_raw_response_list(self, client: Tradesignals) -> None:
+    def test_raw_response_list(self, client: TradesignalsIo) -> None:
         response = client.economic_calendars.with_raw_response.list()
 
         assert response.is_closed is True
@@ -42,7 +42,7 @@ class TestEconomicCalendars:
         assert_matches_type(EconomicCalendarListResponse, economic_calendar, path=["response"])
 
     @parametrize
-    def test_streaming_response_list(self, client: Tradesignals) -> None:
+    def test_streaming_response_list(self, client: TradesignalsIo) -> None:
         with client.economic_calendars.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -57,12 +57,12 @@ class TestAsyncEconomicCalendars:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_list(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_list(self, async_client: AsyncTradesignalsIo) -> None:
         economic_calendar = await async_client.economic_calendars.list()
         assert_matches_type(EconomicCalendarListResponse, economic_calendar, path=["response"])
 
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncTradesignals) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncTradesignalsIo) -> None:
         economic_calendar = await async_client.economic_calendars.list(
             country="US",
             end_date=parse_date("2019-12-27"),
@@ -71,7 +71,7 @@ class TestAsyncEconomicCalendars:
         assert_matches_type(EconomicCalendarListResponse, economic_calendar, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncTradesignals) -> None:
+    async def test_raw_response_list(self, async_client: AsyncTradesignalsIo) -> None:
         response = await async_client.economic_calendars.with_raw_response.list()
 
         assert response.is_closed is True
@@ -80,7 +80,7 @@ class TestAsyncEconomicCalendars:
         assert_matches_type(EconomicCalendarListResponse, economic_calendar, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncTradesignals) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncTradesignalsIo) -> None:
         async with async_client.economic_calendars.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

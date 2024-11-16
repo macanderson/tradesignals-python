@@ -16,11 +16,17 @@ before making any information public.
 ## Reporting Non-SDK Related Security Issues
 
 If you encounter security issues that are not directly related to SDKs but pertain to the services
-or products provided by Tradesignals please follow the respective company's security reporting guidelines.
+or products provided by Tradesignals Io please follow the respective company's security reporting guidelines.
 
-### Tradesignals Terms and Policies
+### Tradesignals Io Terms and Policies
 
-Please contact dev-feedback@tradesignals.com for any questions or concerns regarding security of our services.
+Our Security Policy can be found at [Security Policy URL](https://tradesignals.io/security-policy).
+
+Please contact hello@tradesignals.com for any questions or concerns regarding security of our services.
+
+### DISCLAIMER
+
+THE TRADESIGNALS PLATFORM AND THIRD-PARTY DATA ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS ONLY, AND TRADESIGNALS AND THE THIRD-PARTY PROVIDERS DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, STATUTORY OR OTHERWISE, INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT OF THIRD-PARTY RIGHTS. NEITHER TRADESIGNALS NOR ANY THIRD-PARTY PROVIDER WARRANTS THE ACCURACY, ADEQUACY, OR COMPLETENESS OF ANY THIRD-PARTY DATA OR THE RESULTS THAT MAY BE OBTAINED FROM THE USE OF SUCH THIRD-PARTY DATA. TRADESIGNALS DOES NOT WARRANT THAT THE OVERALL SYSTEM THAT MAKES THE PLATFORM AVAILABLE (INCLUDING BUT NOT LIMITED TO THE INTERNET, OTHER TRANSMISSION NETWORKS, AND CUSTOMER'S LOCAL NETWORK AND EQUIPMENT) WILL BE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS OR THAT THE USE OF THE PLATFORM WILL BE UNINTERRUPTED OR ERROR FREE. CUSTOMER ASSUMES ALL RESPONSIBILITY FOR DETERMINING WHETHER THE PLATFORM AND ANY THIRD-PARTY DATA MADE ACCESSIBLE THROUGH THE PLATFORM ARE SUFFICIENT FOR CUSTOMER'S PURPOSES.
 
 ---
 

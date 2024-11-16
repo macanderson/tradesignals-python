@@ -1,8 +1,8 @@
-# Tradesignals Python API library
+# Tradesignals API Client API library
 
 [![PyPI version](https://img.shields.io/pypi/v/tradesignals.svg)](https://pypi.org/project/tradesignals/)
 
-The Tradesignals Python library provides convenient access to the Tradesignals REST API from any Python 3.8+
+The Tradesignals API Client library provides convenient access to the Tradesignals Io REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -15,12 +15,9 @@ The REST API documentation can be found on [docs.tradesignals.com](https://docs.
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/macanderson/tradesignals-python.git
+# install from PyPI
+pip install --pre tradesignals
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre tradesignals`
 
 ## Usage
 
@@ -28,38 +25,42 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from tradesignals import Tradesignals
+from tradesignals import TradesignalsIo
 
-client = Tradesignals(
-    api_key=os.environ.get("UNUSUALWHALES_API_KEY"),  # This is the default and can be omitted
+client = TradesignalsIo(
+    api_key=os.environ.get("TRADESIGNALS_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.stocks.post()
-print(response.results)
+chain = client.options.chain.retrieve(
+    symbol="AAPL",
+)
+print(chain.option_chain)
 ```
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `UNUSUALWHALES_API_KEY="My API Key"` to your `.env` file
+to add `TRADESIGNALS_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncTradesignals` instead of `Tradesignals` and use `await` with each API call:
+Simply import `AsyncTradesignalsIo` instead of `TradesignalsIo` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from tradesignals import AsyncTradesignals
+from tradesignals import AsyncTradesignalsIo
 
-client = AsyncTradesignals(
-    api_key=os.environ.get("UNUSUALWHALES_API_KEY"),  # This is the default and can be omitted
+client = AsyncTradesignalsIo(
+    api_key=os.environ.get("TRADESIGNALS_API_KEY"),  # This is the default and can be omitted
 )
 
 
 async def main() -> None:
-    response = await client.stocks.post()
-    print(response.results)
+    chain = await client.options.chain.retrieve(
+        symbol="AAPL",
+    )
+    print(chain.option_chain)
 
 
 asyncio.run(main())
@@ -87,12 +88,12 @@ All errors inherit from `tradesignals.APIError`.
 
 ```python
 import tradesignals
-from tradesignals import Tradesignals
+from tradesignals import TradesignalsIo
 
-client = Tradesignals()
+client = TradesignalsIo()
 
 try:
-    client.stocks.post()
+    client.economic_calendars.list()
 except tradesignals.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -126,16 +127,16 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from tradesignals import Tradesignals
+from tradesignals import TradesignalsIo
 
 # Configure the default for all requests:
-client = Tradesignals(
+client = TradesignalsIo(
     # default is 2
     max_retries=0,
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).stocks.post()
+client.with_options(max_retries=5).economic_calendars.list()
 ```
 
 ### Timeouts
@@ -144,21 +145,21 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from tradesignals import Tradesignals
+from tradesignals import TradesignalsIo
 
 # Configure the default for all requests:
-client = Tradesignals(
+client = TradesignalsIo(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = Tradesignals(
+client = TradesignalsIo(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).stocks.post()
+client.with_options(timeout=5.0).economic_calendars.list()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -171,10 +172,10 @@ Note that requests that time out are [retried twice by default](#retries).
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `TRADESIGNALS_LOG` to `debug`.
+You can enable logging by setting the environment variable `TRADESIGNALS_IO_LOG` to `debug`.
 
 ```shell
-$ export TRADESIGNALS_LOG=debug
+$ export TRADESIGNALS_IO_LOG=debug
 ```
 
 ### How to tell whether `None` means `null` or missing
@@ -194,14 +195,14 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from tradesignals import Tradesignals
+from tradesignals import TradesignalsIo
 
-client = Tradesignals()
-response = client.stocks.with_raw_response.post()
+client = TradesignalsIo()
+response = client.economic_calendars.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
-stock = response.parse()  # get the object that `stocks.post()` would have returned
-print(stock.results)
+economic_calendar = response.parse()  # get the object that `economic_calendars.list()` would have returned
+print(economic_calendar.events)
 ```
 
 These methods return an [`APIResponse`](https://github.com/macanderson/tradesignals-python/tree/main/src/tradesignals/_response.py) object.
@@ -215,7 +216,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.stocks.with_streaming_response.post() as response:
+with client.economic_calendars.with_streaming_response.list() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
@@ -268,10 +269,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
-from tradesignals import Tradesignals, DefaultHttpxClient
+from tradesignals import TradesignalsIo, DefaultHttpxClient
 
-client = Tradesignals(
-    # Or use the `TRADESIGNALS_BASE_URL` env var
+client = TradesignalsIo(
+    # Or use the `TRADESIGNALS_IO_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxies="http://my.test.proxy.example.com",
