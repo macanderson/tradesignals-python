@@ -29,35 +29,35 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.options import greekflow_list_params
-from ....types.options.greekflow_list_response import GreekflowListResponse
+from ....types.options import greek_flow_list_params
+from ....types.options.greek_flow_list_response import GreekFlowListResponse
 
-__all__ = ["GreekflowResource", "AsyncGreekflowResource"]
+__all__ = ["GreekFlowResource", "AsyncGreekFlowResource"]
 
 
-class GreekflowResource(SyncAPIResource):
+class GreekFlowResource(SyncAPIResource):
     @cached_property
     def expiry(self) -> ExpiryResource:
         return ExpiryResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> GreekflowResourceWithRawResponse:
+    def with_raw_response(self) -> GreekFlowResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return GreekflowResourceWithRawResponse(self)
+        return GreekFlowResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> GreekflowResourceWithStreamingResponse:
+    def with_streaming_response(self) -> GreekFlowResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return GreekflowResourceWithStreamingResponse(self)
+        return GreekFlowResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -72,7 +72,7 @@ class GreekflowResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GreekflowListResponse:
+    ) -> GreekFlowListResponse:
         """
         Retrieve options flow data with Greek calculations.
 
@@ -107,36 +107,36 @@ class GreekflowResource(SyncAPIResource):
                         "min_delta": min_delta,
                         "symbol": symbol,
                     },
-                    greekflow_list_params.GreekflowListParams,
+                    greek_flow_list_params.GreekFlowListParams,
                 ),
             ),
-            cast_to=GreekflowListResponse,
+            cast_to=GreekFlowListResponse,
         )
 
 
-class AsyncGreekflowResource(AsyncAPIResource):
+class AsyncGreekFlowResource(AsyncAPIResource):
     @cached_property
     def expiry(self) -> AsyncExpiryResource:
         return AsyncExpiryResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncGreekflowResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncGreekFlowResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncGreekflowResourceWithRawResponse(self)
+        return AsyncGreekFlowResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncGreekflowResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncGreekFlowResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncGreekflowResourceWithStreamingResponse(self)
+        return AsyncGreekFlowResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -151,7 +151,7 @@ class AsyncGreekflowResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> GreekflowListResponse:
+    ) -> GreekFlowListResponse:
         """
         Retrieve options flow data with Greek calculations.
 
@@ -186,60 +186,60 @@ class AsyncGreekflowResource(AsyncAPIResource):
                         "min_delta": min_delta,
                         "symbol": symbol,
                     },
-                    greekflow_list_params.GreekflowListParams,
+                    greek_flow_list_params.GreekFlowListParams,
                 ),
             ),
-            cast_to=GreekflowListResponse,
+            cast_to=GreekFlowListResponse,
         )
 
 
-class GreekflowResourceWithRawResponse:
-    def __init__(self, greekflow: GreekflowResource) -> None:
-        self._greekflow = greekflow
+class GreekFlowResourceWithRawResponse:
+    def __init__(self, greek_flow: GreekFlowResource) -> None:
+        self._greek_flow = greek_flow
 
         self.list = to_raw_response_wrapper(
-            greekflow.list,
+            greek_flow.list,
         )
 
     @cached_property
     def expiry(self) -> ExpiryResourceWithRawResponse:
-        return ExpiryResourceWithRawResponse(self._greekflow.expiry)
+        return ExpiryResourceWithRawResponse(self._greek_flow.expiry)
 
 
-class AsyncGreekflowResourceWithRawResponse:
-    def __init__(self, greekflow: AsyncGreekflowResource) -> None:
-        self._greekflow = greekflow
+class AsyncGreekFlowResourceWithRawResponse:
+    def __init__(self, greek_flow: AsyncGreekFlowResource) -> None:
+        self._greek_flow = greek_flow
 
         self.list = async_to_raw_response_wrapper(
-            greekflow.list,
+            greek_flow.list,
         )
 
     @cached_property
     def expiry(self) -> AsyncExpiryResourceWithRawResponse:
-        return AsyncExpiryResourceWithRawResponse(self._greekflow.expiry)
+        return AsyncExpiryResourceWithRawResponse(self._greek_flow.expiry)
 
 
-class GreekflowResourceWithStreamingResponse:
-    def __init__(self, greekflow: GreekflowResource) -> None:
-        self._greekflow = greekflow
+class GreekFlowResourceWithStreamingResponse:
+    def __init__(self, greek_flow: GreekFlowResource) -> None:
+        self._greek_flow = greek_flow
 
         self.list = to_streamed_response_wrapper(
-            greekflow.list,
+            greek_flow.list,
         )
 
     @cached_property
     def expiry(self) -> ExpiryResourceWithStreamingResponse:
-        return ExpiryResourceWithStreamingResponse(self._greekflow.expiry)
+        return ExpiryResourceWithStreamingResponse(self._greek_flow.expiry)
 
 
-class AsyncGreekflowResourceWithStreamingResponse:
-    def __init__(self, greekflow: AsyncGreekflowResource) -> None:
-        self._greekflow = greekflow
+class AsyncGreekFlowResourceWithStreamingResponse:
+    def __init__(self, greek_flow: AsyncGreekFlowResource) -> None:
+        self._greek_flow = greek_flow
 
         self.list = async_to_streamed_response_wrapper(
-            greekflow.list,
+            greek_flow.list,
         )
 
     @cached_property
     def expiry(self) -> AsyncExpiryResourceWithStreamingResponse:
-        return AsyncExpiryResourceWithStreamingResponse(self._greekflow.expiry)
+        return AsyncExpiryResourceWithStreamingResponse(self._greek_flow.expiry)
