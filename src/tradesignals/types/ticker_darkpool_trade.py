@@ -4,12 +4,12 @@ from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["DarkpoolTrade"]
+__all__ = ["TickerDarkpoolTrade"]
 
 
-class DarkpoolTrade(BaseModel):
+class TickerDarkpoolTrade(BaseModel):
     canceled: Optional[bool] = None
     """Whether the trade has been cancelled."""
 

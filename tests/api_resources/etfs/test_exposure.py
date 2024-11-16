@@ -3,110 +3,96 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Optional, cast
+from typing import Any, cast
 
 import pytest
 
 from tests.utils import assert_matches_type
 from tradesignals import TradesignalsIo, AsyncTradesignalsIo
-from tradesignals.types.etf import HoldingRetrieveResponse
+from tradesignals.types.etfs import EtfExposureResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestHoldings:
+class TestExposure:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_retrieve(self, client: TradesignalsIo) -> None:
-        holding = client.etf.holdings.retrieve(
-            "ticker",
+        exposure = client.etfs.exposure.retrieve(
+            "AAPL",
         )
-        assert_matches_type(Optional[HoldingRetrieveResponse], holding, path=["response"])
-
-    @parametrize
-    def test_method_retrieve_with_all_params(self, client: TradesignalsIo) -> None:
-        holding = client.etf.holdings.retrieve(
-            "ticker",
-        )
-        assert_matches_type(Optional[HoldingRetrieveResponse], holding, path=["response"])
+        assert_matches_type(EtfExposureResponse, exposure, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: TradesignalsIo) -> None:
-        response = client.etf.holdings.with_raw_response.retrieve(
-            "ticker",
+        response = client.etfs.exposure.with_raw_response.retrieve(
+            "AAPL",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        holding = response.parse()
-        assert_matches_type(Optional[HoldingRetrieveResponse], holding, path=["response"])
+        exposure = response.parse()
+        assert_matches_type(EtfExposureResponse, exposure, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: TradesignalsIo) -> None:
-        with client.etf.holdings.with_streaming_response.retrieve(
-            "ticker",
+        with client.etfs.exposure.with_streaming_response.retrieve(
+            "AAPL",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            holding = response.parse()
-            assert_matches_type(Optional[HoldingRetrieveResponse], holding, path=["response"])
+            exposure = response.parse()
+            assert_matches_type(EtfExposureResponse, exposure, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_retrieve(self, client: TradesignalsIo) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ticker` but received ''"):
-            client.etf.holdings.with_raw_response.retrieve(
+            client.etfs.exposure.with_raw_response.retrieve(
                 "",
             )
 
 
-class TestAsyncHoldings:
+class TestAsyncExposure:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
-        holding = await async_client.etf.holdings.retrieve(
-            "ticker",
+        exposure = await async_client.etfs.exposure.retrieve(
+            "AAPL",
         )
-        assert_matches_type(Optional[HoldingRetrieveResponse], holding, path=["response"])
-
-    @parametrize
-    async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignalsIo) -> None:
-        holding = await async_client.etf.holdings.retrieve(
-            "ticker",
-        )
-        assert_matches_type(Optional[HoldingRetrieveResponse], holding, path=["response"])
+        assert_matches_type(EtfExposureResponse, exposure, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
-        response = await async_client.etf.holdings.with_raw_response.retrieve(
-            "ticker",
+        response = await async_client.etfs.exposure.with_raw_response.retrieve(
+            "AAPL",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        holding = await response.parse()
-        assert_matches_type(Optional[HoldingRetrieveResponse], holding, path=["response"])
+        exposure = await response.parse()
+        assert_matches_type(EtfExposureResponse, exposure, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
-        async with async_client.etf.holdings.with_streaming_response.retrieve(
-            "ticker",
+        async with async_client.etfs.exposure.with_streaming_response.retrieve(
+            "AAPL",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            holding = await response.parse()
-            assert_matches_type(Optional[HoldingRetrieveResponse], holding, path=["response"])
+            exposure = await response.parse()
+            assert_matches_type(EtfExposureResponse, exposure, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ticker` but received ''"):
-            await async_client.etf.holdings.with_raw_response.retrieve(
+            await async_client.etfs.exposure.with_raw_response.retrieve(
                 "",
             )
