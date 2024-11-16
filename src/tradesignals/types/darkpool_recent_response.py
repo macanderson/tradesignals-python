@@ -6,10 +6,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["DarkpoolListResponse", "Trade"]
+__all__ = ["DarkpoolRecentResponse", "Data"]
 
 
-class Trade(BaseModel):
+class Data(BaseModel):
     canceled: Optional[bool] = None
     """Whether the trade has been cancelled."""
 
@@ -71,5 +71,5 @@ class Trade(BaseModel):
     """The volume of the ticker for the trading day."""
 
 
-class DarkpoolListResponse(BaseModel):
-    trades: Optional[List[Trade]] = None
+class DarkpoolRecentResponse(BaseModel):
+    data: Optional[List[Data]] = None

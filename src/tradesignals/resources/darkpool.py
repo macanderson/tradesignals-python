@@ -7,7 +7,7 @@ from datetime import date
 
 import httpx
 
-from ..types import darkpool_list_params, darkpool_retrieve_params
+from ..types import darkpool_recent_params, darkpool_ticker_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
@@ -22,8 +22,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.darkpool_list_response import DarkpoolListResponse
-from ..types.darkpool_retrieve_response import DarkpoolRetrieveResponse
+from ..types.darkpool_recent_response import DarkpoolRecentResponse
+from ..types.darkpool_ticker_response import DarkpoolTickerResponse
 
 __all__ = ["DarkpoolResource", "AsyncDarkpoolResource"]
 
@@ -48,7 +48,54 @@ class DarkpoolResource(SyncAPIResource):
         """
         return DarkpoolResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def recent(
+        self,
+        *,
+        date: Union[str, date] | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DarkpoolRecentResponse:
+        """
+        Returns recent Darkpool trades for all securities listed on either NASDAQ or
+        NYSE.
+
+        Args:
+          date: Date to filter darkpool transactions.
+
+          limit: How many items to return. Default is 100. Max is 200. Minimum is 1.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/api/darkpool/recent",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "date": date,
+                        "limit": limit,
+                    },
+                    darkpool_recent_params.DarkpoolRecentParams,
+                ),
+            ),
+            cast_to=DarkpoolRecentResponse,
+        )
+
+    def ticker(
         self,
         symbol: str,
         *,
@@ -62,7 +109,7 @@ class DarkpoolResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DarkpoolRetrieveResponse:
+    ) -> DarkpoolTickerResponse:
         """-> Returns the darkpool trades for the given ticker on a given day.
 
         Date must be
@@ -106,57 +153,10 @@ class DarkpoolResource(SyncAPIResource):
                         "newer_than": newer_than,
                         "older_than": older_than,
                     },
-                    darkpool_retrieve_params.DarkpoolRetrieveParams,
+                    darkpool_ticker_params.DarkpoolTickerParams,
                 ),
             ),
-            cast_to=DarkpoolRetrieveResponse,
-        )
-
-    def list(
-        self,
-        *,
-        date: Union[str, date] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DarkpoolListResponse:
-        """
-        Returns recent Darkpool trades for all securities listed on either NASDAQ or
-        NYSE.
-
-        Args:
-          date: Date to filter darkpool transactions.
-
-          limit: How many items to return. Default is 100. Max is 200. Minimum is 1.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            "/api/darkpool/recent",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform(
-                    {
-                        "date": date,
-                        "limit": limit,
-                    },
-                    darkpool_list_params.DarkpoolListParams,
-                ),
-            ),
-            cast_to=DarkpoolListResponse,
+            cast_to=DarkpoolTickerResponse,
         )
 
 
@@ -180,7 +180,54 @@ class AsyncDarkpoolResource(AsyncAPIResource):
         """
         return AsyncDarkpoolResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def recent(
+        self,
+        *,
+        date: Union[str, date] | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DarkpoolRecentResponse:
+        """
+        Returns recent Darkpool trades for all securities listed on either NASDAQ or
+        NYSE.
+
+        Args:
+          date: Date to filter darkpool transactions.
+
+          limit: How many items to return. Default is 100. Max is 200. Minimum is 1.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/api/darkpool/recent",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "date": date,
+                        "limit": limit,
+                    },
+                    darkpool_recent_params.DarkpoolRecentParams,
+                ),
+            ),
+            cast_to=DarkpoolRecentResponse,
+        )
+
+    async def ticker(
         self,
         symbol: str,
         *,
@@ -194,7 +241,7 @@ class AsyncDarkpoolResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DarkpoolRetrieveResponse:
+    ) -> DarkpoolTickerResponse:
         """-> Returns the darkpool trades for the given ticker on a given day.
 
         Date must be
@@ -238,57 +285,10 @@ class AsyncDarkpoolResource(AsyncAPIResource):
                         "newer_than": newer_than,
                         "older_than": older_than,
                     },
-                    darkpool_retrieve_params.DarkpoolRetrieveParams,
+                    darkpool_ticker_params.DarkpoolTickerParams,
                 ),
             ),
-            cast_to=DarkpoolRetrieveResponse,
-        )
-
-    async def list(
-        self,
-        *,
-        date: Union[str, date] | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DarkpoolListResponse:
-        """
-        Returns recent Darkpool trades for all securities listed on either NASDAQ or
-        NYSE.
-
-        Args:
-          date: Date to filter darkpool transactions.
-
-          limit: How many items to return. Default is 100. Max is 200. Minimum is 1.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            "/api/darkpool/recent",
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {
-                        "date": date,
-                        "limit": limit,
-                    },
-                    darkpool_list_params.DarkpoolListParams,
-                ),
-            ),
-            cast_to=DarkpoolListResponse,
+            cast_to=DarkpoolTickerResponse,
         )
 
 
@@ -296,11 +296,11 @@ class DarkpoolResourceWithRawResponse:
     def __init__(self, darkpool: DarkpoolResource) -> None:
         self._darkpool = darkpool
 
-        self.retrieve = to_raw_response_wrapper(
-            darkpool.retrieve,
+        self.recent = to_raw_response_wrapper(
+            darkpool.recent,
         )
-        self.list = to_raw_response_wrapper(
-            darkpool.list,
+        self.ticker = to_raw_response_wrapper(
+            darkpool.ticker,
         )
 
 
@@ -308,11 +308,11 @@ class AsyncDarkpoolResourceWithRawResponse:
     def __init__(self, darkpool: AsyncDarkpoolResource) -> None:
         self._darkpool = darkpool
 
-        self.retrieve = async_to_raw_response_wrapper(
-            darkpool.retrieve,
+        self.recent = async_to_raw_response_wrapper(
+            darkpool.recent,
         )
-        self.list = async_to_raw_response_wrapper(
-            darkpool.list,
+        self.ticker = async_to_raw_response_wrapper(
+            darkpool.ticker,
         )
 
 
@@ -320,11 +320,11 @@ class DarkpoolResourceWithStreamingResponse:
     def __init__(self, darkpool: DarkpoolResource) -> None:
         self._darkpool = darkpool
 
-        self.retrieve = to_streamed_response_wrapper(
-            darkpool.retrieve,
+        self.recent = to_streamed_response_wrapper(
+            darkpool.recent,
         )
-        self.list = to_streamed_response_wrapper(
-            darkpool.list,
+        self.ticker = to_streamed_response_wrapper(
+            darkpool.ticker,
         )
 
 
@@ -332,9 +332,9 @@ class AsyncDarkpoolResourceWithStreamingResponse:
     def __init__(self, darkpool: AsyncDarkpoolResource) -> None:
         self._darkpool = darkpool
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            darkpool.retrieve,
+        self.recent = async_to_streamed_response_wrapper(
+            darkpool.recent,
         )
-        self.list = async_to_streamed_response_wrapper(
-            darkpool.list,
+        self.ticker = async_to_streamed_response_wrapper(
+            darkpool.ticker,
         )
