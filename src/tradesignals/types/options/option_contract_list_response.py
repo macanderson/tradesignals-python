@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["ListContractListResponse", "Contract"]
+__all__ = ["OptionContractListResponse", "Contract"]
 
 
 class Contract(BaseModel):
@@ -19,5 +19,5 @@ class Contract(BaseModel):
     strike_price: Optional[float] = None
 
 
-class ListContractListResponse(BaseModel):
+class OptionContractListResponse(BaseModel):
     contracts: Optional[List[Contract]] = None

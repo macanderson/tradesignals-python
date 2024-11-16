@@ -133,17 +133,17 @@ Methods:
 
 - <code title="get /api/options/contract/{optionSymbol}">client.options.contract.<a href="./src/tradesignals/resources/options/contract.py">retrieve</a>(option_symbol) -> <a href="./src/tradesignals/types/options/contract_retrieve_response.py">ContractRetrieveResponse</a></code>
 
-## ListContracts
+## OptionContracts
 
 Types:
 
 ```python
-from tradesignals.types.options import ListContractListResponse
+from tradesignals.types.options import OptionContractListResponse
 ```
 
 Methods:
 
-- <code title="get /api/options/contracts">client.options.list_contracts.<a href="./src/tradesignals/resources/options/list_contracts.py">list</a>(\*\*<a href="src/tradesignals/types/options/list_contract_list_params.py">params</a>) -> <a href="./src/tradesignals/types/options/list_contract_list_response.py">ListContractListResponse</a></code>
+- <code title="get /api/options/contracts">client.options.option_contracts.<a href="./src/tradesignals/resources/options/option_contracts.py">list</a>(\*\*<a href="src/tradesignals/types/options/option_contract_list_params.py">params</a>) -> <a href="./src/tradesignals/types/options/option_contract_list_response.py">OptionContractListResponse</a></code>
 
 ## Flow
 
@@ -170,29 +170,29 @@ Methods:
 
 - <code title="get /api/options/total_volume">client.options.total_volume.<a href="./src/tradesignals/resources/options/total_volume.py">list</a>(\*\*<a href="src/tradesignals/types/options/total_volume_list_params.py">params</a>) -> <a href="./src/tradesignals/types/options/total_volume_list_response.py">TotalVolumeListResponse</a></code>
 
-## Greekflow
+## GreekFlow
 
 Types:
 
 ```python
-from tradesignals.types.options import GreekflowListResponse
+from tradesignals.types.options import GreekFlowListResponse
 ```
 
 Methods:
 
-- <code title="get /api/options/greekflow">client.options.greekflow.<a href="./src/tradesignals/resources/options/greekflow/greekflow.py">list</a>(\*\*<a href="src/tradesignals/types/options/greekflow_list_params.py">params</a>) -> <a href="./src/tradesignals/types/options/greekflow_list_response.py">GreekflowListResponse</a></code>
+- <code title="get /api/options/greekflow">client.options.greek_flow.<a href="./src/tradesignals/resources/options/greek_flow/greek_flow.py">list</a>(\*\*<a href="src/tradesignals/types/options/greek_flow_list_params.py">params</a>) -> <a href="./src/tradesignals/types/options/greek_flow_list_response.py">GreekFlowListResponse</a></code>
 
 ### Expiry
 
 Types:
 
 ```python
-from tradesignals.types.options.greekflow import ExpiryListResponse
+from tradesignals.types.options.greek_flow import ExpiryListResponse
 ```
 
 Methods:
 
-- <code title="get /api/options/greekflow/expiry">client.options.greekflow.expiry.<a href="./src/tradesignals/resources/options/greekflow/expiry.py">list</a>(\*\*<a href="src/tradesignals/types/options/greekflow/expiry_list_params.py">params</a>) -> <a href="./src/tradesignals/types/options/greekflow/expiry_list_response.py">ExpiryListResponse</a></code>
+- <code title="get /api/options/greekflow/expiry">client.options.greek_flow.expiry.<a href="./src/tradesignals/resources/options/greek_flow/expiry.py">list</a>(\*\*<a href="src/tradesignals/types/options/greek_flow/expiry_list_params.py">params</a>) -> <a href="./src/tradesignals/types/options/greek_flow/expiry_list_response.py">ExpiryListResponse</a></code>
 
 ## OiChange
 
@@ -219,6 +219,16 @@ Methods:
 - <code title="get /api/correlations">client.correlations.<a href="./src/tradesignals/resources/correlations.py">retrieve</a>(\*\*<a href="src/tradesignals/types/correlation_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/correlation_retrieve_response.py">CorrelationRetrieveResponse</a></code>
 
 # Stocks
+
+Types:
+
+```python
+from tradesignals.types import StockScreenerMethodResponse
+```
+
+Methods:
+
+- <code title="get /api/stocks/screener">client.stocks.<a href="./src/tradesignals/resources/stocks/stocks.py">screener_method</a>(\*\*<a href="src/tradesignals/types/stock_screener_method_params.py">params</a>) -> <a href="./src/tradesignals/types/stock_screener_method_response.py">StockScreenerMethodResponse</a></code>
 
 ## Price
 
@@ -314,7 +324,7 @@ from tradesignals.types.stocks import ScreenerRetrieveResponse
 
 Methods:
 
-- <code title="get /api/stocks/screener">client.stocks.screener.<a href="./src/tradesignals/resources/stocks/screener.py">retrieve</a>(\*\*<a href="src/tradesignals/types/stocks/screener_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/stocks/screener_retrieve_response.py">ScreenerRetrieveResponse</a></code>
+- <code title="post /api/stocks/screener">client.stocks.screener.<a href="./src/tradesignals/resources/stocks/screener.py">retrieve</a>(\*\*<a href="src/tradesignals/types/stocks/screener_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/stocks/screener_retrieve_response.py">ScreenerRetrieveResponse</a></code>
 
 # News
 
