@@ -21,8 +21,8 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.options.greek_flow import expiry_list_params
-from ....types.options.greek_flow.expiry_list_response import ExpiryListResponse
+from ....types.options.greekflow import expiry_list_params
+from ....types.options.greekflow.expiry_list_response import ExpiryListResponse
 
 __all__ = ["ExpiryResource", "AsyncExpiryResource"]
 

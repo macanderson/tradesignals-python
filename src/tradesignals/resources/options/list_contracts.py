@@ -22,31 +22,31 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.options import option_contract_list_params
-from ...types.options.option_contract_list_response import OptionContractListResponse
+from ...types.options import list_contract_list_params
+from ...types.options.list_contract_list_response import ListContractListResponse
 
-__all__ = ["OptionContractsResource", "AsyncOptionContractsResource"]
+__all__ = ["ListContractsResource", "AsyncListContractsResource"]
 
 
-class OptionContractsResource(SyncAPIResource):
+class ListContractsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> OptionContractsResourceWithRawResponse:
+    def with_raw_response(self) -> ListContractsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return OptionContractsResourceWithRawResponse(self)
+        return ListContractsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> OptionContractsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> ListContractsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return OptionContractsResourceWithStreamingResponse(self)
+        return ListContractsResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -61,7 +61,7 @@ class OptionContractsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptionContractListResponse:
+    ) -> ListContractListResponse:
         """Retrieve a list of option contracts based on specified filters.
 
         Filter by
@@ -98,32 +98,32 @@ class OptionContractsResource(SyncAPIResource):
                         "option_type": option_type,
                         "strike": strike,
                     },
-                    option_contract_list_params.OptionContractListParams,
+                    list_contract_list_params.ListContractListParams,
                 ),
             ),
-            cast_to=OptionContractListResponse,
+            cast_to=ListContractListResponse,
         )
 
 
-class AsyncOptionContractsResource(AsyncAPIResource):
+class AsyncListContractsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncOptionContractsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncListContractsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncOptionContractsResourceWithRawResponse(self)
+        return AsyncListContractsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncOptionContractsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncListContractsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncOptionContractsResourceWithStreamingResponse(self)
+        return AsyncListContractsResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -138,7 +138,7 @@ class AsyncOptionContractsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> OptionContractListResponse:
+    ) -> ListContractListResponse:
         """Retrieve a list of option contracts based on specified filters.
 
         Filter by
@@ -175,44 +175,44 @@ class AsyncOptionContractsResource(AsyncAPIResource):
                         "option_type": option_type,
                         "strike": strike,
                     },
-                    option_contract_list_params.OptionContractListParams,
+                    list_contract_list_params.ListContractListParams,
                 ),
             ),
-            cast_to=OptionContractListResponse,
+            cast_to=ListContractListResponse,
         )
 
 
-class OptionContractsResourceWithRawResponse:
-    def __init__(self, option_contracts: OptionContractsResource) -> None:
-        self._option_contracts = option_contracts
+class ListContractsResourceWithRawResponse:
+    def __init__(self, list_contracts: ListContractsResource) -> None:
+        self._list_contracts = list_contracts
 
         self.list = to_raw_response_wrapper(
-            option_contracts.list,
+            list_contracts.list,
         )
 
 
-class AsyncOptionContractsResourceWithRawResponse:
-    def __init__(self, option_contracts: AsyncOptionContractsResource) -> None:
-        self._option_contracts = option_contracts
+class AsyncListContractsResourceWithRawResponse:
+    def __init__(self, list_contracts: AsyncListContractsResource) -> None:
+        self._list_contracts = list_contracts
 
         self.list = async_to_raw_response_wrapper(
-            option_contracts.list,
+            list_contracts.list,
         )
 
 
-class OptionContractsResourceWithStreamingResponse:
-    def __init__(self, option_contracts: OptionContractsResource) -> None:
-        self._option_contracts = option_contracts
+class ListContractsResourceWithStreamingResponse:
+    def __init__(self, list_contracts: ListContractsResource) -> None:
+        self._list_contracts = list_contracts
 
         self.list = to_streamed_response_wrapper(
-            option_contracts.list,
+            list_contracts.list,
         )
 
 
-class AsyncOptionContractsResourceWithStreamingResponse:
-    def __init__(self, option_contracts: AsyncOptionContractsResource) -> None:
-        self._option_contracts = option_contracts
+class AsyncListContractsResourceWithStreamingResponse:
+    def __init__(self, list_contracts: AsyncListContractsResource) -> None:
+        self._list_contracts = list_contracts
 
         self.list = async_to_streamed_response_wrapper(
-            option_contracts.list,
+            list_contracts.list,
         )

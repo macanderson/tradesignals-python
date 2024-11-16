@@ -8,13 +8,13 @@ from .expiry import (
     ExpiryResourceWithStreamingResponse,
     AsyncExpiryResourceWithStreamingResponse,
 )
-from .greek_flow import (
-    GreekFlowResource,
-    AsyncGreekFlowResource,
-    GreekFlowResourceWithRawResponse,
-    AsyncGreekFlowResourceWithRawResponse,
-    GreekFlowResourceWithStreamingResponse,
-    AsyncGreekFlowResourceWithStreamingResponse,
+from .greekflow import (
+    GreekflowResource,
+    AsyncGreekflowResource,
+    GreekflowResourceWithRawResponse,
+    AsyncGreekflowResourceWithRawResponse,
+    GreekflowResourceWithStreamingResponse,
+    AsyncGreekflowResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -24,10 +24,10 @@ __all__ = [
     "AsyncExpiryResourceWithRawResponse",
     "ExpiryResourceWithStreamingResponse",
     "AsyncExpiryResourceWithStreamingResponse",
-    "GreekFlowResource",
-    "AsyncGreekFlowResource",
-    "GreekFlowResourceWithRawResponse",
-    "AsyncGreekFlowResourceWithRawResponse",
-    "GreekFlowResourceWithStreamingResponse",
-    "AsyncGreekFlowResourceWithStreamingResponse",
+    "GreekflowResource",
+    "AsyncGreekflowResource",
+    "GreekflowResourceWithRawResponse",
+    "AsyncGreekflowResourceWithRawResponse",
+    "GreekflowResourceWithStreamingResponse",
+    "AsyncGreekflowResourceWithStreamingResponse",
 ]
