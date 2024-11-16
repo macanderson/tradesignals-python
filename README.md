@@ -29,7 +29,7 @@ client = TradesignalsIo(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
 )
 
-ticker_darkpool_trades = client.darkpool.ticker_darkpool_trades.list(
+trades = client.darkpool.ticker_darkpool_trades.list(
     ticker="AAPL",
 )
 ```
@@ -54,7 +54,7 @@ client = AsyncTradesignalsIo(
 
 
 async def main() -> None:
-    ticker_darkpool_trades = await client.darkpool.ticker_darkpool_trades.list(
+    trades = await client.darkpool.ticker_darkpool_trades.list(
         ticker="AAPL",
     )
 

@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from ..trade import Trade
+from .etf_info import EtfInfo
 
-__all__ = ["TickerDarkpoolTradeListResponse"]
+__all__ = ["InformationRetrieveResponse"]
 
-TickerDarkpoolTradeListResponse: TypeAlias = List[Trade]
+InformationRetrieveResponse: TypeAlias = List[EtfInfo]
