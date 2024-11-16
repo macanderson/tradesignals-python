@@ -72,8 +72,22 @@ from .historical import (
     HistoricalResourceWithStreamingResponse,
     AsyncHistoricalResourceWithStreamingResponse,
 )
+from .correlations import (
+    CorrelationsResource,
+    AsyncCorrelationsResource,
+    CorrelationsResourceWithRawResponse,
+    AsyncCorrelationsResourceWithRawResponse,
+    CorrelationsResourceWithStreamingResponse,
+    AsyncCorrelationsResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "CorrelationsResource",
+    "AsyncCorrelationsResource",
+    "CorrelationsResourceWithRawResponse",
+    "AsyncCorrelationsResourceWithRawResponse",
+    "CorrelationsResourceWithStreamingResponse",
+    "AsyncCorrelationsResourceWithStreamingResponse",
     "PriceResource",
     "AsyncPriceResource",
     "PriceResourceWithRawResponse",
