@@ -22,6 +22,8 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.options_flow_list_response import OptionsFlowListResponse
+from ..types.options_flow_retrieve_response import OptionsFlowRetrieveResponse
 
 __all__ = ["OptionsFlowsResource", "AsyncOptionsFlowsResource"]
 
@@ -59,7 +61,7 @@ class OptionsFlowsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> OptionsFlowRetrieveResponse:
         """
         Retrieve options flow data for a specific symbol.
 
@@ -96,7 +98,7 @@ class OptionsFlowsResource(SyncAPIResource):
                     options_flow_retrieve_params.OptionsFlowRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=OptionsFlowRetrieveResponse,
         )
 
     def list(
@@ -112,7 +114,7 @@ class OptionsFlowsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> OptionsFlowListResponse:
         """Retrieve options flow data.
 
         Args:
@@ -151,7 +153,7 @@ class OptionsFlowsResource(SyncAPIResource):
                     options_flow_list_params.OptionsFlowListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=OptionsFlowListResponse,
         )
 
 
@@ -188,7 +190,7 @@ class AsyncOptionsFlowsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> OptionsFlowRetrieveResponse:
         """
         Retrieve options flow data for a specific symbol.
 
@@ -225,7 +227,7 @@ class AsyncOptionsFlowsResource(AsyncAPIResource):
                     options_flow_retrieve_params.OptionsFlowRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=OptionsFlowRetrieveResponse,
         )
 
     async def list(
@@ -241,7 +243,7 @@ class AsyncOptionsFlowsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> OptionsFlowListResponse:
         """Retrieve options flow data.
 
         Args:
@@ -280,7 +282,7 @@ class AsyncOptionsFlowsResource(AsyncAPIResource):
                     options_flow_list_params.OptionsFlowListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=OptionsFlowListResponse,
         )
 
 

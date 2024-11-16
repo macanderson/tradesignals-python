@@ -22,6 +22,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.options_open_interest_change_retrieve_response import OptionsOpenInterestChangeRetrieveResponse
 
 __all__ = ["OptionsOpenInterestChangesResource", "AsyncOptionsOpenInterestChangesResource"]
 
@@ -57,7 +58,7 @@ class OptionsOpenInterestChangesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> OptionsOpenInterestChangeRetrieveResponse:
         """
         Option open interest change data for a specific underlying symbol.
 
@@ -85,7 +86,7 @@ class OptionsOpenInterestChangesResource(SyncAPIResource):
                     {"date": date}, options_open_interest_change_retrieve_params.OptionsOpenInterestChangeRetrieveParams
                 ),
             ),
-            cast_to=object,
+            cast_to=OptionsOpenInterestChangeRetrieveResponse,
         )
 
 
@@ -120,7 +121,7 @@ class AsyncOptionsOpenInterestChangesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> OptionsOpenInterestChangeRetrieveResponse:
         """
         Option open interest change data for a specific underlying symbol.
 
@@ -148,7 +149,7 @@ class AsyncOptionsOpenInterestChangesResource(AsyncAPIResource):
                     {"date": date}, options_open_interest_change_retrieve_params.OptionsOpenInterestChangeRetrieveParams
                 ),
             ),
-            cast_to=object,
+            cast_to=OptionsOpenInterestChangeRetrieveResponse,
         )
 
 

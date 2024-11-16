@@ -22,6 +22,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.options_total_volume_list_response import OptionsTotalVolumeListResponse
 
 __all__ = ["OptionsTotalVolumesResource", "AsyncOptionsTotalVolumesResource"]
 
@@ -57,7 +58,7 @@ class OptionsTotalVolumesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> OptionsTotalVolumeListResponse:
         """
         Retrieve total options volume for all symbols or a specific symbol.
 
@@ -89,7 +90,7 @@ class OptionsTotalVolumesResource(SyncAPIResource):
                     options_total_volume_list_params.OptionsTotalVolumeListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=OptionsTotalVolumeListResponse,
         )
 
 
@@ -124,7 +125,7 @@ class AsyncOptionsTotalVolumesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> OptionsTotalVolumeListResponse:
         """
         Retrieve total options volume for all symbols or a specific symbol.
 
@@ -156,7 +157,7 @@ class AsyncOptionsTotalVolumesResource(AsyncAPIResource):
                     options_total_volume_list_params.OptionsTotalVolumeListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=OptionsTotalVolumeListResponse,
         )
 
 

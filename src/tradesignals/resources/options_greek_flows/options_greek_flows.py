@@ -30,6 +30,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.options_greek_flow_list_response import OptionsGreekFlowListResponse
 
 __all__ = ["OptionsGreekFlowsResource", "AsyncOptionsGreekFlowsResource"]
 
@@ -71,7 +72,7 @@ class OptionsGreekFlowsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> OptionsGreekFlowListResponse:
         """
         Retrieve options flow data with Greek calculations.
 
@@ -109,7 +110,7 @@ class OptionsGreekFlowsResource(SyncAPIResource):
                     options_greek_flow_list_params.OptionsGreekFlowListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=OptionsGreekFlowListResponse,
         )
 
 
@@ -150,7 +151,7 @@ class AsyncOptionsGreekFlowsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> OptionsGreekFlowListResponse:
         """
         Retrieve options flow data with Greek calculations.
 
@@ -188,7 +189,7 @@ class AsyncOptionsGreekFlowsResource(AsyncAPIResource):
                     options_greek_flow_list_params.OptionsGreekFlowListParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=OptionsGreekFlowListResponse,
         )
 
 

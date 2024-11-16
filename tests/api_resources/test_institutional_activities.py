@@ -9,6 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from tradesignals import Tradesignals, AsyncTradesignals
+from tradesignals.types import InstitutionalActivityListResponse
 from tradesignals._utils import parse_date
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -20,7 +21,7 @@ class TestInstitutionalActivities:
     @parametrize
     def test_method_list(self, client: Tradesignals) -> None:
         institutional_activity = client.institutional_activities.list()
-        assert_matches_type(object, institutional_activity, path=["response"])
+        assert_matches_type(InstitutionalActivityListResponse, institutional_activity, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Tradesignals) -> None:
@@ -29,7 +30,7 @@ class TestInstitutionalActivities:
             institution="BlackRock",
             symbol="AAPL",
         )
-        assert_matches_type(object, institutional_activity, path=["response"])
+        assert_matches_type(InstitutionalActivityListResponse, institutional_activity, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Tradesignals) -> None:
@@ -38,7 +39,7 @@ class TestInstitutionalActivities:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         institutional_activity = response.parse()
-        assert_matches_type(object, institutional_activity, path=["response"])
+        assert_matches_type(InstitutionalActivityListResponse, institutional_activity, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Tradesignals) -> None:
@@ -47,7 +48,7 @@ class TestInstitutionalActivities:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             institutional_activity = response.parse()
-            assert_matches_type(object, institutional_activity, path=["response"])
+            assert_matches_type(InstitutionalActivityListResponse, institutional_activity, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -58,7 +59,7 @@ class TestAsyncInstitutionalActivities:
     @parametrize
     async def test_method_list(self, async_client: AsyncTradesignals) -> None:
         institutional_activity = await async_client.institutional_activities.list()
-        assert_matches_type(object, institutional_activity, path=["response"])
+        assert_matches_type(InstitutionalActivityListResponse, institutional_activity, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncTradesignals) -> None:
@@ -67,7 +68,7 @@ class TestAsyncInstitutionalActivities:
             institution="BlackRock",
             symbol="AAPL",
         )
-        assert_matches_type(object, institutional_activity, path=["response"])
+        assert_matches_type(InstitutionalActivityListResponse, institutional_activity, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncTradesignals) -> None:
@@ -76,7 +77,7 @@ class TestAsyncInstitutionalActivities:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         institutional_activity = await response.parse()
-        assert_matches_type(object, institutional_activity, path=["response"])
+        assert_matches_type(InstitutionalActivityListResponse, institutional_activity, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncTradesignals) -> None:
@@ -85,6 +86,6 @@ class TestAsyncInstitutionalActivities:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             institutional_activity = await response.parse()
-            assert_matches_type(object, institutional_activity, path=["response"])
+            assert_matches_type(InstitutionalActivityListResponse, institutional_activity, path=["response"])
 
         assert cast(Any, response.is_closed) is True

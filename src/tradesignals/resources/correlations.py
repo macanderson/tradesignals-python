@@ -23,6 +23,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.correlation_retrieve_response import CorrelationRetrieveResponse
 
 __all__ = ["CorrelationsResource", "AsyncCorrelationsResource"]
 
@@ -60,7 +61,7 @@ class CorrelationsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> CorrelationRetrieveResponse:
         """Retrieve correlation data between different stocks or assets.
 
         Filter by optional
@@ -100,7 +101,7 @@ class CorrelationsResource(SyncAPIResource):
                     correlation_retrieve_params.CorrelationRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=CorrelationRetrieveResponse,
         )
 
 
@@ -137,7 +138,7 @@ class AsyncCorrelationsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> CorrelationRetrieveResponse:
         """Retrieve correlation data between different stocks or assets.
 
         Filter by optional
@@ -177,7 +178,7 @@ class AsyncCorrelationsResource(AsyncAPIResource):
                     correlation_retrieve_params.CorrelationRetrieveParams,
                 ),
             ),
-            cast_to=object,
+            cast_to=CorrelationRetrieveResponse,
         )
 
 
