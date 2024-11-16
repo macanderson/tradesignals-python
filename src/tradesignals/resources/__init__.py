@@ -80,14 +80,6 @@ from .insider_trades import (
     InsiderTradesResourceWithStreamingResponse,
     AsyncInsiderTradesResourceWithStreamingResponse,
 )
-from .spike_detections import (
-    SpikeDetectionsResource,
-    AsyncSpikeDetectionsResource,
-    SpikeDetectionsResourceWithRawResponse,
-    AsyncSpikeDetectionsResourceWithRawResponse,
-    SpikeDetectionsResourceWithStreamingResponse,
-    AsyncSpikeDetectionsResourceWithStreamingResponse,
-)
 from .economic_calendars import (
     EconomicCalendarsResource,
     AsyncEconomicCalendarsResource,
@@ -98,12 +90,6 @@ from .economic_calendars import (
 )
 
 __all__ = [
-    "SpikeDetectionsResource",
-    "AsyncSpikeDetectionsResource",
-    "SpikeDetectionsResourceWithRawResponse",
-    "AsyncSpikeDetectionsResourceWithRawResponse",
-    "SpikeDetectionsResourceWithStreamingResponse",
-    "AsyncSpikeDetectionsResourceWithStreamingResponse",
     "EconomicCalendarsResource",
     "AsyncEconomicCalendarsResource",
     "EconomicCalendarsResourceWithRawResponse",

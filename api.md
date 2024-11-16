@@ -1,15 +1,3 @@
-# SpikeDetections
-
-Types:
-
-```python
-from tradesignals.types import SpikeDetectionListResponse
-```
-
-Methods:
-
-- <code title="get /api/spike/detection">client.spike_detections.<a href="./src/tradesignals/resources/spike_detections.py">list</a>(\*\*<a href="src/tradesignals/types/spike_detection_list_params.py">params</a>) -> <a href="./src/tradesignals/types/spike_detection_list_response.py">SpikeDetectionListResponse</a></code>
-
 # EconomicCalendars
 
 Types:
