@@ -46,7 +46,7 @@ class OptionsGreekFlowsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/tradesignals-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
         return OptionsGreekFlowsResourceWithRawResponse(self)
 
@@ -55,7 +55,7 @@ class OptionsGreekFlowsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/tradesignals-python#with_streaming_response
+        For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
         return OptionsGreekFlowsResourceWithStreamingResponse(self)
 
@@ -125,7 +125,7 @@ class AsyncOptionsGreekFlowsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/tradesignals-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
         return AsyncOptionsGreekFlowsResourceWithRawResponse(self)
 
@@ -134,7 +134,7 @@ class AsyncOptionsGreekFlowsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/tradesignals-python#with_streaming_response
+        For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
         return AsyncOptionsGreekFlowsResourceWithStreamingResponse(self)
 
