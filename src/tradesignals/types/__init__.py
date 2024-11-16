@@ -2,5 +2,4 @@
 
 from __future__ import annotations
 
-from .ticker_darkpool_trade import TickerDarkpoolTrade as TickerDarkpoolTrade
-from .ticker_darkpool_response import TickerDarkpoolResponse as TickerDarkpoolResponse
+from .trade import Trade as Trade
