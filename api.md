@@ -419,13 +419,13 @@ Methods:
 Types:
 
 ```python
-from tradesignals.types import DarkpoolRetrieveResponse, DarkpoolListResponse
+from tradesignals.types import DarkpoolRecentResponse, DarkpoolTickerResponse
 ```
 
 Methods:
 
-- <code title="get /api/darkpool/{symbol}">client.darkpool.<a href="./src/tradesignals/resources/darkpool.py">retrieve</a>(symbol, \*\*<a href="src/tradesignals/types/darkpool_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool_retrieve_response.py">DarkpoolRetrieveResponse</a></code>
-- <code title="get /api/darkpool/recent">client.darkpool.<a href="./src/tradesignals/resources/darkpool.py">list</a>(\*\*<a href="src/tradesignals/types/darkpool_list_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool_list_response.py">DarkpoolListResponse</a></code>
+- <code title="get /api/darkpool/recent">client.darkpool.<a href="./src/tradesignals/resources/darkpool.py">recent</a>(\*\*<a href="src/tradesignals/types/darkpool_recent_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool_recent_response.py">DarkpoolRecentResponse</a></code>
+- <code title="get /api/darkpool/{symbol}">client.darkpool.<a href="./src/tradesignals/resources/darkpool.py">ticker</a>(symbol, \*\*<a href="src/tradesignals/types/darkpool_ticker_params.py">params</a>) -> <a href="./src/tradesignals/types/darkpool_ticker_response.py">DarkpoolTickerResponse</a></code>
 
 # Seasonality
 
