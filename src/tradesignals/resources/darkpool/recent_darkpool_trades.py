@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Type, Union, Optional, cast
 from datetime import date
 
 import httpx
@@ -20,6 +20,7 @@ from ..._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
 from ...types.darkpool import recent_darkpool_trade_retrieve_params
 from ...types.darkpool.recent_darkpool_trade_retrieve_response import RecentDarkpoolTradeRetrieveResponse
@@ -58,9 +59,9 @@ class RecentDarkpoolTradesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RecentDarkpoolTradeRetrieveResponse:
+    ) -> Optional[RecentDarkpoolTradeRetrieveResponse]:
         """
-        Returns recent Darkpool trades for all securities listed on either NASDAQ or
+        -> Returns recent Darkpool trades for all securities listed on either NASDAQ or
         NYSE.
 
         Args:
@@ -90,8 +91,11 @@ class RecentDarkpoolTradesResource(SyncAPIResource):
                     },
                     recent_darkpool_trade_retrieve_params.RecentDarkpoolTradeRetrieveParams,
                 ),
+                post_parser=DataWrapper[Optional[RecentDarkpoolTradeRetrieveResponse]]._unwrapper,
             ),
-            cast_to=RecentDarkpoolTradeRetrieveResponse,
+            cast_to=cast(
+                Type[Optional[RecentDarkpoolTradeRetrieveResponse]], DataWrapper[RecentDarkpoolTradeRetrieveResponse]
+            ),
         )
 
 
@@ -126,9 +130,9 @@ class AsyncRecentDarkpoolTradesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> RecentDarkpoolTradeRetrieveResponse:
+    ) -> Optional[RecentDarkpoolTradeRetrieveResponse]:
         """
-        Returns recent Darkpool trades for all securities listed on either NASDAQ or
+        -> Returns recent Darkpool trades for all securities listed on either NASDAQ or
         NYSE.
 
         Args:
@@ -158,8 +162,11 @@ class AsyncRecentDarkpoolTradesResource(AsyncAPIResource):
                     },
                     recent_darkpool_trade_retrieve_params.RecentDarkpoolTradeRetrieveParams,
                 ),
+                post_parser=DataWrapper[Optional[RecentDarkpoolTradeRetrieveResponse]]._unwrapper,
             ),
-            cast_to=RecentDarkpoolTradeRetrieveResponse,
+            cast_to=cast(
+                Type[Optional[RecentDarkpoolTradeRetrieveResponse]], DataWrapper[RecentDarkpoolTradeRetrieveResponse]
+            ),
         )
 
 

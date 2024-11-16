@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, cast
+from typing import Any, Optional, cast
 
 import pytest
 
@@ -21,7 +21,7 @@ class TestRecentDarkpoolTrades:
     @parametrize
     def test_method_retrieve(self, client: TradesignalsIo) -> None:
         recent_darkpool_trade = client.darkpool.recent_darkpool_trades.retrieve()
-        assert_matches_type(RecentDarkpoolTradeRetrieveResponse, recent_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[RecentDarkpoolTradeRetrieveResponse], recent_darkpool_trade, path=["response"])
 
     @parametrize
     def test_method_retrieve_with_all_params(self, client: TradesignalsIo) -> None:
@@ -29,7 +29,7 @@ class TestRecentDarkpoolTrades:
             date=parse_date("2019-12-27"),
             limit=0,
         )
-        assert_matches_type(RecentDarkpoolTradeRetrieveResponse, recent_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[RecentDarkpoolTradeRetrieveResponse], recent_darkpool_trade, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: TradesignalsIo) -> None:
@@ -38,7 +38,7 @@ class TestRecentDarkpoolTrades:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         recent_darkpool_trade = response.parse()
-        assert_matches_type(RecentDarkpoolTradeRetrieveResponse, recent_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[RecentDarkpoolTradeRetrieveResponse], recent_darkpool_trade, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: TradesignalsIo) -> None:
@@ -47,7 +47,7 @@ class TestRecentDarkpoolTrades:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             recent_darkpool_trade = response.parse()
-            assert_matches_type(RecentDarkpoolTradeRetrieveResponse, recent_darkpool_trade, path=["response"])
+            assert_matches_type(Optional[RecentDarkpoolTradeRetrieveResponse], recent_darkpool_trade, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -58,7 +58,7 @@ class TestAsyncRecentDarkpoolTrades:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         recent_darkpool_trade = await async_client.darkpool.recent_darkpool_trades.retrieve()
-        assert_matches_type(RecentDarkpoolTradeRetrieveResponse, recent_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[RecentDarkpoolTradeRetrieveResponse], recent_darkpool_trade, path=["response"])
 
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignalsIo) -> None:
@@ -66,7 +66,7 @@ class TestAsyncRecentDarkpoolTrades:
             date=parse_date("2019-12-27"),
             limit=0,
         )
-        assert_matches_type(RecentDarkpoolTradeRetrieveResponse, recent_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[RecentDarkpoolTradeRetrieveResponse], recent_darkpool_trade, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
@@ -75,7 +75,7 @@ class TestAsyncRecentDarkpoolTrades:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         recent_darkpool_trade = await response.parse()
-        assert_matches_type(RecentDarkpoolTradeRetrieveResponse, recent_darkpool_trade, path=["response"])
+        assert_matches_type(Optional[RecentDarkpoolTradeRetrieveResponse], recent_darkpool_trade, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
@@ -84,6 +84,6 @@ class TestAsyncRecentDarkpoolTrades:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             recent_darkpool_trade = await response.parse()
-            assert_matches_type(RecentDarkpoolTradeRetrieveResponse, recent_darkpool_trade, path=["response"])
+            assert_matches_type(Optional[RecentDarkpoolTradeRetrieveResponse], recent_darkpool_trade, path=["response"])
 
         assert cast(Any, response.is_closed) is True
