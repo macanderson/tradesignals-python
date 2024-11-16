@@ -336,7 +336,7 @@ class TestTradesignalsIo:
         assert request.headers.get("Authorization") == api_key
 
         with pytest.raises(TradesignalsIoError):
-            with update_env(**{"TRADESIGNALS_API_KEY": Omit()}):
+            with update_env(**{"TRADESIGNALS_TOKEN": Omit()}):
                 client2 = TradesignalsIo(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -555,6 +555,16 @@ class TestTradesignalsIo:
         with update_env(TRADESIGNALS_IO_BASE_URL="http://localhost:5000/from/env"):
             client = TradesignalsIo(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
+
+        # explicit environment arg requires explicitness
+        with update_env(TRADESIGNALS_IO_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                TradesignalsIo(api_key=api_key, _strict_response_validation=True, environment="production")
+
+            client = TradesignalsIo(
+                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
+            )
+            assert str(client.base_url).startswith("https://api.unusualwhales.com")
 
     @pytest.mark.parametrize(
         "client",
@@ -1102,7 +1112,7 @@ class TestAsyncTradesignalsIo:
         assert request.headers.get("Authorization") == api_key
 
         with pytest.raises(TradesignalsIoError):
-            with update_env(**{"TRADESIGNALS_API_KEY": Omit()}):
+            with update_env(**{"TRADESIGNALS_TOKEN": Omit()}):
                 client2 = AsyncTradesignalsIo(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
@@ -1321,6 +1331,16 @@ class TestAsyncTradesignalsIo:
         with update_env(TRADESIGNALS_IO_BASE_URL="http://localhost:5000/from/env"):
             client = AsyncTradesignalsIo(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
+
+        # explicit environment arg requires explicitness
+        with update_env(TRADESIGNALS_IO_BASE_URL="http://localhost:5000/from/env"):
+            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
+                AsyncTradesignalsIo(api_key=api_key, _strict_response_validation=True, environment="production")
+
+            client = AsyncTradesignalsIo(
+                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
+            )
+            assert str(client.base_url).startswith("https://api.unusualwhales.com")
 
     @pytest.mark.parametrize(
         "client",

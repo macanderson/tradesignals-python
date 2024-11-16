@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Union, Mapping
-from typing_extensions import Self, override
+from typing import Any, Dict, Union, Mapping, cast
+from typing_extensions import Self, Literal, override
 
 import httpx
 
@@ -33,6 +33,7 @@ from ._base_client import (
 )
 
 __all__ = [
+    "ENVIRONMENTS",
     "Timeout",
     "Transport",
     "ProxiesTypes",
@@ -43,6 +44,11 @@ __all__ = [
     "Client",
     "AsyncClient",
 ]
+
+ENVIRONMENTS: Dict[str, str] = {
+    "production": "https://api.unusualwhales.com",
+    "sandbox": "https://sandbox.tradesignals.io",
+}
 
 
 class TradesignalsIo(SyncAPIClient):
@@ -65,11 +71,14 @@ class TradesignalsIo(SyncAPIClient):
     # client options
     api_key: str
 
+    _environment: Literal["production", "sandbox"] | NotGiven
+
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        base_url: str | httpx.URL | None = None,
+        environment: Literal["production", "sandbox"] | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -90,20 +99,41 @@ class TradesignalsIo(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Tradesignals.io client instance.
 
-        This automatically infers the `api_key` argument from the `TRADESIGNALS_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `TRADESIGNALS_TOKEN` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("TRADESIGNALS_API_KEY")
+            api_key = os.environ.get("TRADESIGNALS_TOKEN")
         if api_key is None:
             raise TradesignalsIoError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the TRADESIGNALS_API_KEY environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the TRADESIGNALS_TOKEN environment variable"
             )
         self.api_key = api_key
 
-        if base_url is None:
-            base_url = os.environ.get("TRADESIGNALS_IO_BASE_URL")
-        if base_url is None:
-            base_url = f"https://api.unusualwhales.com"
+        self._environment = environment
+
+        base_url_env = os.environ.get("TRADESIGNALS_IO_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # cast required because mypy doesn't understand the type narrowing
+            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; The `TRADESIGNALS_IO_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                )
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
 
         super().__init__(
             version=__version__,
@@ -149,6 +179,7 @@ class TradesignalsIo(SyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": "false",
+            "Accepts": "text/json, text",
             **self._custom_headers,
         }
 
@@ -156,6 +187,7 @@ class TradesignalsIo(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        environment: Literal["production", "sandbox"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -191,6 +223,7 @@ class TradesignalsIo(SyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
+            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -257,11 +290,14 @@ class AsyncTradesignalsIo(AsyncAPIClient):
     # client options
     api_key: str
 
+    _environment: Literal["production", "sandbox"] | NotGiven
+
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        base_url: str | httpx.URL | None = None,
+        environment: Literal["production", "sandbox"] | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -282,20 +318,41 @@ class AsyncTradesignalsIo(AsyncAPIClient):
     ) -> None:
         """Construct a new async Tradesignals.io client instance.
 
-        This automatically infers the `api_key` argument from the `TRADESIGNALS_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `TRADESIGNALS_TOKEN` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("TRADESIGNALS_API_KEY")
+            api_key = os.environ.get("TRADESIGNALS_TOKEN")
         if api_key is None:
             raise TradesignalsIoError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the TRADESIGNALS_API_KEY environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the TRADESIGNALS_TOKEN environment variable"
             )
         self.api_key = api_key
 
-        if base_url is None:
-            base_url = os.environ.get("TRADESIGNALS_IO_BASE_URL")
-        if base_url is None:
-            base_url = f"https://api.unusualwhales.com"
+        self._environment = environment
+
+        base_url_env = os.environ.get("TRADESIGNALS_IO_BASE_URL")
+        if is_given(base_url) and base_url is not None:
+            # cast required because mypy doesn't understand the type narrowing
+            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
+        elif is_given(environment):
+            if base_url_env and base_url is not None:
+                raise ValueError(
+                    "Ambiguous URL; The `TRADESIGNALS_IO_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                )
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
+        elif base_url_env is not None:
+            base_url = base_url_env
+        else:
+            self._environment = environment = "production"
+
+            try:
+                base_url = ENVIRONMENTS[environment]
+            except KeyError as exc:
+                raise ValueError(f"Unknown environment: {environment}") from exc
 
         super().__init__(
             version=__version__,
@@ -341,6 +398,7 @@ class AsyncTradesignalsIo(AsyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": f"async:{get_async_library()}",
+            "Accepts": "text/json, text",
             **self._custom_headers,
         }
 
@@ -348,6 +406,7 @@ class AsyncTradesignalsIo(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
+        environment: Literal["production", "sandbox"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -383,6 +442,7 @@ class AsyncTradesignalsIo(AsyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
+            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
