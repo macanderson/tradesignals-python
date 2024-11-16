@@ -1,6 +1,6 @@
 # Tradesignals API library
 
-[![PyPI version](https://img.shields.io/pypi/v/tradesignals.svg)](https://pypi.org/project/tradesignals/)
+[![PyPI version](https://img.shields.io/pypi/v/tradesignals-python.svg)](https://pypi.org/project/tradesignals-python/)
 
 The Tradesignals library provides convenient access to the Tradesignals Io REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -16,7 +16,7 @@ The REST API documentation can be found on [docs.tradesignals.com](https://docs.
 
 ```sh
 # install from PyPI
-pip install --pre tradesignals
+pip install --pre tradesignals-python
 ```
 
 ## Usage
@@ -31,10 +31,10 @@ client = TradesignalsIo(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
 )
 
-response = client.etfs.holdings.holdings(
-    "ticker",
+ticker_darkpool_trade = client.darkpool.ticker_darkpool_trades.retrieve(
+    ticker="AAPL",
 )
-print(response.data)
+print(ticker_darkpool_trade.data)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -57,10 +57,10 @@ client = AsyncTradesignalsIo(
 
 
 async def main() -> None:
-    response = await client.etfs.holdings.holdings(
-        "ticker",
+    ticker_darkpool_trade = await client.darkpool.ticker_darkpool_trades.retrieve(
+        ticker="AAPL",
     )
-    print(response.data)
+    print(ticker_darkpool_trade.data)
 
 
 asyncio.run(main())
@@ -93,9 +93,7 @@ from tradesignals import TradesignalsIo
 client = TradesignalsIo()
 
 try:
-    client.etfs.holdings.holdings(
-        "ticker",
-    )
+    client.darkpool.recent_darkpool_trades.retrieve()
 except tradesignals.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -138,9 +136,7 @@ client = TradesignalsIo(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).etfs.holdings.holdings(
-    "ticker",
-)
+client.with_options(max_retries=5).darkpool.recent_darkpool_trades.retrieve()
 ```
 
 ### Timeouts
@@ -163,9 +159,7 @@ client = TradesignalsIo(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).etfs.holdings.holdings(
-    "ticker",
-)
+client.with_options(timeout=5.0).darkpool.recent_darkpool_trades.retrieve()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -218,13 +212,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from tradesignals import TradesignalsIo
 
 client = TradesignalsIo()
-response = client.etfs.holdings.with_raw_response.holdings(
-    "ticker",
-)
+response = client.darkpool.recent_darkpool_trades.with_raw_response.retrieve()
 print(response.headers.get('X-My-Header'))
 
-holding = response.parse()  # get the object that `etfs.holdings.holdings()` would have returned
-print(holding.data)
+recent_darkpool_trade = response.parse()  # get the object that `darkpool.recent_darkpool_trades.retrieve()` would have returned
+print(recent_darkpool_trade.data)
 ```
 
 These methods return an [`APIResponse`](https://github.com/macanderson/tradesignals-python/tree/main/src/tradesignals/_response.py) object.
@@ -238,9 +230,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.etfs.holdings.with_streaming_response.holdings(
-    "ticker",
-) as response:
+with client.darkpool.recent_darkpool_trades.with_streaming_response.retrieve() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

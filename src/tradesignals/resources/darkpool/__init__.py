@@ -16,6 +16,14 @@ from .recent_darkpool_trades import (
     RecentDarkpoolTradesResourceWithStreamingResponse,
     AsyncRecentDarkpoolTradesResourceWithStreamingResponse,
 )
+from .ticker_darkpool_trades import (
+    TickerDarkpoolTradesResource,
+    AsyncTickerDarkpoolTradesResource,
+    TickerDarkpoolTradesResourceWithRawResponse,
+    AsyncTickerDarkpoolTradesResourceWithRawResponse,
+    TickerDarkpoolTradesResourceWithStreamingResponse,
+    AsyncTickerDarkpoolTradesResourceWithStreamingResponse,
+)
 
 __all__ = [
     "RecentDarkpoolTradesResource",
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncRecentDarkpoolTradesResourceWithRawResponse",
     "RecentDarkpoolTradesResourceWithStreamingResponse",
     "AsyncRecentDarkpoolTradesResourceWithStreamingResponse",
+    "TickerDarkpoolTradesResource",
+    "AsyncTickerDarkpoolTradesResource",
+    "TickerDarkpoolTradesResourceWithRawResponse",
+    "AsyncTickerDarkpoolTradesResourceWithRawResponse",
+    "TickerDarkpoolTradesResourceWithStreamingResponse",
+    "AsyncTickerDarkpoolTradesResourceWithStreamingResponse",
     "DarkpoolResource",
     "AsyncDarkpoolResource",
     "DarkpoolResourceWithRawResponse",
