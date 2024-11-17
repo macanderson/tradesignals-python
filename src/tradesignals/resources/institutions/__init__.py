@@ -24,6 +24,14 @@ from .holdings import (
     HoldingsResourceWithStreamingResponse,
     AsyncHoldingsResourceWithStreamingResponse,
 )
+from .ownership import (
+    OwnershipResource,
+    AsyncOwnershipResource,
+    OwnershipResourceWithRawResponse,
+    AsyncOwnershipResourceWithRawResponse,
+    OwnershipResourceWithStreamingResponse,
+    AsyncOwnershipResourceWithStreamingResponse,
+)
 from .institutions import (
     InstitutionsResource,
     AsyncInstitutionsResource,
@@ -52,6 +60,12 @@ __all__ = [
     "AsyncSectorsResourceWithRawResponse",
     "SectorsResourceWithStreamingResponse",
     "AsyncSectorsResourceWithStreamingResponse",
+    "OwnershipResource",
+    "AsyncOwnershipResource",
+    "OwnershipResourceWithRawResponse",
+    "AsyncOwnershipResourceWithRawResponse",
+    "OwnershipResourceWithStreamingResponse",
+    "AsyncOwnershipResourceWithStreamingResponse",
     "InstitutionsResource",
     "AsyncInstitutionsResource",
     "InstitutionsResourceWithRawResponse",
