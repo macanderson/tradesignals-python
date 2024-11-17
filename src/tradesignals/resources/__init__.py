@@ -32,6 +32,14 @@ from .earnings import (
     EarningsResourceWithStreamingResponse,
     AsyncEarningsResourceWithStreamingResponse,
 )
+from .institutions import (
+    InstitutionsResource,
+    AsyncInstitutionsResource,
+    InstitutionsResourceWithRawResponse,
+    AsyncInstitutionsResourceWithRawResponse,
+    InstitutionsResourceWithStreamingResponse,
+    AsyncInstitutionsResourceWithStreamingResponse,
+)
 from .industry_groups import (
     IndustryGroupsResource,
     AsyncIndustryGroupsResource,
@@ -42,6 +50,12 @@ from .industry_groups import (
 )
 
 __all__ = [
+    "InstitutionsResource",
+    "AsyncInstitutionsResource",
+    "InstitutionsResourceWithRawResponse",
+    "AsyncInstitutionsResourceWithRawResponse",
+    "InstitutionsResourceWithStreamingResponse",
+    "AsyncInstitutionsResourceWithStreamingResponse",
     "EarningsResource",
     "AsyncEarningsResource",
     "EarningsResourceWithRawResponse",
