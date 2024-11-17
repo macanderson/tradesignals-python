@@ -1,3 +1,53 @@
+# Congress
+
+## RecentTrades
+
+Types:
+
+```python
+from tradesignals.types.congress import CongressionalTrade, RecentTradeListResponse
+```
+
+Methods:
+
+- <code title="get /api/congress/recent-trades">client.congress.recent_trades.<a href="./src/tradesignals/resources/congress/recent_trades.py">list</a>(\*\*<a href="src/tradesignals/types/congress/recent_trade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/recent_trade_list_response.py">Optional</a></code>
+
+## LateReports
+
+Types:
+
+```python
+from tradesignals.types.congress import LateCongressionalReport, LateReportListResponse
+```
+
+Methods:
+
+- <code title="get /api/congress/late-reports">client.congress.late_reports.<a href="./src/tradesignals/resources/congress/late_reports.py">list</a>(\*\*<a href="src/tradesignals/types/congress/late_report_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/late_report_list_response.py">Optional</a></code>
+
+## CongressTrader
+
+Types:
+
+```python
+from tradesignals.types.congress import CongressionalTraderReport
+```
+
+Methods:
+
+- <code title="get /api/congress/congress-trader">client.congress.congress_trader.<a href="./src/tradesignals/resources/congress/congress_trader.py">retrieve</a>(\*\*<a href="src/tradesignals/types/congress/congress_trader_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/late_congressional_report.py">LateCongressionalReport</a></code>
+
+## RecentReports
+
+Types:
+
+```python
+from tradesignals.types.congress import RecentCongressionalReport, RecentReportListResponse
+```
+
+Methods:
+
+- <code title="get /api/congress/recent-reports">client.congress.recent_reports.<a href="./src/tradesignals/resources/congress/recent_reports.py">list</a>(\*\*<a href="src/tradesignals/types/congress/recent_report_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/recent_report_list_response.py">Optional</a></code>
+
 # IndustryGroups
 
 Types:
