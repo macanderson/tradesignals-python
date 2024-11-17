@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+from .sectors import (
+    SectorsResource,
+    AsyncSectorsResource,
+    SectorsResourceWithRawResponse,
+    AsyncSectorsResourceWithRawResponse,
+    SectorsResourceWithStreamingResponse,
+    AsyncSectorsResourceWithStreamingResponse,
+)
 from .activity import (
     ActivityResource,
     AsyncActivityResource,
@@ -34,6 +42,10 @@ class InstitutionsResource(SyncAPIResource):
         return HoldingsResource(self._client)
 
     @cached_property
+    def sectors(self) -> SectorsResource:
+        return SectorsResource(self._client)
+
+    @cached_property
     def with_raw_response(self) -> InstitutionsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
@@ -61,6 +73,10 @@ class AsyncInstitutionsResource(AsyncAPIResource):
     @cached_property
     def holdings(self) -> AsyncHoldingsResource:
         return AsyncHoldingsResource(self._client)
+
+    @cached_property
+    def sectors(self) -> AsyncSectorsResource:
+        return AsyncSectorsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncInstitutionsResourceWithRawResponse:
@@ -94,6 +110,10 @@ class InstitutionsResourceWithRawResponse:
     def holdings(self) -> HoldingsResourceWithRawResponse:
         return HoldingsResourceWithRawResponse(self._institutions.holdings)
 
+    @cached_property
+    def sectors(self) -> SectorsResourceWithRawResponse:
+        return SectorsResourceWithRawResponse(self._institutions.sectors)
+
 
 class AsyncInstitutionsResourceWithRawResponse:
     def __init__(self, institutions: AsyncInstitutionsResource) -> None:
@@ -106,6 +126,10 @@ class AsyncInstitutionsResourceWithRawResponse:
     @cached_property
     def holdings(self) -> AsyncHoldingsResourceWithRawResponse:
         return AsyncHoldingsResourceWithRawResponse(self._institutions.holdings)
+
+    @cached_property
+    def sectors(self) -> AsyncSectorsResourceWithRawResponse:
+        return AsyncSectorsResourceWithRawResponse(self._institutions.sectors)
 
 
 class InstitutionsResourceWithStreamingResponse:
@@ -120,6 +144,10 @@ class InstitutionsResourceWithStreamingResponse:
     def holdings(self) -> HoldingsResourceWithStreamingResponse:
         return HoldingsResourceWithStreamingResponse(self._institutions.holdings)
 
+    @cached_property
+    def sectors(self) -> SectorsResourceWithStreamingResponse:
+        return SectorsResourceWithStreamingResponse(self._institutions.sectors)
+
 
 class AsyncInstitutionsResourceWithStreamingResponse:
     def __init__(self, institutions: AsyncInstitutionsResource) -> None:
@@ -132,3 +160,7 @@ class AsyncInstitutionsResourceWithStreamingResponse:
     @cached_property
     def holdings(self) -> AsyncHoldingsResourceWithStreamingResponse:
         return AsyncHoldingsResourceWithStreamingResponse(self._institutions.holdings)
+
+    @cached_property
+    def sectors(self) -> AsyncSectorsResourceWithStreamingResponse:
+        return AsyncSectorsResourceWithStreamingResponse(self._institutions.sectors)
