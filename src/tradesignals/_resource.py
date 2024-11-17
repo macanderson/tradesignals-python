@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING
 import anyio
 
 if TYPE_CHECKING:
-    from ._client import TradesignalsIo, AsyncTradesignalsIo
+    from ._client import Tradesignals, AsyncTradesignals
 
 
 class SyncAPIResource:
-    _client: TradesignalsIo
+    _client: Tradesignals
 
-    def __init__(self, client: TradesignalsIo) -> None:
+    def __init__(self, client: Tradesignals) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post
@@ -28,9 +28,9 @@ class SyncAPIResource:
 
 
 class AsyncAPIResource:
-    _client: AsyncTradesignalsIo
+    _client: AsyncTradesignals
 
-    def __init__(self, client: AsyncTradesignalsIo) -> None:
+    def __init__(self, client: AsyncTradesignals) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post

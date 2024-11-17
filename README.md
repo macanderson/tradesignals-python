@@ -2,7 +2,7 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/tradesignals-python.svg)](https://pypi.org/project/tradesignals-python/)
 
-The Tradesignals library provides convenient access to the Tradesignals Io REST API from any Python 3.8+
+The Tradesignals library provides convenient access to the Tradesignals REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -23,12 +23,12 @@ The full API of this library can be found in [api.md](api.md).
 
 ```python
 import os
-from tradesignals import TradesignalsIo
+from tradesignals import Tradesignals
 
-client = TradesignalsIo(
+client = Tradesignals(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
-    # or 'production' | 'test'; defaults to "production".
-    environment="live",
+    # defaults to "production".
+    environment="test",
 )
 
 trades = client.darkpool.ticker_darkpool_trades.list(
@@ -43,17 +43,17 @@ so that your API Key is not stored in source control.
 
 ## Async usage
 
-Simply import `AsyncTradesignalsIo` instead of `TradesignalsIo` and use `await` with each API call:
+Simply import `AsyncTradesignals` instead of `Tradesignals` and use `await` with each API call:
 
 ```python
 import os
 import asyncio
-from tradesignals import AsyncTradesignalsIo
+from tradesignals import AsyncTradesignals
 
-client = AsyncTradesignalsIo(
+client = AsyncTradesignals(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
-    # or 'production' | 'test'; defaults to "production".
-    environment="live",
+    # defaults to "production".
+    environment="test",
 )
 
 
@@ -88,9 +88,9 @@ All errors inherit from `tradesignals.APIError`.
 
 ```python
 import tradesignals
-from tradesignals import TradesignalsIo
+from tradesignals import Tradesignals
 
-client = TradesignalsIo()
+client = Tradesignals()
 
 try:
     client.darkpool.recent_darkpool_trades.list()
@@ -127,10 +127,10 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from tradesignals import TradesignalsIo
+from tradesignals import Tradesignals
 
 # Configure the default for all requests:
-client = TradesignalsIo(
+client = Tradesignals(
     # default is 2
     max_retries=0,
 )
@@ -145,16 +145,16 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
 
 ```python
-from tradesignals import TradesignalsIo
+from tradesignals import Tradesignals
 
 # Configure the default for all requests:
-client = TradesignalsIo(
+client = Tradesignals(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
-client = TradesignalsIo(
+client = Tradesignals(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
@@ -173,9 +173,9 @@ We automatically send the `Accepts` header set to `text/json, text`.
 If you need to, you can override it by setting default headers per-request or on the client object.
 
 ```python
-from tradesignals import TradesignalsIo
+from tradesignals import Tradesignals
 
-client = TradesignalsIo(
+client = Tradesignals(
     default_headers={"Accepts": "My-Custom-Value"},
 )
 ```
@@ -186,10 +186,10 @@ client = TradesignalsIo(
 
 We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
 
-You can enable logging by setting the environment variable `TRADESIGNALS_IO_LOG` to `debug`.
+You can enable logging by setting the environment variable `TRADESIGNALS_LOG` to `debug`.
 
 ```shell
-$ export TRADESIGNALS_IO_LOG=debug
+$ export TRADESIGNALS_LOG=debug
 ```
 
 ### How to tell whether `None` means `null` or missing
@@ -209,9 +209,9 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from tradesignals import TradesignalsIo
+from tradesignals import Tradesignals
 
-client = TradesignalsIo()
+client = Tradesignals()
 response = client.darkpool.recent_darkpool_trades.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
@@ -283,10 +283,10 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 - Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality
 
 ```python
-from tradesignals import TradesignalsIo, DefaultHttpxClient
+from tradesignals import Tradesignals, DefaultHttpxClient
 
-client = TradesignalsIo(
-    # Or use the `TRADESIGNALS_IO_BASE_URL` env var
+client = Tradesignals(
+    # Or use the `TRADESIGNALS_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
         proxies="http://my.test.proxy.example.com",
