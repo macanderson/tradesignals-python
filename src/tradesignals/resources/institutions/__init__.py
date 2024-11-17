@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .sectors import (
+    SectorsResource,
+    AsyncSectorsResource,
+    SectorsResourceWithRawResponse,
+    AsyncSectorsResourceWithRawResponse,
+    SectorsResourceWithStreamingResponse,
+    AsyncSectorsResourceWithStreamingResponse,
+)
 from .activity import (
     ActivityResource,
     AsyncActivityResource,
@@ -38,6 +46,12 @@ __all__ = [
     "AsyncHoldingsResourceWithRawResponse",
     "HoldingsResourceWithStreamingResponse",
     "AsyncHoldingsResourceWithStreamingResponse",
+    "SectorsResource",
+    "AsyncSectorsResource",
+    "SectorsResourceWithRawResponse",
+    "AsyncSectorsResourceWithRawResponse",
+    "SectorsResourceWithStreamingResponse",
+    "AsyncSectorsResourceWithStreamingResponse",
     "InstitutionsResource",
     "AsyncInstitutionsResource",
     "InstitutionsResourceWithRawResponse",
