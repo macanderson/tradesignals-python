@@ -52,6 +52,7 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class Tradesignals(SyncAPIClient):
+    earnings: resources.EarningsResource
     congress: resources.CongressResource
     industry_groups: resources.IndustryGroupsResource
     etf: resources.EtfResource
@@ -137,6 +138,7 @@ class Tradesignals(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.earnings = resources.EarningsResource(self)
         self.congress = resources.CongressResource(self)
         self.industry_groups = resources.IndustryGroupsResource(self)
         self.etf = resources.EtfResource(self)
@@ -253,6 +255,7 @@ class Tradesignals(SyncAPIClient):
 
 
 class AsyncTradesignals(AsyncAPIClient):
+    earnings: resources.AsyncEarningsResource
     congress: resources.AsyncCongressResource
     industry_groups: resources.AsyncIndustryGroupsResource
     etf: resources.AsyncEtfResource
@@ -338,6 +341,7 @@ class AsyncTradesignals(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.earnings = resources.AsyncEarningsResource(self)
         self.congress = resources.AsyncCongressResource(self)
         self.industry_groups = resources.AsyncIndustryGroupsResource(self)
         self.etf = resources.AsyncEtfResource(self)
@@ -455,6 +459,7 @@ class AsyncTradesignals(AsyncAPIClient):
 
 class TradesignalsWithRawResponse:
     def __init__(self, client: Tradesignals) -> None:
+        self.earnings = resources.EarningsResourceWithRawResponse(client.earnings)
         self.congress = resources.CongressResourceWithRawResponse(client.congress)
         self.industry_groups = resources.IndustryGroupsResourceWithRawResponse(client.industry_groups)
         self.etf = resources.EtfResourceWithRawResponse(client.etf)
@@ -463,6 +468,7 @@ class TradesignalsWithRawResponse:
 
 class AsyncTradesignalsWithRawResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
+        self.earnings = resources.AsyncEarningsResourceWithRawResponse(client.earnings)
         self.congress = resources.AsyncCongressResourceWithRawResponse(client.congress)
         self.industry_groups = resources.AsyncIndustryGroupsResourceWithRawResponse(client.industry_groups)
         self.etf = resources.AsyncEtfResourceWithRawResponse(client.etf)
@@ -471,6 +477,7 @@ class AsyncTradesignalsWithRawResponse:
 
 class TradesignalsWithStreamedResponse:
     def __init__(self, client: Tradesignals) -> None:
+        self.earnings = resources.EarningsResourceWithStreamingResponse(client.earnings)
         self.congress = resources.CongressResourceWithStreamingResponse(client.congress)
         self.industry_groups = resources.IndustryGroupsResourceWithStreamingResponse(client.industry_groups)
         self.etf = resources.EtfResourceWithStreamingResponse(client.etf)
@@ -479,6 +486,7 @@ class TradesignalsWithStreamedResponse:
 
 class AsyncTradesignalsWithStreamedResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
+        self.earnings = resources.AsyncEarningsResourceWithStreamingResponse(client.earnings)
         self.congress = resources.AsyncCongressResourceWithStreamingResponse(client.congress)
         self.industry_groups = resources.AsyncIndustryGroupsResourceWithStreamingResponse(client.industry_groups)
         self.etf = resources.AsyncEtfResourceWithStreamingResponse(client.etf)
