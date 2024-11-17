@@ -4,10 +4,10 @@ from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["EtfInfo"]
+__all__ = ["Info"]
 
 
-class EtfInfo(BaseModel):
+class Info(BaseModel):
     aum: Optional[str] = None
     """The total assets under management (AUM) of the ETF."""
 

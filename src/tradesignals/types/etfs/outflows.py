@@ -5,10 +5,10 @@ from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["EtfInOutflow"]
+__all__ = ["Outflows"]
 
 
-class EtfInOutflow(BaseModel):
+class Outflows(BaseModel):
     change: Optional[int] = None
     """The net in/outflow measured as volume."""
 

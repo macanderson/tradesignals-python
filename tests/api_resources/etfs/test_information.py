@@ -20,14 +20,14 @@ class TestInformation:
     @parametrize
     def test_method_retrieve(self, client: TradesignalsIo) -> None:
         information = client.etfs.information.retrieve(
-            "AAPL",
+            "ticker",
         )
         assert_matches_type(Optional[InformationRetrieveResponse], information, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: TradesignalsIo) -> None:
         response = client.etfs.information.with_raw_response.retrieve(
-            "AAPL",
+            "ticker",
         )
 
         assert response.is_closed is True
@@ -38,7 +38,7 @@ class TestInformation:
     @parametrize
     def test_streaming_response_retrieve(self, client: TradesignalsIo) -> None:
         with client.etfs.information.with_streaming_response.retrieve(
-            "AAPL",
+            "ticker",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -62,14 +62,14 @@ class TestAsyncInformation:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         information = await async_client.etfs.information.retrieve(
-            "AAPL",
+            "ticker",
         )
         assert_matches_type(Optional[InformationRetrieveResponse], information, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         response = await async_client.etfs.information.with_raw_response.retrieve(
-            "AAPL",
+            "ticker",
         )
 
         assert response.is_closed is True
@@ -80,7 +80,7 @@ class TestAsyncInformation:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncTradesignalsIo) -> None:
         async with async_client.etfs.information.with_streaming_response.retrieve(
-            "AAPL",
+            "ticker",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

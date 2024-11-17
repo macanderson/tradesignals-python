@@ -4,10 +4,10 @@ from typing import Optional
 
 from ..._models import BaseModel
 
-__all__ = ["EtfExposureData"]
+__all__ = ["Exposure"]
 
 
-class EtfExposureData(BaseModel):
+class Exposure(BaseModel):
     avg30_volume: Optional[str] = None
     """The average stock volume for the stock last 30 days."""
 

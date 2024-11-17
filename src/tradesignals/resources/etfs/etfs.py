@@ -36,6 +36,14 @@ from .inflows_outflows import (
     InflowsOutflowsResourceWithStreamingResponse,
     AsyncInflowsOutflowsResourceWithStreamingResponse,
 )
+from .sector_country_weights import (
+    SectorCountryWeightsResource,
+    AsyncSectorCountryWeightsResource,
+    SectorCountryWeightsResourceWithRawResponse,
+    AsyncSectorCountryWeightsResourceWithRawResponse,
+    SectorCountryWeightsResourceWithStreamingResponse,
+    AsyncSectorCountryWeightsResourceWithStreamingResponse,
+)
 
 __all__ = ["EtfsResource", "AsyncEtfsResource"]
 
@@ -56,6 +64,10 @@ class EtfsResource(SyncAPIResource):
     @cached_property
     def exposure(self) -> ExposureResource:
         return ExposureResource(self._client)
+
+    @cached_property
+    def sector_country_weights(self) -> SectorCountryWeightsResource:
+        return SectorCountryWeightsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> EtfsResourceWithRawResponse:
@@ -93,6 +105,10 @@ class AsyncEtfsResource(AsyncAPIResource):
     @cached_property
     def exposure(self) -> AsyncExposureResource:
         return AsyncExposureResource(self._client)
+
+    @cached_property
+    def sector_country_weights(self) -> AsyncSectorCountryWeightsResource:
+        return AsyncSectorCountryWeightsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncEtfsResourceWithRawResponse:
@@ -134,6 +150,10 @@ class EtfsResourceWithRawResponse:
     def exposure(self) -> ExposureResourceWithRawResponse:
         return ExposureResourceWithRawResponse(self._etfs.exposure)
 
+    @cached_property
+    def sector_country_weights(self) -> SectorCountryWeightsResourceWithRawResponse:
+        return SectorCountryWeightsResourceWithRawResponse(self._etfs.sector_country_weights)
+
 
 class AsyncEtfsResourceWithRawResponse:
     def __init__(self, etfs: AsyncEtfsResource) -> None:
@@ -154,6 +174,10 @@ class AsyncEtfsResourceWithRawResponse:
     @cached_property
     def exposure(self) -> AsyncExposureResourceWithRawResponse:
         return AsyncExposureResourceWithRawResponse(self._etfs.exposure)
+
+    @cached_property
+    def sector_country_weights(self) -> AsyncSectorCountryWeightsResourceWithRawResponse:
+        return AsyncSectorCountryWeightsResourceWithRawResponse(self._etfs.sector_country_weights)
 
 
 class EtfsResourceWithStreamingResponse:
@@ -176,6 +200,10 @@ class EtfsResourceWithStreamingResponse:
     def exposure(self) -> ExposureResourceWithStreamingResponse:
         return ExposureResourceWithStreamingResponse(self._etfs.exposure)
 
+    @cached_property
+    def sector_country_weights(self) -> SectorCountryWeightsResourceWithStreamingResponse:
+        return SectorCountryWeightsResourceWithStreamingResponse(self._etfs.sector_country_weights)
+
 
 class AsyncEtfsResourceWithStreamingResponse:
     def __init__(self, etfs: AsyncEtfsResource) -> None:
@@ -196,3 +224,7 @@ class AsyncEtfsResourceWithStreamingResponse:
     @cached_property
     def exposure(self) -> AsyncExposureResourceWithStreamingResponse:
         return AsyncExposureResourceWithStreamingResponse(self._etfs.exposure)
+
+    @cached_property
+    def sector_country_weights(self) -> AsyncSectorCountryWeightsResourceWithStreamingResponse:
+        return AsyncSectorCountryWeightsResourceWithStreamingResponse(self._etfs.sector_country_weights)

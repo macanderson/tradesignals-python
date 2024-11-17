@@ -5,7 +5,7 @@
 Types:
 
 ```python
-from tradesignals.types.etfs import EtfHolding, HoldingListResponse
+from tradesignals.types.etfs import Holdings, HoldingListResponse
 ```
 
 Methods:
@@ -17,7 +17,7 @@ Methods:
 Types:
 
 ```python
-from tradesignals.types.etfs import EtfInOutflow, InflowsOutflowListResponse
+from tradesignals.types.etfs import Outflows, InflowsOutflowListResponse
 ```
 
 Methods:
@@ -29,7 +29,7 @@ Methods:
 Types:
 
 ```python
-from tradesignals.types.etfs import EtfInfo, InformationRetrieveResponse
+from tradesignals.types.etfs import Info, InformationRetrieveResponse
 ```
 
 Methods:
@@ -41,12 +41,24 @@ Methods:
 Types:
 
 ```python
-from tradesignals.types.etfs import EtfExposureData, ExposureRetrieveResponse
+from tradesignals.types.etfs import Exposure, ExposureRetrieveResponse
 ```
 
 Methods:
 
 - <code title="get /api/etfs/{ticker}/exposure">client.etfs.exposure.<a href="./src/tradesignals/resources/etfs/exposure.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/etfs/exposure_retrieve_response.py">Optional</a></code>
+
+## SectorCountryWeights
+
+Types:
+
+```python
+from tradesignals.types.etfs import Weights
+```
+
+Methods:
+
+- <code title="get /api/etfs/{ticker}/weights">client.etfs.sector_country_weights.<a href="./src/tradesignals/resources/etfs/sector_country_weights.py">list</a>(ticker) -> <a href="./src/tradesignals/types/etfs/weights.py">Weights</a></code>
 
 # Darkpool
 

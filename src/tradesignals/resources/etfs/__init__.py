@@ -40,6 +40,14 @@ from .inflows_outflows import (
     InflowsOutflowsResourceWithStreamingResponse,
     AsyncInflowsOutflowsResourceWithStreamingResponse,
 )
+from .sector_country_weights import (
+    SectorCountryWeightsResource,
+    AsyncSectorCountryWeightsResource,
+    SectorCountryWeightsResourceWithRawResponse,
+    AsyncSectorCountryWeightsResourceWithRawResponse,
+    SectorCountryWeightsResourceWithStreamingResponse,
+    AsyncSectorCountryWeightsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "HoldingsResource",
@@ -66,6 +74,12 @@ __all__ = [
     "AsyncExposureResourceWithRawResponse",
     "ExposureResourceWithStreamingResponse",
     "AsyncExposureResourceWithStreamingResponse",
+    "SectorCountryWeightsResource",
+    "AsyncSectorCountryWeightsResource",
+    "SectorCountryWeightsResourceWithRawResponse",
+    "AsyncSectorCountryWeightsResourceWithRawResponse",
+    "SectorCountryWeightsResourceWithStreamingResponse",
+    "AsyncSectorCountryWeightsResourceWithStreamingResponse",
     "EtfsResource",
     "AsyncEtfsResource",
     "EtfsResourceWithRawResponse",
