@@ -1,3 +1,37 @@
+# Institutions
+
+## Activity
+
+Types:
+
+```python
+from tradesignals.types.institutions import (
+    InstitutionActivity,
+    InstitutionActivityResponse,
+    ActivityListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/institution/{name}/activity">client.institutions.activity.<a href="./src/tradesignals/resources/institutions/activity.py">list</a>(name, \*\*<a href="src/tradesignals/types/institutions/activity_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/activity_list_response.py">Optional</a></code>
+
+## Holdings
+
+Types:
+
+```python
+from tradesignals.types.institutions import (
+    InstitutionHolding,
+    InstitutionHoldingsResponse,
+    HoldingListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/institution/{name}/holdings">client.institutions.holdings.<a href="./src/tradesignals/resources/institutions/holdings.py">list</a>(name, \*\*<a href="src/tradesignals/types/institutions/holding_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/holding_list_response.py">Optional</a></code>
+
 # Earnings
 
 ## Afterhours
