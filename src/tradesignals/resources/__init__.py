@@ -8,6 +8,14 @@ from .etf import (
     EtfResourceWithStreamingResponse,
     AsyncEtfResourceWithStreamingResponse,
 )
+from .market import (
+    MarketResource,
+    AsyncMarketResource,
+    MarketResourceWithRawResponse,
+    AsyncMarketResourceWithRawResponse,
+    MarketResourceWithStreamingResponse,
+    AsyncMarketResourceWithStreamingResponse,
+)
 from .congress import (
     CongressResource,
     AsyncCongressResource,
@@ -50,6 +58,12 @@ from .industry_groups import (
 )
 
 __all__ = [
+    "MarketResource",
+    "AsyncMarketResource",
+    "MarketResourceWithRawResponse",
+    "AsyncMarketResourceWithRawResponse",
+    "MarketResourceWithStreamingResponse",
+    "AsyncMarketResourceWithStreamingResponse",
     "InstitutionsResource",
     "AsyncInstitutionsResource",
     "InstitutionsResourceWithRawResponse",

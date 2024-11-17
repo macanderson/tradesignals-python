@@ -1,4 +1,148 @@
+# Market
+
+## SectorEtfs
+
+Types:
+
+```python
+from tradesignals.types.market import SectorEtfEntry, SectorEtfsResponse, SectorEtfListResponse
+```
+
+Methods:
+
+- <code title="get /api/market/sector-etfs">client.market.sector_etfs.<a href="./src/tradesignals/resources/market/sector_etfs.py">list</a>() -> <a href="./src/tradesignals/types/market/sector_etf_list_response.py">Optional</a></code>
+
+## Spike
+
+Types:
+
+```python
+from tradesignals.types.market import SpikeEntry, SpikeResponse, SpikeListResponse
+```
+
+Methods:
+
+- <code title="get /api/market/spike">client.market.spike.<a href="./src/tradesignals/resources/market/spike.py">list</a>(\*\*<a href="src/tradesignals/types/market/spike_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/spike_list_response.py">Optional</a></code>
+
+## TotalOptionsVolume
+
+Types:
+
+```python
+from tradesignals.types.market import (
+    TotalOptionsVolumeEntry,
+    TotalOptionsVolumeResponse,
+    TotalOptionsVolumeListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/market/total-options-volume">client.market.total_options_volume.<a href="./src/tradesignals/resources/market/total_options_volume.py">list</a>(\*\*<a href="src/tradesignals/types/market/total_options_volume_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/total_options_volume_list_response.py">Optional</a></code>
+
+## EtfTide
+
+Types:
+
+```python
+from tradesignals.types.market import EtfTideEntry, EtfTideResponse, EtfTideListResponse
+```
+
+Methods:
+
+- <code title="get /api/market/{ticker}/etf-tide">client.market.etf_tide.<a href="./src/tradesignals/resources/market/etf_tide.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/market/etf_tide_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/etf_tide_list_response.py">Optional</a></code>
+
+## MarketTide
+
+Types:
+
+```python
+from tradesignals.types.market import MarketTideEntry, MarketTideResponse, MarketTideListResponse
+```
+
+Methods:
+
+- <code title="get /api/market/market-tide">client.market.market_tide.<a href="./src/tradesignals/resources/market/market_tide.py">list</a>(\*\*<a href="src/tradesignals/types/market/market_tide_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/market_tide_list_response.py">Optional</a></code>
+
+## OiChange
+
+Types:
+
+```python
+from tradesignals.types.market import OiChangeEntry, OiChangeResponse, OiChangeListResponse
+```
+
+Methods:
+
+- <code title="get /api/market/oi-change">client.market.oi_change.<a href="./src/tradesignals/resources/market/oi_change.py">list</a>(\*\*<a href="src/tradesignals/types/market/oi_change_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/oi_change_list_response.py">Optional</a></code>
+
+## InsiderBuySells
+
+Types:
+
+```python
+from tradesignals.types.market import (
+    InsiderBuySell,
+    InsiderBuySellsResponse,
+    InsiderBuySellListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/market/insider-buy-sells">client.market.insider_buy_sells.<a href="./src/tradesignals/resources/market/insider_buy_sells.py">list</a>(\*\*<a href="src/tradesignals/types/market/insider_buy_sell_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/insider_buy_sell_list_response.py">Optional</a></code>
+
+## Correlations
+
+Types:
+
+```python
+from tradesignals.types.market import Correlation, CorrelationsResponse, CorrelationListResponse
+```
+
+Methods:
+
+- <code title="get /api/market/correlations">client.market.correlations.<a href="./src/tradesignals/resources/market/correlations.py">list</a>(\*\*<a href="src/tradesignals/types/market/correlation_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/correlation_list_response.py">Optional</a></code>
+
+## EconomicCalendar
+
+Types:
+
+```python
+from tradesignals.types.market import (
+    EconomicCalendarEvent,
+    EconomicCalendarResponse,
+    EconomicCalendarListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/market/economic-calendar">client.market.economic_calendar.<a href="./src/tradesignals/resources/market/economic_calendar.py">list</a>() -> <a href="./src/tradesignals/types/market/economic_calendar_list_response.py">Optional</a></code>
+
+## FdaCalendar
+
+Types:
+
+```python
+from tradesignals.types.market import FdaCalendarEvent, FdaCalendarResponse, FdaCalendarListResponse
+```
+
+Methods:
+
+- <code title="get /api/market/fda-calendar">client.market.fda_calendar.<a href="./src/tradesignals/resources/market/fda_calendar.py">list</a>() -> <a href="./src/tradesignals/types/market/fda_calendar_list_response.py">Optional</a></code>
+
 # Institutions
+
+Types:
+
+```python
+from tradesignals.types import Institution, InstitutionsResponse, InstitutionListResponse
+```
+
+Methods:
+
+- <code title="get /api/institutions">client.institutions.<a href="./src/tradesignals/resources/institutions/institutions.py">list</a>(\*\*<a href="src/tradesignals/types/institution_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institution_list_response.py">Optional</a></code>
 
 ## Activity
 
