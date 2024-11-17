@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Literal, TypedDict
 
-__all__ = ["AnalystListParams"]
+__all__ = ["AnalystRatingListParams"]
 
 
-class AnalystListParams(TypedDict, total=False):
+class AnalystRatingListParams(TypedDict, total=False):
     action: Literal["initiated", "reiterated", "downgraded", "upgraded", "maintained"]
 
     limit: int

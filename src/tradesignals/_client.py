@@ -52,7 +52,8 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class Tradesignals(SyncAPIClient):
-    screener: resources.ScreenerResource
+    seasonality: resources.SeasonalityResource
+    screeners: resources.ScreenersResource
     option_trades: resources.OptionTradesResource
     option_contracts: resources.OptionContractsResource
     market: resources.MarketResource
@@ -143,7 +144,8 @@ class Tradesignals(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.screener = resources.ScreenerResource(self)
+        self.seasonality = resources.SeasonalityResource(self)
+        self.screeners = resources.ScreenersResource(self)
         self.option_trades = resources.OptionTradesResource(self)
         self.option_contracts = resources.OptionContractsResource(self)
         self.market = resources.MarketResource(self)
@@ -265,7 +267,8 @@ class Tradesignals(SyncAPIClient):
 
 
 class AsyncTradesignals(AsyncAPIClient):
-    screener: resources.AsyncScreenerResource
+    seasonality: resources.AsyncSeasonalityResource
+    screeners: resources.AsyncScreenersResource
     option_trades: resources.AsyncOptionTradesResource
     option_contracts: resources.AsyncOptionContractsResource
     market: resources.AsyncMarketResource
@@ -356,7 +359,8 @@ class AsyncTradesignals(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.screener = resources.AsyncScreenerResource(self)
+        self.seasonality = resources.AsyncSeasonalityResource(self)
+        self.screeners = resources.AsyncScreenersResource(self)
         self.option_trades = resources.AsyncOptionTradesResource(self)
         self.option_contracts = resources.AsyncOptionContractsResource(self)
         self.market = resources.AsyncMarketResource(self)
@@ -479,7 +483,8 @@ class AsyncTradesignals(AsyncAPIClient):
 
 class TradesignalsWithRawResponse:
     def __init__(self, client: Tradesignals) -> None:
-        self.screener = resources.ScreenerResourceWithRawResponse(client.screener)
+        self.seasonality = resources.SeasonalityResourceWithRawResponse(client.seasonality)
+        self.screeners = resources.ScreenersResourceWithRawResponse(client.screeners)
         self.option_trades = resources.OptionTradesResourceWithRawResponse(client.option_trades)
         self.option_contracts = resources.OptionContractsResourceWithRawResponse(client.option_contracts)
         self.market = resources.MarketResourceWithRawResponse(client.market)
@@ -493,7 +498,8 @@ class TradesignalsWithRawResponse:
 
 class AsyncTradesignalsWithRawResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
-        self.screener = resources.AsyncScreenerResourceWithRawResponse(client.screener)
+        self.seasonality = resources.AsyncSeasonalityResourceWithRawResponse(client.seasonality)
+        self.screeners = resources.AsyncScreenersResourceWithRawResponse(client.screeners)
         self.option_trades = resources.AsyncOptionTradesResourceWithRawResponse(client.option_trades)
         self.option_contracts = resources.AsyncOptionContractsResourceWithRawResponse(client.option_contracts)
         self.market = resources.AsyncMarketResourceWithRawResponse(client.market)
@@ -507,7 +513,8 @@ class AsyncTradesignalsWithRawResponse:
 
 class TradesignalsWithStreamedResponse:
     def __init__(self, client: Tradesignals) -> None:
-        self.screener = resources.ScreenerResourceWithStreamingResponse(client.screener)
+        self.seasonality = resources.SeasonalityResourceWithStreamingResponse(client.seasonality)
+        self.screeners = resources.ScreenersResourceWithStreamingResponse(client.screeners)
         self.option_trades = resources.OptionTradesResourceWithStreamingResponse(client.option_trades)
         self.option_contracts = resources.OptionContractsResourceWithStreamingResponse(client.option_contracts)
         self.market = resources.MarketResourceWithStreamingResponse(client.market)
@@ -521,7 +528,8 @@ class TradesignalsWithStreamedResponse:
 
 class AsyncTradesignalsWithStreamedResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
-        self.screener = resources.AsyncScreenerResourceWithStreamingResponse(client.screener)
+        self.seasonality = resources.AsyncSeasonalityResourceWithStreamingResponse(client.seasonality)
+        self.screeners = resources.AsyncScreenersResourceWithStreamingResponse(client.screeners)
         self.option_trades = resources.AsyncOptionTradesResourceWithStreamingResponse(client.option_trades)
         self.option_contracts = resources.AsyncOptionContractsResourceWithStreamingResponse(client.option_contracts)
         self.market = resources.AsyncMarketResourceWithStreamingResponse(client.market)

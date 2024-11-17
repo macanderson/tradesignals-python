@@ -5,6 +5,6 @@ from typing_extensions import TypeAlias
 
 from .hottest_chain_entry import HottestChainEntry
 
-__all__ = ["OptionContractListResponse"]
+__all__ = ["OptionFinderListResponse"]
 
-OptionContractListResponse: TypeAlias = List[HottestChainEntry]
+OptionFinderListResponse: TypeAlias = List[HottestChainEntry]
