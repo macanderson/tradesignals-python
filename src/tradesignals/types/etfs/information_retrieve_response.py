@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .etf_info import EtfInfo
+from .info import Info
 
 __all__ = ["InformationRetrieveResponse"]
 
-InformationRetrieveResponse: TypeAlias = List[EtfInfo]
+InformationRetrieveResponse: TypeAlias = List[Info]
