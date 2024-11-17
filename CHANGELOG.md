@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-alpha.4 (2024-11-17)
+
+Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
+
+### Features
+
+* **api:** update via SDK Studio ([#14](https://github.com/macanderson/tradesignals-python/issues/14)) ([e9931b8](https://github.com/macanderson/tradesignals-python/commit/e9931b81fe1b51fc3b87a4294c7817ff235964a8))
+* **api:** update via SDK Studio ([#16](https://github.com/macanderson/tradesignals-python/issues/16)) ([4b98f56](https://github.com/macanderson/tradesignals-python/commit/4b98f56c26d7bbf5c280ad2c49c564432db7c76c))
+* **api:** update via SDK Studio ([#17](https://github.com/macanderson/tradesignals-python/issues/17)) ([9c69f7b](https://github.com/macanderson/tradesignals-python/commit/9c69f7bb31c515155be9df1e0cb1b5ad2ca3a9ae))
+* **api:** update via SDK Studio ([#18](https://github.com/macanderson/tradesignals-python/issues/18)) ([d515f59](https://github.com/macanderson/tradesignals-python/commit/d515f59cbf87f51869184c272906325f5f341ede))
+* **api:** update via SDK Studio ([#19](https://github.com/macanderson/tradesignals-python/issues/19)) ([8758b1f](https://github.com/macanderson/tradesignals-python/commit/8758b1f792438ff98905166dc07cec85828f9d5c))
+* **api:** update via SDK Studio ([#20](https://github.com/macanderson/tradesignals-python/issues/20)) ([5b30a2a](https://github.com/macanderson/tradesignals-python/commit/5b30a2a18fd17f93a02f4f195f5cb6fb881e7cae))
+* **api:** update via SDK Studio ([#21](https://github.com/macanderson/tradesignals-python/issues/21)) ([0296019](https://github.com/macanderson/tradesignals-python/commit/029601973f8d847128b5e9a4df9eeb21d8409eca))
+
 ## 0.1.0-alpha.3 (2024-11-16)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
