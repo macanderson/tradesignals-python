@@ -8,6 +8,14 @@ from .etfs import (
     EtfsResourceWithStreamingResponse,
     AsyncEtfsResourceWithStreamingResponse,
 )
+from .congress import (
+    CongressResource,
+    AsyncCongressResource,
+    CongressResourceWithRawResponse,
+    AsyncCongressResourceWithRawResponse,
+    CongressResourceWithStreamingResponse,
+    AsyncCongressResourceWithStreamingResponse,
+)
 from .darkpool import (
     DarkpoolResource,
     AsyncDarkpoolResource,
@@ -26,6 +34,12 @@ from .industry_groups import (
 )
 
 __all__ = [
+    "CongressResource",
+    "AsyncCongressResource",
+    "CongressResourceWithRawResponse",
+    "AsyncCongressResourceWithRawResponse",
+    "CongressResourceWithStreamingResponse",
+    "AsyncCongressResourceWithStreamingResponse",
     "IndustryGroupsResource",
     "AsyncIndustryGroupsResource",
     "IndustryGroupsResourceWithRawResponse",
