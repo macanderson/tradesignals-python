@@ -54,7 +54,7 @@ ENVIRONMENTS: Dict[str, str] = {
 class Tradesignals(SyncAPIClient):
     congress: resources.CongressResource
     industry_groups: resources.IndustryGroupsResource
-    etfs: resources.EtfsResource
+    etf: resources.EtfResource
     darkpool: resources.DarkpoolResource
     with_raw_response: TradesignalsWithRawResponse
     with_streaming_response: TradesignalsWithStreamedResponse
@@ -139,7 +139,7 @@ class Tradesignals(SyncAPIClient):
 
         self.congress = resources.CongressResource(self)
         self.industry_groups = resources.IndustryGroupsResource(self)
-        self.etfs = resources.EtfsResource(self)
+        self.etf = resources.EtfResource(self)
         self.darkpool = resources.DarkpoolResource(self)
         self.with_raw_response = TradesignalsWithRawResponse(self)
         self.with_streaming_response = TradesignalsWithStreamedResponse(self)
@@ -255,7 +255,7 @@ class Tradesignals(SyncAPIClient):
 class AsyncTradesignals(AsyncAPIClient):
     congress: resources.AsyncCongressResource
     industry_groups: resources.AsyncIndustryGroupsResource
-    etfs: resources.AsyncEtfsResource
+    etf: resources.AsyncEtfResource
     darkpool: resources.AsyncDarkpoolResource
     with_raw_response: AsyncTradesignalsWithRawResponse
     with_streaming_response: AsyncTradesignalsWithStreamedResponse
@@ -340,7 +340,7 @@ class AsyncTradesignals(AsyncAPIClient):
 
         self.congress = resources.AsyncCongressResource(self)
         self.industry_groups = resources.AsyncIndustryGroupsResource(self)
-        self.etfs = resources.AsyncEtfsResource(self)
+        self.etf = resources.AsyncEtfResource(self)
         self.darkpool = resources.AsyncDarkpoolResource(self)
         self.with_raw_response = AsyncTradesignalsWithRawResponse(self)
         self.with_streaming_response = AsyncTradesignalsWithStreamedResponse(self)
@@ -457,7 +457,7 @@ class TradesignalsWithRawResponse:
     def __init__(self, client: Tradesignals) -> None:
         self.congress = resources.CongressResourceWithRawResponse(client.congress)
         self.industry_groups = resources.IndustryGroupsResourceWithRawResponse(client.industry_groups)
-        self.etfs = resources.EtfsResourceWithRawResponse(client.etfs)
+        self.etf = resources.EtfResourceWithRawResponse(client.etf)
         self.darkpool = resources.DarkpoolResourceWithRawResponse(client.darkpool)
 
 
@@ -465,7 +465,7 @@ class AsyncTradesignalsWithRawResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
         self.congress = resources.AsyncCongressResourceWithRawResponse(client.congress)
         self.industry_groups = resources.AsyncIndustryGroupsResourceWithRawResponse(client.industry_groups)
-        self.etfs = resources.AsyncEtfsResourceWithRawResponse(client.etfs)
+        self.etf = resources.AsyncEtfResourceWithRawResponse(client.etf)
         self.darkpool = resources.AsyncDarkpoolResourceWithRawResponse(client.darkpool)
 
 
@@ -473,7 +473,7 @@ class TradesignalsWithStreamedResponse:
     def __init__(self, client: Tradesignals) -> None:
         self.congress = resources.CongressResourceWithStreamingResponse(client.congress)
         self.industry_groups = resources.IndustryGroupsResourceWithStreamingResponse(client.industry_groups)
-        self.etfs = resources.EtfsResourceWithStreamingResponse(client.etfs)
+        self.etf = resources.EtfResourceWithStreamingResponse(client.etf)
         self.darkpool = resources.DarkpoolResourceWithStreamingResponse(client.darkpool)
 
 
@@ -481,7 +481,7 @@ class AsyncTradesignalsWithStreamedResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
         self.congress = resources.AsyncCongressResourceWithStreamingResponse(client.congress)
         self.industry_groups = resources.AsyncIndustryGroupsResourceWithStreamingResponse(client.industry_groups)
-        self.etfs = resources.AsyncEtfsResourceWithStreamingResponse(client.etfs)
+        self.etf = resources.AsyncEtfResourceWithStreamingResponse(client.etf)
         self.darkpool = resources.AsyncDarkpoolResourceWithStreamingResponse(client.darkpool)
 
 
