@@ -56,8 +56,22 @@ from .industry_groups import (
     IndustryGroupsResourceWithStreamingResponse,
     AsyncIndustryGroupsResourceWithStreamingResponse,
 )
+from .option_contract import (
+    OptionContractResource,
+    AsyncOptionContractResource,
+    OptionContractResourceWithRawResponse,
+    AsyncOptionContractResourceWithRawResponse,
+    OptionContractResourceWithStreamingResponse,
+    AsyncOptionContractResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "OptionContractResource",
+    "AsyncOptionContractResource",
+    "OptionContractResourceWithRawResponse",
+    "AsyncOptionContractResourceWithRawResponse",
+    "OptionContractResourceWithStreamingResponse",
+    "AsyncOptionContractResourceWithStreamingResponse",
     "MarketResource",
     "AsyncMarketResource",
     "MarketResourceWithRawResponse",

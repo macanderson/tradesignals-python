@@ -1,3 +1,61 @@
+# OptionContract
+
+## OptionChains
+
+Types:
+
+```python
+from tradesignals.types.option_contract import (
+    OptionContractsEntry,
+    OptionContractsResponse,
+    OptionChainListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/option-contracts">client.option_contract.option_chains.<a href="./src/tradesignals/resources/option_contract/option_chains.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/option_contract/option_chain_list_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contract/option_chain_list_response.py">Optional</a></code>
+
+## FlowData
+
+Types:
+
+```python
+from tradesignals.types.option_contract import FlowDataResponse, FlowDataRetrieveResponse
+```
+
+Methods:
+
+- <code title="get /api/option-contract/{id}/flow">client.option_contract.flow_data.<a href="./src/tradesignals/resources/option_contract/flow_data.py">retrieve</a>(id, \*\*<a href="src/tradesignals/types/option_contract/flow_data_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contract/flow_data_retrieve_response.py">Optional</a></code>
+
+## HistoricData
+
+Types:
+
+```python
+from tradesignals.types.option_contract import HistoricDataResponse, HistoricDataRetrieveResponse
+```
+
+Methods:
+
+- <code title="get /api/option-contract/{id}/historic">client.option_contract.historic_data.<a href="./src/tradesignals/resources/option_contract/historic_data.py">retrieve</a>(id, \*\*<a href="src/tradesignals/types/option_contract/historic_data_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contract/historic_data_retrieve_response.py">Optional</a></code>
+
+## ExpiryBreakdown
+
+Types:
+
+```python
+from tradesignals.types.option_contract import (
+    ExpiryBreakdownEntry,
+    ExpiryBreakdownResponse,
+    ExpiryBreakdownListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/expiry-breakdown">client.option_contract.expiry_breakdown.<a href="./src/tradesignals/resources/option_contract/expiry_breakdown.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/option_contract/expiry_breakdown_list_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contract/expiry_breakdown_list_response.py">Optional</a></code>
+
 # Market
 
 ## SectorEtfs
