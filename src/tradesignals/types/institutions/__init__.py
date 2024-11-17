@@ -10,7 +10,11 @@ from .activity_list_params import ActivityListParams as ActivityListParams
 from .institution_activity import InstitutionActivity as InstitutionActivity
 from .sector_list_response import SectorListResponse as SectorListResponse
 from .holding_list_response import HoldingListResponse as HoldingListResponse
+from .institution_ownership import InstitutionOwnership as InstitutionOwnership
+from .ownership_list_params import OwnershipListParams as OwnershipListParams
 from .activity_list_response import ActivityListResponse as ActivityListResponse
+from .ownership_list_response import OwnershipListResponse as OwnershipListResponse
 from .sector_exposure_response import SectorExposureResponse as SectorExposureResponse
 from .institution_activity_response import InstitutionActivityResponse as InstitutionActivityResponse
 from .institution_holdings_response import InstitutionHoldingsResponse as InstitutionHoldingsResponse
+from .institution_ownership_response import InstitutionOwnershipResponse as InstitutionOwnershipResponse
