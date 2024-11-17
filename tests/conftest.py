@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Iterator, AsyncIterator
 import pytest
 from pytest_asyncio import is_async_test
 
-from tradesignals import TradesignalsIo, AsyncTradesignalsIo
+from tradesignals import Tradesignals, AsyncTradesignals
 
 if TYPE_CHECKING:
     from _pytest.fixtures import FixtureRequest
@@ -32,20 +32,20 @@ api_key = "My API Key"
 
 
 @pytest.fixture(scope="session")
-def client(request: FixtureRequest) -> Iterator[TradesignalsIo]:
+def client(request: FixtureRequest) -> Iterator[Tradesignals]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with TradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    with Tradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client
 
 
 @pytest.fixture(scope="session")
-async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncTradesignalsIo]:
+async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncTradesignals]:
     strict = getattr(request, "param", True)
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    async with AsyncTradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
+    async with AsyncTradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client

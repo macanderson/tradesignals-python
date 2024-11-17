@@ -25,7 +25,7 @@ from ._utils import (
 )
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError, TradesignalsIoError
+from ._exceptions import APIStatusError, TradesignalsError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -39,8 +39,8 @@ __all__ = [
     "ProxiesTypes",
     "RequestOptions",
     "resources",
-    "TradesignalsIo",
-    "AsyncTradesignalsIo",
+    "Tradesignals",
+    "AsyncTradesignals",
     "Client",
     "AsyncClient",
 ]
@@ -52,12 +52,12 @@ ENVIRONMENTS: Dict[str, str] = {
 }
 
 
-class TradesignalsIo(SyncAPIClient):
+class Tradesignals(SyncAPIClient):
     industry_groups: resources.IndustryGroupsResource
     etfs: resources.EtfsResource
     darkpool: resources.DarkpoolResource
-    with_raw_response: TradesignalsIoWithRawResponse
-    with_streaming_response: TradesignalsIoWithStreamedResponse
+    with_raw_response: TradesignalsWithRawResponse
+    with_streaming_response: TradesignalsWithStreamedResponse
 
     # client options
     api_key: str
@@ -88,28 +88,28 @@ class TradesignalsIo(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous Tradesignals.io client instance.
+        """Construct a new synchronous Tradesignals client instance.
 
         This automatically infers the `api_key` argument from the `TRADESIGNALS_TOKEN` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("TRADESIGNALS_TOKEN")
         if api_key is None:
-            raise TradesignalsIoError(
+            raise TradesignalsError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the TRADESIGNALS_TOKEN environment variable"
             )
         self.api_key = api_key
 
         self._environment = environment
 
-        base_url_env = os.environ.get("TRADESIGNALS_IO_BASE_URL")
+        base_url_env = os.environ.get("TRADESIGNALS_BASE_URL")
         if is_given(base_url) and base_url is not None:
             # cast required because mypy doesn't understand the type narrowing
             base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
         elif is_given(environment):
             if base_url_env and base_url is not None:
                 raise ValueError(
-                    "Ambiguous URL; The `TRADESIGNALS_IO_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                    "Ambiguous URL; The `TRADESIGNALS_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
                 )
 
             try:
@@ -140,8 +140,8 @@ class TradesignalsIo(SyncAPIClient):
         self.industry_groups = resources.IndustryGroupsResource(self)
         self.etfs = resources.EtfsResource(self)
         self.darkpool = resources.DarkpoolResource(self)
-        self.with_raw_response = TradesignalsIoWithRawResponse(self)
-        self.with_streaming_response = TradesignalsIoWithStreamedResponse(self)
+        self.with_raw_response = TradesignalsWithRawResponse(self)
+        self.with_streaming_response = TradesignalsWithStreamedResponse(self)
 
     @property
     @override
@@ -251,12 +251,12 @@ class TradesignalsIo(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncTradesignalsIo(AsyncAPIClient):
+class AsyncTradesignals(AsyncAPIClient):
     industry_groups: resources.AsyncIndustryGroupsResource
     etfs: resources.AsyncEtfsResource
     darkpool: resources.AsyncDarkpoolResource
-    with_raw_response: AsyncTradesignalsIoWithRawResponse
-    with_streaming_response: AsyncTradesignalsIoWithStreamedResponse
+    with_raw_response: AsyncTradesignalsWithRawResponse
+    with_streaming_response: AsyncTradesignalsWithStreamedResponse
 
     # client options
     api_key: str
@@ -287,28 +287,28 @@ class AsyncTradesignalsIo(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async Tradesignals.io client instance.
+        """Construct a new async Tradesignals client instance.
 
         This automatically infers the `api_key` argument from the `TRADESIGNALS_TOKEN` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("TRADESIGNALS_TOKEN")
         if api_key is None:
-            raise TradesignalsIoError(
+            raise TradesignalsError(
                 "The api_key client option must be set either by passing api_key to the client or by setting the TRADESIGNALS_TOKEN environment variable"
             )
         self.api_key = api_key
 
         self._environment = environment
 
-        base_url_env = os.environ.get("TRADESIGNALS_IO_BASE_URL")
+        base_url_env = os.environ.get("TRADESIGNALS_BASE_URL")
         if is_given(base_url) and base_url is not None:
             # cast required because mypy doesn't understand the type narrowing
             base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
         elif is_given(environment):
             if base_url_env and base_url is not None:
                 raise ValueError(
-                    "Ambiguous URL; The `TRADESIGNALS_IO_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
+                    "Ambiguous URL; The `TRADESIGNALS_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
                 )
 
             try:
@@ -339,8 +339,8 @@ class AsyncTradesignalsIo(AsyncAPIClient):
         self.industry_groups = resources.AsyncIndustryGroupsResource(self)
         self.etfs = resources.AsyncEtfsResource(self)
         self.darkpool = resources.AsyncDarkpoolResource(self)
-        self.with_raw_response = AsyncTradesignalsIoWithRawResponse(self)
-        self.with_streaming_response = AsyncTradesignalsIoWithStreamedResponse(self)
+        self.with_raw_response = AsyncTradesignalsWithRawResponse(self)
+        self.with_streaming_response = AsyncTradesignalsWithStreamedResponse(self)
 
     @property
     @override
@@ -450,34 +450,34 @@ class AsyncTradesignalsIo(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class TradesignalsIoWithRawResponse:
-    def __init__(self, client: TradesignalsIo) -> None:
+class TradesignalsWithRawResponse:
+    def __init__(self, client: Tradesignals) -> None:
         self.industry_groups = resources.IndustryGroupsResourceWithRawResponse(client.industry_groups)
         self.etfs = resources.EtfsResourceWithRawResponse(client.etfs)
         self.darkpool = resources.DarkpoolResourceWithRawResponse(client.darkpool)
 
 
-class AsyncTradesignalsIoWithRawResponse:
-    def __init__(self, client: AsyncTradesignalsIo) -> None:
+class AsyncTradesignalsWithRawResponse:
+    def __init__(self, client: AsyncTradesignals) -> None:
         self.industry_groups = resources.AsyncIndustryGroupsResourceWithRawResponse(client.industry_groups)
         self.etfs = resources.AsyncEtfsResourceWithRawResponse(client.etfs)
         self.darkpool = resources.AsyncDarkpoolResourceWithRawResponse(client.darkpool)
 
 
-class TradesignalsIoWithStreamedResponse:
-    def __init__(self, client: TradesignalsIo) -> None:
+class TradesignalsWithStreamedResponse:
+    def __init__(self, client: Tradesignals) -> None:
         self.industry_groups = resources.IndustryGroupsResourceWithStreamingResponse(client.industry_groups)
         self.etfs = resources.EtfsResourceWithStreamingResponse(client.etfs)
         self.darkpool = resources.DarkpoolResourceWithStreamingResponse(client.darkpool)
 
 
-class AsyncTradesignalsIoWithStreamedResponse:
-    def __init__(self, client: AsyncTradesignalsIo) -> None:
+class AsyncTradesignalsWithStreamedResponse:
+    def __init__(self, client: AsyncTradesignals) -> None:
         self.industry_groups = resources.AsyncIndustryGroupsResourceWithStreamingResponse(client.industry_groups)
         self.etfs = resources.AsyncEtfsResourceWithStreamingResponse(client.etfs)
         self.darkpool = resources.AsyncDarkpoolResourceWithStreamingResponse(client.darkpool)
 
 
-Client = TradesignalsIo
+Client = Tradesignals
 
-AsyncClient = AsyncTradesignalsIo
+AsyncClient = AsyncTradesignals
