@@ -48,6 +48,22 @@ Methods:
 
 - <code title="get /api/institution/{name}/sectors">client.institutions.sectors.<a href="./src/tradesignals/resources/institutions/sectors.py">list</a>(name, \*\*<a href="src/tradesignals/types/institutions/sector_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/sector_list_response.py">Optional</a></code>
 
+## Ownership
+
+Types:
+
+```python
+from tradesignals.types.institutions import (
+    InstitutionOwnership,
+    InstitutionOwnershipResponse,
+    OwnershipListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/institution/{ticker}/ownership">client.institutions.ownership.<a href="./src/tradesignals/resources/institutions/ownership.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/institutions/ownership_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/ownership_list_response.py">Optional</a></code>
+
 # Earnings
 
 ## Afterhours

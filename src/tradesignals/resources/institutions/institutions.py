@@ -27,6 +27,14 @@ from .holdings import (
     AsyncHoldingsResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
+from .ownership import (
+    OwnershipResource,
+    AsyncOwnershipResource,
+    OwnershipResourceWithRawResponse,
+    AsyncOwnershipResourceWithRawResponse,
+    OwnershipResourceWithStreamingResponse,
+    AsyncOwnershipResourceWithStreamingResponse,
+)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
 __all__ = ["InstitutionsResource", "AsyncInstitutionsResource"]
@@ -44,6 +52,10 @@ class InstitutionsResource(SyncAPIResource):
     @cached_property
     def sectors(self) -> SectorsResource:
         return SectorsResource(self._client)
+
+    @cached_property
+    def ownership(self) -> OwnershipResource:
+        return OwnershipResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> InstitutionsResourceWithRawResponse:
@@ -77,6 +89,10 @@ class AsyncInstitutionsResource(AsyncAPIResource):
     @cached_property
     def sectors(self) -> AsyncSectorsResource:
         return AsyncSectorsResource(self._client)
+
+    @cached_property
+    def ownership(self) -> AsyncOwnershipResource:
+        return AsyncOwnershipResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncInstitutionsResourceWithRawResponse:
@@ -114,6 +130,10 @@ class InstitutionsResourceWithRawResponse:
     def sectors(self) -> SectorsResourceWithRawResponse:
         return SectorsResourceWithRawResponse(self._institutions.sectors)
 
+    @cached_property
+    def ownership(self) -> OwnershipResourceWithRawResponse:
+        return OwnershipResourceWithRawResponse(self._institutions.ownership)
+
 
 class AsyncInstitutionsResourceWithRawResponse:
     def __init__(self, institutions: AsyncInstitutionsResource) -> None:
@@ -130,6 +150,10 @@ class AsyncInstitutionsResourceWithRawResponse:
     @cached_property
     def sectors(self) -> AsyncSectorsResourceWithRawResponse:
         return AsyncSectorsResourceWithRawResponse(self._institutions.sectors)
+
+    @cached_property
+    def ownership(self) -> AsyncOwnershipResourceWithRawResponse:
+        return AsyncOwnershipResourceWithRawResponse(self._institutions.ownership)
 
 
 class InstitutionsResourceWithStreamingResponse:
@@ -148,6 +172,10 @@ class InstitutionsResourceWithStreamingResponse:
     def sectors(self) -> SectorsResourceWithStreamingResponse:
         return SectorsResourceWithStreamingResponse(self._institutions.sectors)
 
+    @cached_property
+    def ownership(self) -> OwnershipResourceWithStreamingResponse:
+        return OwnershipResourceWithStreamingResponse(self._institutions.ownership)
+
 
 class AsyncInstitutionsResourceWithStreamingResponse:
     def __init__(self, institutions: AsyncInstitutionsResource) -> None:
@@ -164,3 +192,7 @@ class AsyncInstitutionsResourceWithStreamingResponse:
     @cached_property
     def sectors(self) -> AsyncSectorsResourceWithStreamingResponse:
         return AsyncSectorsResourceWithStreamingResponse(self._institutions.sectors)
+
+    @cached_property
+    def ownership(self) -> AsyncOwnershipResourceWithStreamingResponse:
+        return AsyncOwnershipResourceWithStreamingResponse(self._institutions.ownership)
