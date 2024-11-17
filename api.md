@@ -1,3 +1,49 @@
+# Earnings
+
+## Afterhours
+
+Types:
+
+```python
+from tradesignals.types.earnings import (
+    AfterhoursEarningsData,
+    AfterhoursEarningsResponse,
+    AfterhourListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/earnings/afterhours">client.earnings.afterhours.<a href="./src/tradesignals/resources/earnings/afterhours.py">list</a>(\*\*<a href="src/tradesignals/types/earnings/afterhour_list_params.py">params</a>) -> <a href="./src/tradesignals/types/earnings/afterhour_list_response.py">Optional</a></code>
+
+## Premarket
+
+Types:
+
+```python
+from tradesignals.types.earnings import (
+    PremarketEarningsData,
+    PremarketEarningsResponse,
+    PremarketListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/earnings/premarket">client.earnings.premarket.<a href="./src/tradesignals/resources/earnings/premarket.py">list</a>(\*\*<a href="src/tradesignals/types/earnings/premarket_list_params.py">params</a>) -> <a href="./src/tradesignals/types/earnings/premarket_list_response.py">Optional</a></code>
+
+## PastTicker
+
+Types:
+
+```python
+from tradesignals.types.earnings import HistoricalEarningsData, HistoricalEarningsResponse
+```
+
+Methods:
+
+- <code title="get /api/earnings/{ticker}">client.earnings.past_ticker.<a href="./src/tradesignals/resources/earnings/past_ticker.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/earnings/historical_earnings_response.py">HistoricalEarningsResponse</a></code>
+
 # Congress
 
 ## RecentTrades
