@@ -8,7 +8,7 @@ from typing import Any, Optional, cast
 import pytest
 
 from tests.utils import assert_matches_type
-from tradesignals import TradesignalsIo, AsyncTradesignalsIo
+from tradesignals import Tradesignals, AsyncTradesignals
 from tradesignals._utils import parse_date
 from tradesignals.types.industry_groups import GreekFlowListResponse
 
@@ -19,14 +19,14 @@ class TestGreekFlows:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    def test_method_list(self, client: TradesignalsIo) -> None:
+    def test_method_list(self, client: Tradesignals) -> None:
         greek_flow = client.industry_groups.greek_flows.list(
             flow_group="airline",
         )
         assert_matches_type(Optional[GreekFlowListResponse], greek_flow, path=["response"])
 
     @parametrize
-    def test_method_list_with_all_params(self, client: TradesignalsIo) -> None:
+    def test_method_list_with_all_params(self, client: Tradesignals) -> None:
         greek_flow = client.industry_groups.greek_flows.list(
             flow_group="airline",
             date=parse_date("2019-12-27"),
@@ -34,7 +34,7 @@ class TestGreekFlows:
         assert_matches_type(Optional[GreekFlowListResponse], greek_flow, path=["response"])
 
     @parametrize
-    def test_raw_response_list(self, client: TradesignalsIo) -> None:
+    def test_raw_response_list(self, client: Tradesignals) -> None:
         response = client.industry_groups.greek_flows.with_raw_response.list(
             flow_group="airline",
         )
@@ -45,7 +45,7 @@ class TestGreekFlows:
         assert_matches_type(Optional[GreekFlowListResponse], greek_flow, path=["response"])
 
     @parametrize
-    def test_streaming_response_list(self, client: TradesignalsIo) -> None:
+    def test_streaming_response_list(self, client: Tradesignals) -> None:
         with client.industry_groups.greek_flows.with_streaming_response.list(
             flow_group="airline",
         ) as response:
@@ -62,14 +62,14 @@ class TestAsyncGreekFlows:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
-    async def test_method_list(self, async_client: AsyncTradesignalsIo) -> None:
+    async def test_method_list(self, async_client: AsyncTradesignals) -> None:
         greek_flow = await async_client.industry_groups.greek_flows.list(
             flow_group="airline",
         )
         assert_matches_type(Optional[GreekFlowListResponse], greek_flow, path=["response"])
 
     @parametrize
-    async def test_method_list_with_all_params(self, async_client: AsyncTradesignalsIo) -> None:
+    async def test_method_list_with_all_params(self, async_client: AsyncTradesignals) -> None:
         greek_flow = await async_client.industry_groups.greek_flows.list(
             flow_group="airline",
             date=parse_date("2019-12-27"),
@@ -77,7 +77,7 @@ class TestAsyncGreekFlows:
         assert_matches_type(Optional[GreekFlowListResponse], greek_flow, path=["response"])
 
     @parametrize
-    async def test_raw_response_list(self, async_client: AsyncTradesignalsIo) -> None:
+    async def test_raw_response_list(self, async_client: AsyncTradesignals) -> None:
         response = await async_client.industry_groups.greek_flows.with_raw_response.list(
             flow_group="airline",
         )
@@ -88,7 +88,7 @@ class TestAsyncGreekFlows:
         assert_matches_type(Optional[GreekFlowListResponse], greek_flow, path=["response"])
 
     @parametrize
-    async def test_streaming_response_list(self, async_client: AsyncTradesignalsIo) -> None:
+    async def test_streaming_response_list(self, async_client: AsyncTradesignals) -> None:
         async with async_client.industry_groups.greek_flows.with_streaming_response.list(
             flow_group="airline",
         ) as response:
