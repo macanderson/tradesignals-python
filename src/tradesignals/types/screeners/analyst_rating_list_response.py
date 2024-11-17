@@ -5,6 +5,6 @@ from typing_extensions import TypeAlias
 
 from .analyst_rating_entry import AnalystRatingEntry
 
-__all__ = ["AnalystListResponse"]
+__all__ = ["AnalystRatingListResponse"]
 
-AnalystListResponse: TypeAlias = List[AnalystRatingEntry]
+AnalystRatingListResponse: TypeAlias = List[AnalystRatingEntry]

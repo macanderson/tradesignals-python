@@ -1,36 +1,82 @@
-# Screener
+# Seasonality
 
-## Analysts
+## Market
 
 Types:
 
 ```python
-from tradesignals.types.screener import (
+from tradesignals.types.seasonality import (
+    MarketSeasonalityResponse,
+    SeasonalityEntry,
+    MarketListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/seasonality/market">client.seasonality.market.<a href="./src/tradesignals/resources/seasonality/market.py">list</a>() -> <a href="./src/tradesignals/types/seasonality/market_list_response.py">Optional</a></code>
+
+## Performers
+
+Types:
+
+```python
+from tradesignals.types.seasonality import (
+    MonthPerformerEntry,
+    MonthPerformersResponse,
+    PerformerListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/seasonality/{month}/performers">client.seasonality.performers.<a href="./src/tradesignals/resources/seasonality/performers.py">list</a>(month, \*\*<a href="src/tradesignals/types/seasonality/performer_list_params.py">params</a>) -> <a href="./src/tradesignals/types/seasonality/performer_list_response.py">Optional</a></code>
+
+# Screeners
+
+## StockFinder
+
+Types:
+
+```python
+from tradesignals.types.screeners import StockEntry, StockScreenerResponse, StockFinderListResponse
+```
+
+Methods:
+
+- <code title="get /api/screener/stocks">client.screeners.stock_finder.<a href="./src/tradesignals/resources/screeners/stock_finder.py">list</a>(\*\*<a href="src/tradesignals/types/screeners/stock_finder_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screeners/stock_finder_list_response.py">Optional</a></code>
+
+## AnalystRatings
+
+Types:
+
+```python
+from tradesignals.types.screeners import (
     AnalystRatingEntry,
     AnalystRatingResponse,
-    AnalystListResponse,
+    AnalystRatingListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/screener/analysts">client.screener.analysts.<a href="./src/tradesignals/resources/screener/analysts.py">list</a>(\*\*<a href="src/tradesignals/types/screener/analyst_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screener/analyst_list_response.py">Optional</a></code>
+- <code title="get /api/screener/analysts">client.screeners.analyst_ratings.<a href="./src/tradesignals/resources/screeners/analyst_ratings.py">list</a>(\*\*<a href="src/tradesignals/types/screeners/analyst_rating_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screeners/analyst_rating_list_response.py">Optional</a></code>
 
-## OptionContracts
+## OptionFinder
 
 Types:
 
 ```python
-from tradesignals.types.screener import (
+from tradesignals.types.screeners import (
     HottestChainEntry,
     HottestChainsResponse,
-    OptionContractListResponse,
+    OptionFinderListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/screener/option-contracts">client.screener.option_contracts.<a href="./src/tradesignals/resources/screener/option_contracts.py">list</a>(\*\*<a href="src/tradesignals/types/screener/option_contract_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screener/option_contract_list_response.py">Optional</a></code>
+- <code title="get /api/screener/option-contracts">client.screeners.option_finder.<a href="./src/tradesignals/resources/screeners/option_finder.py">list</a>(\*\*<a href="src/tradesignals/types/screeners/option_finder_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screeners/option_finder_list_response.py">Optional</a></code>
 
 # OptionTrades
 

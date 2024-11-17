@@ -40,13 +40,21 @@ from .earnings import (
     EarningsResourceWithStreamingResponse,
     AsyncEarningsResourceWithStreamingResponse,
 )
-from .screener import (
-    ScreenerResource,
-    AsyncScreenerResource,
-    ScreenerResourceWithRawResponse,
-    AsyncScreenerResourceWithRawResponse,
-    ScreenerResourceWithStreamingResponse,
-    AsyncScreenerResourceWithStreamingResponse,
+from .screeners import (
+    ScreenersResource,
+    AsyncScreenersResource,
+    ScreenersResourceWithRawResponse,
+    AsyncScreenersResourceWithRawResponse,
+    ScreenersResourceWithStreamingResponse,
+    AsyncScreenersResourceWithStreamingResponse,
+)
+from .seasonality import (
+    SeasonalityResource,
+    AsyncSeasonalityResource,
+    SeasonalityResourceWithRawResponse,
+    AsyncSeasonalityResourceWithRawResponse,
+    SeasonalityResourceWithStreamingResponse,
+    AsyncSeasonalityResourceWithStreamingResponse,
 )
 from .institutions import (
     InstitutionsResource,
@@ -82,12 +90,18 @@ from .option_contracts import (
 )
 
 __all__ = [
-    "ScreenerResource",
-    "AsyncScreenerResource",
-    "ScreenerResourceWithRawResponse",
-    "AsyncScreenerResourceWithRawResponse",
-    "ScreenerResourceWithStreamingResponse",
-    "AsyncScreenerResourceWithStreamingResponse",
+    "SeasonalityResource",
+    "AsyncSeasonalityResource",
+    "SeasonalityResourceWithRawResponse",
+    "AsyncSeasonalityResourceWithRawResponse",
+    "SeasonalityResourceWithStreamingResponse",
+    "AsyncSeasonalityResourceWithStreamingResponse",
+    "ScreenersResource",
+    "AsyncScreenersResource",
+    "ScreenersResourceWithRawResponse",
+    "AsyncScreenersResourceWithRawResponse",
+    "ScreenersResourceWithStreamingResponse",
+    "AsyncScreenersResourceWithStreamingResponse",
     "OptionTradesResource",
     "AsyncOptionTradesResource",
     "OptionTradesResourceWithRawResponse",

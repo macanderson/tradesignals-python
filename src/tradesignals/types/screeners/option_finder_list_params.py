@@ -8,10 +8,10 @@ from typing_extensions import Literal, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["OptionContractListParams"]
+__all__ = ["OptionFinderListParams"]
 
 
-class OptionContractListParams(TypedDict, total=False):
+class OptionFinderListParams(TypedDict, total=False):
     expiry_dates: Annotated[List[Union[str, date]], PropertyInfo(format="iso8601")]
 
     is_otm: bool
