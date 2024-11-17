@@ -22,7 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.congress import congress_trader_retrieve_params
-from ...types.congress.late_congressional_report import LateCongressionalReport
+from ...types.congress.congressional_trader_report import CongressionalTraderReport
 
 __all__ = ["CongressTraderResource", "AsyncCongressTraderResource"]
 
@@ -59,7 +59,7 @@ class CongressTraderResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LateCongressionalReport:
+    ) -> CongressionalTraderReport:
         """
         Returns the recent reports by the given congress member.
 
@@ -96,7 +96,7 @@ class CongressTraderResource(SyncAPIResource):
                     congress_trader_retrieve_params.CongressTraderRetrieveParams,
                 ),
             ),
-            cast_to=LateCongressionalReport,
+            cast_to=CongressionalTraderReport,
         )
 
 
@@ -132,7 +132,7 @@ class AsyncCongressTraderResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> LateCongressionalReport:
+    ) -> CongressionalTraderReport:
         """
         Returns the recent reports by the given congress member.
 
@@ -169,7 +169,7 @@ class AsyncCongressTraderResource(AsyncAPIResource):
                     congress_trader_retrieve_params.CongressTraderRetrieveParams,
                 ),
             ),
-            cast_to=LateCongressionalReport,
+            cast_to=CongressionalTraderReport,
         )
 
 

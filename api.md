@@ -34,7 +34,7 @@ from tradesignals.types.congress import CongressionalTraderReport
 
 Methods:
 
-- <code title="get /api/congress/congress-trader">client.congress.congress_trader.<a href="./src/tradesignals/resources/congress/congress_trader.py">retrieve</a>(\*\*<a href="src/tradesignals/types/congress/congress_trader_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/late_congressional_report.py">LateCongressionalReport</a></code>
+- <code title="get /api/congress/congress-trader">client.congress.congress_trader.<a href="./src/tradesignals/resources/congress/congress_trader.py">retrieve</a>(\*\*<a href="src/tradesignals/types/congress/congress_trader_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/congressional_trader_report.py">CongressionalTraderReport</a></code>
 
 ## RecentReports
 
