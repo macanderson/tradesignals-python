@@ -27,6 +27,8 @@ from tradesignals import TradesignalsIo
 
 client = TradesignalsIo(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
+    # or 'production' | 'test'; defaults to "production".
+    environment="live",
 )
 
 trades = client.darkpool.ticker_darkpool_trades.list(
@@ -50,6 +52,8 @@ from tradesignals import AsyncTradesignalsIo
 
 client = AsyncTradesignalsIo(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
+    # or 'production' | 'test'; defaults to "production".
+    environment="live",
 )
 
 
