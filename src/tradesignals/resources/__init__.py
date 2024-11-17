@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .etfs import (
-    EtfsResource,
-    AsyncEtfsResource,
-    EtfsResourceWithRawResponse,
-    AsyncEtfsResourceWithRawResponse,
-    EtfsResourceWithStreamingResponse,
-    AsyncEtfsResourceWithStreamingResponse,
+from .etf import (
+    EtfResource,
+    AsyncEtfResource,
+    EtfResourceWithRawResponse,
+    AsyncEtfResourceWithRawResponse,
+    EtfResourceWithStreamingResponse,
+    AsyncEtfResourceWithStreamingResponse,
 )
 from .congress import (
     CongressResource,
@@ -46,12 +46,12 @@ __all__ = [
     "AsyncIndustryGroupsResourceWithRawResponse",
     "IndustryGroupsResourceWithStreamingResponse",
     "AsyncIndustryGroupsResourceWithStreamingResponse",
-    "EtfsResource",
-    "AsyncEtfsResource",
-    "EtfsResourceWithRawResponse",
-    "AsyncEtfsResourceWithRawResponse",
-    "EtfsResourceWithStreamingResponse",
-    "AsyncEtfsResourceWithStreamingResponse",
+    "EtfResource",
+    "AsyncEtfResource",
+    "EtfResourceWithRawResponse",
+    "AsyncEtfResourceWithRawResponse",
+    "EtfResourceWithStreamingResponse",
+    "AsyncEtfResourceWithStreamingResponse",
     "DarkpoolResource",
     "AsyncDarkpoolResource",
     "DarkpoolResourceWithRawResponse",
