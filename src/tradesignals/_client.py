@@ -52,6 +52,7 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class Tradesignals(SyncAPIClient):
+    option_contract: resources.OptionContractResource
     market: resources.MarketResource
     institutions: resources.InstitutionsResource
     earnings: resources.EarningsResource
@@ -140,6 +141,7 @@ class Tradesignals(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.option_contract = resources.OptionContractResource(self)
         self.market = resources.MarketResource(self)
         self.institutions = resources.InstitutionsResource(self)
         self.earnings = resources.EarningsResource(self)
@@ -259,6 +261,7 @@ class Tradesignals(SyncAPIClient):
 
 
 class AsyncTradesignals(AsyncAPIClient):
+    option_contract: resources.AsyncOptionContractResource
     market: resources.AsyncMarketResource
     institutions: resources.AsyncInstitutionsResource
     earnings: resources.AsyncEarningsResource
@@ -347,6 +350,7 @@ class AsyncTradesignals(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.option_contract = resources.AsyncOptionContractResource(self)
         self.market = resources.AsyncMarketResource(self)
         self.institutions = resources.AsyncInstitutionsResource(self)
         self.earnings = resources.AsyncEarningsResource(self)
@@ -467,6 +471,7 @@ class AsyncTradesignals(AsyncAPIClient):
 
 class TradesignalsWithRawResponse:
     def __init__(self, client: Tradesignals) -> None:
+        self.option_contract = resources.OptionContractResourceWithRawResponse(client.option_contract)
         self.market = resources.MarketResourceWithRawResponse(client.market)
         self.institutions = resources.InstitutionsResourceWithRawResponse(client.institutions)
         self.earnings = resources.EarningsResourceWithRawResponse(client.earnings)
@@ -478,6 +483,7 @@ class TradesignalsWithRawResponse:
 
 class AsyncTradesignalsWithRawResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
+        self.option_contract = resources.AsyncOptionContractResourceWithRawResponse(client.option_contract)
         self.market = resources.AsyncMarketResourceWithRawResponse(client.market)
         self.institutions = resources.AsyncInstitutionsResourceWithRawResponse(client.institutions)
         self.earnings = resources.AsyncEarningsResourceWithRawResponse(client.earnings)
@@ -489,6 +495,7 @@ class AsyncTradesignalsWithRawResponse:
 
 class TradesignalsWithStreamedResponse:
     def __init__(self, client: Tradesignals) -> None:
+        self.option_contract = resources.OptionContractResourceWithStreamingResponse(client.option_contract)
         self.market = resources.MarketResourceWithStreamingResponse(client.market)
         self.institutions = resources.InstitutionsResourceWithStreamingResponse(client.institutions)
         self.earnings = resources.EarningsResourceWithStreamingResponse(client.earnings)
@@ -500,6 +507,7 @@ class TradesignalsWithStreamedResponse:
 
 class AsyncTradesignalsWithStreamedResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
+        self.option_contract = resources.AsyncOptionContractResourceWithStreamingResponse(client.option_contract)
         self.market = resources.AsyncMarketResourceWithStreamingResponse(client.market)
         self.institutions = resources.AsyncInstitutionsResourceWithStreamingResponse(client.institutions)
         self.earnings = resources.AsyncEarningsResourceWithStreamingResponse(client.earnings)
