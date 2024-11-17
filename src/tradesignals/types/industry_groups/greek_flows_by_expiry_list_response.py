@@ -3,7 +3,7 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from ..group_greek_flow import GroupGreekFlow
+from .group_greek_flow import GroupGreekFlow
 
 __all__ = ["GreekFlowsByExpiryListResponse"]
 
