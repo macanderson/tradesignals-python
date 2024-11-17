@@ -1,12 +1,10 @@
 # Tradesignals API library
 
-[![PyPI version](https://img.shields.io/pypi/v/tradesignals.svg)](https://pypi.org/project/tradesignals/)
+[![PyPI version](https://img.shields.io/pypi/v/tradesignals-python.svg)](https://pypi.org/project/tradesignals-python/)
 
 The Tradesignals library provides convenient access to the Tradesignals Io REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
-
-It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Documentation
 
@@ -16,7 +14,7 @@ The REST API documentation can be found on [docs.tradesignals.com](https://docs.
 
 ```sh
 # install from PyPI
-pip install --pre tradesignals
+pip install --pre tradesignals-python
 ```
 
 ## Usage
@@ -29,14 +27,13 @@ from tradesignals import TradesignalsIo
 
 client = TradesignalsIo(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
-    # defaults to "production".
-    environment="sandbox",
+    # or 'production' | 'test'; defaults to "production".
+    environment="live",
 )
 
-chain = client.options.chain.retrieve(
-    symbol="AAPL",
+trades = client.darkpool.ticker_darkpool_trades.list(
+    ticker="AAPL",
 )
-print(chain.option_chain)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -55,16 +52,15 @@ from tradesignals import AsyncTradesignalsIo
 
 client = AsyncTradesignalsIo(
     api_key=os.environ.get("TRADESIGNALS_TOKEN"),  # This is the default and can be omitted
-    # defaults to "production".
-    environment="sandbox",
+    # or 'production' | 'test'; defaults to "production".
+    environment="live",
 )
 
 
 async def main() -> None:
-    chain = await client.options.chain.retrieve(
-        symbol="AAPL",
+    trades = await client.darkpool.ticker_darkpool_trades.list(
+        ticker="AAPL",
     )
-    print(chain.option_chain)
 
 
 asyncio.run(main())
@@ -97,7 +93,7 @@ from tradesignals import TradesignalsIo
 client = TradesignalsIo()
 
 try:
-    client.economic_calendars.list()
+    client.darkpool.recent_darkpool_trades.list()
 except tradesignals.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -140,7 +136,7 @@ client = TradesignalsIo(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).economic_calendars.list()
+client.with_options(max_retries=5).darkpool.recent_darkpool_trades.list()
 ```
 
 ### Timeouts
@@ -163,7 +159,7 @@ client = TradesignalsIo(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).economic_calendars.list()
+client.with_options(timeout=5.0).darkpool.recent_darkpool_trades.list()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -216,11 +212,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from tradesignals import TradesignalsIo
 
 client = TradesignalsIo()
-response = client.economic_calendars.with_raw_response.list()
+response = client.darkpool.recent_darkpool_trades.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
-economic_calendar = response.parse()  # get the object that `economic_calendars.list()` would have returned
-print(economic_calendar.events)
+recent_darkpool_trade = response.parse()  # get the object that `darkpool.recent_darkpool_trades.list()` would have returned
+print(recent_darkpool_trade)
 ```
 
 These methods return an [`APIResponse`](https://github.com/macanderson/tradesignals-python/tree/main/src/tradesignals/_response.py) object.
@@ -234,7 +230,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.economic_calendars.with_streaming_response.list() as response:
+with client.darkpool.recent_darkpool_trades.with_streaming_response.list() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
