@@ -16,8 +16,22 @@ from .darkpool import (
     DarkpoolResourceWithStreamingResponse,
     AsyncDarkpoolResourceWithStreamingResponse,
 )
+from .industry_groups import (
+    IndustryGroupsResource,
+    AsyncIndustryGroupsResource,
+    IndustryGroupsResourceWithRawResponse,
+    AsyncIndustryGroupsResourceWithRawResponse,
+    IndustryGroupsResourceWithStreamingResponse,
+    AsyncIndustryGroupsResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "IndustryGroupsResource",
+    "AsyncIndustryGroupsResource",
+    "IndustryGroupsResourceWithRawResponse",
+    "AsyncIndustryGroupsResourceWithRawResponse",
+    "IndustryGroupsResourceWithStreamingResponse",
+    "AsyncIndustryGroupsResourceWithStreamingResponse",
     "EtfsResource",
     "AsyncEtfsResource",
     "EtfsResourceWithRawResponse",

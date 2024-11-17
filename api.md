@@ -1,3 +1,35 @@
+# IndustryGroups
+
+Types:
+
+```python
+from tradesignals.types import GroupGreekFlow
+```
+
+## GreekFlows
+
+Types:
+
+```python
+from tradesignals.types.industry_groups import GreekFlowListResponse
+```
+
+Methods:
+
+- <code title="get /api/group-flow/{flow_group}/greek-flow">client.industry_groups.greek_flows.<a href="./src/tradesignals/resources/industry_groups/greek_flows.py">list</a>(flow_group, \*\*<a href="src/tradesignals/types/industry_groups/greek_flow_list_params.py">params</a>) -> <a href="./src/tradesignals/types/industry_groups/greek_flow_list_response.py">Optional</a></code>
+
+## GreekFlowsByExpiry
+
+Types:
+
+```python
+from tradesignals.types.industry_groups import GreekFlowsByExpiryListResponse
+```
+
+Methods:
+
+- <code title="get /api/group-flow/{flow_group}/greek-flow/{expiry}">client.industry_groups.greek_flows_by_expiry.<a href="./src/tradesignals/resources/industry_groups/greek_flows_by_expiry.py">list</a>(expiry, \*, flow_group, \*\*<a href="src/tradesignals/types/industry_groups/greek_flows_by_expiry_list_params.py">params</a>) -> <a href="./src/tradesignals/types/industry_groups/greek_flows_by_expiry_list_response.py">Optional</a></code>
+
 # Etfs
 
 ## Holdings
