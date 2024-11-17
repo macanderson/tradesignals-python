@@ -1,51 +1,103 @@
-# OptionContract
+# Screener
 
-## OptionChains
+## Analysts
 
 Types:
 
 ```python
-from tradesignals.types.option_contract import (
-    OptionContractsEntry,
-    OptionContractsResponse,
-    OptionChainListResponse,
+from tradesignals.types.screener import (
+    AnalystRatingEntry,
+    AnalystRatingResponse,
+    AnalystListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/stock/{ticker}/option-contracts">client.option_contract.option_chains.<a href="./src/tradesignals/resources/option_contract/option_chains.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/option_contract/option_chain_list_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contract/option_chain_list_response.py">Optional</a></code>
+- <code title="get /api/screener/analysts">client.screener.analysts.<a href="./src/tradesignals/resources/screener/analysts.py">list</a>(\*\*<a href="src/tradesignals/types/screener/analyst_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screener/analyst_list_response.py">Optional</a></code>
+
+## OptionContracts
+
+Types:
+
+```python
+from tradesignals.types.screener import (
+    HottestChainEntry,
+    HottestChainsResponse,
+    OptionContractListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/screener/option-contracts">client.screener.option_contracts.<a href="./src/tradesignals/resources/screener/option_contracts.py">list</a>(\*\*<a href="src/tradesignals/types/screener/option_contract_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screener/option_contract_list_response.py">Optional</a></code>
+
+# OptionTrades
+
+## FlowAlerts
+
+Types:
+
+```python
+from tradesignals.types.option_trades import (
+    FlowAlertEntry,
+    FlowAlertResponse,
+    FlowAlertListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/option-trades/flow-alerts">client.option_trades.flow_alerts.<a href="./src/tradesignals/resources/option_trades/flow_alerts.py">list</a>() -> <a href="./src/tradesignals/types/option_trades/flow_alert_list_response.py">Optional</a></code>
+
+# OptionContracts
+
+## UnderlyingChains
+
+Types:
+
+```python
+from tradesignals.types.option_contracts import (
+    OptionContractsEntry,
+    OptionContractsResponse,
+    UnderlyingChainListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/option-contracts">client.option_contracts.underlying_chains.<a href="./src/tradesignals/resources/option_contracts/underlying_chains.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/option_contracts/underlying_chain_list_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contracts/underlying_chain_list_response.py">Optional</a></code>
 
 ## FlowData
 
 Types:
 
 ```python
-from tradesignals.types.option_contract import FlowDataResponse, FlowDataRetrieveResponse
+from tradesignals.types.option_contracts import FlowDataResponse, FlowDataRetrieveResponse
 ```
 
 Methods:
 
-- <code title="get /api/option-contract/{id}/flow">client.option_contract.flow_data.<a href="./src/tradesignals/resources/option_contract/flow_data.py">retrieve</a>(id, \*\*<a href="src/tradesignals/types/option_contract/flow_data_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contract/flow_data_retrieve_response.py">Optional</a></code>
+- <code title="get /api/option-contract/{id}/flow">client.option_contracts.flow_data.<a href="./src/tradesignals/resources/option_contracts/flow_data.py">retrieve</a>(id, \*\*<a href="src/tradesignals/types/option_contracts/flow_data_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contracts/flow_data_retrieve_response.py">Optional</a></code>
 
 ## HistoricData
 
 Types:
 
 ```python
-from tradesignals.types.option_contract import HistoricDataResponse, HistoricDataRetrieveResponse
+from tradesignals.types.option_contracts import HistoricDataResponse, HistoricDataRetrieveResponse
 ```
 
 Methods:
 
-- <code title="get /api/option-contract/{id}/historic">client.option_contract.historic_data.<a href="./src/tradesignals/resources/option_contract/historic_data.py">retrieve</a>(id, \*\*<a href="src/tradesignals/types/option_contract/historic_data_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contract/historic_data_retrieve_response.py">Optional</a></code>
+- <code title="get /api/option-contract/{id}/historic">client.option_contracts.historic_data.<a href="./src/tradesignals/resources/option_contracts/historic_data.py">retrieve</a>(id, \*\*<a href="src/tradesignals/types/option_contracts/historic_data_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contracts/historic_data_retrieve_response.py">Optional</a></code>
 
 ## ExpiryBreakdown
 
 Types:
 
 ```python
-from tradesignals.types.option_contract import (
+from tradesignals.types.option_contracts import (
     ExpiryBreakdownEntry,
     ExpiryBreakdownResponse,
     ExpiryBreakdownListResponse,
@@ -54,7 +106,7 @@ from tradesignals.types.option_contract import (
 
 Methods:
 
-- <code title="get /api/stock/{ticker}/expiry-breakdown">client.option_contract.expiry_breakdown.<a href="./src/tradesignals/resources/option_contract/expiry_breakdown.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/option_contract/expiry_breakdown_list_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contract/expiry_breakdown_list_response.py">Optional</a></code>
+- <code title="get /api/stock/{ticker}/expiry-breakdown">client.option_contracts.expiry_breakdown.<a href="./src/tradesignals/resources/option_contracts/expiry_breakdown.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/option_contracts/expiry_breakdown_list_params.py">params</a>) -> <a href="./src/tradesignals/types/option_contracts/expiry_breakdown_list_response.py">Optional</a></code>
 
 # Market
 

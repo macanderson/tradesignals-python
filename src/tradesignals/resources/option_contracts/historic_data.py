@@ -21,8 +21,8 @@ from ..._response import (
 )
 from ..._wrappers import ChainsWrapper
 from ..._base_client import make_request_options
-from ...types.option_contract import historic_data_retrieve_params
-from ...types.option_contract.historic_data_retrieve_response import HistoricDataRetrieveResponse
+from ...types.option_contracts import historic_data_retrieve_params
+from ...types.option_contracts.historic_data_retrieve_response import HistoricDataRetrieveResponse
 
 __all__ = ["HistoricDataResource", "AsyncHistoricDataResource"]
 
