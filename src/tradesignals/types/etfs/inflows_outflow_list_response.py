@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .etf_in_outflow import EtfInOutflow
+from .outflows import Outflows
 
 __all__ = ["InflowsOutflowListResponse"]
 
-InflowsOutflowListResponse: TypeAlias = List[EtfInOutflow]
+InflowsOutflowListResponse: TypeAlias = List[Outflows]

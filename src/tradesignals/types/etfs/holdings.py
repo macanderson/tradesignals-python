@@ -5,10 +5,10 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["EtfHolding"]
+__all__ = ["Holdings"]
 
 
-class EtfHolding(BaseModel):
+class Holdings(BaseModel):
     avg30_volume: Optional[str] = None
     """The average stock volume for the stock over the last 30 days."""
 

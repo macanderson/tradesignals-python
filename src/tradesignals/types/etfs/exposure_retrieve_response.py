@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .etf_exposure_data import EtfExposureData
+from .exposure import Exposure
 
 __all__ = ["ExposureRetrieveResponse"]
 
-ExposureRetrieveResponse: TypeAlias = List[EtfExposureData]
+ExposureRetrieveResponse: TypeAlias = List[Exposure]

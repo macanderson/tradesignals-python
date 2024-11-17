@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .etf_holding import EtfHolding
+from .holdings import Holdings
 
 __all__ = ["HoldingListResponse"]
 
-HoldingListResponse: TypeAlias = List[EtfHolding]
+HoldingListResponse: TypeAlias = List[Holdings]

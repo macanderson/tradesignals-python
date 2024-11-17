@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-from .etf_info import EtfInfo as EtfInfo
-from .etf_holding import EtfHolding as EtfHolding
-from .etf_in_outflow import EtfInOutflow as EtfInOutflow
-from .etf_exposure_data import EtfExposureData as EtfExposureData
+from .info import Info as Info
+from .weights import Weights as Weights
+from .exposure import Exposure as Exposure
+from .holdings import Holdings as Holdings
+from .outflows import Outflows as Outflows
 from .holding_list_response import HoldingListResponse as HoldingListResponse
 from .exposure_retrieve_response import ExposureRetrieveResponse as ExposureRetrieveResponse
 from .inflows_outflow_list_response import InflowsOutflowListResponse as InflowsOutflowListResponse
