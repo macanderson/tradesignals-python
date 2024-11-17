@@ -50,18 +50,12 @@ Methods:
 
 # IndustryGroups
 
-Types:
-
-```python
-from tradesignals.types import GroupGreekFlow
-```
-
 ## GreekFlows
 
 Types:
 
 ```python
-from tradesignals.types.industry_groups import GreekFlowListResponse
+from tradesignals.types.industry_groups import GroupGreekFlow, GreekFlowListResponse
 ```
 
 Methods:
@@ -73,7 +67,7 @@ Methods:
 Types:
 
 ```python
-from tradesignals.types.industry_groups import GreekFlowsByExpiryListResponse
+from tradesignals.types.industry_groups import GroupFlowsResponse, GreekFlowsByExpiryListResponse
 ```
 
 Methods:
