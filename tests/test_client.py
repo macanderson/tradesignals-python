@@ -17,11 +17,11 @@ import pytest
 from respx import MockRouter
 from pydantic import ValidationError
 
-from tradesignals import TradesignalsIo, AsyncTradesignalsIo, APIResponseValidationError
+from tradesignals import Tradesignals, AsyncTradesignals, APIResponseValidationError
 from tradesignals._types import Omit
 from tradesignals._models import BaseModel, FinalRequestOptions
 from tradesignals._constants import RAW_RESPONSE_HEADER
-from tradesignals._exceptions import APIStatusError, APITimeoutError, TradesignalsIoError, APIResponseValidationError
+from tradesignals._exceptions import APIStatusError, APITimeoutError, TradesignalsError, APIResponseValidationError
 from tradesignals._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
@@ -45,7 +45,7 @@ def _low_retry_timeout(*_args: Any, **_kwargs: Any) -> float:
     return 0.1
 
 
-def _get_open_connections(client: TradesignalsIo | AsyncTradesignalsIo) -> int:
+def _get_open_connections(client: Tradesignals | AsyncTradesignals) -> int:
     transport = client._client._transport
     assert isinstance(transport, httpx.HTTPTransport) or isinstance(transport, httpx.AsyncHTTPTransport)
 
@@ -53,8 +53,8 @@ def _get_open_connections(client: TradesignalsIo | AsyncTradesignalsIo) -> int:
     return len(pool._requests)
 
 
-class TestTradesignalsIo:
-    client = TradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+class TestTradesignals:
+    client = Tradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -101,7 +101,7 @@ class TestTradesignalsIo:
         assert isinstance(self.client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = TradesignalsIo(
+        client = Tradesignals(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
@@ -135,7 +135,7 @@ class TestTradesignalsIo:
             client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
 
     def test_copy_default_query(self) -> None:
-        client = TradesignalsIo(
+        client = Tradesignals(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
@@ -260,7 +260,7 @@ class TestTradesignalsIo:
         assert timeout == httpx.Timeout(100.0)
 
     def test_client_timeout_option(self) -> None:
-        client = TradesignalsIo(
+        client = Tradesignals(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
@@ -271,7 +271,7 @@ class TestTradesignalsIo:
     def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
-            client = TradesignalsIo(
+            client = Tradesignals(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -281,7 +281,7 @@ class TestTradesignalsIo:
 
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
-            client = TradesignalsIo(
+            client = Tradesignals(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -291,7 +291,7 @@ class TestTradesignalsIo:
 
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = TradesignalsIo(
+            client = Tradesignals(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -302,7 +302,7 @@ class TestTradesignalsIo:
     async def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             async with httpx.AsyncClient() as http_client:
-                TradesignalsIo(
+                Tradesignals(
                     base_url=base_url,
                     api_key=api_key,
                     _strict_response_validation=True,
@@ -310,14 +310,14 @@ class TestTradesignalsIo:
                 )
 
     def test_default_headers_option(self) -> None:
-        client = TradesignalsIo(
+        client = Tradesignals(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        client2 = TradesignalsIo(
+        client2 = Tradesignals(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -331,17 +331,17 @@ class TestTradesignalsIo:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = TradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Tradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with pytest.raises(TradesignalsIoError):
+        with pytest.raises(TradesignalsError):
             with update_env(**{"TRADESIGNALS_TOKEN": Omit()}):
-                client2 = TradesignalsIo(base_url=base_url, api_key=None, _strict_response_validation=True)
+                client2 = Tradesignals(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
-        client = TradesignalsIo(
+        client = Tradesignals(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -455,7 +455,7 @@ class TestTradesignalsIo:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, client: TradesignalsIo) -> None:
+    def test_multipart_repeating_array(self, client: Tradesignals) -> None:
         request = client._build_request(
             FinalRequestOptions.construct(
                 method="get",
@@ -542,7 +542,7 @@ class TestTradesignalsIo:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = TradesignalsIo(
+        client = Tradesignals(
             base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
@@ -552,16 +552,16 @@ class TestTradesignalsIo:
         assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
-        with update_env(TRADESIGNALS_IO_BASE_URL="http://localhost:5000/from/env"):
-            client = TradesignalsIo(api_key=api_key, _strict_response_validation=True)
+        with update_env(TRADESIGNALS_BASE_URL="http://localhost:5000/from/env"):
+            client = Tradesignals(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
         # explicit environment arg requires explicitness
-        with update_env(TRADESIGNALS_IO_BASE_URL="http://localhost:5000/from/env"):
+        with update_env(TRADESIGNALS_BASE_URL="http://localhost:5000/from/env"):
             with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                TradesignalsIo(api_key=api_key, _strict_response_validation=True, environment="production")
+                Tradesignals(api_key=api_key, _strict_response_validation=True, environment="production")
 
-            client = TradesignalsIo(
+            client = Tradesignals(
                 base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
             )
             assert str(client.base_url).startswith("https://api.unusualwhales.com")
@@ -569,10 +569,10 @@ class TestTradesignalsIo:
     @pytest.mark.parametrize(
         "client",
         [
-            TradesignalsIo(
+            Tradesignals(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            TradesignalsIo(
+            Tradesignals(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -581,7 +581,7 @@ class TestTradesignalsIo:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: TradesignalsIo) -> None:
+    def test_base_url_trailing_slash(self, client: Tradesignals) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -594,10 +594,10 @@ class TestTradesignalsIo:
     @pytest.mark.parametrize(
         "client",
         [
-            TradesignalsIo(
+            Tradesignals(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            TradesignalsIo(
+            Tradesignals(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -606,7 +606,7 @@ class TestTradesignalsIo:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: TradesignalsIo) -> None:
+    def test_base_url_no_trailing_slash(self, client: Tradesignals) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -619,10 +619,10 @@ class TestTradesignalsIo:
     @pytest.mark.parametrize(
         "client",
         [
-            TradesignalsIo(
+            Tradesignals(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            TradesignalsIo(
+            Tradesignals(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -631,7 +631,7 @@ class TestTradesignalsIo:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: TradesignalsIo) -> None:
+    def test_absolute_request_url(self, client: Tradesignals) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -642,7 +642,7 @@ class TestTradesignalsIo:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = TradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Tradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -653,7 +653,7 @@ class TestTradesignalsIo:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = TradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Tradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -674,7 +674,7 @@ class TestTradesignalsIo:
 
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            TradesignalsIo(
+            Tradesignals(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
@@ -685,12 +685,12 @@ class TestTradesignalsIo:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = TradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = Tradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = TradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        client = Tradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -718,7 +718,7 @@ class TestTradesignalsIo:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = TradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Tradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -755,7 +755,7 @@ class TestTradesignalsIo:
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     def test_retries_taken(
         self,
-        client: TradesignalsIo,
+        client: Tradesignals,
         failures_before_success: int,
         failure_mode: Literal["status", "exception"],
         respx_mock: MockRouter,
@@ -784,7 +784,7 @@ class TestTradesignalsIo:
     @mock.patch("tradesignals._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_omit_retry_count_header(
-        self, client: TradesignalsIo, failures_before_success: int, respx_mock: MockRouter
+        self, client: Tradesignals, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = client.with_options(max_retries=4)
 
@@ -809,7 +809,7 @@ class TestTradesignalsIo:
     @mock.patch("tradesignals._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_overwrite_retry_count_header(
-        self, client: TradesignalsIo, failures_before_success: int, respx_mock: MockRouter
+        self, client: Tradesignals, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = client.with_options(max_retries=4)
 
@@ -831,8 +831,8 @@ class TestTradesignalsIo:
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
 
-class TestAsyncTradesignalsIo:
-    client = AsyncTradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+class TestAsyncTradesignals:
+    client = AsyncTradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -881,7 +881,7 @@ class TestAsyncTradesignalsIo:
         assert isinstance(self.client.timeout, httpx.Timeout)
 
     def test_copy_default_headers(self) -> None:
-        client = AsyncTradesignalsIo(
+        client = AsyncTradesignals(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
@@ -915,7 +915,7 @@ class TestAsyncTradesignalsIo:
             client.copy(set_default_headers={}, default_headers={"X-Foo": "Bar"})
 
     def test_copy_default_query(self) -> None:
-        client = AsyncTradesignalsIo(
+        client = AsyncTradesignals(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
@@ -1040,7 +1040,7 @@ class TestAsyncTradesignalsIo:
         assert timeout == httpx.Timeout(100.0)
 
     async def test_client_timeout_option(self) -> None:
-        client = AsyncTradesignalsIo(
+        client = AsyncTradesignals(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
@@ -1051,7 +1051,7 @@ class TestAsyncTradesignalsIo:
     async def test_http_client_timeout_option(self) -> None:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
-            client = AsyncTradesignalsIo(
+            client = AsyncTradesignals(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1061,7 +1061,7 @@ class TestAsyncTradesignalsIo:
 
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
-            client = AsyncTradesignalsIo(
+            client = AsyncTradesignals(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1071,7 +1071,7 @@ class TestAsyncTradesignalsIo:
 
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
-            client = AsyncTradesignalsIo(
+            client = AsyncTradesignals(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
@@ -1082,7 +1082,7 @@ class TestAsyncTradesignalsIo:
     def test_invalid_http_client(self) -> None:
         with pytest.raises(TypeError, match="Invalid `http_client` arg"):
             with httpx.Client() as http_client:
-                AsyncTradesignalsIo(
+                AsyncTradesignals(
                     base_url=base_url,
                     api_key=api_key,
                     _strict_response_validation=True,
@@ -1090,14 +1090,14 @@ class TestAsyncTradesignalsIo:
                 )
 
     def test_default_headers_option(self) -> None:
-        client = AsyncTradesignalsIo(
+        client = AsyncTradesignals(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
         assert request.headers.get("x-stainless-lang") == "python"
 
-        client2 = AsyncTradesignalsIo(
+        client2 = AsyncTradesignals(
             base_url=base_url,
             api_key=api_key,
             _strict_response_validation=True,
@@ -1111,17 +1111,17 @@ class TestAsyncTradesignalsIo:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = AsyncTradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncTradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
-        with pytest.raises(TradesignalsIoError):
+        with pytest.raises(TradesignalsError):
             with update_env(**{"TRADESIGNALS_TOKEN": Omit()}):
-                client2 = AsyncTradesignalsIo(base_url=base_url, api_key=None, _strict_response_validation=True)
+                client2 = AsyncTradesignals(base_url=base_url, api_key=None, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
-        client = AsyncTradesignalsIo(
+        client = AsyncTradesignals(
             base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1235,7 +1235,7 @@ class TestAsyncTradesignalsIo:
         params = dict(request.url.params)
         assert params == {"foo": "2"}
 
-    def test_multipart_repeating_array(self, async_client: AsyncTradesignalsIo) -> None:
+    def test_multipart_repeating_array(self, async_client: AsyncTradesignals) -> None:
         request = async_client._build_request(
             FinalRequestOptions.construct(
                 method="get",
@@ -1322,7 +1322,7 @@ class TestAsyncTradesignalsIo:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = AsyncTradesignalsIo(
+        client = AsyncTradesignals(
             base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
@@ -1332,16 +1332,16 @@ class TestAsyncTradesignalsIo:
         assert client.base_url == "https://example.com/from_setter/"
 
     def test_base_url_env(self) -> None:
-        with update_env(TRADESIGNALS_IO_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncTradesignalsIo(api_key=api_key, _strict_response_validation=True)
+        with update_env(TRADESIGNALS_BASE_URL="http://localhost:5000/from/env"):
+            client = AsyncTradesignals(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
         # explicit environment arg requires explicitness
-        with update_env(TRADESIGNALS_IO_BASE_URL="http://localhost:5000/from/env"):
+        with update_env(TRADESIGNALS_BASE_URL="http://localhost:5000/from/env"):
             with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                AsyncTradesignalsIo(api_key=api_key, _strict_response_validation=True, environment="production")
+                AsyncTradesignals(api_key=api_key, _strict_response_validation=True, environment="production")
 
-            client = AsyncTradesignalsIo(
+            client = AsyncTradesignals(
                 base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
             )
             assert str(client.base_url).startswith("https://api.unusualwhales.com")
@@ -1349,10 +1349,10 @@ class TestAsyncTradesignalsIo:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncTradesignalsIo(
+            AsyncTradesignals(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncTradesignalsIo(
+            AsyncTradesignals(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1361,7 +1361,7 @@ class TestAsyncTradesignalsIo:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_trailing_slash(self, client: AsyncTradesignalsIo) -> None:
+    def test_base_url_trailing_slash(self, client: AsyncTradesignals) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1374,10 +1374,10 @@ class TestAsyncTradesignalsIo:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncTradesignalsIo(
+            AsyncTradesignals(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncTradesignalsIo(
+            AsyncTradesignals(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1386,7 +1386,7 @@ class TestAsyncTradesignalsIo:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_base_url_no_trailing_slash(self, client: AsyncTradesignalsIo) -> None:
+    def test_base_url_no_trailing_slash(self, client: AsyncTradesignals) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1399,10 +1399,10 @@ class TestAsyncTradesignalsIo:
     @pytest.mark.parametrize(
         "client",
         [
-            AsyncTradesignalsIo(
+            AsyncTradesignals(
                 base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
-            AsyncTradesignalsIo(
+            AsyncTradesignals(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
                 _strict_response_validation=True,
@@ -1411,7 +1411,7 @@ class TestAsyncTradesignalsIo:
         ],
         ids=["standard", "custom http client"],
     )
-    def test_absolute_request_url(self, client: AsyncTradesignalsIo) -> None:
+    def test_absolute_request_url(self, client: AsyncTradesignals) -> None:
         request = client._build_request(
             FinalRequestOptions(
                 method="post",
@@ -1422,7 +1422,7 @@ class TestAsyncTradesignalsIo:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncTradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncTradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1434,7 +1434,7 @@ class TestAsyncTradesignalsIo:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncTradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncTradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1456,7 +1456,7 @@ class TestAsyncTradesignalsIo:
 
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
-            AsyncTradesignalsIo(
+            AsyncTradesignals(
                 base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
             )
 
@@ -1468,12 +1468,12 @@ class TestAsyncTradesignalsIo:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncTradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = AsyncTradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncTradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        client = AsyncTradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1502,7 +1502,7 @@ class TestAsyncTradesignalsIo:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncTradesignalsIo(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncTradesignals(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -1540,7 +1540,7 @@ class TestAsyncTradesignalsIo:
     @pytest.mark.parametrize("failure_mode", ["status", "exception"])
     async def test_retries_taken(
         self,
-        async_client: AsyncTradesignalsIo,
+        async_client: AsyncTradesignals,
         failures_before_success: int,
         failure_mode: Literal["status", "exception"],
         respx_mock: MockRouter,
@@ -1570,7 +1570,7 @@ class TestAsyncTradesignalsIo:
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_omit_retry_count_header(
-        self, async_client: AsyncTradesignalsIo, failures_before_success: int, respx_mock: MockRouter
+        self, async_client: AsyncTradesignals, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = async_client.with_options(max_retries=4)
 
@@ -1596,7 +1596,7 @@ class TestAsyncTradesignalsIo:
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
     async def test_overwrite_retry_count_header(
-        self, async_client: AsyncTradesignalsIo, failures_before_success: int, respx_mock: MockRouter
+        self, async_client: AsyncTradesignals, failures_before_success: int, respx_mock: MockRouter
     ) -> None:
         client = async_client.with_options(max_retries=4)
 

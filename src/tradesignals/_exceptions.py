@@ -18,11 +18,11 @@ __all__ = [
 ]
 
 
-class TradesignalsIoError(Exception):
+class TradesignalsError(Exception):
     pass
 
 
-class APIError(TradesignalsIoError):
+class APIError(TradesignalsError):
     message: str
     request: httpx.Request
 
