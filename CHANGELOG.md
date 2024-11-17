@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.6 (2024-11-17)
+
+Full Changelog: [v0.1.0-alpha.5...v0.1.0-alpha.6](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.5...v0.1.0-alpha.6)
+
+### Features
+
+* **api:** update via SDK Studio ([#28](https://github.com/macanderson/tradesignals-python/issues/28)) ([052b150](https://github.com/macanderson/tradesignals-python/commit/052b15044d4acb6d5d090b68d29e76608838fa82))
+* **api:** update via SDK Studio ([#30](https://github.com/macanderson/tradesignals-python/issues/30)) ([afed6b5](https://github.com/macanderson/tradesignals-python/commit/afed6b5f5175f7cd484451685a0045951eed5726))
+* **api:** update via SDK Studio ([#31](https://github.com/macanderson/tradesignals-python/issues/31)) ([e5a2a98](https://github.com/macanderson/tradesignals-python/commit/e5a2a987dc0d02c8528d6e9c75ea5351cc140bda))
+
 ## 0.1.0-alpha.5 (2024-11-17)
 
 Full Changelog: [v0.1.0-alpha.4...v0.1.0-alpha.5](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.4...v0.1.0-alpha.5)
