@@ -23,31 +23,31 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.option_contract import option_chain_list_params
-from ...types.option_contract.option_chain_list_response import OptionChainListResponse
+from ...types.option_contracts import underlying_chain_list_params
+from ...types.option_contracts.underlying_chain_list_response import UnderlyingChainListResponse
 
-__all__ = ["OptionChainsResource", "AsyncOptionChainsResource"]
+__all__ = ["UnderlyingChainsResource", "AsyncUnderlyingChainsResource"]
 
 
-class OptionChainsResource(SyncAPIResource):
+class UnderlyingChainsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> OptionChainsResourceWithRawResponse:
+    def with_raw_response(self) -> UnderlyingChainsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return OptionChainsResourceWithRawResponse(self)
+        return UnderlyingChainsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> OptionChainsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> UnderlyingChainsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return OptionChainsResourceWithStreamingResponse(self)
+        return UnderlyingChainsResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -67,7 +67,7 @@ class OptionChainsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[OptionChainListResponse]:
+    ) -> Optional[UnderlyingChainListResponse]:
         """
         Returns all option contracts for the given ticker.
 
@@ -116,33 +116,33 @@ class OptionChainsResource(SyncAPIResource):
                         "option_type": option_type,
                         "vol_greater_oi": vol_greater_oi,
                     },
-                    option_chain_list_params.OptionChainListParams,
+                    underlying_chain_list_params.UnderlyingChainListParams,
                 ),
-                post_parser=DataWrapper[Optional[OptionChainListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[UnderlyingChainListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[OptionChainListResponse]], DataWrapper[OptionChainListResponse]),
+            cast_to=cast(Type[Optional[UnderlyingChainListResponse]], DataWrapper[UnderlyingChainListResponse]),
         )
 
 
-class AsyncOptionChainsResource(AsyncAPIResource):
+class AsyncUnderlyingChainsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncOptionChainsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncUnderlyingChainsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncOptionChainsResourceWithRawResponse(self)
+        return AsyncUnderlyingChainsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncOptionChainsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncUnderlyingChainsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncOptionChainsResourceWithStreamingResponse(self)
+        return AsyncUnderlyingChainsResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -162,7 +162,7 @@ class AsyncOptionChainsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[OptionChainListResponse]:
+    ) -> Optional[UnderlyingChainListResponse]:
         """
         Returns all option contracts for the given ticker.
 
@@ -211,45 +211,45 @@ class AsyncOptionChainsResource(AsyncAPIResource):
                         "option_type": option_type,
                         "vol_greater_oi": vol_greater_oi,
                     },
-                    option_chain_list_params.OptionChainListParams,
+                    underlying_chain_list_params.UnderlyingChainListParams,
                 ),
-                post_parser=DataWrapper[Optional[OptionChainListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[UnderlyingChainListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[OptionChainListResponse]], DataWrapper[OptionChainListResponse]),
+            cast_to=cast(Type[Optional[UnderlyingChainListResponse]], DataWrapper[UnderlyingChainListResponse]),
         )
 
 
-class OptionChainsResourceWithRawResponse:
-    def __init__(self, option_chains: OptionChainsResource) -> None:
-        self._option_chains = option_chains
+class UnderlyingChainsResourceWithRawResponse:
+    def __init__(self, underlying_chains: UnderlyingChainsResource) -> None:
+        self._underlying_chains = underlying_chains
 
         self.list = to_raw_response_wrapper(
-            option_chains.list,
+            underlying_chains.list,
         )
 
 
-class AsyncOptionChainsResourceWithRawResponse:
-    def __init__(self, option_chains: AsyncOptionChainsResource) -> None:
-        self._option_chains = option_chains
+class AsyncUnderlyingChainsResourceWithRawResponse:
+    def __init__(self, underlying_chains: AsyncUnderlyingChainsResource) -> None:
+        self._underlying_chains = underlying_chains
 
         self.list = async_to_raw_response_wrapper(
-            option_chains.list,
+            underlying_chains.list,
         )
 
 
-class OptionChainsResourceWithStreamingResponse:
-    def __init__(self, option_chains: OptionChainsResource) -> None:
-        self._option_chains = option_chains
+class UnderlyingChainsResourceWithStreamingResponse:
+    def __init__(self, underlying_chains: UnderlyingChainsResource) -> None:
+        self._underlying_chains = underlying_chains
 
         self.list = to_streamed_response_wrapper(
-            option_chains.list,
+            underlying_chains.list,
         )
 
 
-class AsyncOptionChainsResourceWithStreamingResponse:
-    def __init__(self, option_chains: AsyncOptionChainsResource) -> None:
-        self._option_chains = option_chains
+class AsyncUnderlyingChainsResourceWithStreamingResponse:
+    def __init__(self, underlying_chains: AsyncUnderlyingChainsResource) -> None:
+        self._underlying_chains = underlying_chains
 
         self.list = async_to_streamed_response_wrapper(
-            option_chains.list,
+            underlying_chains.list,
         )

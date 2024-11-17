@@ -23,8 +23,8 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.option_contract import flow_data_retrieve_params
-from ...types.option_contract.flow_data_retrieve_response import FlowDataRetrieveResponse
+from ...types.option_contracts import flow_data_retrieve_params
+from ...types.option_contracts.flow_data_retrieve_response import FlowDataRetrieveResponse
 
 __all__ = ["FlowDataResource", "AsyncFlowDataResource"]
 

@@ -8,10 +8,10 @@ from typing_extensions import Literal, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["OptionChainListParams"]
+__all__ = ["UnderlyingChainListParams"]
 
 
-class OptionChainListParams(TypedDict, total=False):
+class UnderlyingChainListParams(TypedDict, total=False):
     exclude_zero_dte: bool
     """Exclude chains expiring the same day."""
 
