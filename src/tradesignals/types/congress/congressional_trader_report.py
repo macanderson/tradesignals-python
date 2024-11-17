@@ -6,10 +6,10 @@ from typing_extensions import Literal
 
 from ..._models import BaseModel
 
-__all__ = ["LateCongressionalReport"]
+__all__ = ["CongressionalTraderReport"]
 
 
-class LateCongressionalReport(BaseModel):
+class CongressionalTraderReport(BaseModel):
     amounts: Optional[str] = None
     """The reported amount range of the transaction."""
 
