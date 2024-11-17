@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Type, Union, Optional, cast
-from datetime import date
+from typing import Type, Optional, cast
 from typing_extensions import Literal
 
 import httpx
@@ -23,53 +22,64 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.screener import option_contract_list_params
-from ...types.screener.option_contract_list_response import OptionContractListResponse
+from ...types.seasonality import performer_list_params
+from ...types.seasonality.performer_list_response import PerformerListResponse
 
-__all__ = ["OptionContractsResource", "AsyncOptionContractsResource"]
+__all__ = ["PerformersResource", "AsyncPerformersResource"]
 
 
-class OptionContractsResource(SyncAPIResource):
+class PerformersResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> OptionContractsResourceWithRawResponse:
+    def with_raw_response(self) -> PerformersResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return OptionContractsResourceWithRawResponse(self)
+        return PerformersResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> OptionContractsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> PerformersResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return OptionContractsResourceWithStreamingResponse(self)
+        return PerformersResourceWithStreamingResponse(self)
 
     def list(
         self,
+        month: int,
         *,
-        expiry_dates: List[Union[str, date]] | NotGiven = NOT_GIVEN,
-        is_otm: bool | NotGiven = NOT_GIVEN,
-        issue_types: List[Literal["Common Stock", "ETF", "Index", "ADR"]] | NotGiven = NOT_GIVEN,
-        max_daily_perc_change: float | NotGiven = NOT_GIVEN,
-        min_volume: int | NotGiven = NOT_GIVEN,
-        order: Literal["bid_ask_vol", "bull_bear_vol", "contract_pricing", "daily_perc_change", "volume"]
+        limit: int | NotGiven = NOT_GIVEN,
+        min_oi: int | NotGiven = NOT_GIVEN,
+        min_years: int | NotGiven = NOT_GIVEN,
+        order: Literal[
+            "ticker",
+            "month",
+            "positive_closes",
+            "years",
+            "positive_months_perc",
+            "median_change",
+            "avg_change",
+            "max_change",
+            "min_change",
+        ]
         | NotGiven = NOT_GIVEN,
         order_direction: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        s_p_500_nasdaq_only: bool | NotGiven = NOT_GIVEN,
+        ticker_for_sector: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[OptionContractListResponse]:
+    ) -> Optional[PerformerListResponse]:
         """
-        A contract screener endpoint to screen the market for contracts by a variety of
-        filter options. Contracts with a volume of less than 200 are not returned.
+        Returns the tickers with the highest performance in terms of price change in the
+        given month.
 
         Args:
           extra_headers: Send extra headers
@@ -81,7 +91,7 @@ class OptionContractsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            "/api/screener/option-contracts",
+            f"/api/seasonality/{month}/performers",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -89,63 +99,74 @@ class OptionContractsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "expiry_dates": expiry_dates,
-                        "is_otm": is_otm,
-                        "issue_types": issue_types,
-                        "max_daily_perc_change": max_daily_perc_change,
-                        "min_volume": min_volume,
+                        "limit": limit,
+                        "min_oi": min_oi,
+                        "min_years": min_years,
                         "order": order,
                         "order_direction": order_direction,
+                        "s_p_500_nasdaq_only": s_p_500_nasdaq_only,
+                        "ticker_for_sector": ticker_for_sector,
                     },
-                    option_contract_list_params.OptionContractListParams,
+                    performer_list_params.PerformerListParams,
                 ),
-                post_parser=DataWrapper[Optional[OptionContractListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[PerformerListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[OptionContractListResponse]], DataWrapper[OptionContractListResponse]),
+            cast_to=cast(Type[Optional[PerformerListResponse]], DataWrapper[PerformerListResponse]),
         )
 
 
-class AsyncOptionContractsResource(AsyncAPIResource):
+class AsyncPerformersResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncOptionContractsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncPerformersResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncOptionContractsResourceWithRawResponse(self)
+        return AsyncPerformersResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncOptionContractsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncPerformersResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncOptionContractsResourceWithStreamingResponse(self)
+        return AsyncPerformersResourceWithStreamingResponse(self)
 
     async def list(
         self,
+        month: int,
         *,
-        expiry_dates: List[Union[str, date]] | NotGiven = NOT_GIVEN,
-        is_otm: bool | NotGiven = NOT_GIVEN,
-        issue_types: List[Literal["Common Stock", "ETF", "Index", "ADR"]] | NotGiven = NOT_GIVEN,
-        max_daily_perc_change: float | NotGiven = NOT_GIVEN,
-        min_volume: int | NotGiven = NOT_GIVEN,
-        order: Literal["bid_ask_vol", "bull_bear_vol", "contract_pricing", "daily_perc_change", "volume"]
+        limit: int | NotGiven = NOT_GIVEN,
+        min_oi: int | NotGiven = NOT_GIVEN,
+        min_years: int | NotGiven = NOT_GIVEN,
+        order: Literal[
+            "ticker",
+            "month",
+            "positive_closes",
+            "years",
+            "positive_months_perc",
+            "median_change",
+            "avg_change",
+            "max_change",
+            "min_change",
+        ]
         | NotGiven = NOT_GIVEN,
         order_direction: Literal["asc", "desc"] | NotGiven = NOT_GIVEN,
+        s_p_500_nasdaq_only: bool | NotGiven = NOT_GIVEN,
+        ticker_for_sector: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[OptionContractListResponse]:
+    ) -> Optional[PerformerListResponse]:
         """
-        A contract screener endpoint to screen the market for contracts by a variety of
-        filter options. Contracts with a volume of less than 200 are not returned.
+        Returns the tickers with the highest performance in terms of price change in the
+        given month.
 
         Args:
           extra_headers: Send extra headers
@@ -157,7 +178,7 @@ class AsyncOptionContractsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            "/api/screener/option-contracts",
+            f"/api/seasonality/{month}/performers",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -165,53 +186,53 @@ class AsyncOptionContractsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "expiry_dates": expiry_dates,
-                        "is_otm": is_otm,
-                        "issue_types": issue_types,
-                        "max_daily_perc_change": max_daily_perc_change,
-                        "min_volume": min_volume,
+                        "limit": limit,
+                        "min_oi": min_oi,
+                        "min_years": min_years,
                         "order": order,
                         "order_direction": order_direction,
+                        "s_p_500_nasdaq_only": s_p_500_nasdaq_only,
+                        "ticker_for_sector": ticker_for_sector,
                     },
-                    option_contract_list_params.OptionContractListParams,
+                    performer_list_params.PerformerListParams,
                 ),
-                post_parser=DataWrapper[Optional[OptionContractListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[PerformerListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[OptionContractListResponse]], DataWrapper[OptionContractListResponse]),
+            cast_to=cast(Type[Optional[PerformerListResponse]], DataWrapper[PerformerListResponse]),
         )
 
 
-class OptionContractsResourceWithRawResponse:
-    def __init__(self, option_contracts: OptionContractsResource) -> None:
-        self._option_contracts = option_contracts
+class PerformersResourceWithRawResponse:
+    def __init__(self, performers: PerformersResource) -> None:
+        self._performers = performers
 
         self.list = to_raw_response_wrapper(
-            option_contracts.list,
+            performers.list,
         )
 
 
-class AsyncOptionContractsResourceWithRawResponse:
-    def __init__(self, option_contracts: AsyncOptionContractsResource) -> None:
-        self._option_contracts = option_contracts
+class AsyncPerformersResourceWithRawResponse:
+    def __init__(self, performers: AsyncPerformersResource) -> None:
+        self._performers = performers
 
         self.list = async_to_raw_response_wrapper(
-            option_contracts.list,
+            performers.list,
         )
 
 
-class OptionContractsResourceWithStreamingResponse:
-    def __init__(self, option_contracts: OptionContractsResource) -> None:
-        self._option_contracts = option_contracts
+class PerformersResourceWithStreamingResponse:
+    def __init__(self, performers: PerformersResource) -> None:
+        self._performers = performers
 
         self.list = to_streamed_response_wrapper(
-            option_contracts.list,
+            performers.list,
         )
 
 
-class AsyncOptionContractsResourceWithStreamingResponse:
-    def __init__(self, option_contracts: AsyncOptionContractsResource) -> None:
-        self._option_contracts = option_contracts
+class AsyncPerformersResourceWithStreamingResponse:
+    def __init__(self, performers: AsyncPerformersResource) -> None:
+        self._performers = performers
 
         self.list = async_to_streamed_response_wrapper(
-            option_contracts.list,
+            performers.list,
         )

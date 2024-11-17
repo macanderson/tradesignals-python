@@ -22,31 +22,31 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.screener import analyst_list_params
-from ...types.screener.analyst_list_response import AnalystListResponse
+from ...types.screeners import analyst_rating_list_params
+from ...types.screeners.analyst_rating_list_response import AnalystRatingListResponse
 
-__all__ = ["AnalystsResource", "AsyncAnalystsResource"]
+__all__ = ["AnalystRatingsResource", "AsyncAnalystRatingsResource"]
 
 
-class AnalystsResource(SyncAPIResource):
+class AnalystRatingsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AnalystsResourceWithRawResponse:
+    def with_raw_response(self) -> AnalystRatingsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AnalystsResourceWithRawResponse(self)
+        return AnalystRatingsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AnalystsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AnalystRatingsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AnalystsResourceWithStreamingResponse(self)
+        return AnalystRatingsResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -61,7 +61,7 @@ class AnalystsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[AnalystListResponse]:
+    ) -> Optional[AnalystRatingListResponse]:
         """
         Returns the latest analyst ratings for the given ticker
 
@@ -88,33 +88,33 @@ class AnalystsResource(SyncAPIResource):
                         "recommendation": recommendation,
                         "ticker": ticker,
                     },
-                    analyst_list_params.AnalystListParams,
+                    analyst_rating_list_params.AnalystRatingListParams,
                 ),
-                post_parser=DataWrapper[Optional[AnalystListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[AnalystRatingListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[AnalystListResponse]], DataWrapper[AnalystListResponse]),
+            cast_to=cast(Type[Optional[AnalystRatingListResponse]], DataWrapper[AnalystRatingListResponse]),
         )
 
 
-class AsyncAnalystsResource(AsyncAPIResource):
+class AsyncAnalystRatingsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncAnalystsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncAnalystRatingsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncAnalystsResourceWithRawResponse(self)
+        return AsyncAnalystRatingsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncAnalystsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncAnalystRatingsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncAnalystsResourceWithStreamingResponse(self)
+        return AsyncAnalystRatingsResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -129,7 +129,7 @@ class AsyncAnalystsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[AnalystListResponse]:
+    ) -> Optional[AnalystRatingListResponse]:
         """
         Returns the latest analyst ratings for the given ticker
 
@@ -156,45 +156,45 @@ class AsyncAnalystsResource(AsyncAPIResource):
                         "recommendation": recommendation,
                         "ticker": ticker,
                     },
-                    analyst_list_params.AnalystListParams,
+                    analyst_rating_list_params.AnalystRatingListParams,
                 ),
-                post_parser=DataWrapper[Optional[AnalystListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[AnalystRatingListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[AnalystListResponse]], DataWrapper[AnalystListResponse]),
+            cast_to=cast(Type[Optional[AnalystRatingListResponse]], DataWrapper[AnalystRatingListResponse]),
         )
 
 
-class AnalystsResourceWithRawResponse:
-    def __init__(self, analysts: AnalystsResource) -> None:
-        self._analysts = analysts
+class AnalystRatingsResourceWithRawResponse:
+    def __init__(self, analyst_ratings: AnalystRatingsResource) -> None:
+        self._analyst_ratings = analyst_ratings
 
         self.list = to_raw_response_wrapper(
-            analysts.list,
+            analyst_ratings.list,
         )
 
 
-class AsyncAnalystsResourceWithRawResponse:
-    def __init__(self, analysts: AsyncAnalystsResource) -> None:
-        self._analysts = analysts
+class AsyncAnalystRatingsResourceWithRawResponse:
+    def __init__(self, analyst_ratings: AsyncAnalystRatingsResource) -> None:
+        self._analyst_ratings = analyst_ratings
 
         self.list = async_to_raw_response_wrapper(
-            analysts.list,
+            analyst_ratings.list,
         )
 
 
-class AnalystsResourceWithStreamingResponse:
-    def __init__(self, analysts: AnalystsResource) -> None:
-        self._analysts = analysts
+class AnalystRatingsResourceWithStreamingResponse:
+    def __init__(self, analyst_ratings: AnalystRatingsResource) -> None:
+        self._analyst_ratings = analyst_ratings
 
         self.list = to_streamed_response_wrapper(
-            analysts.list,
+            analyst_ratings.list,
         )
 
 
-class AsyncAnalystsResourceWithStreamingResponse:
-    def __init__(self, analysts: AsyncAnalystsResource) -> None:
-        self._analysts = analysts
+class AsyncAnalystRatingsResourceWithStreamingResponse:
+    def __init__(self, analyst_ratings: AsyncAnalystRatingsResource) -> None:
+        self._analyst_ratings = analyst_ratings
 
         self.list = async_to_streamed_response_wrapper(
-            analysts.list,
+            analyst_ratings.list,
         )
