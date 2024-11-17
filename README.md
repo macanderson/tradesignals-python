@@ -31,7 +31,7 @@ client = Tradesignals(
     environment="test",
 )
 
-trades = client.darkpool.ticker_darkpool_trades.list(
+trades = client.darkpool.trades_by_ticker.list(
     ticker="AAPL",
 )
 ```
@@ -58,7 +58,7 @@ client = AsyncTradesignals(
 
 
 async def main() -> None:
-    trades = await client.darkpool.ticker_darkpool_trades.list(
+    trades = await client.darkpool.trades_by_ticker.list(
         ticker="AAPL",
     )
 
@@ -93,7 +93,7 @@ from tradesignals import Tradesignals
 client = Tradesignals()
 
 try:
-    client.darkpool.recent_darkpool_trades.list()
+    client.darkpool.recent_trades.list()
 except tradesignals.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -136,7 +136,7 @@ client = Tradesignals(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).darkpool.recent_darkpool_trades.list()
+client.with_options(max_retries=5).darkpool.recent_trades.list()
 ```
 
 ### Timeouts
@@ -159,7 +159,7 @@ client = Tradesignals(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).darkpool.recent_darkpool_trades.list()
+client.with_options(timeout=5.0).darkpool.recent_trades.list()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -212,11 +212,11 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from tradesignals import Tradesignals
 
 client = Tradesignals()
-response = client.darkpool.recent_darkpool_trades.with_raw_response.list()
+response = client.darkpool.recent_trades.with_raw_response.list()
 print(response.headers.get('X-My-Header'))
 
-recent_darkpool_trade = response.parse()  # get the object that `darkpool.recent_darkpool_trades.list()` would have returned
-print(recent_darkpool_trade)
+recent_trade = response.parse()  # get the object that `darkpool.recent_trades.list()` would have returned
+print(recent_trade)
 ```
 
 These methods return an [`APIResponse`](https://github.com/macanderson/tradesignals-python/tree/main/src/tradesignals/_response.py) object.
@@ -230,7 +230,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.darkpool.recent_darkpool_trades.with_streaming_response.list() as response:
+with client.darkpool.recent_trades.with_streaming_response.list() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
