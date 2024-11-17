@@ -32,6 +32,22 @@ Methods:
 
 - <code title="get /api/institution/{name}/holdings">client.institutions.holdings.<a href="./src/tradesignals/resources/institutions/holdings.py">list</a>(name, \*\*<a href="src/tradesignals/types/institutions/holding_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/holding_list_response.py">Optional</a></code>
 
+## Sectors
+
+Types:
+
+```python
+from tradesignals.types.institutions import (
+    SectorExposure,
+    SectorExposureResponse,
+    SectorListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/institution/{name}/sectors">client.institutions.sectors.<a href="./src/tradesignals/resources/institutions/sectors.py">list</a>(name, \*\*<a href="src/tradesignals/types/institutions/sector_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/sector_list_response.py">Optional</a></code>
+
 # Earnings
 
 ## Afterhours

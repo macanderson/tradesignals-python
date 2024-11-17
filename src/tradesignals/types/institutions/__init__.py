@@ -2,11 +2,15 @@
 
 from __future__ import annotations
 
+from .sector_exposure import SectorExposure as SectorExposure
+from .sector_list_params import SectorListParams as SectorListParams
 from .holding_list_params import HoldingListParams as HoldingListParams
 from .institution_holding import InstitutionHolding as InstitutionHolding
 from .activity_list_params import ActivityListParams as ActivityListParams
 from .institution_activity import InstitutionActivity as InstitutionActivity
+from .sector_list_response import SectorListResponse as SectorListResponse
 from .holding_list_response import HoldingListResponse as HoldingListResponse
 from .activity_list_response import ActivityListResponse as ActivityListResponse
+from .sector_exposure_response import SectorExposureResponse as SectorExposureResponse
 from .institution_activity_response import InstitutionActivityResponse as InstitutionActivityResponse
 from .institution_holdings_response import InstitutionHoldingsResponse as InstitutionHoldingsResponse
