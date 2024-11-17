@@ -5,6 +5,6 @@ from typing_extensions import TypeAlias
 
 from .option_contracts_entry import OptionContractsEntry
 
-__all__ = ["OptionChainListResponse"]
+__all__ = ["UnderlyingChainListResponse"]
 
-OptionChainListResponse: TypeAlias = List[OptionContractsEntry]
+UnderlyingChainListResponse: TypeAlias = List[OptionContractsEntry]

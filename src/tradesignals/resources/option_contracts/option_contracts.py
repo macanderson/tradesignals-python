@@ -20,14 +20,6 @@ from .historic_data import (
     HistoricDataResourceWithStreamingResponse,
     AsyncHistoricDataResourceWithStreamingResponse,
 )
-from .option_chains import (
-    OptionChainsResource,
-    AsyncOptionChainsResource,
-    OptionChainsResourceWithRawResponse,
-    AsyncOptionChainsResourceWithRawResponse,
-    OptionChainsResourceWithStreamingResponse,
-    AsyncOptionChainsResourceWithStreamingResponse,
-)
 from .expiry_breakdown import (
     ExpiryBreakdownResource,
     AsyncExpiryBreakdownResource,
@@ -36,14 +28,22 @@ from .expiry_breakdown import (
     ExpiryBreakdownResourceWithStreamingResponse,
     AsyncExpiryBreakdownResourceWithStreamingResponse,
 )
+from .underlying_chains import (
+    UnderlyingChainsResource,
+    AsyncUnderlyingChainsResource,
+    UnderlyingChainsResourceWithRawResponse,
+    AsyncUnderlyingChainsResourceWithRawResponse,
+    UnderlyingChainsResourceWithStreamingResponse,
+    AsyncUnderlyingChainsResourceWithStreamingResponse,
+)
 
-__all__ = ["OptionContractResource", "AsyncOptionContractResource"]
+__all__ = ["OptionContractsResource", "AsyncOptionContractsResource"]
 
 
-class OptionContractResource(SyncAPIResource):
+class OptionContractsResource(SyncAPIResource):
     @cached_property
-    def option_chains(self) -> OptionChainsResource:
-        return OptionChainsResource(self._client)
+    def underlying_chains(self) -> UnderlyingChainsResource:
+        return UnderlyingChainsResource(self._client)
 
     @cached_property
     def flow_data(self) -> FlowDataResource:
@@ -58,29 +58,29 @@ class OptionContractResource(SyncAPIResource):
         return ExpiryBreakdownResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> OptionContractResourceWithRawResponse:
+    def with_raw_response(self) -> OptionContractsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return OptionContractResourceWithRawResponse(self)
+        return OptionContractsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> OptionContractResourceWithStreamingResponse:
+    def with_streaming_response(self) -> OptionContractsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return OptionContractResourceWithStreamingResponse(self)
+        return OptionContractsResourceWithStreamingResponse(self)
 
 
-class AsyncOptionContractResource(AsyncAPIResource):
+class AsyncOptionContractsResource(AsyncAPIResource):
     @cached_property
-    def option_chains(self) -> AsyncOptionChainsResource:
-        return AsyncOptionChainsResource(self._client)
+    def underlying_chains(self) -> AsyncUnderlyingChainsResource:
+        return AsyncUnderlyingChainsResource(self._client)
 
     @cached_property
     def flow_data(self) -> AsyncFlowDataResource:
@@ -95,104 +95,104 @@ class AsyncOptionContractResource(AsyncAPIResource):
         return AsyncExpiryBreakdownResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> AsyncOptionContractResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncOptionContractsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncOptionContractResourceWithRawResponse(self)
+        return AsyncOptionContractsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncOptionContractResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncOptionContractsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncOptionContractResourceWithStreamingResponse(self)
+        return AsyncOptionContractsResourceWithStreamingResponse(self)
 
 
-class OptionContractResourceWithRawResponse:
-    def __init__(self, option_contract: OptionContractResource) -> None:
-        self._option_contract = option_contract
+class OptionContractsResourceWithRawResponse:
+    def __init__(self, option_contracts: OptionContractsResource) -> None:
+        self._option_contracts = option_contracts
 
     @cached_property
-    def option_chains(self) -> OptionChainsResourceWithRawResponse:
-        return OptionChainsResourceWithRawResponse(self._option_contract.option_chains)
+    def underlying_chains(self) -> UnderlyingChainsResourceWithRawResponse:
+        return UnderlyingChainsResourceWithRawResponse(self._option_contracts.underlying_chains)
 
     @cached_property
     def flow_data(self) -> FlowDataResourceWithRawResponse:
-        return FlowDataResourceWithRawResponse(self._option_contract.flow_data)
+        return FlowDataResourceWithRawResponse(self._option_contracts.flow_data)
 
     @cached_property
     def historic_data(self) -> HistoricDataResourceWithRawResponse:
-        return HistoricDataResourceWithRawResponse(self._option_contract.historic_data)
+        return HistoricDataResourceWithRawResponse(self._option_contracts.historic_data)
 
     @cached_property
     def expiry_breakdown(self) -> ExpiryBreakdownResourceWithRawResponse:
-        return ExpiryBreakdownResourceWithRawResponse(self._option_contract.expiry_breakdown)
+        return ExpiryBreakdownResourceWithRawResponse(self._option_contracts.expiry_breakdown)
 
 
-class AsyncOptionContractResourceWithRawResponse:
-    def __init__(self, option_contract: AsyncOptionContractResource) -> None:
-        self._option_contract = option_contract
+class AsyncOptionContractsResourceWithRawResponse:
+    def __init__(self, option_contracts: AsyncOptionContractsResource) -> None:
+        self._option_contracts = option_contracts
 
     @cached_property
-    def option_chains(self) -> AsyncOptionChainsResourceWithRawResponse:
-        return AsyncOptionChainsResourceWithRawResponse(self._option_contract.option_chains)
+    def underlying_chains(self) -> AsyncUnderlyingChainsResourceWithRawResponse:
+        return AsyncUnderlyingChainsResourceWithRawResponse(self._option_contracts.underlying_chains)
 
     @cached_property
     def flow_data(self) -> AsyncFlowDataResourceWithRawResponse:
-        return AsyncFlowDataResourceWithRawResponse(self._option_contract.flow_data)
+        return AsyncFlowDataResourceWithRawResponse(self._option_contracts.flow_data)
 
     @cached_property
     def historic_data(self) -> AsyncHistoricDataResourceWithRawResponse:
-        return AsyncHistoricDataResourceWithRawResponse(self._option_contract.historic_data)
+        return AsyncHistoricDataResourceWithRawResponse(self._option_contracts.historic_data)
 
     @cached_property
     def expiry_breakdown(self) -> AsyncExpiryBreakdownResourceWithRawResponse:
-        return AsyncExpiryBreakdownResourceWithRawResponse(self._option_contract.expiry_breakdown)
+        return AsyncExpiryBreakdownResourceWithRawResponse(self._option_contracts.expiry_breakdown)
 
 
-class OptionContractResourceWithStreamingResponse:
-    def __init__(self, option_contract: OptionContractResource) -> None:
-        self._option_contract = option_contract
+class OptionContractsResourceWithStreamingResponse:
+    def __init__(self, option_contracts: OptionContractsResource) -> None:
+        self._option_contracts = option_contracts
 
     @cached_property
-    def option_chains(self) -> OptionChainsResourceWithStreamingResponse:
-        return OptionChainsResourceWithStreamingResponse(self._option_contract.option_chains)
+    def underlying_chains(self) -> UnderlyingChainsResourceWithStreamingResponse:
+        return UnderlyingChainsResourceWithStreamingResponse(self._option_contracts.underlying_chains)
 
     @cached_property
     def flow_data(self) -> FlowDataResourceWithStreamingResponse:
-        return FlowDataResourceWithStreamingResponse(self._option_contract.flow_data)
+        return FlowDataResourceWithStreamingResponse(self._option_contracts.flow_data)
 
     @cached_property
     def historic_data(self) -> HistoricDataResourceWithStreamingResponse:
-        return HistoricDataResourceWithStreamingResponse(self._option_contract.historic_data)
+        return HistoricDataResourceWithStreamingResponse(self._option_contracts.historic_data)
 
     @cached_property
     def expiry_breakdown(self) -> ExpiryBreakdownResourceWithStreamingResponse:
-        return ExpiryBreakdownResourceWithStreamingResponse(self._option_contract.expiry_breakdown)
+        return ExpiryBreakdownResourceWithStreamingResponse(self._option_contracts.expiry_breakdown)
 
 
-class AsyncOptionContractResourceWithStreamingResponse:
-    def __init__(self, option_contract: AsyncOptionContractResource) -> None:
-        self._option_contract = option_contract
+class AsyncOptionContractsResourceWithStreamingResponse:
+    def __init__(self, option_contracts: AsyncOptionContractsResource) -> None:
+        self._option_contracts = option_contracts
 
     @cached_property
-    def option_chains(self) -> AsyncOptionChainsResourceWithStreamingResponse:
-        return AsyncOptionChainsResourceWithStreamingResponse(self._option_contract.option_chains)
+    def underlying_chains(self) -> AsyncUnderlyingChainsResourceWithStreamingResponse:
+        return AsyncUnderlyingChainsResourceWithStreamingResponse(self._option_contracts.underlying_chains)
 
     @cached_property
     def flow_data(self) -> AsyncFlowDataResourceWithStreamingResponse:
-        return AsyncFlowDataResourceWithStreamingResponse(self._option_contract.flow_data)
+        return AsyncFlowDataResourceWithStreamingResponse(self._option_contracts.flow_data)
 
     @cached_property
     def historic_data(self) -> AsyncHistoricDataResourceWithStreamingResponse:
-        return AsyncHistoricDataResourceWithStreamingResponse(self._option_contract.historic_data)
+        return AsyncHistoricDataResourceWithStreamingResponse(self._option_contracts.historic_data)
 
     @cached_property
     def expiry_breakdown(self) -> AsyncExpiryBreakdownResourceWithStreamingResponse:
-        return AsyncExpiryBreakdownResourceWithStreamingResponse(self._option_contract.expiry_breakdown)
+        return AsyncExpiryBreakdownResourceWithStreamingResponse(self._option_contracts.expiry_breakdown)

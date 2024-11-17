@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Type, Union, Optional, cast
-from datetime import date
+from typing import Type, Optional, cast
+from typing_extensions import Literal
 
 import httpx
 
@@ -22,50 +22,50 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.option_contract import expiry_breakdown_list_params
-from ...types.option_contract.expiry_breakdown_list_response import ExpiryBreakdownListResponse
+from ...types.screener import analyst_list_params
+from ...types.screener.analyst_list_response import AnalystListResponse
 
-__all__ = ["ExpiryBreakdownResource", "AsyncExpiryBreakdownResource"]
+__all__ = ["AnalystsResource", "AsyncAnalystsResource"]
 
 
-class ExpiryBreakdownResource(SyncAPIResource):
+class AnalystsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> ExpiryBreakdownResourceWithRawResponse:
+    def with_raw_response(self) -> AnalystsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return ExpiryBreakdownResourceWithRawResponse(self)
+        return AnalystsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ExpiryBreakdownResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AnalystsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return ExpiryBreakdownResourceWithStreamingResponse(self)
+        return AnalystsResourceWithStreamingResponse(self)
 
     def list(
         self,
-        ticker: str,
         *,
-        date: Union[str, date] | NotGiven = NOT_GIVEN,
+        action: Literal["initiated", "reiterated", "downgraded", "upgraded", "maintained"] | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        recommendation: Literal["buy", "hold", "sell"] | NotGiven = NOT_GIVEN,
+        ticker: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[ExpiryBreakdownListResponse]:
+    ) -> Optional[AnalystListResponse]:
         """
-        Returns all expirations for the given trading day for a ticker.
+        Returns the latest analyst ratings for the given ticker
 
         Args:
-          date: A trading date in the format YYYY-MM-DD. Defaults to the last trading date.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -74,60 +74,66 @@ class ExpiryBreakdownResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not ticker:
-            raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return self._get(
-            f"/api/stock/{ticker}/expiry-breakdown",
+            "/api/screener/analysts",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"date": date}, expiry_breakdown_list_params.ExpiryBreakdownListParams),
-                post_parser=DataWrapper[Optional[ExpiryBreakdownListResponse]]._unwrapper,
+                query=maybe_transform(
+                    {
+                        "action": action,
+                        "limit": limit,
+                        "recommendation": recommendation,
+                        "ticker": ticker,
+                    },
+                    analyst_list_params.AnalystListParams,
+                ),
+                post_parser=DataWrapper[Optional[AnalystListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[ExpiryBreakdownListResponse]], DataWrapper[ExpiryBreakdownListResponse]),
+            cast_to=cast(Type[Optional[AnalystListResponse]], DataWrapper[AnalystListResponse]),
         )
 
 
-class AsyncExpiryBreakdownResource(AsyncAPIResource):
+class AsyncAnalystsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncExpiryBreakdownResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncAnalystsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncExpiryBreakdownResourceWithRawResponse(self)
+        return AsyncAnalystsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncExpiryBreakdownResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncAnalystsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncExpiryBreakdownResourceWithStreamingResponse(self)
+        return AsyncAnalystsResourceWithStreamingResponse(self)
 
     async def list(
         self,
-        ticker: str,
         *,
-        date: Union[str, date] | NotGiven = NOT_GIVEN,
+        action: Literal["initiated", "reiterated", "downgraded", "upgraded", "maintained"] | NotGiven = NOT_GIVEN,
+        limit: int | NotGiven = NOT_GIVEN,
+        recommendation: Literal["buy", "hold", "sell"] | NotGiven = NOT_GIVEN,
+        ticker: str | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[ExpiryBreakdownListResponse]:
+    ) -> Optional[AnalystListResponse]:
         """
-        Returns all expirations for the given trading day for a ticker.
+        Returns the latest analyst ratings for the given ticker
 
         Args:
-          date: A trading date in the format YYYY-MM-DD. Defaults to the last trading date.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -136,55 +142,59 @@ class AsyncExpiryBreakdownResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not ticker:
-            raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return await self._get(
-            f"/api/stock/{ticker}/expiry-breakdown",
+            "/api/screener/analysts",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"date": date}, expiry_breakdown_list_params.ExpiryBreakdownListParams
+                    {
+                        "action": action,
+                        "limit": limit,
+                        "recommendation": recommendation,
+                        "ticker": ticker,
+                    },
+                    analyst_list_params.AnalystListParams,
                 ),
-                post_parser=DataWrapper[Optional[ExpiryBreakdownListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[AnalystListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[ExpiryBreakdownListResponse]], DataWrapper[ExpiryBreakdownListResponse]),
+            cast_to=cast(Type[Optional[AnalystListResponse]], DataWrapper[AnalystListResponse]),
         )
 
 
-class ExpiryBreakdownResourceWithRawResponse:
-    def __init__(self, expiry_breakdown: ExpiryBreakdownResource) -> None:
-        self._expiry_breakdown = expiry_breakdown
+class AnalystsResourceWithRawResponse:
+    def __init__(self, analysts: AnalystsResource) -> None:
+        self._analysts = analysts
 
         self.list = to_raw_response_wrapper(
-            expiry_breakdown.list,
+            analysts.list,
         )
 
 
-class AsyncExpiryBreakdownResourceWithRawResponse:
-    def __init__(self, expiry_breakdown: AsyncExpiryBreakdownResource) -> None:
-        self._expiry_breakdown = expiry_breakdown
+class AsyncAnalystsResourceWithRawResponse:
+    def __init__(self, analysts: AsyncAnalystsResource) -> None:
+        self._analysts = analysts
 
         self.list = async_to_raw_response_wrapper(
-            expiry_breakdown.list,
+            analysts.list,
         )
 
 
-class ExpiryBreakdownResourceWithStreamingResponse:
-    def __init__(self, expiry_breakdown: ExpiryBreakdownResource) -> None:
-        self._expiry_breakdown = expiry_breakdown
+class AnalystsResourceWithStreamingResponse:
+    def __init__(self, analysts: AnalystsResource) -> None:
+        self._analysts = analysts
 
         self.list = to_streamed_response_wrapper(
-            expiry_breakdown.list,
+            analysts.list,
         )
 
 
-class AsyncExpiryBreakdownResourceWithStreamingResponse:
-    def __init__(self, expiry_breakdown: AsyncExpiryBreakdownResource) -> None:
-        self._expiry_breakdown = expiry_breakdown
+class AsyncAnalystsResourceWithStreamingResponse:
+    def __init__(self, analysts: AsyncAnalystsResource) -> None:
+        self._analysts = analysts
 
         self.list = async_to_streamed_response_wrapper(
-            expiry_breakdown.list,
+            analysts.list,
         )

@@ -9,7 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from tradesignals import Tradesignals, AsyncTradesignals
-from tradesignals.types.option_contract import HistoricDataRetrieveResponse
+from tradesignals.types.option_contracts import HistoricDataRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -19,14 +19,14 @@ class TestHistoricData:
 
     @parametrize
     def test_method_retrieve(self, client: Tradesignals) -> None:
-        historic_data = client.option_contract.historic_data.retrieve(
+        historic_data = client.option_contracts.historic_data.retrieve(
             id="TSLA230526P00167500",
         )
         assert_matches_type(Optional[HistoricDataRetrieveResponse], historic_data, path=["response"])
 
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Tradesignals) -> None:
-        historic_data = client.option_contract.historic_data.retrieve(
+        historic_data = client.option_contracts.historic_data.retrieve(
             id="TSLA230526P00167500",
             limit=10,
         )
@@ -34,7 +34,7 @@ class TestHistoricData:
 
     @parametrize
     def test_raw_response_retrieve(self, client: Tradesignals) -> None:
-        response = client.option_contract.historic_data.with_raw_response.retrieve(
+        response = client.option_contracts.historic_data.with_raw_response.retrieve(
             id="TSLA230526P00167500",
         )
 
@@ -45,7 +45,7 @@ class TestHistoricData:
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Tradesignals) -> None:
-        with client.option_contract.historic_data.with_streaming_response.retrieve(
+        with client.option_contracts.historic_data.with_streaming_response.retrieve(
             id="TSLA230526P00167500",
         ) as response:
             assert not response.is_closed
@@ -59,7 +59,7 @@ class TestHistoricData:
     @parametrize
     def test_path_params_retrieve(self, client: Tradesignals) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            client.option_contract.historic_data.with_raw_response.retrieve(
+            client.option_contracts.historic_data.with_raw_response.retrieve(
                 id="",
             )
 
@@ -69,14 +69,14 @@ class TestAsyncHistoricData:
 
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncTradesignals) -> None:
-        historic_data = await async_client.option_contract.historic_data.retrieve(
+        historic_data = await async_client.option_contracts.historic_data.retrieve(
             id="TSLA230526P00167500",
         )
         assert_matches_type(Optional[HistoricDataRetrieveResponse], historic_data, path=["response"])
 
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncTradesignals) -> None:
-        historic_data = await async_client.option_contract.historic_data.retrieve(
+        historic_data = await async_client.option_contracts.historic_data.retrieve(
             id="TSLA230526P00167500",
             limit=10,
         )
@@ -84,7 +84,7 @@ class TestAsyncHistoricData:
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncTradesignals) -> None:
-        response = await async_client.option_contract.historic_data.with_raw_response.retrieve(
+        response = await async_client.option_contracts.historic_data.with_raw_response.retrieve(
             id="TSLA230526P00167500",
         )
 
@@ -95,7 +95,7 @@ class TestAsyncHistoricData:
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncTradesignals) -> None:
-        async with async_client.option_contract.historic_data.with_streaming_response.retrieve(
+        async with async_client.option_contracts.historic_data.with_streaming_response.retrieve(
             id="TSLA230526P00167500",
         ) as response:
             assert not response.is_closed
@@ -109,6 +109,6 @@ class TestAsyncHistoricData:
     @parametrize
     async def test_path_params_retrieve(self, async_client: AsyncTradesignals) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `id` but received ''"):
-            await async_client.option_contract.historic_data.with_raw_response.retrieve(
+            await async_client.option_contracts.historic_data.with_raw_response.retrieve(
                 id="",
             )
