@@ -2,11 +2,11 @@
 
 from typing import List, Optional
 
+from .etf_tide import EtfTide
 from ..._models import BaseModel
-from .etf_tide_entry import EtfTideEntry
 
 __all__ = ["EtfTideResponse"]
 
 
 class EtfTideResponse(BaseModel):
-    data: Optional[List[EtfTideEntry]] = None
+    data: Optional[List[EtfTide]] = None

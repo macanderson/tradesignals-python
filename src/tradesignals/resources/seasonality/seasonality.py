@@ -28,13 +28,13 @@ from .market_seasonality import (
     MarketSeasonalityResourceWithStreamingResponse,
     AsyncMarketSeasonalityResourceWithStreamingResponse,
 )
-from .ticker_seasonality import (
-    TickerSeasonalityResource,
-    AsyncTickerSeasonalityResource,
-    TickerSeasonalityResourceWithRawResponse,
-    AsyncTickerSeasonalityResourceWithRawResponse,
-    TickerSeasonalityResourceWithStreamingResponse,
-    AsyncTickerSeasonalityResourceWithStreamingResponse,
+from .monthly_seasonality import (
+    MonthlySeasonalityResource,
+    AsyncMonthlySeasonalityResource,
+    MonthlySeasonalityResourceWithRawResponse,
+    AsyncMonthlySeasonalityResourceWithRawResponse,
+    MonthlySeasonalityResourceWithStreamingResponse,
+    AsyncMonthlySeasonalityResourceWithStreamingResponse,
 )
 
 __all__ = ["SeasonalityResource", "AsyncSeasonalityResource"]
@@ -42,8 +42,8 @@ __all__ = ["SeasonalityResource", "AsyncSeasonalityResource"]
 
 class SeasonalityResource(SyncAPIResource):
     @cached_property
-    def ticker_seasonality(self) -> TickerSeasonalityResource:
-        return TickerSeasonalityResource(self._client)
+    def monthly_seasonality(self) -> MonthlySeasonalityResource:
+        return MonthlySeasonalityResource(self._client)
 
     @cached_property
     def year_month_change(self) -> YearMonthChangeResource:
@@ -79,8 +79,8 @@ class SeasonalityResource(SyncAPIResource):
 
 class AsyncSeasonalityResource(AsyncAPIResource):
     @cached_property
-    def ticker_seasonality(self) -> AsyncTickerSeasonalityResource:
-        return AsyncTickerSeasonalityResource(self._client)
+    def monthly_seasonality(self) -> AsyncMonthlySeasonalityResource:
+        return AsyncMonthlySeasonalityResource(self._client)
 
     @cached_property
     def year_month_change(self) -> AsyncYearMonthChangeResource:
@@ -119,8 +119,8 @@ class SeasonalityResourceWithRawResponse:
         self._seasonality = seasonality
 
     @cached_property
-    def ticker_seasonality(self) -> TickerSeasonalityResourceWithRawResponse:
-        return TickerSeasonalityResourceWithRawResponse(self._seasonality.ticker_seasonality)
+    def monthly_seasonality(self) -> MonthlySeasonalityResourceWithRawResponse:
+        return MonthlySeasonalityResourceWithRawResponse(self._seasonality.monthly_seasonality)
 
     @cached_property
     def year_month_change(self) -> YearMonthChangeResourceWithRawResponse:
@@ -140,8 +140,8 @@ class AsyncSeasonalityResourceWithRawResponse:
         self._seasonality = seasonality
 
     @cached_property
-    def ticker_seasonality(self) -> AsyncTickerSeasonalityResourceWithRawResponse:
-        return AsyncTickerSeasonalityResourceWithRawResponse(self._seasonality.ticker_seasonality)
+    def monthly_seasonality(self) -> AsyncMonthlySeasonalityResourceWithRawResponse:
+        return AsyncMonthlySeasonalityResourceWithRawResponse(self._seasonality.monthly_seasonality)
 
     @cached_property
     def year_month_change(self) -> AsyncYearMonthChangeResourceWithRawResponse:
@@ -161,8 +161,8 @@ class SeasonalityResourceWithStreamingResponse:
         self._seasonality = seasonality
 
     @cached_property
-    def ticker_seasonality(self) -> TickerSeasonalityResourceWithStreamingResponse:
-        return TickerSeasonalityResourceWithStreamingResponse(self._seasonality.ticker_seasonality)
+    def monthly_seasonality(self) -> MonthlySeasonalityResourceWithStreamingResponse:
+        return MonthlySeasonalityResourceWithStreamingResponse(self._seasonality.monthly_seasonality)
 
     @cached_property
     def year_month_change(self) -> YearMonthChangeResourceWithStreamingResponse:
@@ -182,8 +182,8 @@ class AsyncSeasonalityResourceWithStreamingResponse:
         self._seasonality = seasonality
 
     @cached_property
-    def ticker_seasonality(self) -> AsyncTickerSeasonalityResourceWithStreamingResponse:
-        return AsyncTickerSeasonalityResourceWithStreamingResponse(self._seasonality.ticker_seasonality)
+    def monthly_seasonality(self) -> AsyncMonthlySeasonalityResourceWithStreamingResponse:
+        return AsyncMonthlySeasonalityResourceWithStreamingResponse(self._seasonality.monthly_seasonality)
 
     @cached_property
     def year_month_change(self) -> AsyncYearMonthChangeResourceWithStreamingResponse:

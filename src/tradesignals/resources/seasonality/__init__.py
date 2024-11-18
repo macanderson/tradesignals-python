@@ -32,22 +32,22 @@ from .market_seasonality import (
     MarketSeasonalityResourceWithStreamingResponse,
     AsyncMarketSeasonalityResourceWithStreamingResponse,
 )
-from .ticker_seasonality import (
-    TickerSeasonalityResource,
-    AsyncTickerSeasonalityResource,
-    TickerSeasonalityResourceWithRawResponse,
-    AsyncTickerSeasonalityResourceWithRawResponse,
-    TickerSeasonalityResourceWithStreamingResponse,
-    AsyncTickerSeasonalityResourceWithStreamingResponse,
+from .monthly_seasonality import (
+    MonthlySeasonalityResource,
+    AsyncMonthlySeasonalityResource,
+    MonthlySeasonalityResourceWithRawResponse,
+    AsyncMonthlySeasonalityResourceWithRawResponse,
+    MonthlySeasonalityResourceWithStreamingResponse,
+    AsyncMonthlySeasonalityResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "TickerSeasonalityResource",
-    "AsyncTickerSeasonalityResource",
-    "TickerSeasonalityResourceWithRawResponse",
-    "AsyncTickerSeasonalityResourceWithRawResponse",
-    "TickerSeasonalityResourceWithStreamingResponse",
-    "AsyncTickerSeasonalityResourceWithStreamingResponse",
+    "MonthlySeasonalityResource",
+    "AsyncMonthlySeasonalityResource",
+    "MonthlySeasonalityResourceWithRawResponse",
+    "AsyncMonthlySeasonalityResourceWithRawResponse",
+    "MonthlySeasonalityResourceWithStreamingResponse",
+    "AsyncMonthlySeasonalityResourceWithStreamingResponse",
     "YearMonthChangeResource",
     "AsyncYearMonthChangeResource",
     "YearMonthChangeResourceWithRawResponse",

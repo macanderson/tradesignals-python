@@ -1,16 +1,32 @@
 # Stock
 
-## FlowPerExpiry
+## FlowPerStrike
 
 Types:
 
 ```python
-from tradesignals.types.stock import ExpiryFlow, ExpiryFlowResponse, FlowPerExpiryListResponse
+from tradesignals.types.stock import FlowPerStrike, FlowPerStrikeResponse
 ```
 
 Methods:
 
-- <code title="get /api/stock/{ticker}/flow-per-expiry">client.stock.flow_per_expiry.<a href="./src/tradesignals/resources/stock/flow_per_expiry.py">list</a>(ticker) -> <a href="./src/tradesignals/types/stock/flow_per_expiry_list_response.py">Optional</a></code>
+- <code title="get /api/stock/{ticker}/flow-per-strike">client.stock.flow_per_strike.<a href="./src/tradesignals/resources/stock/flow_per_strike.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/stock/flow_per_strike_list_params.py">params</a>) -> <a href="./src/tradesignals/types/stock/flow_per_strike_response.py">FlowPerStrikeResponse</a></code>
+
+## FlowByExpiry
+
+Types:
+
+```python
+from tradesignals.types.stock import (
+    ExpirationOrderFlow,
+    ExpirationOrderFlowResponse,
+    FlowByExpiryListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/flow-per-expiry">client.stock.flow_by_expiry.<a href="./src/tradesignals/resources/stock/flow_by_expiry.py">list</a>(ticker) -> <a href="./src/tradesignals/types/stock/flow_by_expiry_list_response.py">Optional</a></code>
 
 ## OptionAlerts
 
@@ -48,9 +64,23 @@ Methods:
 
 - <code title="get /api/stock/{ticker}/atm-chains">client.stock.atm_chains.<a href="./src/tradesignals/resources/stock/atm_chains.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/stock/atm_chain_list_params.py">params</a>) -> <a href="./src/tradesignals/types/stock/atm_chain_list_response.py">Optional</a></code>
 
+# Analyst
+
+## Ratings
+
+Types:
+
+```python
+from tradesignals.types.analyst import AnalystRatingEntry, AnalystRatingResponse, RatingListResponse
+```
+
+Methods:
+
+- <code title="get /api/screener/analysts">client.analyst.ratings.<a href="./src/tradesignals/resources/analyst/ratings.py">list</a>(\*\*<a href="src/tradesignals/types/analyst/rating_list_params.py">params</a>) -> <a href="./src/tradesignals/types/analyst/rating_list_response.py">Optional</a></code>
+
 # Seasonality
 
-## TickerSeasonality
+## MonthlySeasonality
 
 Types:
 
@@ -58,13 +88,13 @@ Types:
 from tradesignals.types.seasonality import (
     MonthlyAverageEntry,
     MonthlyAverageResponse,
-    TickerSeasonalityListResponse,
+    MonthlySeasonalityListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/seasonality/{ticker}/monthly">client.seasonality.ticker_seasonality.<a href="./src/tradesignals/resources/seasonality/ticker_seasonality.py">list</a>(ticker) -> <a href="./src/tradesignals/types/seasonality/ticker_seasonality_list_response.py">Optional</a></code>
+- <code title="get /api/seasonality/{ticker}/monthly">client.seasonality.monthly_seasonality.<a href="./src/tradesignals/resources/seasonality/monthly_seasonality.py">list</a>(ticker) -> <a href="./src/tradesignals/types/seasonality/monthly_seasonality_list_response.py">Optional</a></code>
 
 ## YearMonthChange
 
@@ -114,51 +144,35 @@ Methods:
 
 - <code title="get /api/seasonality/{month}/performers">client.seasonality.top_performers.<a href="./src/tradesignals/resources/seasonality/top_performers.py">list</a>(month, \*\*<a href="src/tradesignals/types/seasonality/top_performer_list_params.py">params</a>) -> <a href="./src/tradesignals/types/seasonality/top_performer_list_response.py">Optional</a></code>
 
-# Screeners
+# Screener
 
-## StockFinder
+## StockScreener
 
 Types:
 
 ```python
-from tradesignals.types.screeners import StockEntry, StockScreenerResponse, StockFinderListResponse
+from tradesignals.types.screener import StockEntry, StockScreenerResponse, StockScreenerListResponse
 ```
 
 Methods:
 
-- <code title="get /api/screener/stocks">client.screeners.stock_finder.<a href="./src/tradesignals/resources/screeners/stock_finder.py">list</a>(\*\*<a href="src/tradesignals/types/screeners/stock_finder_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screeners/stock_finder_list_response.py">Optional</a></code>
+- <code title="get /api/screener/stocks">client.screener.stock_screener.<a href="./src/tradesignals/resources/screener/stock_screener.py">list</a>(\*\*<a href="src/tradesignals/types/screener/stock_screener_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screener/stock_screener_list_response.py">Optional</a></code>
 
-## AnalystRatings
-
-Types:
-
-```python
-from tradesignals.types.screeners import (
-    AnalystRatingEntry,
-    AnalystRatingResponse,
-    AnalystRatingListResponse,
-)
-```
-
-Methods:
-
-- <code title="get /api/screener/analysts">client.screeners.analyst_ratings.<a href="./src/tradesignals/resources/screeners/analyst_ratings.py">list</a>(\*\*<a href="src/tradesignals/types/screeners/analyst_rating_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screeners/analyst_rating_list_response.py">Optional</a></code>
-
-## OptionFinder
+## OptionScreener
 
 Types:
 
 ```python
-from tradesignals.types.screeners import (
+from tradesignals.types.screener import (
     HottestChainEntry,
     HottestChainsResponse,
-    OptionFinderListResponse,
+    OptionScreenerListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/screener/option-contracts">client.screeners.option_finder.<a href="./src/tradesignals/resources/screeners/option_finder.py">list</a>(\*\*<a href="src/tradesignals/types/screeners/option_finder_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screeners/option_finder_list_response.py">Optional</a></code>
+- <code title="get /api/screener/option-contracts">client.screener.option_screener.<a href="./src/tradesignals/resources/screener/option_screener.py">list</a>(\*\*<a href="src/tradesignals/types/screener/option_screener_list_params.py">params</a>) -> <a href="./src/tradesignals/types/screener/option_screener_list_response.py">Optional</a></code>
 
 # OptionTrades
 
@@ -262,28 +276,28 @@ Methods:
 
 - <code title="get /api/market/spike">client.market.spike.<a href="./src/tradesignals/resources/market/spike.py">list</a>(\*\*<a href="src/tradesignals/types/market/spike_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/spike_list_response.py">Optional</a></code>
 
-## TotalOptionsVolume
+## OptionTradeVolume
 
 Types:
 
 ```python
 from tradesignals.types.market import (
-    TotalOptionsVolumeEntry,
-    TotalOptionsVolumeResponse,
-    TotalOptionsVolumeListResponse,
+    OptionTradeVolume,
+    OptionTradeVolumeResponse,
+    OptionTradeVolumeListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/market/total-options-volume">client.market.total_options_volume.<a href="./src/tradesignals/resources/market/total_options_volume.py">list</a>(\*\*<a href="src/tradesignals/types/market/total_options_volume_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/total_options_volume_list_response.py">Optional</a></code>
+- <code title="get /api/market/total-options-volume">client.market.option_trade_volume.<a href="./src/tradesignals/resources/market/option_trade_volume.py">list</a>(\*\*<a href="src/tradesignals/types/market/option_trade_volume_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/option_trade_volume_list_response.py">Optional</a></code>
 
 ## EtfTide
 
 Types:
 
 ```python
-from tradesignals.types.market import EtfTideEntry, EtfTideResponse, EtfTideListResponse
+from tradesignals.types.market import EtfTide, EtfTideResponse, EtfTideListResponse
 ```
 
 Methods:
@@ -295,7 +309,7 @@ Methods:
 Types:
 
 ```python
-from tradesignals.types.market import MarketTideEntry, MarketTideResponse, MarketTideListResponse
+from tradesignals.types.market import MarketTide, MarketTideResponse, MarketTideListResponse
 ```
 
 Methods:
@@ -307,30 +321,26 @@ Methods:
 Types:
 
 ```python
-from tradesignals.types.market import OiChangeEntry, OiChangeResponse, OiChangeListResponse
+from tradesignals.types.market import OiChange, OiChangeResponse, OiChangeListResponse
 ```
 
 Methods:
 
 - <code title="get /api/market/oi-change">client.market.oi_change.<a href="./src/tradesignals/resources/market/oi_change.py">list</a>(\*\*<a href="src/tradesignals/types/market/oi_change_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/oi_change_list_response.py">Optional</a></code>
 
-## InsiderBuySells
+## InsiderTrades
 
 Types:
 
 ```python
-from tradesignals.types.market import (
-    InsiderBuySell,
-    InsiderBuySellsResponse,
-    InsiderBuySellListResponse,
-)
+from tradesignals.types.market import InsiderTrade, InsiderTradeResponse, InsiderTradeListResponse
 ```
 
 Methods:
 
-- <code title="get /api/market/insider-buy-sells">client.market.insider_buy_sells.<a href="./src/tradesignals/resources/market/insider_buy_sells.py">list</a>(\*\*<a href="src/tradesignals/types/market/insider_buy_sell_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/insider_buy_sell_list_response.py">Optional</a></code>
+- <code title="get /api/market/insider-buy-sells">client.market.insider_trades.<a href="./src/tradesignals/resources/market/insider_trades.py">list</a>(\*\*<a href="src/tradesignals/types/market/insider_trade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/insider_trade_list_response.py">Optional</a></code>
 
-## Correlations
+## Correlation
 
 Types:
 
@@ -340,7 +350,7 @@ from tradesignals.types.market import Correlation, CorrelationsResponse, Correla
 
 Methods:
 
-- <code title="get /api/market/correlations">client.market.correlations.<a href="./src/tradesignals/resources/market/correlations.py">list</a>(\*\*<a href="src/tradesignals/types/market/correlation_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/correlation_list_response.py">Optional</a></code>
+- <code title="get /api/market/correlations">client.market.correlation.<a href="./src/tradesignals/resources/market/correlation.py">list</a>(\*\*<a href="src/tradesignals/types/market/correlation_list_params.py">params</a>) -> <a href="./src/tradesignals/types/market/correlation_list_response.py">Optional</a></code>
 
 ## EconomicCalendar
 
@@ -370,85 +380,83 @@ Methods:
 
 - <code title="get /api/market/fda-calendar">client.market.fda_calendar.<a href="./src/tradesignals/resources/market/fda_calendar.py">list</a>() -> <a href="./src/tradesignals/types/market/fda_calendar_list_response.py">Optional</a></code>
 
-# Institutions
+# Institution
+
+## InstitutionList
 
 Types:
 
 ```python
-from tradesignals.types import Institution, InstitutionsResponse, InstitutionListResponse
+from tradesignals.types.institution import (
+    Institution,
+    InstitutionListResponse,
+    InstitutionListListResponse,
+)
 ```
 
 Methods:
 
-- <code title="get /api/institutions">client.institutions.<a href="./src/tradesignals/resources/institutions/institutions.py">list</a>(\*\*<a href="src/tradesignals/types/institution_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institution_list_response.py">Optional</a></code>
+- <code title="get /api/institutions">client.institution.institution_list.<a href="./src/tradesignals/resources/institution/institution_list.py">list</a>(\*\*<a href="src/tradesignals/types/institution/institution_list_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institution/institution_list_list_response.py">Optional</a></code>
 
 ## Activity
 
 Types:
 
 ```python
-from tradesignals.types.institutions import (
-    InstitutionActivity,
-    InstitutionActivityResponse,
-    ActivityListResponse,
-)
+from tradesignals.types.institution import Activity, ActivityResponse, ActivityListResponse
 ```
 
 Methods:
 
-- <code title="get /api/institution/{name}/activity">client.institutions.activity.<a href="./src/tradesignals/resources/institutions/activity.py">list</a>(name, \*\*<a href="src/tradesignals/types/institutions/activity_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/activity_list_response.py">Optional</a></code>
+- <code title="get /api/institution/{name}/activity">client.institution.activity.<a href="./src/tradesignals/resources/institution/activity.py">list</a>(name, \*\*<a href="src/tradesignals/types/institution/activity_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institution/activity_list_response.py">Optional</a></code>
 
 ## Holdings
 
 Types:
 
 ```python
-from tradesignals.types.institutions import (
-    InstitutionHolding,
-    InstitutionHoldingsResponse,
-    HoldingListResponse,
-)
+from tradesignals.types.institution import Holdings, HoldingsResponse, HoldingListResponse
 ```
 
 Methods:
 
-- <code title="get /api/institution/{name}/holdings">client.institutions.holdings.<a href="./src/tradesignals/resources/institutions/holdings.py">list</a>(name, \*\*<a href="src/tradesignals/types/institutions/holding_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/holding_list_response.py">Optional</a></code>
+- <code title="get /api/institution/{name}/holdings">client.institution.holdings.<a href="./src/tradesignals/resources/institution/holdings.py">list</a>(name, \*\*<a href="src/tradesignals/types/institution/holding_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institution/holding_list_response.py">Optional</a></code>
 
-## Sectors
+## SectorExposure
 
 Types:
 
 ```python
-from tradesignals.types.institutions import (
+from tradesignals.types.institution import (
     SectorExposure,
     SectorExposureResponse,
-    SectorListResponse,
+    SectorExposureListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/institution/{name}/sectors">client.institutions.sectors.<a href="./src/tradesignals/resources/institutions/sectors.py">list</a>(name, \*\*<a href="src/tradesignals/types/institutions/sector_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/sector_list_response.py">Optional</a></code>
+- <code title="get /api/institution/{name}/sectors">client.institution.sector_exposure.<a href="./src/tradesignals/resources/institution/sector_exposure.py">list</a>(name, \*\*<a href="src/tradesignals/types/institution/sector_exposure_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institution/sector_exposure_list_response.py">Optional</a></code>
 
-## Ownership
+## StockOwnership
 
 Types:
 
 ```python
-from tradesignals.types.institutions import (
-    InstitutionOwnership,
-    InstitutionOwnershipResponse,
-    OwnershipListResponse,
+from tradesignals.types.institution import (
+    StockOwnership,
+    StockOwnershipResponse,
+    StockOwnershipListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/institution/{ticker}/ownership">client.institutions.ownership.<a href="./src/tradesignals/resources/institutions/ownership.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/institutions/ownership_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institutions/ownership_list_response.py">Optional</a></code>
+- <code title="get /api/institution/{ticker}/ownership">client.institution.stock_ownership.<a href="./src/tradesignals/resources/institution/stock_ownership.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/institution/stock_ownership_list_params.py">params</a>) -> <a href="./src/tradesignals/types/institution/stock_ownership_list_response.py">Optional</a></code>
 
 # Earnings
 
-## Afterhours
+## AfterhoursEarnings
 
 Types:
 
@@ -456,15 +464,15 @@ Types:
 from tradesignals.types.earnings import (
     AfterhoursEarningsData,
     AfterhoursEarningsResponse,
-    AfterhourListResponse,
+    AfterhoursEarningListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/earnings/afterhours">client.earnings.afterhours.<a href="./src/tradesignals/resources/earnings/afterhours.py">list</a>(\*\*<a href="src/tradesignals/types/earnings/afterhour_list_params.py">params</a>) -> <a href="./src/tradesignals/types/earnings/afterhour_list_response.py">Optional</a></code>
+- <code title="get /api/earnings/afterhours">client.earnings.afterhours_earnings.<a href="./src/tradesignals/resources/earnings/afterhours_earnings.py">list</a>(\*\*<a href="src/tradesignals/types/earnings/afterhours_earning_list_params.py">params</a>) -> <a href="./src/tradesignals/types/earnings/afterhours_earning_list_response.py">Optional</a></code>
 
-## Premarket
+## PremarketEarnings
 
 Types:
 
@@ -472,15 +480,15 @@ Types:
 from tradesignals.types.earnings import (
     PremarketEarningsData,
     PremarketEarningsResponse,
-    PremarketListResponse,
+    PremarketEarningListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/earnings/premarket">client.earnings.premarket.<a href="./src/tradesignals/resources/earnings/premarket.py">list</a>(\*\*<a href="src/tradesignals/types/earnings/premarket_list_params.py">params</a>) -> <a href="./src/tradesignals/types/earnings/premarket_list_response.py">Optional</a></code>
+- <code title="get /api/earnings/premarket">client.earnings.premarket_earnings.<a href="./src/tradesignals/resources/earnings/premarket_earnings.py">list</a>(\*\*<a href="src/tradesignals/types/earnings/premarket_earning_list_params.py">params</a>) -> <a href="./src/tradesignals/types/earnings/premarket_earning_list_response.py">Optional</a></code>
 
-## PastTicker
+## HistoricalEarnings
 
 Types:
 
@@ -490,7 +498,7 @@ from tradesignals.types.earnings import HistoricalEarningsData, HistoricalEarnin
 
 Methods:
 
-- <code title="get /api/earnings/{ticker}">client.earnings.past_ticker.<a href="./src/tradesignals/resources/earnings/past_ticker.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/earnings/historical_earnings_response.py">HistoricalEarningsResponse</a></code>
+- <code title="get /api/earnings/{ticker}">client.earnings.historical_earnings.<a href="./src/tradesignals/resources/earnings/historical_earnings.py">retrieve</a>(ticker) -> <a href="./src/tradesignals/types/earnings/historical_earnings_response.py">HistoricalEarningsResponse</a></code>
 
 # Congress
 
@@ -506,19 +514,19 @@ Methods:
 
 - <code title="get /api/congress/recent-trades">client.congress.recent_trades.<a href="./src/tradesignals/resources/congress/recent_trades.py">list</a>(\*\*<a href="src/tradesignals/types/congress/recent_trade_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/recent_trade_list_response.py">Optional</a></code>
 
-## LateTradeReports
+## TradesReportedLate
 
 Types:
 
 ```python
-from tradesignals.types.congress import LateCongressionalReport, LateTradeReportListResponse
+from tradesignals.types.congress import LateCongressionalReport, TradesReportedLateListResponse
 ```
 
 Methods:
 
-- <code title="get /api/congress/late-reports">client.congress.late_trade_reports.<a href="./src/tradesignals/resources/congress/late_trade_reports.py">list</a>(\*\*<a href="src/tradesignals/types/congress/late_trade_report_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/late_trade_report_list_response.py">Optional</a></code>
+- <code title="get /api/congress/late-reports">client.congress.trades_reported_late.<a href="./src/tradesignals/resources/congress/trades_reported_late.py">list</a>(\*\*<a href="src/tradesignals/types/congress/trades_reported_late_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/trades_reported_late_list_response.py">Optional</a></code>
 
-## Trader
+## TradesByMember
 
 Types:
 
@@ -528,45 +536,45 @@ from tradesignals.types.congress import CongressionalTraderReport
 
 Methods:
 
-- <code title="get /api/congress/congress-trader">client.congress.trader.<a href="./src/tradesignals/resources/congress/trader.py">retrieve</a>(\*\*<a href="src/tradesignals/types/congress/trader_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/congressional_trader_report.py">CongressionalTraderReport</a></code>
+- <code title="get /api/congress/congress-trader">client.congress.trades_by_member.<a href="./src/tradesignals/resources/congress/trades_by_member.py">retrieve</a>(\*\*<a href="src/tradesignals/types/congress/trades_by_member_retrieve_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/congressional_trader_report.py">CongressionalTraderReport</a></code>
 
-## RecentTradeReports
-
-Types:
-
-```python
-from tradesignals.types.congress import RecentCongressionalReport, RecentTradeReportListResponse
-```
-
-Methods:
-
-- <code title="get /api/congress/recent-reports">client.congress.recent_trade_reports.<a href="./src/tradesignals/resources/congress/recent_trade_reports.py">list</a>(\*\*<a href="src/tradesignals/types/congress/recent_trade_report_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/recent_trade_report_list_response.py">Optional</a></code>
-
-# IndustryGroups
-
-## GreekFlows
+## RecentReports
 
 Types:
 
 ```python
-from tradesignals.types.industry_groups import GroupGreekFlow, GreekFlowListResponse
+from tradesignals.types.congress import RecentCongressionalReport, RecentReportListResponse
 ```
 
 Methods:
 
-- <code title="get /api/group-flow/{flow_group}/greek-flow">client.industry_groups.greek_flows.<a href="./src/tradesignals/resources/industry_groups/greek_flows.py">list</a>(flow_group, \*\*<a href="src/tradesignals/types/industry_groups/greek_flow_list_params.py">params</a>) -> <a href="./src/tradesignals/types/industry_groups/greek_flow_list_response.py">Optional</a></code>
+- <code title="get /api/congress/recent-reports">client.congress.recent_reports.<a href="./src/tradesignals/resources/congress/recent_reports.py">list</a>(\*\*<a href="src/tradesignals/types/congress/recent_report_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/recent_report_list_response.py">Optional</a></code>
 
-## GreekFlowsByExpiry
+# IndustryGroup
+
+## GreekFlow
 
 Types:
 
 ```python
-from tradesignals.types.industry_groups import GroupFlowsResponse, GreekFlowsByExpiryListResponse
+from tradesignals.types.industry_group import GroupGreekFlow, GreekFlowListResponse
 ```
 
 Methods:
 
-- <code title="get /api/group-flow/{flow_group}/greek-flow/{expiry}">client.industry_groups.greek_flows_by_expiry.<a href="./src/tradesignals/resources/industry_groups/greek_flows_by_expiry.py">list</a>(expiry, \*, flow_group, \*\*<a href="src/tradesignals/types/industry_groups/greek_flows_by_expiry_list_params.py">params</a>) -> <a href="./src/tradesignals/types/industry_groups/greek_flows_by_expiry_list_response.py">Optional</a></code>
+- <code title="get /api/group-flow/{flow_group}/greek-flow">client.industry_group.greek_flow.<a href="./src/tradesignals/resources/industry_group/greek_flow.py">list</a>(flow_group, \*\*<a href="src/tradesignals/types/industry_group/greek_flow_list_params.py">params</a>) -> <a href="./src/tradesignals/types/industry_group/greek_flow_list_response.py">Optional</a></code>
+
+## GreekFlowByExpiry
+
+Types:
+
+```python
+from tradesignals.types.industry_group import GroupFlowsResponse, GreekFlowByExpiryListResponse
+```
+
+Methods:
+
+- <code title="get /api/group-flow/{flow_group}/greek-flow/{expiry}">client.industry_group.greek_flow_by_expiry.<a href="./src/tradesignals/resources/industry_group/greek_flow_by_expiry.py">list</a>(expiry, \*, flow_group, \*\*<a href="src/tradesignals/types/industry_group/greek_flow_by_expiry_list_params.py">params</a>) -> <a href="./src/tradesignals/types/industry_group/greek_flow_by_expiry_list_response.py">Optional</a></code>
 
 # Etf
 
@@ -575,7 +583,7 @@ Methods:
 Types:
 
 ```python
-from tradesignals.types.etf import Holdings, HoldingListResponse
+from tradesignals.types.etf import EtfHolding, HoldingListResponse
 ```
 
 Methods:

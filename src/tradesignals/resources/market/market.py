@@ -28,6 +28,14 @@ from .oi_change import (
     AsyncOiChangeResourceWithStreamingResponse,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from .correlation import (
+    CorrelationResource,
+    AsyncCorrelationResource,
+    CorrelationResourceWithRawResponse,
+    AsyncCorrelationResourceWithRawResponse,
+    CorrelationResourceWithStreamingResponse,
+    AsyncCorrelationResourceWithStreamingResponse,
+)
 from .market_tide import (
     MarketTideResource,
     AsyncMarketTideResource,
@@ -44,14 +52,6 @@ from .sector_etfs import (
     SectorEtfsResourceWithStreamingResponse,
     AsyncSectorEtfsResourceWithStreamingResponse,
 )
-from .correlations import (
-    CorrelationsResource,
-    AsyncCorrelationsResource,
-    CorrelationsResourceWithRawResponse,
-    AsyncCorrelationsResourceWithRawResponse,
-    CorrelationsResourceWithStreamingResponse,
-    AsyncCorrelationsResourceWithStreamingResponse,
-)
 from .fda_calendar import (
     FdaCalendarResource,
     AsyncFdaCalendarResource,
@@ -59,6 +59,14 @@ from .fda_calendar import (
     AsyncFdaCalendarResourceWithRawResponse,
     FdaCalendarResourceWithStreamingResponse,
     AsyncFdaCalendarResourceWithStreamingResponse,
+)
+from .insider_trades import (
+    InsiderTradesResource,
+    AsyncInsiderTradesResource,
+    InsiderTradesResourceWithRawResponse,
+    AsyncInsiderTradesResourceWithRawResponse,
+    InsiderTradesResourceWithStreamingResponse,
+    AsyncInsiderTradesResourceWithStreamingResponse,
 )
 from .economic_calendar import (
     EconomicCalendarResource,
@@ -68,21 +76,13 @@ from .economic_calendar import (
     EconomicCalendarResourceWithStreamingResponse,
     AsyncEconomicCalendarResourceWithStreamingResponse,
 )
-from .insider_buy_sells import (
-    InsiderBuySellsResource,
-    AsyncInsiderBuySellsResource,
-    InsiderBuySellsResourceWithRawResponse,
-    AsyncInsiderBuySellsResourceWithRawResponse,
-    InsiderBuySellsResourceWithStreamingResponse,
-    AsyncInsiderBuySellsResourceWithStreamingResponse,
-)
-from .total_options_volume import (
-    TotalOptionsVolumeResource,
-    AsyncTotalOptionsVolumeResource,
-    TotalOptionsVolumeResourceWithRawResponse,
-    AsyncTotalOptionsVolumeResourceWithRawResponse,
-    TotalOptionsVolumeResourceWithStreamingResponse,
-    AsyncTotalOptionsVolumeResourceWithStreamingResponse,
+from .option_trade_volume import (
+    OptionTradeVolumeResource,
+    AsyncOptionTradeVolumeResource,
+    OptionTradeVolumeResourceWithRawResponse,
+    AsyncOptionTradeVolumeResourceWithRawResponse,
+    OptionTradeVolumeResourceWithStreamingResponse,
+    AsyncOptionTradeVolumeResourceWithStreamingResponse,
 )
 
 __all__ = ["MarketResource", "AsyncMarketResource"]
@@ -98,8 +98,8 @@ class MarketResource(SyncAPIResource):
         return SpikeResource(self._client)
 
     @cached_property
-    def total_options_volume(self) -> TotalOptionsVolumeResource:
-        return TotalOptionsVolumeResource(self._client)
+    def option_trade_volume(self) -> OptionTradeVolumeResource:
+        return OptionTradeVolumeResource(self._client)
 
     @cached_property
     def etf_tide(self) -> EtfTideResource:
@@ -114,12 +114,12 @@ class MarketResource(SyncAPIResource):
         return OiChangeResource(self._client)
 
     @cached_property
-    def insider_buy_sells(self) -> InsiderBuySellsResource:
-        return InsiderBuySellsResource(self._client)
+    def insider_trades(self) -> InsiderTradesResource:
+        return InsiderTradesResource(self._client)
 
     @cached_property
-    def correlations(self) -> CorrelationsResource:
-        return CorrelationsResource(self._client)
+    def correlation(self) -> CorrelationResource:
+        return CorrelationResource(self._client)
 
     @cached_property
     def economic_calendar(self) -> EconomicCalendarResource:
@@ -159,8 +159,8 @@ class AsyncMarketResource(AsyncAPIResource):
         return AsyncSpikeResource(self._client)
 
     @cached_property
-    def total_options_volume(self) -> AsyncTotalOptionsVolumeResource:
-        return AsyncTotalOptionsVolumeResource(self._client)
+    def option_trade_volume(self) -> AsyncOptionTradeVolumeResource:
+        return AsyncOptionTradeVolumeResource(self._client)
 
     @cached_property
     def etf_tide(self) -> AsyncEtfTideResource:
@@ -175,12 +175,12 @@ class AsyncMarketResource(AsyncAPIResource):
         return AsyncOiChangeResource(self._client)
 
     @cached_property
-    def insider_buy_sells(self) -> AsyncInsiderBuySellsResource:
-        return AsyncInsiderBuySellsResource(self._client)
+    def insider_trades(self) -> AsyncInsiderTradesResource:
+        return AsyncInsiderTradesResource(self._client)
 
     @cached_property
-    def correlations(self) -> AsyncCorrelationsResource:
-        return AsyncCorrelationsResource(self._client)
+    def correlation(self) -> AsyncCorrelationResource:
+        return AsyncCorrelationResource(self._client)
 
     @cached_property
     def economic_calendar(self) -> AsyncEconomicCalendarResource:
@@ -223,8 +223,8 @@ class MarketResourceWithRawResponse:
         return SpikeResourceWithRawResponse(self._market.spike)
 
     @cached_property
-    def total_options_volume(self) -> TotalOptionsVolumeResourceWithRawResponse:
-        return TotalOptionsVolumeResourceWithRawResponse(self._market.total_options_volume)
+    def option_trade_volume(self) -> OptionTradeVolumeResourceWithRawResponse:
+        return OptionTradeVolumeResourceWithRawResponse(self._market.option_trade_volume)
 
     @cached_property
     def etf_tide(self) -> EtfTideResourceWithRawResponse:
@@ -239,12 +239,12 @@ class MarketResourceWithRawResponse:
         return OiChangeResourceWithRawResponse(self._market.oi_change)
 
     @cached_property
-    def insider_buy_sells(self) -> InsiderBuySellsResourceWithRawResponse:
-        return InsiderBuySellsResourceWithRawResponse(self._market.insider_buy_sells)
+    def insider_trades(self) -> InsiderTradesResourceWithRawResponse:
+        return InsiderTradesResourceWithRawResponse(self._market.insider_trades)
 
     @cached_property
-    def correlations(self) -> CorrelationsResourceWithRawResponse:
-        return CorrelationsResourceWithRawResponse(self._market.correlations)
+    def correlation(self) -> CorrelationResourceWithRawResponse:
+        return CorrelationResourceWithRawResponse(self._market.correlation)
 
     @cached_property
     def economic_calendar(self) -> EconomicCalendarResourceWithRawResponse:
@@ -268,8 +268,8 @@ class AsyncMarketResourceWithRawResponse:
         return AsyncSpikeResourceWithRawResponse(self._market.spike)
 
     @cached_property
-    def total_options_volume(self) -> AsyncTotalOptionsVolumeResourceWithRawResponse:
-        return AsyncTotalOptionsVolumeResourceWithRawResponse(self._market.total_options_volume)
+    def option_trade_volume(self) -> AsyncOptionTradeVolumeResourceWithRawResponse:
+        return AsyncOptionTradeVolumeResourceWithRawResponse(self._market.option_trade_volume)
 
     @cached_property
     def etf_tide(self) -> AsyncEtfTideResourceWithRawResponse:
@@ -284,12 +284,12 @@ class AsyncMarketResourceWithRawResponse:
         return AsyncOiChangeResourceWithRawResponse(self._market.oi_change)
 
     @cached_property
-    def insider_buy_sells(self) -> AsyncInsiderBuySellsResourceWithRawResponse:
-        return AsyncInsiderBuySellsResourceWithRawResponse(self._market.insider_buy_sells)
+    def insider_trades(self) -> AsyncInsiderTradesResourceWithRawResponse:
+        return AsyncInsiderTradesResourceWithRawResponse(self._market.insider_trades)
 
     @cached_property
-    def correlations(self) -> AsyncCorrelationsResourceWithRawResponse:
-        return AsyncCorrelationsResourceWithRawResponse(self._market.correlations)
+    def correlation(self) -> AsyncCorrelationResourceWithRawResponse:
+        return AsyncCorrelationResourceWithRawResponse(self._market.correlation)
 
     @cached_property
     def economic_calendar(self) -> AsyncEconomicCalendarResourceWithRawResponse:
@@ -313,8 +313,8 @@ class MarketResourceWithStreamingResponse:
         return SpikeResourceWithStreamingResponse(self._market.spike)
 
     @cached_property
-    def total_options_volume(self) -> TotalOptionsVolumeResourceWithStreamingResponse:
-        return TotalOptionsVolumeResourceWithStreamingResponse(self._market.total_options_volume)
+    def option_trade_volume(self) -> OptionTradeVolumeResourceWithStreamingResponse:
+        return OptionTradeVolumeResourceWithStreamingResponse(self._market.option_trade_volume)
 
     @cached_property
     def etf_tide(self) -> EtfTideResourceWithStreamingResponse:
@@ -329,12 +329,12 @@ class MarketResourceWithStreamingResponse:
         return OiChangeResourceWithStreamingResponse(self._market.oi_change)
 
     @cached_property
-    def insider_buy_sells(self) -> InsiderBuySellsResourceWithStreamingResponse:
-        return InsiderBuySellsResourceWithStreamingResponse(self._market.insider_buy_sells)
+    def insider_trades(self) -> InsiderTradesResourceWithStreamingResponse:
+        return InsiderTradesResourceWithStreamingResponse(self._market.insider_trades)
 
     @cached_property
-    def correlations(self) -> CorrelationsResourceWithStreamingResponse:
-        return CorrelationsResourceWithStreamingResponse(self._market.correlations)
+    def correlation(self) -> CorrelationResourceWithStreamingResponse:
+        return CorrelationResourceWithStreamingResponse(self._market.correlation)
 
     @cached_property
     def economic_calendar(self) -> EconomicCalendarResourceWithStreamingResponse:
@@ -358,8 +358,8 @@ class AsyncMarketResourceWithStreamingResponse:
         return AsyncSpikeResourceWithStreamingResponse(self._market.spike)
 
     @cached_property
-    def total_options_volume(self) -> AsyncTotalOptionsVolumeResourceWithStreamingResponse:
-        return AsyncTotalOptionsVolumeResourceWithStreamingResponse(self._market.total_options_volume)
+    def option_trade_volume(self) -> AsyncOptionTradeVolumeResourceWithStreamingResponse:
+        return AsyncOptionTradeVolumeResourceWithStreamingResponse(self._market.option_trade_volume)
 
     @cached_property
     def etf_tide(self) -> AsyncEtfTideResourceWithStreamingResponse:
@@ -374,12 +374,12 @@ class AsyncMarketResourceWithStreamingResponse:
         return AsyncOiChangeResourceWithStreamingResponse(self._market.oi_change)
 
     @cached_property
-    def insider_buy_sells(self) -> AsyncInsiderBuySellsResourceWithStreamingResponse:
-        return AsyncInsiderBuySellsResourceWithStreamingResponse(self._market.insider_buy_sells)
+    def insider_trades(self) -> AsyncInsiderTradesResourceWithStreamingResponse:
+        return AsyncInsiderTradesResourceWithStreamingResponse(self._market.insider_trades)
 
     @cached_property
-    def correlations(self) -> AsyncCorrelationsResourceWithStreamingResponse:
-        return AsyncCorrelationsResourceWithStreamingResponse(self._market.correlations)
+    def correlation(self) -> AsyncCorrelationResourceWithStreamingResponse:
+        return AsyncCorrelationResourceWithStreamingResponse(self._market.correlation)
 
     @cached_property
     def economic_calendar(self) -> AsyncEconomicCalendarResourceWithStreamingResponse:

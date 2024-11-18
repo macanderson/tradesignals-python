@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .market_tide_entry import MarketTideEntry
+from .market_tide import MarketTide
 
 __all__ = ["MarketTideListResponse"]
 
-MarketTideListResponse: TypeAlias = List[MarketTideEntry]
+MarketTideListResponse: TypeAlias = List[MarketTide]
