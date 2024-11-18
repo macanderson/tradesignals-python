@@ -26,9 +26,9 @@ class TestOptionScreener:
     @parametrize
     def test_method_list_with_all_params(self, client: Tradesignals) -> None:
         option_screener = client.screener.option_screener.list(
-            expiry_dates=[parse_date("2019-12-27"), parse_date("2019-12-27"), parse_date("2019-12-27")],
+            expiry_dates=[parse_date("2019-12-27")],
             is_otm=True,
-            issue_types=["Common Stock", "ETF", "Index"],
+            issue_types=["Common Stock"],
             max_daily_perc_change=0,
             min_volume=0,
             order="bid_ask_vol",
@@ -68,9 +68,9 @@ class TestAsyncOptionScreener:
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncTradesignals) -> None:
         option_screener = await async_client.screener.option_screener.list(
-            expiry_dates=[parse_date("2019-12-27"), parse_date("2019-12-27"), parse_date("2019-12-27")],
+            expiry_dates=[parse_date("2019-12-27")],
             is_otm=True,
-            issue_types=["Common Stock", "ETF", "Index"],
+            issue_types=["Common Stock"],
             max_daily_perc_change=0,
             min_volume=0,
             order="bid_ask_vol",
