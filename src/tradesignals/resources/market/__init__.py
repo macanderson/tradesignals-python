@@ -32,6 +32,14 @@ from .oi_change import (
     OiChangeResourceWithStreamingResponse,
     AsyncOiChangeResourceWithStreamingResponse,
 )
+from .correlation import (
+    CorrelationResource,
+    AsyncCorrelationResource,
+    CorrelationResourceWithRawResponse,
+    AsyncCorrelationResourceWithRawResponse,
+    CorrelationResourceWithStreamingResponse,
+    AsyncCorrelationResourceWithStreamingResponse,
+)
 from .market_tide import (
     MarketTideResource,
     AsyncMarketTideResource,
@@ -48,14 +56,6 @@ from .sector_etfs import (
     SectorEtfsResourceWithStreamingResponse,
     AsyncSectorEtfsResourceWithStreamingResponse,
 )
-from .correlations import (
-    CorrelationsResource,
-    AsyncCorrelationsResource,
-    CorrelationsResourceWithRawResponse,
-    AsyncCorrelationsResourceWithRawResponse,
-    CorrelationsResourceWithStreamingResponse,
-    AsyncCorrelationsResourceWithStreamingResponse,
-)
 from .fda_calendar import (
     FdaCalendarResource,
     AsyncFdaCalendarResource,
@@ -63,6 +63,14 @@ from .fda_calendar import (
     AsyncFdaCalendarResourceWithRawResponse,
     FdaCalendarResourceWithStreamingResponse,
     AsyncFdaCalendarResourceWithStreamingResponse,
+)
+from .insider_trades import (
+    InsiderTradesResource,
+    AsyncInsiderTradesResource,
+    InsiderTradesResourceWithRawResponse,
+    AsyncInsiderTradesResourceWithRawResponse,
+    InsiderTradesResourceWithStreamingResponse,
+    AsyncInsiderTradesResourceWithStreamingResponse,
 )
 from .economic_calendar import (
     EconomicCalendarResource,
@@ -72,21 +80,13 @@ from .economic_calendar import (
     EconomicCalendarResourceWithStreamingResponse,
     AsyncEconomicCalendarResourceWithStreamingResponse,
 )
-from .insider_buy_sells import (
-    InsiderBuySellsResource,
-    AsyncInsiderBuySellsResource,
-    InsiderBuySellsResourceWithRawResponse,
-    AsyncInsiderBuySellsResourceWithRawResponse,
-    InsiderBuySellsResourceWithStreamingResponse,
-    AsyncInsiderBuySellsResourceWithStreamingResponse,
-)
-from .total_options_volume import (
-    TotalOptionsVolumeResource,
-    AsyncTotalOptionsVolumeResource,
-    TotalOptionsVolumeResourceWithRawResponse,
-    AsyncTotalOptionsVolumeResourceWithRawResponse,
-    TotalOptionsVolumeResourceWithStreamingResponse,
-    AsyncTotalOptionsVolumeResourceWithStreamingResponse,
+from .option_trade_volume import (
+    OptionTradeVolumeResource,
+    AsyncOptionTradeVolumeResource,
+    OptionTradeVolumeResourceWithRawResponse,
+    AsyncOptionTradeVolumeResourceWithRawResponse,
+    OptionTradeVolumeResourceWithStreamingResponse,
+    AsyncOptionTradeVolumeResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -102,12 +102,12 @@ __all__ = [
     "AsyncSpikeResourceWithRawResponse",
     "SpikeResourceWithStreamingResponse",
     "AsyncSpikeResourceWithStreamingResponse",
-    "TotalOptionsVolumeResource",
-    "AsyncTotalOptionsVolumeResource",
-    "TotalOptionsVolumeResourceWithRawResponse",
-    "AsyncTotalOptionsVolumeResourceWithRawResponse",
-    "TotalOptionsVolumeResourceWithStreamingResponse",
-    "AsyncTotalOptionsVolumeResourceWithStreamingResponse",
+    "OptionTradeVolumeResource",
+    "AsyncOptionTradeVolumeResource",
+    "OptionTradeVolumeResourceWithRawResponse",
+    "AsyncOptionTradeVolumeResourceWithRawResponse",
+    "OptionTradeVolumeResourceWithStreamingResponse",
+    "AsyncOptionTradeVolumeResourceWithStreamingResponse",
     "EtfTideResource",
     "AsyncEtfTideResource",
     "EtfTideResourceWithRawResponse",
@@ -126,18 +126,18 @@ __all__ = [
     "AsyncOiChangeResourceWithRawResponse",
     "OiChangeResourceWithStreamingResponse",
     "AsyncOiChangeResourceWithStreamingResponse",
-    "InsiderBuySellsResource",
-    "AsyncInsiderBuySellsResource",
-    "InsiderBuySellsResourceWithRawResponse",
-    "AsyncInsiderBuySellsResourceWithRawResponse",
-    "InsiderBuySellsResourceWithStreamingResponse",
-    "AsyncInsiderBuySellsResourceWithStreamingResponse",
-    "CorrelationsResource",
-    "AsyncCorrelationsResource",
-    "CorrelationsResourceWithRawResponse",
-    "AsyncCorrelationsResourceWithRawResponse",
-    "CorrelationsResourceWithStreamingResponse",
-    "AsyncCorrelationsResourceWithStreamingResponse",
+    "InsiderTradesResource",
+    "AsyncInsiderTradesResource",
+    "InsiderTradesResourceWithRawResponse",
+    "AsyncInsiderTradesResourceWithRawResponse",
+    "InsiderTradesResourceWithStreamingResponse",
+    "AsyncInsiderTradesResourceWithStreamingResponse",
+    "CorrelationResource",
+    "AsyncCorrelationResource",
+    "CorrelationResourceWithRawResponse",
+    "AsyncCorrelationResourceWithRawResponse",
+    "CorrelationResourceWithStreamingResponse",
+    "AsyncCorrelationResourceWithStreamingResponse",
     "EconomicCalendarResource",
     "AsyncEconomicCalendarResource",
     "EconomicCalendarResourceWithRawResponse",

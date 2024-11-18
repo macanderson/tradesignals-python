@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .oi_change_entry import OiChangeEntry
+from .oi_change import OiChange
 
 __all__ = ["OiChangeListResponse"]
 
-OiChangeListResponse: TypeAlias = List[OiChangeEntry]
+OiChangeListResponse: TypeAlias = List[OiChange]

@@ -3,10 +3,10 @@
 from typing import List, Optional
 
 from ..._models import BaseModel
-from .market_tide_entry import MarketTideEntry
+from .market_tide import MarketTide
 
 __all__ = ["MarketTideResponse"]
 
 
 class MarketTideResponse(BaseModel):
-    data: Optional[List[MarketTideEntry]] = None
+    data: Optional[List[MarketTide]] = None

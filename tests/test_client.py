@@ -556,16 +556,6 @@ class TestTradesignals:
             client = Tradesignals(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
-        # explicit environment arg requires explicitness
-        with update_env(TRADESIGNALS_BASE_URL="http://localhost:5000/from/env"):
-            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                Tradesignals(api_key=api_key, _strict_response_validation=True, environment="production")
-
-            client = Tradesignals(
-                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
-            )
-            assert str(client.base_url).startswith("https://api.unusualwhales.com")
-
     @pytest.mark.parametrize(
         "client",
         [
@@ -1333,16 +1323,6 @@ class TestAsyncTradesignals:
         with update_env(TRADESIGNALS_BASE_URL="http://localhost:5000/from/env"):
             client = AsyncTradesignals(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
-
-        # explicit environment arg requires explicitness
-        with update_env(TRADESIGNALS_BASE_URL="http://localhost:5000/from/env"):
-            with pytest.raises(ValueError, match=r"you must pass base_url=None"):
-                AsyncTradesignals(api_key=api_key, _strict_response_validation=True, environment="production")
-
-            client = AsyncTradesignals(
-                base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
-            )
-            assert str(client.base_url).startswith("https://api.unusualwhales.com")
 
     @pytest.mark.parametrize(
         "client",
