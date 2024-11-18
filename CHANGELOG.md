@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-alpha.8 (2024-11-18)
+
+Full Changelog: [v0.1.0-alpha.7...v0.1.0-alpha.8](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.7...v0.1.0-alpha.8)
+
+### Chores
+
+* rebuild project due to codegen change ([#54](https://github.com/macanderson/tradesignals-python/issues/54)) ([a82b855](https://github.com/macanderson/tradesignals-python/commit/a82b8555ed22b6a12c4a6bd01af85366d30938c2))
+* rebuild project due to codegen change ([#56](https://github.com/macanderson/tradesignals-python/issues/56)) ([81547d1](https://github.com/macanderson/tradesignals-python/commit/81547d195351b80a2346423f370e19057b0b2718))
+
 ## 0.1.0-alpha.7 (2024-11-18)
 
 Full Changelog: [v0.1.0-alpha.6...v0.1.0-alpha.7](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.6...v0.1.0-alpha.7)
