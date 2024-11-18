@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+from .ohlc import (
+    OhlcResource,
+    AsyncOhlcResource,
+    OhlcResourceWithRawResponse,
+    AsyncOhlcResourceWithRawResponse,
+    OhlcResourceWithStreamingResponse,
+    AsyncOhlcResourceWithStreamingResponse,
+)
 from .max_pain import (
     MaxPainResource,
     AsyncMaxPainResource,
@@ -11,6 +19,7 @@ from .max_pain import (
     AsyncMaxPainResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
+from .ohlc.ohlc import OhlcResource, AsyncOhlcResource
 from .oi_change import (
     OiChangeResource,
     AsyncOiChangeResource,
@@ -90,6 +99,10 @@ __all__ = ["StockResource", "AsyncStockResource"]
 
 class StockResource(SyncAPIResource):
     @cached_property
+    def ohlc(self) -> OhlcResource:
+        return OhlcResource(self._client)
+
+    @cached_property
     def max_pain(self) -> MaxPainResource:
         return MaxPainResource(self._client)
 
@@ -150,6 +163,10 @@ class StockResource(SyncAPIResource):
 
 
 class AsyncStockResource(AsyncAPIResource):
+    @cached_property
+    def ohlc(self) -> AsyncOhlcResource:
+        return AsyncOhlcResource(self._client)
+
     @cached_property
     def max_pain(self) -> AsyncMaxPainResource:
         return AsyncMaxPainResource(self._client)
@@ -215,6 +232,10 @@ class StockResourceWithRawResponse:
         self._stock = stock
 
     @cached_property
+    def ohlc(self) -> OhlcResourceWithRawResponse:
+        return OhlcResourceWithRawResponse(self._stock.ohlc)
+
+    @cached_property
     def max_pain(self) -> MaxPainResourceWithRawResponse:
         return MaxPainResourceWithRawResponse(self._stock.max_pain)
 
@@ -258,6 +279,10 @@ class StockResourceWithRawResponse:
 class AsyncStockResourceWithRawResponse:
     def __init__(self, stock: AsyncStockResource) -> None:
         self._stock = stock
+
+    @cached_property
+    def ohlc(self) -> AsyncOhlcResourceWithRawResponse:
+        return AsyncOhlcResourceWithRawResponse(self._stock.ohlc)
 
     @cached_property
     def max_pain(self) -> AsyncMaxPainResourceWithRawResponse:
@@ -305,6 +330,10 @@ class StockResourceWithStreamingResponse:
         self._stock = stock
 
     @cached_property
+    def ohlc(self) -> OhlcResourceWithStreamingResponse:
+        return OhlcResourceWithStreamingResponse(self._stock.ohlc)
+
+    @cached_property
     def max_pain(self) -> MaxPainResourceWithStreamingResponse:
         return MaxPainResourceWithStreamingResponse(self._stock.max_pain)
 
@@ -348,6 +377,10 @@ class StockResourceWithStreamingResponse:
 class AsyncStockResourceWithStreamingResponse:
     def __init__(self, stock: AsyncStockResource) -> None:
         self._stock = stock
+
+    @cached_property
+    def ohlc(self) -> AsyncOhlcResourceWithStreamingResponse:
+        return AsyncOhlcResourceWithStreamingResponse(self._stock.ohlc)
 
     @cached_property
     def max_pain(self) -> AsyncMaxPainResourceWithStreamingResponse:

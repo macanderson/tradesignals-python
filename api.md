@@ -1,5 +1,19 @@
 # Stock
 
+## Ohlc
+
+### CandleData
+
+Types:
+
+```python
+from tradesignals.types.stock.ohlc import OhlcEntry, OhlcResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/ohlc/{candle_size}">client.stock.ohlc.candle_data.<a href="./src/tradesignals/resources/stock/ohlc/candle_data.py">list</a>(candle_size, \*, ticker, \*\*<a href="src/tradesignals/types/stock/ohlc/candle_data_list_params.py">params</a>) -> <a href="./src/tradesignals/types/stock/ohlc/ohlc_response.py">OhlcResponse</a></code>
+
 ## MaxPain
 
 Types:
