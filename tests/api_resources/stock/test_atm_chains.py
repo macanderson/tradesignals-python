@@ -21,7 +21,7 @@ class TestAtmChains:
     def test_method_list(self, client: Tradesignals) -> None:
         atm_chain = client.stock.atm_chains.list(
             ticker="AAPL",
-            expirations=["string", "string", "string"],
+            expirations=["string"],
         )
         assert_matches_type(Optional[AtmChainListResponse], atm_chain, path=["response"])
 
@@ -29,7 +29,7 @@ class TestAtmChains:
     def test_raw_response_list(self, client: Tradesignals) -> None:
         response = client.stock.atm_chains.with_raw_response.list(
             ticker="AAPL",
-            expirations=["string", "string", "string"],
+            expirations=["string"],
         )
 
         assert response.is_closed is True
@@ -41,7 +41,7 @@ class TestAtmChains:
     def test_streaming_response_list(self, client: Tradesignals) -> None:
         with client.stock.atm_chains.with_streaming_response.list(
             ticker="AAPL",
-            expirations=["string", "string", "string"],
+            expirations=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -56,7 +56,7 @@ class TestAtmChains:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ticker` but received ''"):
             client.stock.atm_chains.with_raw_response.list(
                 ticker="",
-                expirations=["string", "string", "string"],
+                expirations=["string"],
             )
 
 
@@ -67,7 +67,7 @@ class TestAsyncAtmChains:
     async def test_method_list(self, async_client: AsyncTradesignals) -> None:
         atm_chain = await async_client.stock.atm_chains.list(
             ticker="AAPL",
-            expirations=["string", "string", "string"],
+            expirations=["string"],
         )
         assert_matches_type(Optional[AtmChainListResponse], atm_chain, path=["response"])
 
@@ -75,7 +75,7 @@ class TestAsyncAtmChains:
     async def test_raw_response_list(self, async_client: AsyncTradesignals) -> None:
         response = await async_client.stock.atm_chains.with_raw_response.list(
             ticker="AAPL",
-            expirations=["string", "string", "string"],
+            expirations=["string"],
         )
 
         assert response.is_closed is True
@@ -87,7 +87,7 @@ class TestAsyncAtmChains:
     async def test_streaming_response_list(self, async_client: AsyncTradesignals) -> None:
         async with async_client.stock.atm_chains.with_streaming_response.list(
             ticker="AAPL",
-            expirations=["string", "string", "string"],
+            expirations=["string"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -102,5 +102,5 @@ class TestAsyncAtmChains:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `ticker` but received ''"):
             await async_client.stock.atm_chains.with_raw_response.list(
                 ticker="",
-                expirations=["string", "string", "string"],
+                expirations=["string"],
             )
