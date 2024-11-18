@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import Literal, TypedDict
 
-__all__ = ["PerformerListParams"]
+__all__ = ["TopPerformerListParams"]
 
 
-class PerformerListParams(TypedDict, total=False):
+class TopPerformerListParams(TypedDict, total=False):
     limit: int
 
     min_oi: int

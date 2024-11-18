@@ -2,36 +2,60 @@
 
 from __future__ import annotations
 
-from .market import (
-    MarketResource,
-    AsyncMarketResource,
-    MarketResourceWithRawResponse,
-    AsyncMarketResourceWithRawResponse,
-    MarketResourceWithStreamingResponse,
-    AsyncMarketResourceWithStreamingResponse,
-)
 from ..._compat import cached_property
-from .performers import (
-    PerformersResource,
-    AsyncPerformersResource,
-    PerformersResourceWithRawResponse,
-    AsyncPerformersResourceWithRawResponse,
-    PerformersResourceWithStreamingResponse,
-    AsyncPerformersResourceWithStreamingResponse,
-)
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from .top_performers import (
+    TopPerformersResource,
+    AsyncTopPerformersResource,
+    TopPerformersResourceWithRawResponse,
+    AsyncTopPerformersResourceWithRawResponse,
+    TopPerformersResourceWithStreamingResponse,
+    AsyncTopPerformersResourceWithStreamingResponse,
+)
+from .market_seasonality import (
+    MarketSeasonalityResource,
+    AsyncMarketSeasonalityResource,
+    MarketSeasonalityResourceWithRawResponse,
+    AsyncMarketSeasonalityResourceWithRawResponse,
+    MarketSeasonalityResourceWithStreamingResponse,
+    AsyncMarketSeasonalityResourceWithStreamingResponse,
+)
+from .stock_price_changes import (
+    StockPriceChangesResource,
+    AsyncStockPriceChangesResource,
+    StockPriceChangesResourceWithRawResponse,
+    AsyncStockPriceChangesResourceWithRawResponse,
+    StockPriceChangesResourceWithStreamingResponse,
+    AsyncStockPriceChangesResourceWithStreamingResponse,
+)
+from .stock_average_returns import (
+    StockAverageReturnsResource,
+    AsyncStockAverageReturnsResource,
+    StockAverageReturnsResourceWithRawResponse,
+    AsyncStockAverageReturnsResourceWithRawResponse,
+    StockAverageReturnsResourceWithStreamingResponse,
+    AsyncStockAverageReturnsResourceWithStreamingResponse,
+)
 
 __all__ = ["SeasonalityResource", "AsyncSeasonalityResource"]
 
 
 class SeasonalityResource(SyncAPIResource):
     @cached_property
-    def market(self) -> MarketResource:
-        return MarketResource(self._client)
+    def stock_average_returns(self) -> StockAverageReturnsResource:
+        return StockAverageReturnsResource(self._client)
 
     @cached_property
-    def performers(self) -> PerformersResource:
-        return PerformersResource(self._client)
+    def stock_price_changes(self) -> StockPriceChangesResource:
+        return StockPriceChangesResource(self._client)
+
+    @cached_property
+    def market_seasonality(self) -> MarketSeasonalityResource:
+        return MarketSeasonalityResource(self._client)
+
+    @cached_property
+    def top_performers(self) -> TopPerformersResource:
+        return TopPerformersResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> SeasonalityResourceWithRawResponse:
@@ -55,12 +79,20 @@ class SeasonalityResource(SyncAPIResource):
 
 class AsyncSeasonalityResource(AsyncAPIResource):
     @cached_property
-    def market(self) -> AsyncMarketResource:
-        return AsyncMarketResource(self._client)
+    def stock_average_returns(self) -> AsyncStockAverageReturnsResource:
+        return AsyncStockAverageReturnsResource(self._client)
 
     @cached_property
-    def performers(self) -> AsyncPerformersResource:
-        return AsyncPerformersResource(self._client)
+    def stock_price_changes(self) -> AsyncStockPriceChangesResource:
+        return AsyncStockPriceChangesResource(self._client)
+
+    @cached_property
+    def market_seasonality(self) -> AsyncMarketSeasonalityResource:
+        return AsyncMarketSeasonalityResource(self._client)
+
+    @cached_property
+    def top_performers(self) -> AsyncTopPerformersResource:
+        return AsyncTopPerformersResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncSeasonalityResourceWithRawResponse:
@@ -87,12 +119,20 @@ class SeasonalityResourceWithRawResponse:
         self._seasonality = seasonality
 
     @cached_property
-    def market(self) -> MarketResourceWithRawResponse:
-        return MarketResourceWithRawResponse(self._seasonality.market)
+    def stock_average_returns(self) -> StockAverageReturnsResourceWithRawResponse:
+        return StockAverageReturnsResourceWithRawResponse(self._seasonality.stock_average_returns)
 
     @cached_property
-    def performers(self) -> PerformersResourceWithRawResponse:
-        return PerformersResourceWithRawResponse(self._seasonality.performers)
+    def stock_price_changes(self) -> StockPriceChangesResourceWithRawResponse:
+        return StockPriceChangesResourceWithRawResponse(self._seasonality.stock_price_changes)
+
+    @cached_property
+    def market_seasonality(self) -> MarketSeasonalityResourceWithRawResponse:
+        return MarketSeasonalityResourceWithRawResponse(self._seasonality.market_seasonality)
+
+    @cached_property
+    def top_performers(self) -> TopPerformersResourceWithRawResponse:
+        return TopPerformersResourceWithRawResponse(self._seasonality.top_performers)
 
 
 class AsyncSeasonalityResourceWithRawResponse:
@@ -100,12 +140,20 @@ class AsyncSeasonalityResourceWithRawResponse:
         self._seasonality = seasonality
 
     @cached_property
-    def market(self) -> AsyncMarketResourceWithRawResponse:
-        return AsyncMarketResourceWithRawResponse(self._seasonality.market)
+    def stock_average_returns(self) -> AsyncStockAverageReturnsResourceWithRawResponse:
+        return AsyncStockAverageReturnsResourceWithRawResponse(self._seasonality.stock_average_returns)
 
     @cached_property
-    def performers(self) -> AsyncPerformersResourceWithRawResponse:
-        return AsyncPerformersResourceWithRawResponse(self._seasonality.performers)
+    def stock_price_changes(self) -> AsyncStockPriceChangesResourceWithRawResponse:
+        return AsyncStockPriceChangesResourceWithRawResponse(self._seasonality.stock_price_changes)
+
+    @cached_property
+    def market_seasonality(self) -> AsyncMarketSeasonalityResourceWithRawResponse:
+        return AsyncMarketSeasonalityResourceWithRawResponse(self._seasonality.market_seasonality)
+
+    @cached_property
+    def top_performers(self) -> AsyncTopPerformersResourceWithRawResponse:
+        return AsyncTopPerformersResourceWithRawResponse(self._seasonality.top_performers)
 
 
 class SeasonalityResourceWithStreamingResponse:
@@ -113,12 +161,20 @@ class SeasonalityResourceWithStreamingResponse:
         self._seasonality = seasonality
 
     @cached_property
-    def market(self) -> MarketResourceWithStreamingResponse:
-        return MarketResourceWithStreamingResponse(self._seasonality.market)
+    def stock_average_returns(self) -> StockAverageReturnsResourceWithStreamingResponse:
+        return StockAverageReturnsResourceWithStreamingResponse(self._seasonality.stock_average_returns)
 
     @cached_property
-    def performers(self) -> PerformersResourceWithStreamingResponse:
-        return PerformersResourceWithStreamingResponse(self._seasonality.performers)
+    def stock_price_changes(self) -> StockPriceChangesResourceWithStreamingResponse:
+        return StockPriceChangesResourceWithStreamingResponse(self._seasonality.stock_price_changes)
+
+    @cached_property
+    def market_seasonality(self) -> MarketSeasonalityResourceWithStreamingResponse:
+        return MarketSeasonalityResourceWithStreamingResponse(self._seasonality.market_seasonality)
+
+    @cached_property
+    def top_performers(self) -> TopPerformersResourceWithStreamingResponse:
+        return TopPerformersResourceWithStreamingResponse(self._seasonality.top_performers)
 
 
 class AsyncSeasonalityResourceWithStreamingResponse:
@@ -126,9 +182,17 @@ class AsyncSeasonalityResourceWithStreamingResponse:
         self._seasonality = seasonality
 
     @cached_property
-    def market(self) -> AsyncMarketResourceWithStreamingResponse:
-        return AsyncMarketResourceWithStreamingResponse(self._seasonality.market)
+    def stock_average_returns(self) -> AsyncStockAverageReturnsResourceWithStreamingResponse:
+        return AsyncStockAverageReturnsResourceWithStreamingResponse(self._seasonality.stock_average_returns)
 
     @cached_property
-    def performers(self) -> AsyncPerformersResourceWithStreamingResponse:
-        return AsyncPerformersResourceWithStreamingResponse(self._seasonality.performers)
+    def stock_price_changes(self) -> AsyncStockPriceChangesResourceWithStreamingResponse:
+        return AsyncStockPriceChangesResourceWithStreamingResponse(self._seasonality.stock_price_changes)
+
+    @cached_property
+    def market_seasonality(self) -> AsyncMarketSeasonalityResourceWithStreamingResponse:
+        return AsyncMarketSeasonalityResourceWithStreamingResponse(self._seasonality.market_seasonality)
+
+    @cached_property
+    def top_performers(self) -> AsyncTopPerformersResourceWithStreamingResponse:
+        return AsyncTopPerformersResourceWithStreamingResponse(self._seasonality.top_performers)
