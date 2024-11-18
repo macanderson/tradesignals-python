@@ -16,6 +16,14 @@ from .top_performers import (
     TopPerformersResourceWithStreamingResponse,
     AsyncTopPerformersResourceWithStreamingResponse,
 )
+from .year_month_change import (
+    YearMonthChangeResource,
+    AsyncYearMonthChangeResource,
+    YearMonthChangeResourceWithRawResponse,
+    AsyncYearMonthChangeResourceWithRawResponse,
+    YearMonthChangeResourceWithStreamingResponse,
+    AsyncYearMonthChangeResourceWithStreamingResponse,
+)
 from .market_seasonality import (
     MarketSeasonalityResource,
     AsyncMarketSeasonalityResource,
@@ -24,36 +32,28 @@ from .market_seasonality import (
     MarketSeasonalityResourceWithStreamingResponse,
     AsyncMarketSeasonalityResourceWithStreamingResponse,
 )
-from .stock_price_changes import (
-    StockPriceChangesResource,
-    AsyncStockPriceChangesResource,
-    StockPriceChangesResourceWithRawResponse,
-    AsyncStockPriceChangesResourceWithRawResponse,
-    StockPriceChangesResourceWithStreamingResponse,
-    AsyncStockPriceChangesResourceWithStreamingResponse,
-)
-from .stock_average_returns import (
-    StockAverageReturnsResource,
-    AsyncStockAverageReturnsResource,
-    StockAverageReturnsResourceWithRawResponse,
-    AsyncStockAverageReturnsResourceWithRawResponse,
-    StockAverageReturnsResourceWithStreamingResponse,
-    AsyncStockAverageReturnsResourceWithStreamingResponse,
+from .ticker_seasonality import (
+    TickerSeasonalityResource,
+    AsyncTickerSeasonalityResource,
+    TickerSeasonalityResourceWithRawResponse,
+    AsyncTickerSeasonalityResourceWithRawResponse,
+    TickerSeasonalityResourceWithStreamingResponse,
+    AsyncTickerSeasonalityResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "StockAverageReturnsResource",
-    "AsyncStockAverageReturnsResource",
-    "StockAverageReturnsResourceWithRawResponse",
-    "AsyncStockAverageReturnsResourceWithRawResponse",
-    "StockAverageReturnsResourceWithStreamingResponse",
-    "AsyncStockAverageReturnsResourceWithStreamingResponse",
-    "StockPriceChangesResource",
-    "AsyncStockPriceChangesResource",
-    "StockPriceChangesResourceWithRawResponse",
-    "AsyncStockPriceChangesResourceWithRawResponse",
-    "StockPriceChangesResourceWithStreamingResponse",
-    "AsyncStockPriceChangesResourceWithStreamingResponse",
+    "TickerSeasonalityResource",
+    "AsyncTickerSeasonalityResource",
+    "TickerSeasonalityResourceWithRawResponse",
+    "AsyncTickerSeasonalityResourceWithRawResponse",
+    "TickerSeasonalityResourceWithStreamingResponse",
+    "AsyncTickerSeasonalityResourceWithStreamingResponse",
+    "YearMonthChangeResource",
+    "AsyncYearMonthChangeResource",
+    "YearMonthChangeResourceWithRawResponse",
+    "AsyncYearMonthChangeResourceWithRawResponse",
+    "YearMonthChangeResourceWithStreamingResponse",
+    "AsyncYearMonthChangeResourceWithStreamingResponse",
     "MarketSeasonalityResource",
     "AsyncMarketSeasonalityResource",
     "MarketSeasonalityResourceWithRawResponse",

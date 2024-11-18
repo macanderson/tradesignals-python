@@ -17,30 +17,30 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.seasonality.stock_price_change_list_response import StockPriceChangeListResponse
+from ...types.stock.flow_per_expiry_list_response import FlowPerExpiryListResponse
 
-__all__ = ["StockPriceChangesResource", "AsyncStockPriceChangesResource"]
+__all__ = ["FlowPerExpiryResource", "AsyncFlowPerExpiryResource"]
 
 
-class StockPriceChangesResource(SyncAPIResource):
+class FlowPerExpiryResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> StockPriceChangesResourceWithRawResponse:
+    def with_raw_response(self) -> FlowPerExpiryResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return StockPriceChangesResourceWithRawResponse(self)
+        return FlowPerExpiryResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> StockPriceChangesResourceWithStreamingResponse:
+    def with_streaming_response(self) -> FlowPerExpiryResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return StockPriceChangesResourceWithStreamingResponse(self)
+        return FlowPerExpiryResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -52,9 +52,9 @@ class StockPriceChangesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[StockPriceChangeListResponse]:
+    ) -> Optional[FlowPerExpiryListResponse]:
         """
-        Returns the relative price change for all past months over multiple years.
+        Returns the option flow per expiry for the last trading day.
 
         Args:
           extra_headers: Send extra headers
@@ -68,37 +68,37 @@ class StockPriceChangesResource(SyncAPIResource):
         if not ticker:
             raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return self._get(
-            f"/api/seasonality/{ticker}/year-month",
+            f"/api/stock/{ticker}/flow-per-expiry",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[Optional[StockPriceChangeListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[FlowPerExpiryListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[StockPriceChangeListResponse]], DataWrapper[StockPriceChangeListResponse]),
+            cast_to=cast(Type[Optional[FlowPerExpiryListResponse]], DataWrapper[FlowPerExpiryListResponse]),
         )
 
 
-class AsyncStockPriceChangesResource(AsyncAPIResource):
+class AsyncFlowPerExpiryResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncStockPriceChangesResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncFlowPerExpiryResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncStockPriceChangesResourceWithRawResponse(self)
+        return AsyncFlowPerExpiryResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncStockPriceChangesResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncFlowPerExpiryResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncStockPriceChangesResourceWithStreamingResponse(self)
+        return AsyncFlowPerExpiryResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -110,9 +110,9 @@ class AsyncStockPriceChangesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[StockPriceChangeListResponse]:
+    ) -> Optional[FlowPerExpiryListResponse]:
         """
-        Returns the relative price change for all past months over multiple years.
+        Returns the option flow per expiry for the last trading day.
 
         Args:
           extra_headers: Send extra headers
@@ -126,49 +126,49 @@ class AsyncStockPriceChangesResource(AsyncAPIResource):
         if not ticker:
             raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return await self._get(
-            f"/api/seasonality/{ticker}/year-month",
+            f"/api/stock/{ticker}/flow-per-expiry",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[Optional[StockPriceChangeListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[FlowPerExpiryListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[StockPriceChangeListResponse]], DataWrapper[StockPriceChangeListResponse]),
+            cast_to=cast(Type[Optional[FlowPerExpiryListResponse]], DataWrapper[FlowPerExpiryListResponse]),
         )
 
 
-class StockPriceChangesResourceWithRawResponse:
-    def __init__(self, stock_price_changes: StockPriceChangesResource) -> None:
-        self._stock_price_changes = stock_price_changes
+class FlowPerExpiryResourceWithRawResponse:
+    def __init__(self, flow_per_expiry: FlowPerExpiryResource) -> None:
+        self._flow_per_expiry = flow_per_expiry
 
         self.list = to_raw_response_wrapper(
-            stock_price_changes.list,
+            flow_per_expiry.list,
         )
 
 
-class AsyncStockPriceChangesResourceWithRawResponse:
-    def __init__(self, stock_price_changes: AsyncStockPriceChangesResource) -> None:
-        self._stock_price_changes = stock_price_changes
+class AsyncFlowPerExpiryResourceWithRawResponse:
+    def __init__(self, flow_per_expiry: AsyncFlowPerExpiryResource) -> None:
+        self._flow_per_expiry = flow_per_expiry
 
         self.list = async_to_raw_response_wrapper(
-            stock_price_changes.list,
+            flow_per_expiry.list,
         )
 
 
-class StockPriceChangesResourceWithStreamingResponse:
-    def __init__(self, stock_price_changes: StockPriceChangesResource) -> None:
-        self._stock_price_changes = stock_price_changes
+class FlowPerExpiryResourceWithStreamingResponse:
+    def __init__(self, flow_per_expiry: FlowPerExpiryResource) -> None:
+        self._flow_per_expiry = flow_per_expiry
 
         self.list = to_streamed_response_wrapper(
-            stock_price_changes.list,
+            flow_per_expiry.list,
         )
 
 
-class AsyncStockPriceChangesResourceWithStreamingResponse:
-    def __init__(self, stock_price_changes: AsyncStockPriceChangesResource) -> None:
-        self._stock_price_changes = stock_price_changes
+class AsyncFlowPerExpiryResourceWithStreamingResponse:
+    def __init__(self, flow_per_expiry: AsyncFlowPerExpiryResource) -> None:
+        self._flow_per_expiry = flow_per_expiry
 
         self.list = async_to_streamed_response_wrapper(
-            stock_price_changes.list,
+            flow_per_expiry.list,
         )

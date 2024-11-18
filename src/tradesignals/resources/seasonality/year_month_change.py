@@ -17,30 +17,30 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.seasonality.stock_average_return_list_response import StockAverageReturnListResponse
+from ...types.seasonality.year_month_change_list_response import YearMonthChangeListResponse
 
-__all__ = ["StockAverageReturnsResource", "AsyncStockAverageReturnsResource"]
+__all__ = ["YearMonthChangeResource", "AsyncYearMonthChangeResource"]
 
 
-class StockAverageReturnsResource(SyncAPIResource):
+class YearMonthChangeResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> StockAverageReturnsResourceWithRawResponse:
+    def with_raw_response(self) -> YearMonthChangeResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return StockAverageReturnsResourceWithRawResponse(self)
+        return YearMonthChangeResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> StockAverageReturnsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> YearMonthChangeResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return StockAverageReturnsResourceWithStreamingResponse(self)
+        return YearMonthChangeResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -52,9 +52,9 @@ class StockAverageReturnsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[StockAverageReturnListResponse]:
+    ) -> Optional[YearMonthChangeListResponse]:
         """
-        Returns the average return by month for the given ticker.
+        Returns the relative price change for all past months over multiple years.
 
         Args:
           extra_headers: Send extra headers
@@ -68,37 +68,37 @@ class StockAverageReturnsResource(SyncAPIResource):
         if not ticker:
             raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return self._get(
-            f"/api/seasonality/{ticker}/monthly",
+            f"/api/seasonality/{ticker}/year-month",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[Optional[StockAverageReturnListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[YearMonthChangeListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[StockAverageReturnListResponse]], DataWrapper[StockAverageReturnListResponse]),
+            cast_to=cast(Type[Optional[YearMonthChangeListResponse]], DataWrapper[YearMonthChangeListResponse]),
         )
 
 
-class AsyncStockAverageReturnsResource(AsyncAPIResource):
+class AsyncYearMonthChangeResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncStockAverageReturnsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncYearMonthChangeResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncStockAverageReturnsResourceWithRawResponse(self)
+        return AsyncYearMonthChangeResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncStockAverageReturnsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncYearMonthChangeResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncStockAverageReturnsResourceWithStreamingResponse(self)
+        return AsyncYearMonthChangeResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -110,9 +110,9 @@ class AsyncStockAverageReturnsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[StockAverageReturnListResponse]:
+    ) -> Optional[YearMonthChangeListResponse]:
         """
-        Returns the average return by month for the given ticker.
+        Returns the relative price change for all past months over multiple years.
 
         Args:
           extra_headers: Send extra headers
@@ -126,49 +126,49 @@ class AsyncStockAverageReturnsResource(AsyncAPIResource):
         if not ticker:
             raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return await self._get(
-            f"/api/seasonality/{ticker}/monthly",
+            f"/api/seasonality/{ticker}/year-month",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[Optional[StockAverageReturnListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[YearMonthChangeListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[StockAverageReturnListResponse]], DataWrapper[StockAverageReturnListResponse]),
+            cast_to=cast(Type[Optional[YearMonthChangeListResponse]], DataWrapper[YearMonthChangeListResponse]),
         )
 
 
-class StockAverageReturnsResourceWithRawResponse:
-    def __init__(self, stock_average_returns: StockAverageReturnsResource) -> None:
-        self._stock_average_returns = stock_average_returns
+class YearMonthChangeResourceWithRawResponse:
+    def __init__(self, year_month_change: YearMonthChangeResource) -> None:
+        self._year_month_change = year_month_change
 
         self.list = to_raw_response_wrapper(
-            stock_average_returns.list,
+            year_month_change.list,
         )
 
 
-class AsyncStockAverageReturnsResourceWithRawResponse:
-    def __init__(self, stock_average_returns: AsyncStockAverageReturnsResource) -> None:
-        self._stock_average_returns = stock_average_returns
+class AsyncYearMonthChangeResourceWithRawResponse:
+    def __init__(self, year_month_change: AsyncYearMonthChangeResource) -> None:
+        self._year_month_change = year_month_change
 
         self.list = async_to_raw_response_wrapper(
-            stock_average_returns.list,
+            year_month_change.list,
         )
 
 
-class StockAverageReturnsResourceWithStreamingResponse:
-    def __init__(self, stock_average_returns: StockAverageReturnsResource) -> None:
-        self._stock_average_returns = stock_average_returns
+class YearMonthChangeResourceWithStreamingResponse:
+    def __init__(self, year_month_change: YearMonthChangeResource) -> None:
+        self._year_month_change = year_month_change
 
         self.list = to_streamed_response_wrapper(
-            stock_average_returns.list,
+            year_month_change.list,
         )
 
 
-class AsyncStockAverageReturnsResourceWithStreamingResponse:
-    def __init__(self, stock_average_returns: AsyncStockAverageReturnsResource) -> None:
-        self._stock_average_returns = stock_average_returns
+class AsyncYearMonthChangeResourceWithStreamingResponse:
+    def __init__(self, year_month_change: AsyncYearMonthChangeResource) -> None:
+        self._year_month_change = year_month_change
 
         self.list = async_to_streamed_response_wrapper(
-            stock_average_returns.list,
+            year_month_change.list,
         )
