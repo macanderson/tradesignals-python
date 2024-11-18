@@ -48,6 +48,14 @@ from .earnings import (
     EarningsResourceWithStreamingResponse,
     AsyncEarningsResourceWithStreamingResponse,
 )
+from .industry import (
+    IndustryResource,
+    AsyncIndustryResource,
+    IndustryResourceWithRawResponse,
+    AsyncIndustryResourceWithRawResponse,
+    IndustryResourceWithStreamingResponse,
+    AsyncIndustryResourceWithStreamingResponse,
+)
 from .screener import (
     ScreenerResource,
     AsyncScreenerResource,
@@ -87,14 +95,6 @@ from .option_trades import (
     AsyncOptionTradesResourceWithRawResponse,
     OptionTradesResourceWithStreamingResponse,
     AsyncOptionTradesResourceWithStreamingResponse,
-)
-from .industry_group import (
-    IndustryGroupResource,
-    AsyncIndustryGroupResource,
-    IndustryGroupResourceWithRawResponse,
-    AsyncIndustryGroupResourceWithRawResponse,
-    IndustryGroupResourceWithStreamingResponse,
-    AsyncIndustryGroupResourceWithStreamingResponse,
 )
 from .option_contracts import (
     OptionContractsResource,
@@ -166,12 +166,12 @@ __all__ = [
     "AsyncCongressResourceWithRawResponse",
     "CongressResourceWithStreamingResponse",
     "AsyncCongressResourceWithStreamingResponse",
-    "IndustryGroupResource",
-    "AsyncIndustryGroupResource",
-    "IndustryGroupResourceWithRawResponse",
-    "AsyncIndustryGroupResourceWithRawResponse",
-    "IndustryGroupResourceWithStreamingResponse",
-    "AsyncIndustryGroupResourceWithStreamingResponse",
+    "IndustryResource",
+    "AsyncIndustryResource",
+    "IndustryResourceWithRawResponse",
+    "AsyncIndustryResourceWithRawResponse",
+    "IndustryResourceWithStreamingResponse",
+    "AsyncIndustryResourceWithStreamingResponse",
     "EtfResource",
     "AsyncEtfResource",
     "EtfResourceWithRawResponse",
