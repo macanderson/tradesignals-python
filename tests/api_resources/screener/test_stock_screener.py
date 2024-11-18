@@ -27,7 +27,7 @@ class TestStockScreener:
         stock_screener = client.screener.stock_screener.list(
             has_dividends=True,
             is_s_p_500=True,
-            issue_types=["Common Stock", "ETF", "Index"],
+            issue_types=["Common Stock"],
             max_marketcap=0,
             min_volume=0,
             order="premium",
@@ -69,7 +69,7 @@ class TestAsyncStockScreener:
         stock_screener = await async_client.screener.stock_screener.list(
             has_dividends=True,
             is_s_p_500=True,
-            issue_types=["Common Stock", "ETF", "Index"],
+            issue_types=["Common Stock"],
             max_marketcap=0,
             min_volume=0,
             order="premium",
