@@ -20,6 +20,14 @@ from .option_alerts import (
     OptionAlertsResourceWithStreamingResponse,
     AsyncOptionAlertsResourceWithStreamingResponse,
 )
+from .flow_by_expiry import (
+    FlowByExpiryResource,
+    AsyncFlowByExpiryResource,
+    FlowByExpiryResourceWithRawResponse,
+    AsyncFlowByExpiryResourceWithRawResponse,
+    FlowByExpiryResourceWithStreamingResponse,
+    AsyncFlowByExpiryResourceWithStreamingResponse,
+)
 from .sector_tickers import (
     SectorTickersResource,
     AsyncSectorTickersResource,
@@ -28,13 +36,13 @@ from .sector_tickers import (
     SectorTickersResourceWithStreamingResponse,
     AsyncSectorTickersResourceWithStreamingResponse,
 )
-from .flow_per_expiry import (
-    FlowPerExpiryResource,
-    AsyncFlowPerExpiryResource,
-    FlowPerExpiryResourceWithRawResponse,
-    AsyncFlowPerExpiryResourceWithRawResponse,
-    FlowPerExpiryResourceWithStreamingResponse,
-    AsyncFlowPerExpiryResourceWithStreamingResponse,
+from .flow_per_strike import (
+    FlowPerStrikeResource,
+    AsyncFlowPerStrikeResource,
+    FlowPerStrikeResourceWithRawResponse,
+    AsyncFlowPerStrikeResourceWithRawResponse,
+    FlowPerStrikeResourceWithStreamingResponse,
+    AsyncFlowPerStrikeResourceWithStreamingResponse,
 )
 
 __all__ = ["StockResource", "AsyncStockResource"]
@@ -42,8 +50,12 @@ __all__ = ["StockResource", "AsyncStockResource"]
 
 class StockResource(SyncAPIResource):
     @cached_property
-    def flow_per_expiry(self) -> FlowPerExpiryResource:
-        return FlowPerExpiryResource(self._client)
+    def flow_per_strike(self) -> FlowPerStrikeResource:
+        return FlowPerStrikeResource(self._client)
+
+    @cached_property
+    def flow_by_expiry(self) -> FlowByExpiryResource:
+        return FlowByExpiryResource(self._client)
 
     @cached_property
     def option_alerts(self) -> OptionAlertsResource:
@@ -79,8 +91,12 @@ class StockResource(SyncAPIResource):
 
 class AsyncStockResource(AsyncAPIResource):
     @cached_property
-    def flow_per_expiry(self) -> AsyncFlowPerExpiryResource:
-        return AsyncFlowPerExpiryResource(self._client)
+    def flow_per_strike(self) -> AsyncFlowPerStrikeResource:
+        return AsyncFlowPerStrikeResource(self._client)
+
+    @cached_property
+    def flow_by_expiry(self) -> AsyncFlowByExpiryResource:
+        return AsyncFlowByExpiryResource(self._client)
 
     @cached_property
     def option_alerts(self) -> AsyncOptionAlertsResource:
@@ -119,8 +135,12 @@ class StockResourceWithRawResponse:
         self._stock = stock
 
     @cached_property
-    def flow_per_expiry(self) -> FlowPerExpiryResourceWithRawResponse:
-        return FlowPerExpiryResourceWithRawResponse(self._stock.flow_per_expiry)
+    def flow_per_strike(self) -> FlowPerStrikeResourceWithRawResponse:
+        return FlowPerStrikeResourceWithRawResponse(self._stock.flow_per_strike)
+
+    @cached_property
+    def flow_by_expiry(self) -> FlowByExpiryResourceWithRawResponse:
+        return FlowByExpiryResourceWithRawResponse(self._stock.flow_by_expiry)
 
     @cached_property
     def option_alerts(self) -> OptionAlertsResourceWithRawResponse:
@@ -140,8 +160,12 @@ class AsyncStockResourceWithRawResponse:
         self._stock = stock
 
     @cached_property
-    def flow_per_expiry(self) -> AsyncFlowPerExpiryResourceWithRawResponse:
-        return AsyncFlowPerExpiryResourceWithRawResponse(self._stock.flow_per_expiry)
+    def flow_per_strike(self) -> AsyncFlowPerStrikeResourceWithRawResponse:
+        return AsyncFlowPerStrikeResourceWithRawResponse(self._stock.flow_per_strike)
+
+    @cached_property
+    def flow_by_expiry(self) -> AsyncFlowByExpiryResourceWithRawResponse:
+        return AsyncFlowByExpiryResourceWithRawResponse(self._stock.flow_by_expiry)
 
     @cached_property
     def option_alerts(self) -> AsyncOptionAlertsResourceWithRawResponse:
@@ -161,8 +185,12 @@ class StockResourceWithStreamingResponse:
         self._stock = stock
 
     @cached_property
-    def flow_per_expiry(self) -> FlowPerExpiryResourceWithStreamingResponse:
-        return FlowPerExpiryResourceWithStreamingResponse(self._stock.flow_per_expiry)
+    def flow_per_strike(self) -> FlowPerStrikeResourceWithStreamingResponse:
+        return FlowPerStrikeResourceWithStreamingResponse(self._stock.flow_per_strike)
+
+    @cached_property
+    def flow_by_expiry(self) -> FlowByExpiryResourceWithStreamingResponse:
+        return FlowByExpiryResourceWithStreamingResponse(self._stock.flow_by_expiry)
 
     @cached_property
     def option_alerts(self) -> OptionAlertsResourceWithStreamingResponse:
@@ -182,8 +210,12 @@ class AsyncStockResourceWithStreamingResponse:
         self._stock = stock
 
     @cached_property
-    def flow_per_expiry(self) -> AsyncFlowPerExpiryResourceWithStreamingResponse:
-        return AsyncFlowPerExpiryResourceWithStreamingResponse(self._stock.flow_per_expiry)
+    def flow_per_strike(self) -> AsyncFlowPerStrikeResourceWithStreamingResponse:
+        return AsyncFlowPerStrikeResourceWithStreamingResponse(self._stock.flow_per_strike)
+
+    @cached_property
+    def flow_by_expiry(self) -> AsyncFlowByExpiryResourceWithStreamingResponse:
+        return AsyncFlowByExpiryResourceWithStreamingResponse(self._stock.flow_by_expiry)
 
     @cached_property
     def option_alerts(self) -> AsyncOptionAlertsResourceWithStreamingResponse:

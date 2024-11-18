@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .etf_tide_entry import EtfTideEntry
+from .etf_tide import EtfTide
 
 __all__ = ["EtfTideListResponse"]
 
-EtfTideListResponse: TypeAlias = List[EtfTideEntry]
+EtfTideListResponse: TypeAlias = List[EtfTide]

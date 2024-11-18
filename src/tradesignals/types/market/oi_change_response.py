@@ -3,10 +3,10 @@
 from typing import List, Optional
 
 from ..._models import BaseModel
-from .oi_change_entry import OiChangeEntry
+from .oi_change import OiChange
 
 __all__ = ["OiChangeResponse"]
 
 
 class OiChangeResponse(BaseModel):
-    data: Optional[List[OiChangeEntry]] = None
+    data: Optional[List[OiChange]] = None
