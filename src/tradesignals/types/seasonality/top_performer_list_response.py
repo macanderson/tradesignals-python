@@ -5,6 +5,6 @@ from typing_extensions import TypeAlias
 
 from .month_performer_entry import MonthPerformerEntry
 
-__all__ = ["PerformerListResponse"]
+__all__ = ["TopPerformerListResponse"]
 
-PerformerListResponse: TypeAlias = List[MonthPerformerEntry]
+TopPerformerListResponse: TypeAlias = List[MonthPerformerEntry]

@@ -1,21 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .market import (
-    MarketResource,
-    AsyncMarketResource,
-    MarketResourceWithRawResponse,
-    AsyncMarketResourceWithRawResponse,
-    MarketResourceWithStreamingResponse,
-    AsyncMarketResourceWithStreamingResponse,
-)
-from .performers import (
-    PerformersResource,
-    AsyncPerformersResource,
-    PerformersResourceWithRawResponse,
-    AsyncPerformersResourceWithRawResponse,
-    PerformersResourceWithStreamingResponse,
-    AsyncPerformersResourceWithStreamingResponse,
-)
 from .seasonality import (
     SeasonalityResource,
     AsyncSeasonalityResource,
@@ -24,20 +8,64 @@ from .seasonality import (
     SeasonalityResourceWithStreamingResponse,
     AsyncSeasonalityResourceWithStreamingResponse,
 )
+from .top_performers import (
+    TopPerformersResource,
+    AsyncTopPerformersResource,
+    TopPerformersResourceWithRawResponse,
+    AsyncTopPerformersResourceWithRawResponse,
+    TopPerformersResourceWithStreamingResponse,
+    AsyncTopPerformersResourceWithStreamingResponse,
+)
+from .market_seasonality import (
+    MarketSeasonalityResource,
+    AsyncMarketSeasonalityResource,
+    MarketSeasonalityResourceWithRawResponse,
+    AsyncMarketSeasonalityResourceWithRawResponse,
+    MarketSeasonalityResourceWithStreamingResponse,
+    AsyncMarketSeasonalityResourceWithStreamingResponse,
+)
+from .stock_price_changes import (
+    StockPriceChangesResource,
+    AsyncStockPriceChangesResource,
+    StockPriceChangesResourceWithRawResponse,
+    AsyncStockPriceChangesResourceWithRawResponse,
+    StockPriceChangesResourceWithStreamingResponse,
+    AsyncStockPriceChangesResourceWithStreamingResponse,
+)
+from .stock_average_returns import (
+    StockAverageReturnsResource,
+    AsyncStockAverageReturnsResource,
+    StockAverageReturnsResourceWithRawResponse,
+    AsyncStockAverageReturnsResourceWithRawResponse,
+    StockAverageReturnsResourceWithStreamingResponse,
+    AsyncStockAverageReturnsResourceWithStreamingResponse,
+)
 
 __all__ = [
-    "MarketResource",
-    "AsyncMarketResource",
-    "MarketResourceWithRawResponse",
-    "AsyncMarketResourceWithRawResponse",
-    "MarketResourceWithStreamingResponse",
-    "AsyncMarketResourceWithStreamingResponse",
-    "PerformersResource",
-    "AsyncPerformersResource",
-    "PerformersResourceWithRawResponse",
-    "AsyncPerformersResourceWithRawResponse",
-    "PerformersResourceWithStreamingResponse",
-    "AsyncPerformersResourceWithStreamingResponse",
+    "StockAverageReturnsResource",
+    "AsyncStockAverageReturnsResource",
+    "StockAverageReturnsResourceWithRawResponse",
+    "AsyncStockAverageReturnsResourceWithRawResponse",
+    "StockAverageReturnsResourceWithStreamingResponse",
+    "AsyncStockAverageReturnsResourceWithStreamingResponse",
+    "StockPriceChangesResource",
+    "AsyncStockPriceChangesResource",
+    "StockPriceChangesResourceWithRawResponse",
+    "AsyncStockPriceChangesResourceWithRawResponse",
+    "StockPriceChangesResourceWithStreamingResponse",
+    "AsyncStockPriceChangesResourceWithStreamingResponse",
+    "MarketSeasonalityResource",
+    "AsyncMarketSeasonalityResource",
+    "MarketSeasonalityResourceWithRawResponse",
+    "AsyncMarketSeasonalityResourceWithRawResponse",
+    "MarketSeasonalityResourceWithStreamingResponse",
+    "AsyncMarketSeasonalityResourceWithStreamingResponse",
+    "TopPerformersResource",
+    "AsyncTopPerformersResource",
+    "TopPerformersResourceWithRawResponse",
+    "AsyncTopPerformersResourceWithRawResponse",
+    "TopPerformersResourceWithStreamingResponse",
+    "AsyncTopPerformersResourceWithStreamingResponse",
     "SeasonalityResource",
     "AsyncSeasonalityResource",
     "SeasonalityResourceWithRawResponse",

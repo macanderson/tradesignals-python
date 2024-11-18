@@ -22,31 +22,31 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.seasonality import performer_list_params
-from ...types.seasonality.performer_list_response import PerformerListResponse
+from ...types.seasonality import top_performer_list_params
+from ...types.seasonality.top_performer_list_response import TopPerformerListResponse
 
-__all__ = ["PerformersResource", "AsyncPerformersResource"]
+__all__ = ["TopPerformersResource", "AsyncTopPerformersResource"]
 
 
-class PerformersResource(SyncAPIResource):
+class TopPerformersResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> PerformersResourceWithRawResponse:
+    def with_raw_response(self) -> TopPerformersResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return PerformersResourceWithRawResponse(self)
+        return TopPerformersResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> PerformersResourceWithStreamingResponse:
+    def with_streaming_response(self) -> TopPerformersResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return PerformersResourceWithStreamingResponse(self)
+        return TopPerformersResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -76,7 +76,7 @@ class PerformersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[PerformerListResponse]:
+    ) -> Optional[TopPerformerListResponse]:
         """
         Returns the tickers with the highest performance in terms of price change in the
         given month.
@@ -107,33 +107,33 @@ class PerformersResource(SyncAPIResource):
                         "s_p_500_nasdaq_only": s_p_500_nasdaq_only,
                         "ticker_for_sector": ticker_for_sector,
                     },
-                    performer_list_params.PerformerListParams,
+                    top_performer_list_params.TopPerformerListParams,
                 ),
-                post_parser=DataWrapper[Optional[PerformerListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[TopPerformerListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[PerformerListResponse]], DataWrapper[PerformerListResponse]),
+            cast_to=cast(Type[Optional[TopPerformerListResponse]], DataWrapper[TopPerformerListResponse]),
         )
 
 
-class AsyncPerformersResource(AsyncAPIResource):
+class AsyncTopPerformersResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncPerformersResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncTopPerformersResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncPerformersResourceWithRawResponse(self)
+        return AsyncTopPerformersResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncPerformersResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncTopPerformersResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncPerformersResourceWithStreamingResponse(self)
+        return AsyncTopPerformersResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -163,7 +163,7 @@ class AsyncPerformersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[PerformerListResponse]:
+    ) -> Optional[TopPerformerListResponse]:
         """
         Returns the tickers with the highest performance in terms of price change in the
         given month.
@@ -194,45 +194,45 @@ class AsyncPerformersResource(AsyncAPIResource):
                         "s_p_500_nasdaq_only": s_p_500_nasdaq_only,
                         "ticker_for_sector": ticker_for_sector,
                     },
-                    performer_list_params.PerformerListParams,
+                    top_performer_list_params.TopPerformerListParams,
                 ),
-                post_parser=DataWrapper[Optional[PerformerListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[TopPerformerListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[PerformerListResponse]], DataWrapper[PerformerListResponse]),
+            cast_to=cast(Type[Optional[TopPerformerListResponse]], DataWrapper[TopPerformerListResponse]),
         )
 
 
-class PerformersResourceWithRawResponse:
-    def __init__(self, performers: PerformersResource) -> None:
-        self._performers = performers
+class TopPerformersResourceWithRawResponse:
+    def __init__(self, top_performers: TopPerformersResource) -> None:
+        self._top_performers = top_performers
 
         self.list = to_raw_response_wrapper(
-            performers.list,
+            top_performers.list,
         )
 
 
-class AsyncPerformersResourceWithRawResponse:
-    def __init__(self, performers: AsyncPerformersResource) -> None:
-        self._performers = performers
+class AsyncTopPerformersResourceWithRawResponse:
+    def __init__(self, top_performers: AsyncTopPerformersResource) -> None:
+        self._top_performers = top_performers
 
         self.list = async_to_raw_response_wrapper(
-            performers.list,
+            top_performers.list,
         )
 
 
-class PerformersResourceWithStreamingResponse:
-    def __init__(self, performers: PerformersResource) -> None:
-        self._performers = performers
+class TopPerformersResourceWithStreamingResponse:
+    def __init__(self, top_performers: TopPerformersResource) -> None:
+        self._top_performers = top_performers
 
         self.list = to_streamed_response_wrapper(
-            performers.list,
+            top_performers.list,
         )
 
 
-class AsyncPerformersResourceWithStreamingResponse:
-    def __init__(self, performers: AsyncPerformersResource) -> None:
-        self._performers = performers
+class AsyncTopPerformersResourceWithStreamingResponse:
+    def __init__(self, top_performers: AsyncTopPerformersResource) -> None:
+        self._top_performers = top_performers
 
         self.list = async_to_streamed_response_wrapper(
-            performers.list,
+            top_performers.list,
         )
