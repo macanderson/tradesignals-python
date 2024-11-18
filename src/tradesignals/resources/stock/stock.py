@@ -19,7 +19,6 @@ from .max_pain import (
     AsyncMaxPainResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
-from .ohlc.ohlc import OhlcResource, AsyncOhlcResource
 from .oi_change import (
     OiChangeResource,
     AsyncOiChangeResource,
