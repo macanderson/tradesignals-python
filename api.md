@@ -1,5 +1,17 @@
 # Stock
 
+## OiChange
+
+Types:
+
+```python
+from tradesignals.types.stock import StockOiChange, StockOiChangeResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/oi-change">client.stock.oi_change.<a href="./src/tradesignals/resources/stock/oi_change.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/stock/oi_change_list_params.py">params</a>) -> <a href="./src/tradesignals/types/stock/stock_oi_change_response.py">StockOiChangeResponse</a></code>
+
 ## FlowPerStrikeIntraday
 
 Types:

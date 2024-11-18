@@ -8,6 +8,14 @@ from .stock import (
     StockResourceWithStreamingResponse,
     AsyncStockResourceWithStreamingResponse,
 )
+from .oi_change import (
+    OiChangeResource,
+    AsyncOiChangeResource,
+    OiChangeResourceWithRawResponse,
+    AsyncOiChangeResourceWithRawResponse,
+    OiChangeResourceWithStreamingResponse,
+    AsyncOiChangeResourceWithStreamingResponse,
+)
 from .atm_chains import (
     AtmChainsResource,
     AsyncAtmChainsResource,
@@ -58,6 +66,12 @@ from .flow_per_strike_intraday import (
 )
 
 __all__ = [
+    "OiChangeResource",
+    "AsyncOiChangeResource",
+    "OiChangeResourceWithRawResponse",
+    "AsyncOiChangeResourceWithRawResponse",
+    "OiChangeResourceWithStreamingResponse",
+    "AsyncOiChangeResourceWithStreamingResponse",
     "FlowPerStrikeIntradayResource",
     "AsyncFlowPerStrikeIntradayResource",
     "FlowPerStrikeIntradayResourceWithRawResponse",
