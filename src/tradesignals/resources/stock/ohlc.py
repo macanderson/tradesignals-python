@@ -8,45 +8,45 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ...._utils import (
+from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._utils import (
     maybe_transform,
     async_maybe_transform,
 )
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import make_request_options
-from ....types.stock.ohlc import candle_data_list_params
-from ....types.stock.ohlc.ohlc_response import OhlcResponse
+from ...types.stock import ohlc_list_params
+from ..._base_client import make_request_options
+from ...types.stock.ohlc_response import OhlcResponse
 
-__all__ = ["CandleDataResource", "AsyncCandleDataResource"]
+__all__ = ["OhlcResource", "AsyncOhlcResource"]
 
 
-class CandleDataResource(SyncAPIResource):
+class OhlcResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> CandleDataResourceWithRawResponse:
+    def with_raw_response(self) -> OhlcResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return CandleDataResourceWithRawResponse(self)
+        return OhlcResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> CandleDataResourceWithStreamingResponse:
+    def with_streaming_response(self) -> OhlcResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return CandleDataResourceWithStreamingResponse(self)
+        return OhlcResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -103,32 +103,32 @@ class CandleDataResource(SyncAPIResource):
                         "limit": limit,
                         "timeframe": timeframe,
                     },
-                    candle_data_list_params.CandleDataListParams,
+                    ohlc_list_params.OhlcListParams,
                 ),
             ),
             cast_to=OhlcResponse,
         )
 
 
-class AsyncCandleDataResource(AsyncAPIResource):
+class AsyncOhlcResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncCandleDataResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncOhlcResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncCandleDataResourceWithRawResponse(self)
+        return AsyncOhlcResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncCandleDataResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncOhlcResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncCandleDataResourceWithStreamingResponse(self)
+        return AsyncOhlcResourceWithStreamingResponse(self)
 
     async def list(
         self,
@@ -185,44 +185,44 @@ class AsyncCandleDataResource(AsyncAPIResource):
                         "limit": limit,
                         "timeframe": timeframe,
                     },
-                    candle_data_list_params.CandleDataListParams,
+                    ohlc_list_params.OhlcListParams,
                 ),
             ),
             cast_to=OhlcResponse,
         )
 
 
-class CandleDataResourceWithRawResponse:
-    def __init__(self, candle_data: CandleDataResource) -> None:
-        self._candle_data = candle_data
+class OhlcResourceWithRawResponse:
+    def __init__(self, ohlc: OhlcResource) -> None:
+        self._ohlc = ohlc
 
         self.list = to_raw_response_wrapper(
-            candle_data.list,
+            ohlc.list,
         )
 
 
-class AsyncCandleDataResourceWithRawResponse:
-    def __init__(self, candle_data: AsyncCandleDataResource) -> None:
-        self._candle_data = candle_data
+class AsyncOhlcResourceWithRawResponse:
+    def __init__(self, ohlc: AsyncOhlcResource) -> None:
+        self._ohlc = ohlc
 
         self.list = async_to_raw_response_wrapper(
-            candle_data.list,
+            ohlc.list,
         )
 
 
-class CandleDataResourceWithStreamingResponse:
-    def __init__(self, candle_data: CandleDataResource) -> None:
-        self._candle_data = candle_data
+class OhlcResourceWithStreamingResponse:
+    def __init__(self, ohlc: OhlcResource) -> None:
+        self._ohlc = ohlc
 
         self.list = to_streamed_response_wrapper(
-            candle_data.list,
+            ohlc.list,
         )
 
 
-class AsyncCandleDataResourceWithStreamingResponse:
-    def __init__(self, candle_data: AsyncCandleDataResource) -> None:
-        self._candle_data = candle_data
+class AsyncOhlcResourceWithStreamingResponse:
+    def __init__(self, ohlc: AsyncOhlcResource) -> None:
+        self._ohlc = ohlc
 
         self.list = async_to_streamed_response_wrapper(
-            candle_data.list,
+            ohlc.list,
         )

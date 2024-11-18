@@ -6,12 +6,12 @@ import datetime
 from typing import Union
 from typing_extensions import Required, Annotated, TypedDict
 
-from ...._utils import PropertyInfo
+from ..._utils import PropertyInfo
 
-__all__ = ["CandleDataListParams"]
+__all__ = ["OhlcListParams"]
 
 
-class CandleDataListParams(TypedDict, total=False):
+class OhlcListParams(TypedDict, total=False):
     ticker: Required[str]
 
     date: Annotated[Union[str, datetime.date], PropertyInfo(format="iso8601")]
