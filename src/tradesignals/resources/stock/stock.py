@@ -3,6 +3,14 @@
 from __future__ import annotations
 
 from ..._compat import cached_property
+from .oi_change import (
+    OiChangeResource,
+    AsyncOiChangeResource,
+    OiChangeResourceWithRawResponse,
+    AsyncOiChangeResourceWithRawResponse,
+    OiChangeResourceWithStreamingResponse,
+    AsyncOiChangeResourceWithStreamingResponse,
+)
 from .atm_chains import (
     AtmChainsResource,
     AsyncAtmChainsResource,
@@ -58,6 +66,10 @@ __all__ = ["StockResource", "AsyncStockResource"]
 
 class StockResource(SyncAPIResource):
     @cached_property
+    def oi_change(self) -> OiChangeResource:
+        return OiChangeResource(self._client)
+
+    @cached_property
     def flow_per_strike_intraday(self) -> FlowPerStrikeIntradayResource:
         return FlowPerStrikeIntradayResource(self._client)
 
@@ -102,6 +114,10 @@ class StockResource(SyncAPIResource):
 
 
 class AsyncStockResource(AsyncAPIResource):
+    @cached_property
+    def oi_change(self) -> AsyncOiChangeResource:
+        return AsyncOiChangeResource(self._client)
+
     @cached_property
     def flow_per_strike_intraday(self) -> AsyncFlowPerStrikeIntradayResource:
         return AsyncFlowPerStrikeIntradayResource(self._client)
@@ -151,6 +167,10 @@ class StockResourceWithRawResponse:
         self._stock = stock
 
     @cached_property
+    def oi_change(self) -> OiChangeResourceWithRawResponse:
+        return OiChangeResourceWithRawResponse(self._stock.oi_change)
+
+    @cached_property
     def flow_per_strike_intraday(self) -> FlowPerStrikeIntradayResourceWithRawResponse:
         return FlowPerStrikeIntradayResourceWithRawResponse(self._stock.flow_per_strike_intraday)
 
@@ -178,6 +198,10 @@ class StockResourceWithRawResponse:
 class AsyncStockResourceWithRawResponse:
     def __init__(self, stock: AsyncStockResource) -> None:
         self._stock = stock
+
+    @cached_property
+    def oi_change(self) -> AsyncOiChangeResourceWithRawResponse:
+        return AsyncOiChangeResourceWithRawResponse(self._stock.oi_change)
 
     @cached_property
     def flow_per_strike_intraday(self) -> AsyncFlowPerStrikeIntradayResourceWithRawResponse:
@@ -209,6 +233,10 @@ class StockResourceWithStreamingResponse:
         self._stock = stock
 
     @cached_property
+    def oi_change(self) -> OiChangeResourceWithStreamingResponse:
+        return OiChangeResourceWithStreamingResponse(self._stock.oi_change)
+
+    @cached_property
     def flow_per_strike_intraday(self) -> FlowPerStrikeIntradayResourceWithStreamingResponse:
         return FlowPerStrikeIntradayResourceWithStreamingResponse(self._stock.flow_per_strike_intraday)
 
@@ -236,6 +264,10 @@ class StockResourceWithStreamingResponse:
 class AsyncStockResourceWithStreamingResponse:
     def __init__(self, stock: AsyncStockResource) -> None:
         self._stock = stock
+
+    @cached_property
+    def oi_change(self) -> AsyncOiChangeResourceWithStreamingResponse:
+        return AsyncOiChangeResourceWithStreamingResponse(self._stock.oi_change)
 
     @cached_property
     def flow_per_strike_intraday(self) -> AsyncFlowPerStrikeIntradayResourceWithStreamingResponse:
