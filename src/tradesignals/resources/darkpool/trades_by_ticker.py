@@ -74,11 +74,11 @@ class TradesByTickerResource(SyncAPIResource):
 
           limit: How many items to return. Default is 100. Max is 200. Minimum is 1.
 
-          newer_than: -> The unix time in milliseconds or seconds at which no older results will be
+          newer_than: The unix time in milliseconds or seconds at which no older results will be
               returned. Can be used with newer_than to paginate by time. Also accepts an ISO
               date example "2024-01-25".
 
-          older_than: -> The unix time in milliseconds or seconds at which no newer results will be
+          older_than: The unix time in milliseconds or seconds at which no newer results will be
               returned. Can be used with newer_than to paginate by time. Also accepts an ISO
               date example "2024-01-25".
 
@@ -160,11 +160,11 @@ class AsyncTradesByTickerResource(AsyncAPIResource):
 
           limit: How many items to return. Default is 100. Max is 200. Minimum is 1.
 
-          newer_than: -> The unix time in milliseconds or seconds at which no older results will be
+          newer_than: The unix time in milliseconds or seconds at which no older results will be
               returned. Can be used with newer_than to paginate by time. Also accepts an ISO
               date example "2024-01-25".
 
-          older_than: -> The unix time in milliseconds or seconds at which no newer results will be
+          older_than: The unix time in milliseconds or seconds at which no newer results will be
               returned. Can be used with newer_than to paginate by time. Also accepts an ISO
               date example "2024-01-25".
 
