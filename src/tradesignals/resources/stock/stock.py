@@ -85,6 +85,22 @@ from .flow_per_strike import (
     FlowPerStrikeResourceWithStreamingResponse,
     AsyncFlowPerStrikeResourceWithStreamingResponse,
 )
+from .off_lit_price_levels import (
+    OffLitPriceLevelsResource,
+    AsyncOffLitPriceLevelsResource,
+    OffLitPriceLevelsResourceWithRawResponse,
+    AsyncOffLitPriceLevelsResourceWithRawResponse,
+    OffLitPriceLevelsResourceWithStreamingResponse,
+    AsyncOffLitPriceLevelsResourceWithStreamingResponse,
+)
+from .ticker_options_volume import (
+    TickerOptionsVolumeResource,
+    AsyncTickerOptionsVolumeResource,
+    TickerOptionsVolumeResourceWithRawResponse,
+    AsyncTickerOptionsVolumeResourceWithRawResponse,
+    TickerOptionsVolumeResourceWithStreamingResponse,
+    AsyncTickerOptionsVolumeResourceWithStreamingResponse,
+)
 from .flow_per_strike_intraday import (
     FlowPerStrikeIntradayResource,
     AsyncFlowPerStrikeIntradayResource,
@@ -98,6 +114,14 @@ __all__ = ["StockResource", "AsyncStockResource"]
 
 
 class StockResource(SyncAPIResource):
+    @cached_property
+    def off_lit_price_levels(self) -> OffLitPriceLevelsResource:
+        return OffLitPriceLevelsResource(self._client)
+
+    @cached_property
+    def ticker_options_volume(self) -> TickerOptionsVolumeResource:
+        return TickerOptionsVolumeResource(self._client)
+
     @cached_property
     def ohlc(self) -> OhlcResource:
         return OhlcResource(self._client)
@@ -163,6 +187,14 @@ class StockResource(SyncAPIResource):
 
 
 class AsyncStockResource(AsyncAPIResource):
+    @cached_property
+    def off_lit_price_levels(self) -> AsyncOffLitPriceLevelsResource:
+        return AsyncOffLitPriceLevelsResource(self._client)
+
+    @cached_property
+    def ticker_options_volume(self) -> AsyncTickerOptionsVolumeResource:
+        return AsyncTickerOptionsVolumeResource(self._client)
+
     @cached_property
     def ohlc(self) -> AsyncOhlcResource:
         return AsyncOhlcResource(self._client)
@@ -232,6 +264,14 @@ class StockResourceWithRawResponse:
         self._stock = stock
 
     @cached_property
+    def off_lit_price_levels(self) -> OffLitPriceLevelsResourceWithRawResponse:
+        return OffLitPriceLevelsResourceWithRawResponse(self._stock.off_lit_price_levels)
+
+    @cached_property
+    def ticker_options_volume(self) -> TickerOptionsVolumeResourceWithRawResponse:
+        return TickerOptionsVolumeResourceWithRawResponse(self._stock.ticker_options_volume)
+
+    @cached_property
     def ohlc(self) -> OhlcResourceWithRawResponse:
         return OhlcResourceWithRawResponse(self._stock.ohlc)
 
@@ -279,6 +319,14 @@ class StockResourceWithRawResponse:
 class AsyncStockResourceWithRawResponse:
     def __init__(self, stock: AsyncStockResource) -> None:
         self._stock = stock
+
+    @cached_property
+    def off_lit_price_levels(self) -> AsyncOffLitPriceLevelsResourceWithRawResponse:
+        return AsyncOffLitPriceLevelsResourceWithRawResponse(self._stock.off_lit_price_levels)
+
+    @cached_property
+    def ticker_options_volume(self) -> AsyncTickerOptionsVolumeResourceWithRawResponse:
+        return AsyncTickerOptionsVolumeResourceWithRawResponse(self._stock.ticker_options_volume)
 
     @cached_property
     def ohlc(self) -> AsyncOhlcResourceWithRawResponse:
@@ -330,6 +378,14 @@ class StockResourceWithStreamingResponse:
         self._stock = stock
 
     @cached_property
+    def off_lit_price_levels(self) -> OffLitPriceLevelsResourceWithStreamingResponse:
+        return OffLitPriceLevelsResourceWithStreamingResponse(self._stock.off_lit_price_levels)
+
+    @cached_property
+    def ticker_options_volume(self) -> TickerOptionsVolumeResourceWithStreamingResponse:
+        return TickerOptionsVolumeResourceWithStreamingResponse(self._stock.ticker_options_volume)
+
+    @cached_property
     def ohlc(self) -> OhlcResourceWithStreamingResponse:
         return OhlcResourceWithStreamingResponse(self._stock.ohlc)
 
@@ -377,6 +433,14 @@ class StockResourceWithStreamingResponse:
 class AsyncStockResourceWithStreamingResponse:
     def __init__(self, stock: AsyncStockResource) -> None:
         self._stock = stock
+
+    @cached_property
+    def off_lit_price_levels(self) -> AsyncOffLitPriceLevelsResourceWithStreamingResponse:
+        return AsyncOffLitPriceLevelsResourceWithStreamingResponse(self._stock.off_lit_price_levels)
+
+    @cached_property
+    def ticker_options_volume(self) -> AsyncTickerOptionsVolumeResourceWithStreamingResponse:
+        return AsyncTickerOptionsVolumeResourceWithStreamingResponse(self._stock.ticker_options_volume)
 
     @cached_property
     def ohlc(self) -> AsyncOhlcResourceWithStreamingResponse:
