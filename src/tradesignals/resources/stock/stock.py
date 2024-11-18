@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+from .max_pain import (
+    MaxPainResource,
+    AsyncMaxPainResource,
+    MaxPainResourceWithRawResponse,
+    AsyncMaxPainResourceWithRawResponse,
+    MaxPainResourceWithStreamingResponse,
+    AsyncMaxPainResourceWithStreamingResponse,
+)
 from ..._compat import cached_property
 from .oi_change import (
     OiChangeResource,
@@ -20,6 +28,14 @@ from .atm_chains import (
     AsyncAtmChainsResourceWithStreamingResponse,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from .ticker_info import (
+    TickerInfoResource,
+    AsyncTickerInfoResource,
+    TickerInfoResourceWithRawResponse,
+    AsyncTickerInfoResourceWithRawResponse,
+    TickerInfoResourceWithStreamingResponse,
+    AsyncTickerInfoResourceWithStreamingResponse,
+)
 from .option_alerts import (
     OptionAlertsResource,
     AsyncOptionAlertsResource,
@@ -74,6 +90,14 @@ __all__ = ["StockResource", "AsyncStockResource"]
 
 class StockResource(SyncAPIResource):
     @cached_property
+    def max_pain(self) -> MaxPainResource:
+        return MaxPainResource(self._client)
+
+    @cached_property
+    def ticker_info(self) -> TickerInfoResource:
+        return TickerInfoResource(self._client)
+
+    @cached_property
     def net_prem_ticks(self) -> NetPremTicksResource:
         return NetPremTicksResource(self._client)
 
@@ -126,6 +150,14 @@ class StockResource(SyncAPIResource):
 
 
 class AsyncStockResource(AsyncAPIResource):
+    @cached_property
+    def max_pain(self) -> AsyncMaxPainResource:
+        return AsyncMaxPainResource(self._client)
+
+    @cached_property
+    def ticker_info(self) -> AsyncTickerInfoResource:
+        return AsyncTickerInfoResource(self._client)
+
     @cached_property
     def net_prem_ticks(self) -> AsyncNetPremTicksResource:
         return AsyncNetPremTicksResource(self._client)
@@ -183,6 +215,14 @@ class StockResourceWithRawResponse:
         self._stock = stock
 
     @cached_property
+    def max_pain(self) -> MaxPainResourceWithRawResponse:
+        return MaxPainResourceWithRawResponse(self._stock.max_pain)
+
+    @cached_property
+    def ticker_info(self) -> TickerInfoResourceWithRawResponse:
+        return TickerInfoResourceWithRawResponse(self._stock.ticker_info)
+
+    @cached_property
     def net_prem_ticks(self) -> NetPremTicksResourceWithRawResponse:
         return NetPremTicksResourceWithRawResponse(self._stock.net_prem_ticks)
 
@@ -218,6 +258,14 @@ class StockResourceWithRawResponse:
 class AsyncStockResourceWithRawResponse:
     def __init__(self, stock: AsyncStockResource) -> None:
         self._stock = stock
+
+    @cached_property
+    def max_pain(self) -> AsyncMaxPainResourceWithRawResponse:
+        return AsyncMaxPainResourceWithRawResponse(self._stock.max_pain)
+
+    @cached_property
+    def ticker_info(self) -> AsyncTickerInfoResourceWithRawResponse:
+        return AsyncTickerInfoResourceWithRawResponse(self._stock.ticker_info)
 
     @cached_property
     def net_prem_ticks(self) -> AsyncNetPremTicksResourceWithRawResponse:
@@ -257,6 +305,14 @@ class StockResourceWithStreamingResponse:
         self._stock = stock
 
     @cached_property
+    def max_pain(self) -> MaxPainResourceWithStreamingResponse:
+        return MaxPainResourceWithStreamingResponse(self._stock.max_pain)
+
+    @cached_property
+    def ticker_info(self) -> TickerInfoResourceWithStreamingResponse:
+        return TickerInfoResourceWithStreamingResponse(self._stock.ticker_info)
+
+    @cached_property
     def net_prem_ticks(self) -> NetPremTicksResourceWithStreamingResponse:
         return NetPremTicksResourceWithStreamingResponse(self._stock.net_prem_ticks)
 
@@ -292,6 +348,14 @@ class StockResourceWithStreamingResponse:
 class AsyncStockResourceWithStreamingResponse:
     def __init__(self, stock: AsyncStockResource) -> None:
         self._stock = stock
+
+    @cached_property
+    def max_pain(self) -> AsyncMaxPainResourceWithStreamingResponse:
+        return AsyncMaxPainResourceWithStreamingResponse(self._stock.max_pain)
+
+    @cached_property
+    def ticker_info(self) -> AsyncTickerInfoResourceWithStreamingResponse:
+        return AsyncTickerInfoResourceWithStreamingResponse(self._stock.ticker_info)
 
     @cached_property
     def net_prem_ticks(self) -> AsyncNetPremTicksResourceWithStreamingResponse:
