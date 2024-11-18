@@ -90,7 +90,7 @@ __all__ = ["MarketDataResource", "AsyncMarketDataResource"]
 
 class MarketDataResource(SyncAPIResource):
     """
-    -> Market endpoints provide data and insights into the broader stock market and other macro-level indicators.
+    Market endpoints provide data and insights into the broader stock market and other macro-level indicators.
     """
 
     @cached_property
@@ -155,7 +155,7 @@ class MarketDataResource(SyncAPIResource):
 
 class AsyncMarketDataResource(AsyncAPIResource):
     """
-    -> Market endpoints provide data and insights into the broader stock market and other macro-level indicators.
+    Market endpoints provide data and insights into the broader stock market and other macro-level indicators.
     """
 
     @cached_property
