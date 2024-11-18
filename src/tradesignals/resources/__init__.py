@@ -8,6 +8,14 @@ from .etf import (
     EtfResourceWithStreamingResponse,
     AsyncEtfResourceWithStreamingResponse,
 )
+from .stock import (
+    StockResource,
+    AsyncStockResource,
+    StockResourceWithRawResponse,
+    AsyncStockResourceWithRawResponse,
+    StockResourceWithStreamingResponse,
+    AsyncStockResourceWithStreamingResponse,
+)
 from .market import (
     MarketResource,
     AsyncMarketResource,
@@ -90,6 +98,12 @@ from .option_contracts import (
 )
 
 __all__ = [
+    "StockResource",
+    "AsyncStockResource",
+    "StockResourceWithRawResponse",
+    "AsyncStockResourceWithRawResponse",
+    "StockResourceWithStreamingResponse",
+    "AsyncStockResourceWithStreamingResponse",
     "SeasonalityResource",
     "AsyncSeasonalityResource",
     "SeasonalityResourceWithRawResponse",

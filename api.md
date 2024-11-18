@@ -1,6 +1,56 @@
+# Stock
+
+## FlowPerExpiry
+
+Types:
+
+```python
+from tradesignals.types.stock import ExpiryFlow, ExpiryFlowResponse, FlowPerExpiryListResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/flow-per-expiry">client.stock.flow_per_expiry.<a href="./src/tradesignals/resources/stock/flow_per_expiry.py">list</a>(ticker) -> <a href="./src/tradesignals/types/stock/flow_per_expiry_list_response.py">Optional</a></code>
+
+## OptionAlerts
+
+Types:
+
+```python
+from tradesignals.types.stock import OptionAlert, OptionAlertResponse, OptionAlertListResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/flow-alerts">client.stock.option_alerts.<a href="./src/tradesignals/resources/stock/option_alerts.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/stock/option_alert_list_params.py">params</a>) -> <a href="./src/tradesignals/types/stock/option_alert_list_response.py">Optional</a></code>
+
+## SectorTickers
+
+Types:
+
+```python
+from tradesignals.types.stock import SectorTickersResponse, SectorTickerListResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{sector}/tickers">client.stock.sector_tickers.<a href="./src/tradesignals/resources/stock/sector_tickers.py">list</a>(sector) -> <a href="./src/tradesignals/types/stock/sector_ticker_list_response.py">Optional</a></code>
+
+## AtmChains
+
+Types:
+
+```python
+from tradesignals.types.stock import AtmChainEntry, AtmChainsResponse, AtmChainListResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/atm-chains">client.stock.atm_chains.<a href="./src/tradesignals/resources/stock/atm_chains.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/stock/atm_chain_list_params.py">params</a>) -> <a href="./src/tradesignals/types/stock/atm_chain_list_response.py">Optional</a></code>
+
 # Seasonality
 
-## StockAverageReturns
+## TickerSeasonality
 
 Types:
 
@@ -8,15 +58,15 @@ Types:
 from tradesignals.types.seasonality import (
     MonthlyAverageEntry,
     MonthlyAverageResponse,
-    StockAverageReturnListResponse,
+    TickerSeasonalityListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/seasonality/{ticker}/monthly">client.seasonality.stock_average_returns.<a href="./src/tradesignals/resources/seasonality/stock_average_returns.py">list</a>(ticker) -> <a href="./src/tradesignals/types/seasonality/stock_average_return_list_response.py">Optional</a></code>
+- <code title="get /api/seasonality/{ticker}/monthly">client.seasonality.ticker_seasonality.<a href="./src/tradesignals/resources/seasonality/ticker_seasonality.py">list</a>(ticker) -> <a href="./src/tradesignals/types/seasonality/ticker_seasonality_list_response.py">Optional</a></code>
 
-## StockPriceChanges
+## YearMonthChange
 
 Types:
 
@@ -24,13 +74,13 @@ Types:
 from tradesignals.types.seasonality import (
     YearMonthEntry,
     YearMonthResponse,
-    StockPriceChangeListResponse,
+    YearMonthChangeListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/seasonality/{ticker}/year-month">client.seasonality.stock_price_changes.<a href="./src/tradesignals/resources/seasonality/stock_price_changes.py">list</a>(ticker) -> <a href="./src/tradesignals/types/seasonality/stock_price_change_list_response.py">Optional</a></code>
+- <code title="get /api/seasonality/{ticker}/year-month">client.seasonality.year_month_change.<a href="./src/tradesignals/resources/seasonality/year_month_change.py">list</a>(ticker) -> <a href="./src/tradesignals/types/seasonality/year_month_change_list_response.py">Optional</a></code>
 
 ## MarketSeasonality
 

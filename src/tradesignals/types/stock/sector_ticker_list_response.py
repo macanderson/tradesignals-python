@@ -3,8 +3,6 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .year_month_entry import YearMonthEntry
+__all__ = ["SectorTickerListResponse"]
 
-__all__ = ["StockPriceChangeListResponse"]
-
-StockPriceChangeListResponse: TypeAlias = List[YearMonthEntry]
+SectorTickerListResponse: TypeAlias = List[str]
