@@ -1,5 +1,29 @@
 # Stock
 
+## MaxPain
+
+Types:
+
+```python
+from tradesignals.types.stock import MaxPainEntry, MaxPainResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/max-pain">client.stock.max_pain.<a href="./src/tradesignals/resources/stock/max_pain.py">list</a>(ticker) -> <a href="./src/tradesignals/types/stock/max_pain_response.py">MaxPainResponse</a></code>
+
+## TickerInfo
+
+Types:
+
+```python
+from tradesignals.types.stock import TickerInfoResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/info">client.stock.ticker_info.<a href="./src/tradesignals/resources/stock/ticker_info.py">list</a>(ticker) -> <a href="./src/tradesignals/types/stock/ticker_info_response.py">TickerInfoResponse</a></code>
+
 ## NetPremTicks
 
 Types:
