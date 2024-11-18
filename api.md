@@ -1,5 +1,29 @@
 # Stock
 
+## OffLitPriceLevels
+
+Types:
+
+```python
+from tradesignals.types.stock import OffLitPriceLevel, OffLitPriceLevelsResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/stock-volume-price-levels">client.stock.off_lit_price_levels.<a href="./src/tradesignals/resources/stock/off_lit_price_levels.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/stock/off_lit_price_level_list_params.py">params</a>) -> <a href="./src/tradesignals/types/stock/off_lit_price_levels_response.py">OffLitPriceLevelsResponse</a></code>
+
+## TickerOptionsVolume
+
+Types:
+
+```python
+from tradesignals.types.stock import TickerOptionsVolume, TickerOptionsVolumeResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/options-volume">client.stock.ticker_options_volume.<a href="./src/tradesignals/resources/stock/ticker_options_volume.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/stock/ticker_options_volume_list_params.py">params</a>) -> <a href="./src/tradesignals/types/stock/ticker_options_volume_response.py">TickerOptionsVolumeResponse</a></code>
+
 ## Ohlc
 
 ### CandleData
