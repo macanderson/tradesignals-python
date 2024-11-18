@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Union, Mapping, cast
-from typing_extensions import Self, Literal, override
+from typing import Any, Union, Mapping
+from typing_extensions import Self, override
 
 import httpx
 
@@ -33,7 +33,6 @@ from ._base_client import (
 )
 
 __all__ = [
-    "ENVIRONMENTS",
     "Timeout",
     "Transport",
     "ProxiesTypes",
@@ -45,15 +44,19 @@ __all__ = [
     "AsyncClient",
 ]
 
-ENVIRONMENTS: Dict[str, str] = {
-    "production": "https://api.unusualwhales.com",
-    "test": "https://test.tradesignals.io",
-}
-
 
 class Tradesignals(SyncAPIClient):
+    stock: resources.StockResource
+    analyst: resources.AnalystResource
+    seasonality: resources.SeasonalityResource
+    screener: resources.ScreenerResource
+    option_trades: resources.OptionTradesResource
+    option_contracts: resources.OptionContractsResource
+    market_data: resources.MarketDataResource
+    institution: resources.InstitutionResource
+    earnings: resources.EarningsResource
     congress: resources.CongressResource
-    industry_groups: resources.IndustryGroupsResource
+    industry: resources.IndustryResource
     etf: resources.EtfResource
     darkpool: resources.DarkpoolResource
     with_raw_response: TradesignalsWithRawResponse
@@ -62,14 +65,11 @@ class Tradesignals(SyncAPIClient):
     # client options
     api_key: str
 
-    _environment: Literal["production", "test"] | NotGiven
-
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "test"] | NotGiven = NOT_GIVEN,
-        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -100,31 +100,10 @@ class Tradesignals(SyncAPIClient):
             )
         self.api_key = api_key
 
-        self._environment = environment
-
-        base_url_env = os.environ.get("TRADESIGNALS_BASE_URL")
-        if is_given(base_url) and base_url is not None:
-            # cast required because mypy doesn't understand the type narrowing
-            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
-        elif is_given(environment):
-            if base_url_env and base_url is not None:
-                raise ValueError(
-                    "Ambiguous URL; The `TRADESIGNALS_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
-                )
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
-        elif base_url_env is not None:
-            base_url = base_url_env
-        else:
-            self._environment = environment = "production"
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+        if base_url is None:
+            base_url = os.environ.get("TRADESIGNALS_BASE_URL")
+        if base_url is None:
+            base_url = f"https://api.unusualwhales.com"
 
         super().__init__(
             version=__version__,
@@ -137,8 +116,17 @@ class Tradesignals(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.stock = resources.StockResource(self)
+        self.analyst = resources.AnalystResource(self)
+        self.seasonality = resources.SeasonalityResource(self)
+        self.screener = resources.ScreenerResource(self)
+        self.option_trades = resources.OptionTradesResource(self)
+        self.option_contracts = resources.OptionContractsResource(self)
+        self.market_data = resources.MarketDataResource(self)
+        self.institution = resources.InstitutionResource(self)
+        self.earnings = resources.EarningsResource(self)
         self.congress = resources.CongressResource(self)
-        self.industry_groups = resources.IndustryGroupsResource(self)
+        self.industry = resources.IndustryResource(self)
         self.etf = resources.EtfResource(self)
         self.darkpool = resources.DarkpoolResource(self)
         self.with_raw_response = TradesignalsWithRawResponse(self)
@@ -169,7 +157,6 @@ class Tradesignals(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "test"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -205,7 +192,6 @@ class Tradesignals(SyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
-            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -253,8 +239,17 @@ class Tradesignals(SyncAPIClient):
 
 
 class AsyncTradesignals(AsyncAPIClient):
+    stock: resources.AsyncStockResource
+    analyst: resources.AsyncAnalystResource
+    seasonality: resources.AsyncSeasonalityResource
+    screener: resources.AsyncScreenerResource
+    option_trades: resources.AsyncOptionTradesResource
+    option_contracts: resources.AsyncOptionContractsResource
+    market_data: resources.AsyncMarketDataResource
+    institution: resources.AsyncInstitutionResource
+    earnings: resources.AsyncEarningsResource
     congress: resources.AsyncCongressResource
-    industry_groups: resources.AsyncIndustryGroupsResource
+    industry: resources.AsyncIndustryResource
     etf: resources.AsyncEtfResource
     darkpool: resources.AsyncDarkpoolResource
     with_raw_response: AsyncTradesignalsWithRawResponse
@@ -263,14 +258,11 @@ class AsyncTradesignals(AsyncAPIClient):
     # client options
     api_key: str
 
-    _environment: Literal["production", "test"] | NotGiven
-
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "test"] | NotGiven = NOT_GIVEN,
-        base_url: str | httpx.URL | None | NotGiven = NOT_GIVEN,
+        base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
@@ -301,31 +293,10 @@ class AsyncTradesignals(AsyncAPIClient):
             )
         self.api_key = api_key
 
-        self._environment = environment
-
-        base_url_env = os.environ.get("TRADESIGNALS_BASE_URL")
-        if is_given(base_url) and base_url is not None:
-            # cast required because mypy doesn't understand the type narrowing
-            base_url = cast("str | httpx.URL", base_url)  # pyright: ignore[reportUnnecessaryCast]
-        elif is_given(environment):
-            if base_url_env and base_url is not None:
-                raise ValueError(
-                    "Ambiguous URL; The `TRADESIGNALS_BASE_URL` env var and the `environment` argument are given. If you want to use the environment, you must pass base_url=None",
-                )
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
-        elif base_url_env is not None:
-            base_url = base_url_env
-        else:
-            self._environment = environment = "production"
-
-            try:
-                base_url = ENVIRONMENTS[environment]
-            except KeyError as exc:
-                raise ValueError(f"Unknown environment: {environment}") from exc
+        if base_url is None:
+            base_url = os.environ.get("TRADESIGNALS_BASE_URL")
+        if base_url is None:
+            base_url = f"https://api.unusualwhales.com"
 
         super().__init__(
             version=__version__,
@@ -338,8 +309,17 @@ class AsyncTradesignals(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.stock = resources.AsyncStockResource(self)
+        self.analyst = resources.AsyncAnalystResource(self)
+        self.seasonality = resources.AsyncSeasonalityResource(self)
+        self.screener = resources.AsyncScreenerResource(self)
+        self.option_trades = resources.AsyncOptionTradesResource(self)
+        self.option_contracts = resources.AsyncOptionContractsResource(self)
+        self.market_data = resources.AsyncMarketDataResource(self)
+        self.institution = resources.AsyncInstitutionResource(self)
+        self.earnings = resources.AsyncEarningsResource(self)
         self.congress = resources.AsyncCongressResource(self)
-        self.industry_groups = resources.AsyncIndustryGroupsResource(self)
+        self.industry = resources.AsyncIndustryResource(self)
         self.etf = resources.AsyncEtfResource(self)
         self.darkpool = resources.AsyncDarkpoolResource(self)
         self.with_raw_response = AsyncTradesignalsWithRawResponse(self)
@@ -370,7 +350,6 @@ class AsyncTradesignals(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        environment: Literal["production", "test"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -406,7 +385,6 @@ class AsyncTradesignals(AsyncAPIClient):
         return self.__class__(
             api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
-            environment=environment or self._environment,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
             max_retries=max_retries if is_given(max_retries) else self.max_retries,
@@ -455,32 +433,68 @@ class AsyncTradesignals(AsyncAPIClient):
 
 class TradesignalsWithRawResponse:
     def __init__(self, client: Tradesignals) -> None:
+        self.stock = resources.StockResourceWithRawResponse(client.stock)
+        self.analyst = resources.AnalystResourceWithRawResponse(client.analyst)
+        self.seasonality = resources.SeasonalityResourceWithRawResponse(client.seasonality)
+        self.screener = resources.ScreenerResourceWithRawResponse(client.screener)
+        self.option_trades = resources.OptionTradesResourceWithRawResponse(client.option_trades)
+        self.option_contracts = resources.OptionContractsResourceWithRawResponse(client.option_contracts)
+        self.market_data = resources.MarketDataResourceWithRawResponse(client.market_data)
+        self.institution = resources.InstitutionResourceWithRawResponse(client.institution)
+        self.earnings = resources.EarningsResourceWithRawResponse(client.earnings)
         self.congress = resources.CongressResourceWithRawResponse(client.congress)
-        self.industry_groups = resources.IndustryGroupsResourceWithRawResponse(client.industry_groups)
+        self.industry = resources.IndustryResourceWithRawResponse(client.industry)
         self.etf = resources.EtfResourceWithRawResponse(client.etf)
         self.darkpool = resources.DarkpoolResourceWithRawResponse(client.darkpool)
 
 
 class AsyncTradesignalsWithRawResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
+        self.stock = resources.AsyncStockResourceWithRawResponse(client.stock)
+        self.analyst = resources.AsyncAnalystResourceWithRawResponse(client.analyst)
+        self.seasonality = resources.AsyncSeasonalityResourceWithRawResponse(client.seasonality)
+        self.screener = resources.AsyncScreenerResourceWithRawResponse(client.screener)
+        self.option_trades = resources.AsyncOptionTradesResourceWithRawResponse(client.option_trades)
+        self.option_contracts = resources.AsyncOptionContractsResourceWithRawResponse(client.option_contracts)
+        self.market_data = resources.AsyncMarketDataResourceWithRawResponse(client.market_data)
+        self.institution = resources.AsyncInstitutionResourceWithRawResponse(client.institution)
+        self.earnings = resources.AsyncEarningsResourceWithRawResponse(client.earnings)
         self.congress = resources.AsyncCongressResourceWithRawResponse(client.congress)
-        self.industry_groups = resources.AsyncIndustryGroupsResourceWithRawResponse(client.industry_groups)
+        self.industry = resources.AsyncIndustryResourceWithRawResponse(client.industry)
         self.etf = resources.AsyncEtfResourceWithRawResponse(client.etf)
         self.darkpool = resources.AsyncDarkpoolResourceWithRawResponse(client.darkpool)
 
 
 class TradesignalsWithStreamedResponse:
     def __init__(self, client: Tradesignals) -> None:
+        self.stock = resources.StockResourceWithStreamingResponse(client.stock)
+        self.analyst = resources.AnalystResourceWithStreamingResponse(client.analyst)
+        self.seasonality = resources.SeasonalityResourceWithStreamingResponse(client.seasonality)
+        self.screener = resources.ScreenerResourceWithStreamingResponse(client.screener)
+        self.option_trades = resources.OptionTradesResourceWithStreamingResponse(client.option_trades)
+        self.option_contracts = resources.OptionContractsResourceWithStreamingResponse(client.option_contracts)
+        self.market_data = resources.MarketDataResourceWithStreamingResponse(client.market_data)
+        self.institution = resources.InstitutionResourceWithStreamingResponse(client.institution)
+        self.earnings = resources.EarningsResourceWithStreamingResponse(client.earnings)
         self.congress = resources.CongressResourceWithStreamingResponse(client.congress)
-        self.industry_groups = resources.IndustryGroupsResourceWithStreamingResponse(client.industry_groups)
+        self.industry = resources.IndustryResourceWithStreamingResponse(client.industry)
         self.etf = resources.EtfResourceWithStreamingResponse(client.etf)
         self.darkpool = resources.DarkpoolResourceWithStreamingResponse(client.darkpool)
 
 
 class AsyncTradesignalsWithStreamedResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
+        self.stock = resources.AsyncStockResourceWithStreamingResponse(client.stock)
+        self.analyst = resources.AsyncAnalystResourceWithStreamingResponse(client.analyst)
+        self.seasonality = resources.AsyncSeasonalityResourceWithStreamingResponse(client.seasonality)
+        self.screener = resources.AsyncScreenerResourceWithStreamingResponse(client.screener)
+        self.option_trades = resources.AsyncOptionTradesResourceWithStreamingResponse(client.option_trades)
+        self.option_contracts = resources.AsyncOptionContractsResourceWithStreamingResponse(client.option_contracts)
+        self.market_data = resources.AsyncMarketDataResourceWithStreamingResponse(client.market_data)
+        self.institution = resources.AsyncInstitutionResourceWithStreamingResponse(client.institution)
+        self.earnings = resources.AsyncEarningsResourceWithStreamingResponse(client.earnings)
         self.congress = resources.AsyncCongressResourceWithStreamingResponse(client.congress)
-        self.industry_groups = resources.AsyncIndustryGroupsResourceWithStreamingResponse(client.industry_groups)
+        self.industry = resources.AsyncIndustryResourceWithStreamingResponse(client.industry)
         self.etf = resources.AsyncEtfResourceWithStreamingResponse(client.etf)
         self.darkpool = resources.AsyncDarkpoolResourceWithStreamingResponse(client.darkpool)
 

@@ -20,14 +20,14 @@ class TradesByTickerListParams(TypedDict, total=False):
 
     newer_than: str
     """
-    -> The unix time in milliseconds or seconds at which no older results will be
+    The unix time in milliseconds or seconds at which no older results will be
     returned. Can be used with newer_than to paginate by time. Also accepts an ISO
     date example "2024-01-25".
     """
 
     older_than: str
     """
-    -> The unix time in milliseconds or seconds at which no newer results will be
+    The unix time in milliseconds or seconds at which no newer results will be
     returned. Can be used with newer_than to paginate by time. Also accepts an ISO
     date example "2024-01-25".
     """

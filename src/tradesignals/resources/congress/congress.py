@@ -2,60 +2,64 @@
 
 from __future__ import annotations
 
-from .trader import (
-    TraderResource,
-    AsyncTraderResource,
-    TraderResourceWithRawResponse,
-    AsyncTraderResourceWithRawResponse,
-    TraderResourceWithStreamingResponse,
-    AsyncTraderResourceWithStreamingResponse,
-)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from .recent_trades import (
-    RecentTradesResource,
-    AsyncRecentTradesResource,
-    RecentTradesResourceWithRawResponse,
-    AsyncRecentTradesResourceWithRawResponse,
-    RecentTradesResourceWithStreamingResponse,
-    AsyncRecentTradesResourceWithStreamingResponse,
+from .recent_reports import (
+    RecentReportsResource,
+    AsyncRecentReportsResource,
+    RecentReportsResourceWithRawResponse,
+    AsyncRecentReportsResourceWithRawResponse,
+    RecentReportsResourceWithStreamingResponse,
+    AsyncRecentReportsResourceWithStreamingResponse,
 )
-from .late_trade_reports import (
-    LateTradeReportsResource,
-    AsyncLateTradeReportsResource,
-    LateTradeReportsResourceWithRawResponse,
-    AsyncLateTradeReportsResourceWithRawResponse,
-    LateTradeReportsResourceWithStreamingResponse,
-    AsyncLateTradeReportsResourceWithStreamingResponse,
+from .trades_by_member import (
+    TradesByMemberResource,
+    AsyncTradesByMemberResource,
+    TradesByMemberResourceWithRawResponse,
+    AsyncTradesByMemberResourceWithRawResponse,
+    TradesByMemberResourceWithStreamingResponse,
+    AsyncTradesByMemberResourceWithStreamingResponse,
 )
-from .recent_trade_reports import (
-    RecentTradeReportsResource,
-    AsyncRecentTradeReportsResource,
-    RecentTradeReportsResourceWithRawResponse,
-    AsyncRecentTradeReportsResourceWithRawResponse,
-    RecentTradeReportsResourceWithStreamingResponse,
-    AsyncRecentTradeReportsResourceWithStreamingResponse,
+from .trades_reported_late import (
+    TradesReportedLateResource,
+    AsyncTradesReportedLateResource,
+    TradesReportedLateResourceWithRawResponse,
+    AsyncTradesReportedLateResourceWithRawResponse,
+    TradesReportedLateResourceWithStreamingResponse,
+    AsyncTradesReportedLateResourceWithStreamingResponse,
+)
+from .congress_member_trades import (
+    CongressMemberTradesResource,
+    AsyncCongressMemberTradesResource,
+    CongressMemberTradesResourceWithRawResponse,
+    AsyncCongressMemberTradesResourceWithRawResponse,
+    CongressMemberTradesResourceWithStreamingResponse,
+    AsyncCongressMemberTradesResourceWithStreamingResponse,
 )
 
 __all__ = ["CongressResource", "AsyncCongressResource"]
 
 
 class CongressResource(SyncAPIResource):
-    @cached_property
-    def recent_trades(self) -> RecentTradesResource:
-        return RecentTradesResource(self._client)
+    """
+    -> Congress endpoints provides insights into the trading activity of members of congress including the US Senate and the US House of Representatives.
+    """
 
     @cached_property
-    def late_trade_reports(self) -> LateTradeReportsResource:
-        return LateTradeReportsResource(self._client)
+    def congress_member_trades(self) -> CongressMemberTradesResource:
+        return CongressMemberTradesResource(self._client)
 
     @cached_property
-    def trader(self) -> TraderResource:
-        return TraderResource(self._client)
+    def trades_reported_late(self) -> TradesReportedLateResource:
+        return TradesReportedLateResource(self._client)
 
     @cached_property
-    def recent_trade_reports(self) -> RecentTradeReportsResource:
-        return RecentTradeReportsResource(self._client)
+    def trades_by_member(self) -> TradesByMemberResource:
+        return TradesByMemberResource(self._client)
+
+    @cached_property
+    def recent_reports(self) -> RecentReportsResource:
+        return RecentReportsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> CongressResourceWithRawResponse:
@@ -78,21 +82,25 @@ class CongressResource(SyncAPIResource):
 
 
 class AsyncCongressResource(AsyncAPIResource):
-    @cached_property
-    def recent_trades(self) -> AsyncRecentTradesResource:
-        return AsyncRecentTradesResource(self._client)
+    """
+    -> Congress endpoints provides insights into the trading activity of members of congress including the US Senate and the US House of Representatives.
+    """
 
     @cached_property
-    def late_trade_reports(self) -> AsyncLateTradeReportsResource:
-        return AsyncLateTradeReportsResource(self._client)
+    def congress_member_trades(self) -> AsyncCongressMemberTradesResource:
+        return AsyncCongressMemberTradesResource(self._client)
 
     @cached_property
-    def trader(self) -> AsyncTraderResource:
-        return AsyncTraderResource(self._client)
+    def trades_reported_late(self) -> AsyncTradesReportedLateResource:
+        return AsyncTradesReportedLateResource(self._client)
 
     @cached_property
-    def recent_trade_reports(self) -> AsyncRecentTradeReportsResource:
-        return AsyncRecentTradeReportsResource(self._client)
+    def trades_by_member(self) -> AsyncTradesByMemberResource:
+        return AsyncTradesByMemberResource(self._client)
+
+    @cached_property
+    def recent_reports(self) -> AsyncRecentReportsResource:
+        return AsyncRecentReportsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncCongressResourceWithRawResponse:
@@ -119,20 +127,20 @@ class CongressResourceWithRawResponse:
         self._congress = congress
 
     @cached_property
-    def recent_trades(self) -> RecentTradesResourceWithRawResponse:
-        return RecentTradesResourceWithRawResponse(self._congress.recent_trades)
+    def congress_member_trades(self) -> CongressMemberTradesResourceWithRawResponse:
+        return CongressMemberTradesResourceWithRawResponse(self._congress.congress_member_trades)
 
     @cached_property
-    def late_trade_reports(self) -> LateTradeReportsResourceWithRawResponse:
-        return LateTradeReportsResourceWithRawResponse(self._congress.late_trade_reports)
+    def trades_reported_late(self) -> TradesReportedLateResourceWithRawResponse:
+        return TradesReportedLateResourceWithRawResponse(self._congress.trades_reported_late)
 
     @cached_property
-    def trader(self) -> TraderResourceWithRawResponse:
-        return TraderResourceWithRawResponse(self._congress.trader)
+    def trades_by_member(self) -> TradesByMemberResourceWithRawResponse:
+        return TradesByMemberResourceWithRawResponse(self._congress.trades_by_member)
 
     @cached_property
-    def recent_trade_reports(self) -> RecentTradeReportsResourceWithRawResponse:
-        return RecentTradeReportsResourceWithRawResponse(self._congress.recent_trade_reports)
+    def recent_reports(self) -> RecentReportsResourceWithRawResponse:
+        return RecentReportsResourceWithRawResponse(self._congress.recent_reports)
 
 
 class AsyncCongressResourceWithRawResponse:
@@ -140,20 +148,20 @@ class AsyncCongressResourceWithRawResponse:
         self._congress = congress
 
     @cached_property
-    def recent_trades(self) -> AsyncRecentTradesResourceWithRawResponse:
-        return AsyncRecentTradesResourceWithRawResponse(self._congress.recent_trades)
+    def congress_member_trades(self) -> AsyncCongressMemberTradesResourceWithRawResponse:
+        return AsyncCongressMemberTradesResourceWithRawResponse(self._congress.congress_member_trades)
 
     @cached_property
-    def late_trade_reports(self) -> AsyncLateTradeReportsResourceWithRawResponse:
-        return AsyncLateTradeReportsResourceWithRawResponse(self._congress.late_trade_reports)
+    def trades_reported_late(self) -> AsyncTradesReportedLateResourceWithRawResponse:
+        return AsyncTradesReportedLateResourceWithRawResponse(self._congress.trades_reported_late)
 
     @cached_property
-    def trader(self) -> AsyncTraderResourceWithRawResponse:
-        return AsyncTraderResourceWithRawResponse(self._congress.trader)
+    def trades_by_member(self) -> AsyncTradesByMemberResourceWithRawResponse:
+        return AsyncTradesByMemberResourceWithRawResponse(self._congress.trades_by_member)
 
     @cached_property
-    def recent_trade_reports(self) -> AsyncRecentTradeReportsResourceWithRawResponse:
-        return AsyncRecentTradeReportsResourceWithRawResponse(self._congress.recent_trade_reports)
+    def recent_reports(self) -> AsyncRecentReportsResourceWithRawResponse:
+        return AsyncRecentReportsResourceWithRawResponse(self._congress.recent_reports)
 
 
 class CongressResourceWithStreamingResponse:
@@ -161,20 +169,20 @@ class CongressResourceWithStreamingResponse:
         self._congress = congress
 
     @cached_property
-    def recent_trades(self) -> RecentTradesResourceWithStreamingResponse:
-        return RecentTradesResourceWithStreamingResponse(self._congress.recent_trades)
+    def congress_member_trades(self) -> CongressMemberTradesResourceWithStreamingResponse:
+        return CongressMemberTradesResourceWithStreamingResponse(self._congress.congress_member_trades)
 
     @cached_property
-    def late_trade_reports(self) -> LateTradeReportsResourceWithStreamingResponse:
-        return LateTradeReportsResourceWithStreamingResponse(self._congress.late_trade_reports)
+    def trades_reported_late(self) -> TradesReportedLateResourceWithStreamingResponse:
+        return TradesReportedLateResourceWithStreamingResponse(self._congress.trades_reported_late)
 
     @cached_property
-    def trader(self) -> TraderResourceWithStreamingResponse:
-        return TraderResourceWithStreamingResponse(self._congress.trader)
+    def trades_by_member(self) -> TradesByMemberResourceWithStreamingResponse:
+        return TradesByMemberResourceWithStreamingResponse(self._congress.trades_by_member)
 
     @cached_property
-    def recent_trade_reports(self) -> RecentTradeReportsResourceWithStreamingResponse:
-        return RecentTradeReportsResourceWithStreamingResponse(self._congress.recent_trade_reports)
+    def recent_reports(self) -> RecentReportsResourceWithStreamingResponse:
+        return RecentReportsResourceWithStreamingResponse(self._congress.recent_reports)
 
 
 class AsyncCongressResourceWithStreamingResponse:
@@ -182,17 +190,17 @@ class AsyncCongressResourceWithStreamingResponse:
         self._congress = congress
 
     @cached_property
-    def recent_trades(self) -> AsyncRecentTradesResourceWithStreamingResponse:
-        return AsyncRecentTradesResourceWithStreamingResponse(self._congress.recent_trades)
+    def congress_member_trades(self) -> AsyncCongressMemberTradesResourceWithStreamingResponse:
+        return AsyncCongressMemberTradesResourceWithStreamingResponse(self._congress.congress_member_trades)
 
     @cached_property
-    def late_trade_reports(self) -> AsyncLateTradeReportsResourceWithStreamingResponse:
-        return AsyncLateTradeReportsResourceWithStreamingResponse(self._congress.late_trade_reports)
+    def trades_reported_late(self) -> AsyncTradesReportedLateResourceWithStreamingResponse:
+        return AsyncTradesReportedLateResourceWithStreamingResponse(self._congress.trades_reported_late)
 
     @cached_property
-    def trader(self) -> AsyncTraderResourceWithStreamingResponse:
-        return AsyncTraderResourceWithStreamingResponse(self._congress.trader)
+    def trades_by_member(self) -> AsyncTradesByMemberResourceWithStreamingResponse:
+        return AsyncTradesByMemberResourceWithStreamingResponse(self._congress.trades_by_member)
 
     @cached_property
-    def recent_trade_reports(self) -> AsyncRecentTradeReportsResourceWithStreamingResponse:
-        return AsyncRecentTradeReportsResourceWithStreamingResponse(self._congress.recent_trade_reports)
+    def recent_reports(self) -> AsyncRecentReportsResourceWithStreamingResponse:
+        return AsyncRecentReportsResourceWithStreamingResponse(self._congress.recent_reports)
