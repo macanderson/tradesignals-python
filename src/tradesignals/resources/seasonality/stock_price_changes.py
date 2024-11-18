@@ -17,33 +17,34 @@ from ..._response import (
 )
 from ..._wrappers import DataWrapper
 from ..._base_client import make_request_options
-from ...types.seasonality.market_list_response import MarketListResponse
+from ...types.seasonality.stock_price_change_list_response import StockPriceChangeListResponse
 
-__all__ = ["MarketResource", "AsyncMarketResource"]
+__all__ = ["StockPriceChangesResource", "AsyncStockPriceChangesResource"]
 
 
-class MarketResource(SyncAPIResource):
+class StockPriceChangesResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> MarketResourceWithRawResponse:
+    def with_raw_response(self) -> StockPriceChangesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return MarketResourceWithRawResponse(self)
+        return StockPriceChangesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> MarketResourceWithStreamingResponse:
+    def with_streaming_response(self) -> StockPriceChangesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return MarketResourceWithStreamingResponse(self)
+        return StockPriceChangesResourceWithStreamingResponse(self)
 
     def list(
         self,
+        ticker: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -51,46 +52,57 @@ class MarketResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[MarketListResponse]:
+    ) -> Optional[StockPriceChangeListResponse]:
         """
-        Returns the average return by month for the tickers SPY, QQQ, IWM, XLE, XLC,
-        XLK, XLV, XLP, XLY, XLRE, XLF, XLI, XLB.
+        Returns the relative price change for all past months over multiple years.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not ticker:
+            raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return self._get(
-            "/api/seasonality/market",
+            f"/api/seasonality/{ticker}/year-month",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[Optional[MarketListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[StockPriceChangeListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[MarketListResponse]], DataWrapper[MarketListResponse]),
+            cast_to=cast(Type[Optional[StockPriceChangeListResponse]], DataWrapper[StockPriceChangeListResponse]),
         )
 
 
-class AsyncMarketResource(AsyncAPIResource):
+class AsyncStockPriceChangesResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncMarketResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncStockPriceChangesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#accessing-raw-response-data-eg-headers
         """
-        return AsyncMarketResourceWithRawResponse(self)
+        return AsyncStockPriceChangesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncMarketResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncStockPriceChangesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/macanderson/tradesignals-python#with_streaming_response
         """
-        return AsyncMarketResourceWithStreamingResponse(self)
+        return AsyncStockPriceChangesResourceWithStreamingResponse(self)
 
     async def list(
         self,
+        ticker: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -98,55 +110,65 @@ class AsyncMarketResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Optional[MarketListResponse]:
+    ) -> Optional[StockPriceChangeListResponse]:
         """
-        Returns the average return by month for the tickers SPY, QQQ, IWM, XLE, XLC,
-        XLK, XLV, XLP, XLY, XLRE, XLF, XLI, XLB.
+        Returns the relative price change for all past months over multiple years.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
+        if not ticker:
+            raise ValueError(f"Expected a non-empty value for `ticker` but received {ticker!r}")
         return await self._get(
-            "/api/seasonality/market",
+            f"/api/seasonality/{ticker}/year-month",
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                post_parser=DataWrapper[Optional[MarketListResponse]]._unwrapper,
+                post_parser=DataWrapper[Optional[StockPriceChangeListResponse]]._unwrapper,
             ),
-            cast_to=cast(Type[Optional[MarketListResponse]], DataWrapper[MarketListResponse]),
+            cast_to=cast(Type[Optional[StockPriceChangeListResponse]], DataWrapper[StockPriceChangeListResponse]),
         )
 
 
-class MarketResourceWithRawResponse:
-    def __init__(self, market: MarketResource) -> None:
-        self._market = market
+class StockPriceChangesResourceWithRawResponse:
+    def __init__(self, stock_price_changes: StockPriceChangesResource) -> None:
+        self._stock_price_changes = stock_price_changes
 
         self.list = to_raw_response_wrapper(
-            market.list,
+            stock_price_changes.list,
         )
 
 
-class AsyncMarketResourceWithRawResponse:
-    def __init__(self, market: AsyncMarketResource) -> None:
-        self._market = market
+class AsyncStockPriceChangesResourceWithRawResponse:
+    def __init__(self, stock_price_changes: AsyncStockPriceChangesResource) -> None:
+        self._stock_price_changes = stock_price_changes
 
         self.list = async_to_raw_response_wrapper(
-            market.list,
+            stock_price_changes.list,
         )
 
 
-class MarketResourceWithStreamingResponse:
-    def __init__(self, market: MarketResource) -> None:
-        self._market = market
+class StockPriceChangesResourceWithStreamingResponse:
+    def __init__(self, stock_price_changes: StockPriceChangesResource) -> None:
+        self._stock_price_changes = stock_price_changes
 
         self.list = to_streamed_response_wrapper(
-            market.list,
+            stock_price_changes.list,
         )
 
 
-class AsyncMarketResourceWithStreamingResponse:
-    def __init__(self, market: AsyncMarketResource) -> None:
-        self._market = market
+class AsyncStockPriceChangesResourceWithStreamingResponse:
+    def __init__(self, stock_price_changes: AsyncStockPriceChangesResource) -> None:
+        self._stock_price_changes = stock_price_changes
 
         self.list = async_to_streamed_response_wrapper(
-            market.list,
+            stock_price_changes.list,
         )

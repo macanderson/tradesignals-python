@@ -1,6 +1,38 @@
 # Seasonality
 
-## Market
+## StockAverageReturns
+
+Types:
+
+```python
+from tradesignals.types.seasonality import (
+    MonthlyAverageEntry,
+    MonthlyAverageResponse,
+    StockAverageReturnListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/seasonality/{ticker}/monthly">client.seasonality.stock_average_returns.<a href="./src/tradesignals/resources/seasonality/stock_average_returns.py">list</a>(ticker) -> <a href="./src/tradesignals/types/seasonality/stock_average_return_list_response.py">Optional</a></code>
+
+## StockPriceChanges
+
+Types:
+
+```python
+from tradesignals.types.seasonality import (
+    YearMonthEntry,
+    YearMonthResponse,
+    StockPriceChangeListResponse,
+)
+```
+
+Methods:
+
+- <code title="get /api/seasonality/{ticker}/year-month">client.seasonality.stock_price_changes.<a href="./src/tradesignals/resources/seasonality/stock_price_changes.py">list</a>(ticker) -> <a href="./src/tradesignals/types/seasonality/stock_price_change_list_response.py">Optional</a></code>
+
+## MarketSeasonality
 
 Types:
 
@@ -8,15 +40,15 @@ Types:
 from tradesignals.types.seasonality import (
     MarketSeasonalityResponse,
     SeasonalityEntry,
-    MarketListResponse,
+    MarketSeasonalityListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/seasonality/market">client.seasonality.market.<a href="./src/tradesignals/resources/seasonality/market.py">list</a>() -> <a href="./src/tradesignals/types/seasonality/market_list_response.py">Optional</a></code>
+- <code title="get /api/seasonality/market">client.seasonality.market_seasonality.<a href="./src/tradesignals/resources/seasonality/market_seasonality.py">list</a>() -> <a href="./src/tradesignals/types/seasonality/market_seasonality_list_response.py">Optional</a></code>
 
-## Performers
+## TopPerformers
 
 Types:
 
@@ -24,13 +56,13 @@ Types:
 from tradesignals.types.seasonality import (
     MonthPerformerEntry,
     MonthPerformersResponse,
-    PerformerListResponse,
+    TopPerformerListResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /api/seasonality/{month}/performers">client.seasonality.performers.<a href="./src/tradesignals/resources/seasonality/performers.py">list</a>(month, \*\*<a href="src/tradesignals/types/seasonality/performer_list_params.py">params</a>) -> <a href="./src/tradesignals/types/seasonality/performer_list_response.py">Optional</a></code>
+- <code title="get /api/seasonality/{month}/performers">client.seasonality.top_performers.<a href="./src/tradesignals/resources/seasonality/top_performers.py">list</a>(month, \*\*<a href="src/tradesignals/types/seasonality/top_performer_list_params.py">params</a>) -> <a href="./src/tradesignals/types/seasonality/top_performer_list_response.py">Optional</a></code>
 
 # Screeners
 
