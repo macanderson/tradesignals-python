@@ -5,10 +5,10 @@ from datetime import datetime
 
 from ..._models import BaseModel
 
-__all__ = ["GroupGreekFlow"]
+__all__ = ["IndustryGreekFlow"]
 
 
-class GroupGreekFlow(BaseModel):
+class IndustryGreekFlow(BaseModel):
     dir_delta_flow: Optional[str] = None
     """The directional delta flow."""
 

@@ -56,7 +56,7 @@ class Tradesignals(SyncAPIClient):
     institution: resources.InstitutionResource
     earnings: resources.EarningsResource
     congress: resources.CongressResource
-    industry_group: resources.IndustryGroupResource
+    industry: resources.IndustryResource
     etf: resources.EtfResource
     darkpool: resources.DarkpoolResource
     with_raw_response: TradesignalsWithRawResponse
@@ -126,7 +126,7 @@ class Tradesignals(SyncAPIClient):
         self.institution = resources.InstitutionResource(self)
         self.earnings = resources.EarningsResource(self)
         self.congress = resources.CongressResource(self)
-        self.industry_group = resources.IndustryGroupResource(self)
+        self.industry = resources.IndustryResource(self)
         self.etf = resources.EtfResource(self)
         self.darkpool = resources.DarkpoolResource(self)
         self.with_raw_response = TradesignalsWithRawResponse(self)
@@ -249,7 +249,7 @@ class AsyncTradesignals(AsyncAPIClient):
     institution: resources.AsyncInstitutionResource
     earnings: resources.AsyncEarningsResource
     congress: resources.AsyncCongressResource
-    industry_group: resources.AsyncIndustryGroupResource
+    industry: resources.AsyncIndustryResource
     etf: resources.AsyncEtfResource
     darkpool: resources.AsyncDarkpoolResource
     with_raw_response: AsyncTradesignalsWithRawResponse
@@ -319,7 +319,7 @@ class AsyncTradesignals(AsyncAPIClient):
         self.institution = resources.AsyncInstitutionResource(self)
         self.earnings = resources.AsyncEarningsResource(self)
         self.congress = resources.AsyncCongressResource(self)
-        self.industry_group = resources.AsyncIndustryGroupResource(self)
+        self.industry = resources.AsyncIndustryResource(self)
         self.etf = resources.AsyncEtfResource(self)
         self.darkpool = resources.AsyncDarkpoolResource(self)
         self.with_raw_response = AsyncTradesignalsWithRawResponse(self)
@@ -443,7 +443,7 @@ class TradesignalsWithRawResponse:
         self.institution = resources.InstitutionResourceWithRawResponse(client.institution)
         self.earnings = resources.EarningsResourceWithRawResponse(client.earnings)
         self.congress = resources.CongressResourceWithRawResponse(client.congress)
-        self.industry_group = resources.IndustryGroupResourceWithRawResponse(client.industry_group)
+        self.industry = resources.IndustryResourceWithRawResponse(client.industry)
         self.etf = resources.EtfResourceWithRawResponse(client.etf)
         self.darkpool = resources.DarkpoolResourceWithRawResponse(client.darkpool)
 
@@ -460,7 +460,7 @@ class AsyncTradesignalsWithRawResponse:
         self.institution = resources.AsyncInstitutionResourceWithRawResponse(client.institution)
         self.earnings = resources.AsyncEarningsResourceWithRawResponse(client.earnings)
         self.congress = resources.AsyncCongressResourceWithRawResponse(client.congress)
-        self.industry_group = resources.AsyncIndustryGroupResourceWithRawResponse(client.industry_group)
+        self.industry = resources.AsyncIndustryResourceWithRawResponse(client.industry)
         self.etf = resources.AsyncEtfResourceWithRawResponse(client.etf)
         self.darkpool = resources.AsyncDarkpoolResourceWithRawResponse(client.darkpool)
 
@@ -477,7 +477,7 @@ class TradesignalsWithStreamedResponse:
         self.institution = resources.InstitutionResourceWithStreamingResponse(client.institution)
         self.earnings = resources.EarningsResourceWithStreamingResponse(client.earnings)
         self.congress = resources.CongressResourceWithStreamingResponse(client.congress)
-        self.industry_group = resources.IndustryGroupResourceWithStreamingResponse(client.industry_group)
+        self.industry = resources.IndustryResourceWithStreamingResponse(client.industry)
         self.etf = resources.EtfResourceWithStreamingResponse(client.etf)
         self.darkpool = resources.DarkpoolResourceWithStreamingResponse(client.darkpool)
 
@@ -494,7 +494,7 @@ class AsyncTradesignalsWithStreamedResponse:
         self.institution = resources.AsyncInstitutionResourceWithStreamingResponse(client.institution)
         self.earnings = resources.AsyncEarningsResourceWithStreamingResponse(client.earnings)
         self.congress = resources.AsyncCongressResourceWithStreamingResponse(client.congress)
-        self.industry_group = resources.AsyncIndustryGroupResourceWithStreamingResponse(client.industry_group)
+        self.industry = resources.AsyncIndustryResourceWithStreamingResponse(client.industry)
         self.etf = resources.AsyncEtfResourceWithStreamingResponse(client.etf)
         self.darkpool = resources.AsyncDarkpoolResourceWithStreamingResponse(client.darkpool)
 
