@@ -8,10 +8,10 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["GreekFlowByExpiryListParams"]
+__all__ = ["IndustryExpiryGreekFlowListParams"]
 
 
-class GreekFlowByExpiryListParams(TypedDict, total=False):
+class IndustryExpiryGreekFlowListParams(TypedDict, total=False):
     flow_group: Required[
         Literal[
             "airline",

@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .group_greek_flow import GroupGreekFlow
+from .industry_greek_flow import IndustryGreekFlow
 
-__all__ = ["GreekFlowByExpiryListResponse"]
+__all__ = ["GreekFlowListResponse"]
 
-GreekFlowByExpiryListResponse: TypeAlias = List[GroupGreekFlow]
+GreekFlowListResponse: TypeAlias = List[IndustryGreekFlow]

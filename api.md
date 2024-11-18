@@ -614,31 +614,35 @@ Methods:
 
 - <code title="get /api/congress/recent-reports">client.congress.recent_reports.<a href="./src/tradesignals/resources/congress/recent_reports.py">list</a>(\*\*<a href="src/tradesignals/types/congress/recent_report_list_params.py">params</a>) -> <a href="./src/tradesignals/types/congress/recent_report_list_response.py">Optional</a></code>
 
-# IndustryGroup
+# Industry
 
 ## GreekFlow
 
 Types:
 
 ```python
-from tradesignals.types.industry_group import GroupGreekFlow, GreekFlowListResponse
+from tradesignals.types.industry import IndustryGreekFlow, GreekFlowListResponse
 ```
 
 Methods:
 
-- <code title="get /api/group-flow/{flow_group}/greek-flow">client.industry_group.greek_flow.<a href="./src/tradesignals/resources/industry_group/greek_flow.py">list</a>(flow_group, \*\*<a href="src/tradesignals/types/industry_group/greek_flow_list_params.py">params</a>) -> <a href="./src/tradesignals/types/industry_group/greek_flow_list_response.py">Optional</a></code>
+- <code title="get /api/group-flow/{flow_group}/greek-flow">client.industry.greek_flow.<a href="./src/tradesignals/resources/industry/greek_flow.py">list</a>(flow_group, \*\*<a href="src/tradesignals/types/industry/greek_flow_list_params.py">params</a>) -> <a href="./src/tradesignals/types/industry/greek_flow_list_response.py">Optional</a></code>
 
-## GreekFlowByExpiry
+## IndustryExpiryGreekFlow
 
 Types:
 
 ```python
-from tradesignals.types.industry_group import GroupFlowsResponse, GreekFlowByExpiryListResponse
+from tradesignals.types.industry import (
+    IndustryExpiryGreekFlow,
+    IndustryExpiryGreekFlowResponse,
+    IndustryExpiryGreekFlowListResponse,
+)
 ```
 
 Methods:
 
-- <code title="get /api/group-flow/{flow_group}/greek-flow/{expiry}">client.industry_group.greek_flow_by_expiry.<a href="./src/tradesignals/resources/industry_group/greek_flow_by_expiry.py">list</a>(expiry, \*, flow_group, \*\*<a href="src/tradesignals/types/industry_group/greek_flow_by_expiry_list_params.py">params</a>) -> <a href="./src/tradesignals/types/industry_group/greek_flow_by_expiry_list_response.py">Optional</a></code>
+- <code title="get /api/group-flow/{flow_group}/greek-flow/{expiry}">client.industry.industry_expiry_greek_flow.<a href="./src/tradesignals/resources/industry/industry_expiry_greek_flow.py">list</a>(expiry, \*, flow_group, \*\*<a href="src/tradesignals/types/industry/industry_expiry_greek_flow_list_params.py">params</a>) -> <a href="./src/tradesignals/types/industry/industry_expiry_greek_flow_list_response.py">Optional</a></code>
 
 # Etf
 
