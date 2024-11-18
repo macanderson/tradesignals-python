@@ -1,5 +1,17 @@
 # Stock
 
+## FlowPerStrikeIntraday
+
+Types:
+
+```python
+from tradesignals.types.stock import FlowPerStrikeIntradayEntry, FlowPerStrikeIntradayResponse
+```
+
+Methods:
+
+- <code title="get /api/stock/{ticker}/flow-per-strike-intraday">client.stock.flow_per_strike_intraday.<a href="./src/tradesignals/resources/stock/flow_per_strike_intraday.py">list</a>(ticker, \*\*<a href="src/tradesignals/types/stock/flow_per_strike_intraday_list_params.py">params</a>) -> <a href="./src/tradesignals/types/stock/flow_per_strike_intraday_response.py">FlowPerStrikeIntradayResponse</a></code>
+
 ## FlowPerStrike
 
 Types:
