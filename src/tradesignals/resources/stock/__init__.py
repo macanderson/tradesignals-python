@@ -40,6 +40,14 @@ from .flow_by_expiry import (
     FlowByExpiryResourceWithStreamingResponse,
     AsyncFlowByExpiryResourceWithStreamingResponse,
 )
+from .net_prem_ticks import (
+    NetPremTicksResource,
+    AsyncNetPremTicksResource,
+    NetPremTicksResourceWithRawResponse,
+    AsyncNetPremTicksResourceWithRawResponse,
+    NetPremTicksResourceWithStreamingResponse,
+    AsyncNetPremTicksResourceWithStreamingResponse,
+)
 from .sector_tickers import (
     SectorTickersResource,
     AsyncSectorTickersResource,
@@ -66,6 +74,12 @@ from .flow_per_strike_intraday import (
 )
 
 __all__ = [
+    "NetPremTicksResource",
+    "AsyncNetPremTicksResource",
+    "NetPremTicksResourceWithRawResponse",
+    "AsyncNetPremTicksResourceWithRawResponse",
+    "NetPremTicksResourceWithStreamingResponse",
+    "AsyncNetPremTicksResourceWithStreamingResponse",
     "OiChangeResource",
     "AsyncOiChangeResource",
     "OiChangeResourceWithRawResponse",

@@ -3,8 +3,8 @@
 from typing import List
 from typing_extensions import TypeAlias
 
-from .congressional_trader_report import CongressionalTraderReport
+from .congress_late_report import CongressLateReport
 
 __all__ = ["TradesReportedLateListResponse"]
 
-TradesReportedLateListResponse: TypeAlias = List[CongressionalTraderReport]
+TradesReportedLateListResponse: TypeAlias = List[CongressLateReport]

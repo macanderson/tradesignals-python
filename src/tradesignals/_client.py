@@ -52,7 +52,7 @@ class Tradesignals(SyncAPIClient):
     screener: resources.ScreenerResource
     option_trades: resources.OptionTradesResource
     option_contracts: resources.OptionContractsResource
-    market: resources.MarketResource
+    market_data: resources.MarketDataResource
     institution: resources.InstitutionResource
     earnings: resources.EarningsResource
     congress: resources.CongressResource
@@ -122,7 +122,7 @@ class Tradesignals(SyncAPIClient):
         self.screener = resources.ScreenerResource(self)
         self.option_trades = resources.OptionTradesResource(self)
         self.option_contracts = resources.OptionContractsResource(self)
-        self.market = resources.MarketResource(self)
+        self.market_data = resources.MarketDataResource(self)
         self.institution = resources.InstitutionResource(self)
         self.earnings = resources.EarningsResource(self)
         self.congress = resources.CongressResource(self)
@@ -245,7 +245,7 @@ class AsyncTradesignals(AsyncAPIClient):
     screener: resources.AsyncScreenerResource
     option_trades: resources.AsyncOptionTradesResource
     option_contracts: resources.AsyncOptionContractsResource
-    market: resources.AsyncMarketResource
+    market_data: resources.AsyncMarketDataResource
     institution: resources.AsyncInstitutionResource
     earnings: resources.AsyncEarningsResource
     congress: resources.AsyncCongressResource
@@ -315,7 +315,7 @@ class AsyncTradesignals(AsyncAPIClient):
         self.screener = resources.AsyncScreenerResource(self)
         self.option_trades = resources.AsyncOptionTradesResource(self)
         self.option_contracts = resources.AsyncOptionContractsResource(self)
-        self.market = resources.AsyncMarketResource(self)
+        self.market_data = resources.AsyncMarketDataResource(self)
         self.institution = resources.AsyncInstitutionResource(self)
         self.earnings = resources.AsyncEarningsResource(self)
         self.congress = resources.AsyncCongressResource(self)
@@ -439,7 +439,7 @@ class TradesignalsWithRawResponse:
         self.screener = resources.ScreenerResourceWithRawResponse(client.screener)
         self.option_trades = resources.OptionTradesResourceWithRawResponse(client.option_trades)
         self.option_contracts = resources.OptionContractsResourceWithRawResponse(client.option_contracts)
-        self.market = resources.MarketResourceWithRawResponse(client.market)
+        self.market_data = resources.MarketDataResourceWithRawResponse(client.market_data)
         self.institution = resources.InstitutionResourceWithRawResponse(client.institution)
         self.earnings = resources.EarningsResourceWithRawResponse(client.earnings)
         self.congress = resources.CongressResourceWithRawResponse(client.congress)
@@ -456,7 +456,7 @@ class AsyncTradesignalsWithRawResponse:
         self.screener = resources.AsyncScreenerResourceWithRawResponse(client.screener)
         self.option_trades = resources.AsyncOptionTradesResourceWithRawResponse(client.option_trades)
         self.option_contracts = resources.AsyncOptionContractsResourceWithRawResponse(client.option_contracts)
-        self.market = resources.AsyncMarketResourceWithRawResponse(client.market)
+        self.market_data = resources.AsyncMarketDataResourceWithRawResponse(client.market_data)
         self.institution = resources.AsyncInstitutionResourceWithRawResponse(client.institution)
         self.earnings = resources.AsyncEarningsResourceWithRawResponse(client.earnings)
         self.congress = resources.AsyncCongressResourceWithRawResponse(client.congress)
@@ -473,7 +473,7 @@ class TradesignalsWithStreamedResponse:
         self.screener = resources.ScreenerResourceWithStreamingResponse(client.screener)
         self.option_trades = resources.OptionTradesResourceWithStreamingResponse(client.option_trades)
         self.option_contracts = resources.OptionContractsResourceWithStreamingResponse(client.option_contracts)
-        self.market = resources.MarketResourceWithStreamingResponse(client.market)
+        self.market_data = resources.MarketDataResourceWithStreamingResponse(client.market_data)
         self.institution = resources.InstitutionResourceWithStreamingResponse(client.institution)
         self.earnings = resources.EarningsResourceWithStreamingResponse(client.earnings)
         self.congress = resources.CongressResourceWithStreamingResponse(client.congress)
@@ -490,7 +490,7 @@ class AsyncTradesignalsWithStreamedResponse:
         self.screener = resources.AsyncScreenerResourceWithStreamingResponse(client.screener)
         self.option_trades = resources.AsyncOptionTradesResourceWithStreamingResponse(client.option_trades)
         self.option_contracts = resources.AsyncOptionContractsResourceWithStreamingResponse(client.option_contracts)
-        self.market = resources.AsyncMarketResourceWithStreamingResponse(client.market)
+        self.market_data = resources.AsyncMarketDataResourceWithStreamingResponse(client.market_data)
         self.institution = resources.AsyncInstitutionResourceWithStreamingResponse(client.institution)
         self.earnings = resources.AsyncEarningsResourceWithStreamingResponse(client.earnings)
         self.congress = resources.AsyncCongressResourceWithStreamingResponse(client.congress)
