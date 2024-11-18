@@ -8,14 +8,6 @@ from .congress import (
     CongressResourceWithStreamingResponse,
     AsyncCongressResourceWithStreamingResponse,
 )
-from .recent_trades import (
-    RecentTradesResource,
-    AsyncRecentTradesResource,
-    RecentTradesResourceWithRawResponse,
-    AsyncRecentTradesResourceWithRawResponse,
-    RecentTradesResourceWithStreamingResponse,
-    AsyncRecentTradesResourceWithStreamingResponse,
-)
 from .recent_reports import (
     RecentReportsResource,
     AsyncRecentReportsResource,
@@ -40,14 +32,22 @@ from .trades_reported_late import (
     TradesReportedLateResourceWithStreamingResponse,
     AsyncTradesReportedLateResourceWithStreamingResponse,
 )
+from .congress_member_trades import (
+    CongressMemberTradesResource,
+    AsyncCongressMemberTradesResource,
+    CongressMemberTradesResourceWithRawResponse,
+    AsyncCongressMemberTradesResourceWithRawResponse,
+    CongressMemberTradesResourceWithStreamingResponse,
+    AsyncCongressMemberTradesResourceWithStreamingResponse,
+)
 
 __all__ = [
-    "RecentTradesResource",
-    "AsyncRecentTradesResource",
-    "RecentTradesResourceWithRawResponse",
-    "AsyncRecentTradesResourceWithRawResponse",
-    "RecentTradesResourceWithStreamingResponse",
-    "AsyncRecentTradesResourceWithStreamingResponse",
+    "CongressMemberTradesResource",
+    "AsyncCongressMemberTradesResource",
+    "CongressMemberTradesResourceWithRawResponse",
+    "AsyncCongressMemberTradesResourceWithRawResponse",
+    "CongressMemberTradesResourceWithStreamingResponse",
+    "AsyncCongressMemberTradesResourceWithStreamingResponse",
     "TradesReportedLateResource",
     "AsyncTradesReportedLateResource",
     "TradesReportedLateResourceWithRawResponse",

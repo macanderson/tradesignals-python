@@ -33,6 +33,10 @@ __all__ = ["EarningsResource", "AsyncEarningsResource"]
 
 
 class EarningsResource(SyncAPIResource):
+    """
+    -> Earnings endpoints provides historical data for equity earnings, as well as upcoming earnings for both afterhours and premarket earnings reports.
+    """
+
     @cached_property
     def afterhours_earnings(self) -> AfterhoursEarningsResource:
         return AfterhoursEarningsResource(self._client)
@@ -66,6 +70,10 @@ class EarningsResource(SyncAPIResource):
 
 
 class AsyncEarningsResource(AsyncAPIResource):
+    """
+    -> Earnings endpoints provides historical data for equity earnings, as well as upcoming earnings for both afterhours and premarket earnings reports.
+    """
+
     @cached_property
     def afterhours_earnings(self) -> AsyncAfterhoursEarningsResource:
         return AsyncAfterhoursEarningsResource(self._client)

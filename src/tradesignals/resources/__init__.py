@@ -16,14 +16,6 @@ from .stock import (
     StockResourceWithStreamingResponse,
     AsyncStockResourceWithStreamingResponse,
 )
-from .market import (
-    MarketResource,
-    AsyncMarketResource,
-    MarketResourceWithRawResponse,
-    AsyncMarketResourceWithRawResponse,
-    MarketResourceWithStreamingResponse,
-    AsyncMarketResourceWithStreamingResponse,
-)
 from .analyst import (
     AnalystResource,
     AsyncAnalystResource,
@@ -71,6 +63,14 @@ from .institution import (
     AsyncInstitutionResourceWithRawResponse,
     InstitutionResourceWithStreamingResponse,
     AsyncInstitutionResourceWithStreamingResponse,
+)
+from .market_data import (
+    MarketDataResource,
+    AsyncMarketDataResource,
+    MarketDataResourceWithRawResponse,
+    AsyncMarketDataResourceWithRawResponse,
+    MarketDataResourceWithStreamingResponse,
+    AsyncMarketDataResourceWithStreamingResponse,
 )
 from .seasonality import (
     SeasonalityResource,
@@ -142,12 +142,12 @@ __all__ = [
     "AsyncOptionContractsResourceWithRawResponse",
     "OptionContractsResourceWithStreamingResponse",
     "AsyncOptionContractsResourceWithStreamingResponse",
-    "MarketResource",
-    "AsyncMarketResource",
-    "MarketResourceWithRawResponse",
-    "AsyncMarketResourceWithRawResponse",
-    "MarketResourceWithStreamingResponse",
-    "AsyncMarketResourceWithStreamingResponse",
+    "MarketDataResource",
+    "AsyncMarketDataResource",
+    "MarketDataResourceWithRawResponse",
+    "AsyncMarketDataResourceWithRawResponse",
+    "MarketDataResourceWithStreamingResponse",
+    "AsyncMarketDataResourceWithStreamingResponse",
     "InstitutionResource",
     "AsyncInstitutionResource",
     "InstitutionResourceWithRawResponse",

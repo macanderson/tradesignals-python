@@ -2,14 +2,6 @@
 
 from __future__ import annotations
 
-from .activity import (
-    ActivityResource,
-    AsyncActivityResource,
-    ActivityResourceWithRawResponse,
-    AsyncActivityResourceWithRawResponse,
-    ActivityResourceWithStreamingResponse,
-    AsyncActivityResourceWithStreamingResponse,
-)
 from .holdings import (
     HoldingsResource,
     AsyncHoldingsResource,
@@ -20,6 +12,14 @@ from .holdings import (
 )
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from .institutions import (
+    InstitutionsResource,
+    AsyncInstitutionsResource,
+    InstitutionsResourceWithRawResponse,
+    AsyncInstitutionsResourceWithRawResponse,
+    InstitutionsResourceWithStreamingResponse,
+    AsyncInstitutionsResourceWithStreamingResponse,
+)
 from .sector_exposure import (
     SectorExposureResource,
     AsyncSectorExposureResource,
@@ -28,34 +28,38 @@ from .sector_exposure import (
     SectorExposureResourceWithStreamingResponse,
     AsyncSectorExposureResourceWithStreamingResponse,
 )
-from .stock_ownership import (
-    StockOwnershipResource,
-    AsyncStockOwnershipResource,
-    StockOwnershipResourceWithRawResponse,
-    AsyncStockOwnershipResourceWithRawResponse,
-    StockOwnershipResourceWithStreamingResponse,
-    AsyncStockOwnershipResourceWithStreamingResponse,
+from .equity_ownership import (
+    EquityOwnershipResource,
+    AsyncEquityOwnershipResource,
+    EquityOwnershipResourceWithRawResponse,
+    AsyncEquityOwnershipResourceWithRawResponse,
+    EquityOwnershipResourceWithStreamingResponse,
+    AsyncEquityOwnershipResourceWithStreamingResponse,
 )
-from .institution_list import (
-    InstitutionListResource,
-    AsyncInstitutionListResource,
-    InstitutionListResourceWithRawResponse,
-    AsyncInstitutionListResourceWithRawResponse,
-    InstitutionListResourceWithStreamingResponse,
-    AsyncInstitutionListResourceWithStreamingResponse,
+from .trading_activity import (
+    TradingActivityResource,
+    AsyncTradingActivityResource,
+    TradingActivityResourceWithRawResponse,
+    AsyncTradingActivityResourceWithRawResponse,
+    TradingActivityResourceWithStreamingResponse,
+    AsyncTradingActivityResourceWithStreamingResponse,
 )
 
 __all__ = ["InstitutionResource", "AsyncInstitutionResource"]
 
 
 class InstitutionResource(SyncAPIResource):
-    @cached_property
-    def institution_list(self) -> InstitutionListResource:
-        return InstitutionListResource(self._client)
+    """
+    -> Institution endpoints provide data and insights into the activities, holdings, and sector exposure of hedge funds.
+    """
 
     @cached_property
-    def activity(self) -> ActivityResource:
-        return ActivityResource(self._client)
+    def institutions(self) -> InstitutionsResource:
+        return InstitutionsResource(self._client)
+
+    @cached_property
+    def trading_activity(self) -> TradingActivityResource:
+        return TradingActivityResource(self._client)
 
     @cached_property
     def holdings(self) -> HoldingsResource:
@@ -66,8 +70,8 @@ class InstitutionResource(SyncAPIResource):
         return SectorExposureResource(self._client)
 
     @cached_property
-    def stock_ownership(self) -> StockOwnershipResource:
-        return StockOwnershipResource(self._client)
+    def equity_ownership(self) -> EquityOwnershipResource:
+        return EquityOwnershipResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> InstitutionResourceWithRawResponse:
@@ -90,13 +94,17 @@ class InstitutionResource(SyncAPIResource):
 
 
 class AsyncInstitutionResource(AsyncAPIResource):
-    @cached_property
-    def institution_list(self) -> AsyncInstitutionListResource:
-        return AsyncInstitutionListResource(self._client)
+    """
+    -> Institution endpoints provide data and insights into the activities, holdings, and sector exposure of hedge funds.
+    """
 
     @cached_property
-    def activity(self) -> AsyncActivityResource:
-        return AsyncActivityResource(self._client)
+    def institutions(self) -> AsyncInstitutionsResource:
+        return AsyncInstitutionsResource(self._client)
+
+    @cached_property
+    def trading_activity(self) -> AsyncTradingActivityResource:
+        return AsyncTradingActivityResource(self._client)
 
     @cached_property
     def holdings(self) -> AsyncHoldingsResource:
@@ -107,8 +115,8 @@ class AsyncInstitutionResource(AsyncAPIResource):
         return AsyncSectorExposureResource(self._client)
 
     @cached_property
-    def stock_ownership(self) -> AsyncStockOwnershipResource:
-        return AsyncStockOwnershipResource(self._client)
+    def equity_ownership(self) -> AsyncEquityOwnershipResource:
+        return AsyncEquityOwnershipResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncInstitutionResourceWithRawResponse:
@@ -135,12 +143,12 @@ class InstitutionResourceWithRawResponse:
         self._institution = institution
 
     @cached_property
-    def institution_list(self) -> InstitutionListResourceWithRawResponse:
-        return InstitutionListResourceWithRawResponse(self._institution.institution_list)
+    def institutions(self) -> InstitutionsResourceWithRawResponse:
+        return InstitutionsResourceWithRawResponse(self._institution.institutions)
 
     @cached_property
-    def activity(self) -> ActivityResourceWithRawResponse:
-        return ActivityResourceWithRawResponse(self._institution.activity)
+    def trading_activity(self) -> TradingActivityResourceWithRawResponse:
+        return TradingActivityResourceWithRawResponse(self._institution.trading_activity)
 
     @cached_property
     def holdings(self) -> HoldingsResourceWithRawResponse:
@@ -151,8 +159,8 @@ class InstitutionResourceWithRawResponse:
         return SectorExposureResourceWithRawResponse(self._institution.sector_exposure)
 
     @cached_property
-    def stock_ownership(self) -> StockOwnershipResourceWithRawResponse:
-        return StockOwnershipResourceWithRawResponse(self._institution.stock_ownership)
+    def equity_ownership(self) -> EquityOwnershipResourceWithRawResponse:
+        return EquityOwnershipResourceWithRawResponse(self._institution.equity_ownership)
 
 
 class AsyncInstitutionResourceWithRawResponse:
@@ -160,12 +168,12 @@ class AsyncInstitutionResourceWithRawResponse:
         self._institution = institution
 
     @cached_property
-    def institution_list(self) -> AsyncInstitutionListResourceWithRawResponse:
-        return AsyncInstitutionListResourceWithRawResponse(self._institution.institution_list)
+    def institutions(self) -> AsyncInstitutionsResourceWithRawResponse:
+        return AsyncInstitutionsResourceWithRawResponse(self._institution.institutions)
 
     @cached_property
-    def activity(self) -> AsyncActivityResourceWithRawResponse:
-        return AsyncActivityResourceWithRawResponse(self._institution.activity)
+    def trading_activity(self) -> AsyncTradingActivityResourceWithRawResponse:
+        return AsyncTradingActivityResourceWithRawResponse(self._institution.trading_activity)
 
     @cached_property
     def holdings(self) -> AsyncHoldingsResourceWithRawResponse:
@@ -176,8 +184,8 @@ class AsyncInstitutionResourceWithRawResponse:
         return AsyncSectorExposureResourceWithRawResponse(self._institution.sector_exposure)
 
     @cached_property
-    def stock_ownership(self) -> AsyncStockOwnershipResourceWithRawResponse:
-        return AsyncStockOwnershipResourceWithRawResponse(self._institution.stock_ownership)
+    def equity_ownership(self) -> AsyncEquityOwnershipResourceWithRawResponse:
+        return AsyncEquityOwnershipResourceWithRawResponse(self._institution.equity_ownership)
 
 
 class InstitutionResourceWithStreamingResponse:
@@ -185,12 +193,12 @@ class InstitutionResourceWithStreamingResponse:
         self._institution = institution
 
     @cached_property
-    def institution_list(self) -> InstitutionListResourceWithStreamingResponse:
-        return InstitutionListResourceWithStreamingResponse(self._institution.institution_list)
+    def institutions(self) -> InstitutionsResourceWithStreamingResponse:
+        return InstitutionsResourceWithStreamingResponse(self._institution.institutions)
 
     @cached_property
-    def activity(self) -> ActivityResourceWithStreamingResponse:
-        return ActivityResourceWithStreamingResponse(self._institution.activity)
+    def trading_activity(self) -> TradingActivityResourceWithStreamingResponse:
+        return TradingActivityResourceWithStreamingResponse(self._institution.trading_activity)
 
     @cached_property
     def holdings(self) -> HoldingsResourceWithStreamingResponse:
@@ -201,8 +209,8 @@ class InstitutionResourceWithStreamingResponse:
         return SectorExposureResourceWithStreamingResponse(self._institution.sector_exposure)
 
     @cached_property
-    def stock_ownership(self) -> StockOwnershipResourceWithStreamingResponse:
-        return StockOwnershipResourceWithStreamingResponse(self._institution.stock_ownership)
+    def equity_ownership(self) -> EquityOwnershipResourceWithStreamingResponse:
+        return EquityOwnershipResourceWithStreamingResponse(self._institution.equity_ownership)
 
 
 class AsyncInstitutionResourceWithStreamingResponse:
@@ -210,12 +218,12 @@ class AsyncInstitutionResourceWithStreamingResponse:
         self._institution = institution
 
     @cached_property
-    def institution_list(self) -> AsyncInstitutionListResourceWithStreamingResponse:
-        return AsyncInstitutionListResourceWithStreamingResponse(self._institution.institution_list)
+    def institutions(self) -> AsyncInstitutionsResourceWithStreamingResponse:
+        return AsyncInstitutionsResourceWithStreamingResponse(self._institution.institutions)
 
     @cached_property
-    def activity(self) -> AsyncActivityResourceWithStreamingResponse:
-        return AsyncActivityResourceWithStreamingResponse(self._institution.activity)
+    def trading_activity(self) -> AsyncTradingActivityResourceWithStreamingResponse:
+        return AsyncTradingActivityResourceWithStreamingResponse(self._institution.trading_activity)
 
     @cached_property
     def holdings(self) -> AsyncHoldingsResourceWithStreamingResponse:
@@ -226,5 +234,5 @@ class AsyncInstitutionResourceWithStreamingResponse:
         return AsyncSectorExposureResourceWithStreamingResponse(self._institution.sector_exposure)
 
     @cached_property
-    def stock_ownership(self) -> AsyncStockOwnershipResourceWithStreamingResponse:
-        return AsyncStockOwnershipResourceWithStreamingResponse(self._institution.stock_ownership)
+    def equity_ownership(self) -> AsyncEquityOwnershipResourceWithStreamingResponse:
+        return AsyncEquityOwnershipResourceWithStreamingResponse(self._institution.equity_ownership)
