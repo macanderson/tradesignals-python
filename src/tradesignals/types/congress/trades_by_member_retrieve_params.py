@@ -25,5 +25,5 @@ class TradesByMemberRetrieveParams(TypedDict, total=False):
     """The full name of a congress member.
 
     Cannot contain digits/numbers. Spaces need to be replaced with either '+' or
-    '%20'.
+    '%20'. Defaults to Nancy Pelosi.
     """

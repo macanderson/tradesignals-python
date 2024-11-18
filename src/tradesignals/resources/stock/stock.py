@@ -36,6 +36,14 @@ from .flow_by_expiry import (
     FlowByExpiryResourceWithStreamingResponse,
     AsyncFlowByExpiryResourceWithStreamingResponse,
 )
+from .net_prem_ticks import (
+    NetPremTicksResource,
+    AsyncNetPremTicksResource,
+    NetPremTicksResourceWithRawResponse,
+    AsyncNetPremTicksResourceWithRawResponse,
+    NetPremTicksResourceWithStreamingResponse,
+    AsyncNetPremTicksResourceWithStreamingResponse,
+)
 from .sector_tickers import (
     SectorTickersResource,
     AsyncSectorTickersResource,
@@ -65,6 +73,10 @@ __all__ = ["StockResource", "AsyncStockResource"]
 
 
 class StockResource(SyncAPIResource):
+    @cached_property
+    def net_prem_ticks(self) -> NetPremTicksResource:
+        return NetPremTicksResource(self._client)
+
     @cached_property
     def oi_change(self) -> OiChangeResource:
         return OiChangeResource(self._client)
@@ -114,6 +126,10 @@ class StockResource(SyncAPIResource):
 
 
 class AsyncStockResource(AsyncAPIResource):
+    @cached_property
+    def net_prem_ticks(self) -> AsyncNetPremTicksResource:
+        return AsyncNetPremTicksResource(self._client)
+
     @cached_property
     def oi_change(self) -> AsyncOiChangeResource:
         return AsyncOiChangeResource(self._client)
@@ -167,6 +183,10 @@ class StockResourceWithRawResponse:
         self._stock = stock
 
     @cached_property
+    def net_prem_ticks(self) -> NetPremTicksResourceWithRawResponse:
+        return NetPremTicksResourceWithRawResponse(self._stock.net_prem_ticks)
+
+    @cached_property
     def oi_change(self) -> OiChangeResourceWithRawResponse:
         return OiChangeResourceWithRawResponse(self._stock.oi_change)
 
@@ -198,6 +218,10 @@ class StockResourceWithRawResponse:
 class AsyncStockResourceWithRawResponse:
     def __init__(self, stock: AsyncStockResource) -> None:
         self._stock = stock
+
+    @cached_property
+    def net_prem_ticks(self) -> AsyncNetPremTicksResourceWithRawResponse:
+        return AsyncNetPremTicksResourceWithRawResponse(self._stock.net_prem_ticks)
 
     @cached_property
     def oi_change(self) -> AsyncOiChangeResourceWithRawResponse:
@@ -233,6 +257,10 @@ class StockResourceWithStreamingResponse:
         self._stock = stock
 
     @cached_property
+    def net_prem_ticks(self) -> NetPremTicksResourceWithStreamingResponse:
+        return NetPremTicksResourceWithStreamingResponse(self._stock.net_prem_ticks)
+
+    @cached_property
     def oi_change(self) -> OiChangeResourceWithStreamingResponse:
         return OiChangeResourceWithStreamingResponse(self._stock.oi_change)
 
@@ -264,6 +292,10 @@ class StockResourceWithStreamingResponse:
 class AsyncStockResourceWithStreamingResponse:
     def __init__(self, stock: AsyncStockResource) -> None:
         self._stock = stock
+
+    @cached_property
+    def net_prem_ticks(self) -> AsyncNetPremTicksResourceWithStreamingResponse:
+        return AsyncNetPremTicksResourceWithStreamingResponse(self._stock.net_prem_ticks)
 
     @cached_property
     def oi_change(self) -> AsyncOiChangeResourceWithStreamingResponse:

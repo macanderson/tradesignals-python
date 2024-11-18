@@ -22,7 +22,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.congress import trades_by_member_retrieve_params
-from ...types.congress.congressional_trader_report import CongressionalTraderReport
+from ...types.congress.congress_trader_response import CongressTraderResponse
 
 __all__ = ["TradesByMemberResource", "AsyncTradesByMemberResource"]
 
@@ -59,9 +59,9 @@ class TradesByMemberResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CongressionalTraderReport:
+    ) -> CongressTraderResponse:
         """
-        Returns the recent reports by the given congress member.
+        Returns the recent trade disclosures filed by congress member.
 
         Args:
           date: A trading date in the format of YYYY-MM-DD. This is optional and by default the
@@ -70,7 +70,7 @@ class TradesByMemberResource(SyncAPIResource):
           limit: How many items to return
 
           name: The full name of a congress member. Cannot contain digits/numbers. Spaces need
-              to be replaced with either '+' or '%20'.
+              to be replaced with either '+' or '%20'. Defaults to Nancy Pelosi.
 
           extra_headers: Send extra headers
 
@@ -96,7 +96,7 @@ class TradesByMemberResource(SyncAPIResource):
                     trades_by_member_retrieve_params.TradesByMemberRetrieveParams,
                 ),
             ),
-            cast_to=CongressionalTraderReport,
+            cast_to=CongressTraderResponse,
         )
 
 
@@ -132,9 +132,9 @@ class AsyncTradesByMemberResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CongressionalTraderReport:
+    ) -> CongressTraderResponse:
         """
-        Returns the recent reports by the given congress member.
+        Returns the recent trade disclosures filed by congress member.
 
         Args:
           date: A trading date in the format of YYYY-MM-DD. This is optional and by default the
@@ -143,7 +143,7 @@ class AsyncTradesByMemberResource(AsyncAPIResource):
           limit: How many items to return
 
           name: The full name of a congress member. Cannot contain digits/numbers. Spaces need
-              to be replaced with either '+' or '%20'.
+              to be replaced with either '+' or '%20'. Defaults to Nancy Pelosi.
 
           extra_headers: Send extra headers
 
@@ -169,7 +169,7 @@ class AsyncTradesByMemberResource(AsyncAPIResource):
                     trades_by_member_retrieve_params.TradesByMemberRetrieveParams,
                 ),
             ),
-            cast_to=CongressionalTraderReport,
+            cast_to=CongressTraderResponse,
         )
 
 
