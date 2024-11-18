@@ -5,6 +5,6 @@ from typing_extensions import TypeAlias
 
 from .monthly_average_entry import MonthlyAverageEntry
 
-__all__ = ["StockAverageReturnListResponse"]
+__all__ = ["TickerSeasonalityListResponse"]
 
-StockAverageReturnListResponse: TypeAlias = List[MonthlyAverageEntry]
+TickerSeasonalityListResponse: TypeAlias = List[MonthlyAverageEntry]

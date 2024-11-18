@@ -52,6 +52,7 @@ ENVIRONMENTS: Dict[str, str] = {
 
 
 class Tradesignals(SyncAPIClient):
+    stock: resources.StockResource
     seasonality: resources.SeasonalityResource
     screeners: resources.ScreenersResource
     option_trades: resources.OptionTradesResource
@@ -144,6 +145,7 @@ class Tradesignals(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.stock = resources.StockResource(self)
         self.seasonality = resources.SeasonalityResource(self)
         self.screeners = resources.ScreenersResource(self)
         self.option_trades = resources.OptionTradesResource(self)
@@ -267,6 +269,7 @@ class Tradesignals(SyncAPIClient):
 
 
 class AsyncTradesignals(AsyncAPIClient):
+    stock: resources.AsyncStockResource
     seasonality: resources.AsyncSeasonalityResource
     screeners: resources.AsyncScreenersResource
     option_trades: resources.AsyncOptionTradesResource
@@ -359,6 +362,7 @@ class AsyncTradesignals(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.stock = resources.AsyncStockResource(self)
         self.seasonality = resources.AsyncSeasonalityResource(self)
         self.screeners = resources.AsyncScreenersResource(self)
         self.option_trades = resources.AsyncOptionTradesResource(self)
@@ -483,6 +487,7 @@ class AsyncTradesignals(AsyncAPIClient):
 
 class TradesignalsWithRawResponse:
     def __init__(self, client: Tradesignals) -> None:
+        self.stock = resources.StockResourceWithRawResponse(client.stock)
         self.seasonality = resources.SeasonalityResourceWithRawResponse(client.seasonality)
         self.screeners = resources.ScreenersResourceWithRawResponse(client.screeners)
         self.option_trades = resources.OptionTradesResourceWithRawResponse(client.option_trades)
@@ -498,6 +503,7 @@ class TradesignalsWithRawResponse:
 
 class AsyncTradesignalsWithRawResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
+        self.stock = resources.AsyncStockResourceWithRawResponse(client.stock)
         self.seasonality = resources.AsyncSeasonalityResourceWithRawResponse(client.seasonality)
         self.screeners = resources.AsyncScreenersResourceWithRawResponse(client.screeners)
         self.option_trades = resources.AsyncOptionTradesResourceWithRawResponse(client.option_trades)
@@ -513,6 +519,7 @@ class AsyncTradesignalsWithRawResponse:
 
 class TradesignalsWithStreamedResponse:
     def __init__(self, client: Tradesignals) -> None:
+        self.stock = resources.StockResourceWithStreamingResponse(client.stock)
         self.seasonality = resources.SeasonalityResourceWithStreamingResponse(client.seasonality)
         self.screeners = resources.ScreenersResourceWithStreamingResponse(client.screeners)
         self.option_trades = resources.OptionTradesResourceWithStreamingResponse(client.option_trades)
@@ -528,6 +535,7 @@ class TradesignalsWithStreamedResponse:
 
 class AsyncTradesignalsWithStreamedResponse:
     def __init__(self, client: AsyncTradesignals) -> None:
+        self.stock = resources.AsyncStockResourceWithStreamingResponse(client.stock)
         self.seasonality = resources.AsyncSeasonalityResourceWithStreamingResponse(client.seasonality)
         self.screeners = resources.AsyncScreenersResourceWithStreamingResponse(client.screeners)
         self.option_trades = resources.AsyncOptionTradesResourceWithStreamingResponse(client.option_trades)
