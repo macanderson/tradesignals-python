@@ -1,6 +1,6 @@
 [project]
 name = "tradesignals-python"
-version = "0.1.0-alpha.7"
+version = "0.1.0-alpha.8"
 description = "The official Python library for the Tradesignals API"
 dynamic = ["readme"]
 license = "Apache-2.0"
@@ -55,6 +55,7 @@ dev-dependencies = [
     "dirty-equals>=0.6.0",
     "importlib-metadata>=6.7.0",
     "rich>=13.7.1",
+    "nest_asyncio==1.6.0"
 ]
 
 [tool.rye.scripts]
