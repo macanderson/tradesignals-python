@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.9 (2024-11-22)
+
+Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
+
+### Chores
+
+* **internal:** fix compat model_dump method when warnings are passed ([#58](https://github.com/macanderson/tradesignals-python/issues/58)) ([79d55ff](https://github.com/macanderson/tradesignals-python/commit/79d55ff4f929248de3ff10c6b17129ebaade932b))
+
+
+### Documentation
+
+* add info log level to readme ([#60](https://github.com/macanderson/tradesignals-python/issues/60)) ([4327df7](https://github.com/macanderson/tradesignals-python/commit/4327df770a89fd9748b9f9dc629d1c2c30d11cc6))
+
 ## 0.1.0-alpha.8 (2024-11-18)
 
 Full Changelog: [v0.1.0-alpha.7...v0.1.0-alpha.8](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.7...v0.1.0-alpha.8)
