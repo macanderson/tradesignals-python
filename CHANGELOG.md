@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.10 (2024-11-27)
+
+Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)
+
+### Chores
+
+* remove now unused `cached-property` dep ([#62](https://github.com/macanderson/tradesignals-python/issues/62)) ([93c85b0](https://github.com/macanderson/tradesignals-python/commit/93c85b0a5d203b2e55e38c27c4f9a394abcba8a7))
+
+
+### Documentation
+
+* **api.md:** fix return type annotations ([#64](https://github.com/macanderson/tradesignals-python/issues/64)) ([fb10524](https://github.com/macanderson/tradesignals-python/commit/fb10524fc2867687555d45d2a04faabe0097c22a))
+
 ## 0.1.0-alpha.9 (2024-11-22)
 
 Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
