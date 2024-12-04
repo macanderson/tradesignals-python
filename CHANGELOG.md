@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.1.0-alpha.10 (2024-12-04)
+
+Full Changelog: [v0.1.0-alpha.9...v0.1.0-alpha.10](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.9...v0.1.0-alpha.10)
+
+### Bug Fixes
+
+* **client:** compat with new httpx 0.28.0 release ([#66](https://github.com/macanderson/tradesignals-python/issues/66)) ([200bab8](https://github.com/macanderson/tradesignals-python/commit/200bab8e4b446dd2b10b9d17b35bd615db7b6541))
+
+
+### Chores
+
+* **internal:** bump pyright ([#67](https://github.com/macanderson/tradesignals-python/issues/67)) ([4bfc5cb](https://github.com/macanderson/tradesignals-python/commit/4bfc5cbe425b4d29ad122de90629f72e3810d685))
+* **internal:** exclude mypy from running on tests ([#65](https://github.com/macanderson/tradesignals-python/issues/65)) ([619615f](https://github.com/macanderson/tradesignals-python/commit/619615f895c48a0461b37d02ee53c860282494f5))
+* make the `Omit` type public ([#68](https://github.com/macanderson/tradesignals-python/issues/68)) ([5790a5d](https://github.com/macanderson/tradesignals-python/commit/5790a5d37b5a92146dc641817d61f90407e0e994))
+* remove now unused `cached-property` dep ([#62](https://github.com/macanderson/tradesignals-python/issues/62)) ([93c85b0](https://github.com/macanderson/tradesignals-python/commit/93c85b0a5d203b2e55e38c27c4f9a394abcba8a7))
+
+
+### Documentation
+
+* **api.md:** fix return type annotations ([#64](https://github.com/macanderson/tradesignals-python/issues/64)) ([fb10524](https://github.com/macanderson/tradesignals-python/commit/fb10524fc2867687555d45d2a04faabe0097c22a))
+
 ## 0.1.0-alpha.9 (2024-11-22)
 
 Full Changelog: [v0.1.0-alpha.8...v0.1.0-alpha.9](https://github.com/macanderson/tradesignals-python/compare/v0.1.0-alpha.8...v0.1.0-alpha.9)
